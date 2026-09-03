@@ -2,30 +2,78 @@
   "_meta": {
     "schema_version": "0.1",
     "generated": "2026-08-31",
-    "notes": "Sinan Robo 首批种子数据。字段值为 null 或标注 '待核实' 的,必须在入库前由维护者核实并补充 evidence。所有已填字段的来源见 evidence 数组;source_type: literature=论文/官方文档, news=媒体报道, hub=模型仓库页。"
+    "notes": "Sinan Robo 首批种子数据。字段值为 null 或标注 '待核实' 的,必须在入库前由维护者核实并补充 evidence。所有已填字段的来源见 evidence 数组;source_type: literature=论文/官方文档, news=媒体报道, hub=模型仓库页。 2026-09-03：GR00T N1.7 / LingBot-VLA 2.0 / GO-1 / π0 / π0.5 / SmolVLA 六条按一手来源核实并补 evidence。"
   },
   "models": [
     {
       "id": "gr00t-n1.7",
       "name": "Isaac GR00T N1.7",
       "org": "NVIDIA",
-      "release_date": "2026 (月份待核实)",
-      "params_b": 3,
+      "release_date": "2026-04",
+      "params_b": 3.0,
       "arch_type": "dual_system",
       "arch_notes": "Action Cascade:System 2 为 VLM(处理图像token与语言指令,输出高层action token);System 1 为 32 层 Diffusion Transformer,结合实时机器人状态生成运动指令",
-      "license": "开放且允许商业使用(具体许可证名称待核实)",
+      "license": "NVIDIA Open Model License（权重）；Apache-2.0（Isaac-GR00T 代码）",
       "commercial_ok": true,
-      "weights_url": "https://huggingface.co/nvidia (GR00T N1.7 页面,具体路径待核实)",
-      "code_url": "GitHub (待核实)",
+      "weights_url": "https://huggingface.co/nvidia/GR00T-N1.7-3B",
+      "code_url": "https://github.com/NVIDIA/Isaac-GR00T",
       "paper_url": null,
-      "modalities_in": ["rgb", "language", "state"],
+      "modalities_in": [
+        "rgb",
+        "language",
+        "state"
+      ],
       "action_space": "关节/全身(人形为主)",
       "cross_embodiment": "以人形为主(待核实其他构型支持)",
       "pretrain_hours": null,
-      "target_embodiments": ["humanoid"],
+      "target_embodiments": [
+        "humanoid"
+      ],
       "evidence": [
-        {"field": "params_b,arch_notes,commercial_ok", "url": "https://huggingface.co/blog/nvidia/gr00t-n1-7", "source_type": "hub", "fetched": "2026-08-31"}
-      ]
+        {
+          "field": "license,commercial_ok",
+          "url": "https://huggingface.co/nvidia/GR00T-N1.7-3B",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "NVIDIA Open Model License Agreement; ready for commercial/non-commercial use"
+        },
+        {
+          "field": "license",
+          "url": "https://raw.githubusercontent.com/NVIDIA/Isaac-GR00T/main/LICENSE",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "代码 Apache License 2.0"
+        },
+        {
+          "field": "params_b,weights_url",
+          "url": "https://huggingface.co/api/models/nvidia/GR00T-N1.7-3B",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "safetensors 3,144,016,000 参数"
+        },
+        {
+          "field": "release_date",
+          "url": "https://forums.developer.nvidia.com/t/early-access-isaac-gr00t-n1-7-open-reasoning-vla-model-for-humanoid-robotics/366916",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "Early Access 公告 2026-04-17"
+        },
+        {
+          "field": "release_date,params_b",
+          "url": "https://huggingface.co/blog/nvidia/gr00t-n1-7",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "April 17, 2026; 3B open reasoning VLA"
+        },
+        {
+          "field": "code_url,weights_url",
+          "url": "https://raw.githubusercontent.com/NVIDIA/Isaac-GR00T/main/README.md",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "GA 已发布；nvidia/GR00T-N1.7-3B"
+        }
+      ],
+      "verify_note": "GA 正式版具体日期未见官方标注，release_date 记 Early Access 公开月"
     },
     {
       "id": "gr00t-n1.6-3b",
@@ -40,123 +88,349 @@
       "weights_url": "https://huggingface.co/nvidia/GR00T-N1.6-3B",
       "code_url": null,
       "paper_url": null,
-      "modalities_in": ["rgb", "language", "state"],
+      "modalities_in": [
+        "rgb",
+        "language",
+        "state"
+      ],
       "action_space": "关节/全身",
       "cross_embodiment": "待核实",
       "pretrain_hours": null,
-      "target_embodiments": ["humanoid"],
+      "target_embodiments": [
+        "humanoid"
+      ],
       "evidence": [
-        {"field": "weights_url", "url": "https://huggingface.co/nvidia/GR00T-N1.6-3B", "source_type": "hub", "fetched": "2026-08-31"}
+        {
+          "field": "weights_url",
+          "url": "https://huggingface.co/nvidia/GR00T-N1.6-3B",
+          "source_type": "hub",
+          "fetched": "2026-08-31"
+        }
       ]
     },
     {
       "id": "lingbot-vla-2.0",
       "name": "LingBot-VLA 2.0",
       "org": "蚂蚁灵波科技 (Ant Group)",
-      "release_date": "2026-07-08",
-      "params_b": null,
+      "release_date": "2026-07",
+      "params_b": 6.0,
       "arch_type": "待核实",
       "arch_notes": "预训练融入 6 万小时真实物理数据;支持头部、腰部、末端执行器与移动底盘等自由度",
-      "license": "开源(许可证名称待核实)",
-      "commercial_ok": null,
-      "weights_url": "待核实",
-      "code_url": "待核实",
+      "license": "Apache-2.0",
+      "commercial_ok": true,
+      "weights_url": "https://huggingface.co/robbyant/lingbot-vla-v2-6b",
+      "code_url": "https://github.com/robbyant/lingbot-vla-v2",
       "paper_url": null,
-      "modalities_in": ["rgb", "language", "state"],
+      "modalities_in": [
+        "rgb",
+        "language",
+        "state"
+      ],
       "action_space": "多构型(单臂/双臂、双足/轮式)",
-      "cross_embodiment": "是:预训练覆盖 17 家厂商 20 种构型(乐聚、智元、宇树、松灵、星海图、银河通用、星尘、睿尔曼、Franka、方舟、北京人形、傅立叶、魔法原子、千寻、零次方、非夕、青龙)",
+      "cross_embodiment": "是：预训练覆盖 20 种机器人构型（官方）；媒体称 17 家厂商",
       "pretrain_hours": 60000,
-      "target_embodiments": ["humanoid", "dual_arm", "single_arm", "wheeled"],
+      "target_embodiments": [
+        "humanoid",
+        "dual_arm",
+        "single_arm",
+        "wheeled"
+      ],
       "evidence": [
-        {"field": "release_date,pretrain_hours,cross_embodiment", "url": "https://www.qbitai.com/2026/07/445668.html", "source_type": "news", "fetched": "2026-08-31"},
-        {"field": "cross_embodiment", "url": "http://www.eeo.com.cn/2026/0708/948073.shtml", "source_type": "news", "fetched": "2026-08-31"}
+        {
+          "field": "license,params_b,weights_url,code_url,release_date",
+          "url": "https://github.com/robbyant/lingbot-vla-v2",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "Apache-2.0; 6B; 2026-07-08 权重发布"
+        },
+        {
+          "field": "license,pretrain_hours,cross_embodiment",
+          "url": "https://huggingface.co/robbyant/lingbot-vla-v2-6b/raw/main/README.md",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "Apache-2.0; 60,000 hours; 20 robot configurations"
+        },
+        {
+          "field": "params_b,release_date",
+          "url": "https://huggingface.co/api/models/robbyant/lingbot-vla-v2-6b",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "safetensors ≈6.38B F32; created 2026-07-07"
+        },
+        {
+          "field": "pretrain_hours,cross_embodiment",
+          "url": "https://arxiv.org/abs/2607.06403",
+          "source_type": "literature",
+          "fetched": "2026-09-03",
+          "note": "50k h 真机 + 10k h 第一视角视频; 20 constructions"
+        },
+        {
+          "field": "cross_embodiment",
+          "url": "https://www.qbitai.com/2026/07/445668.html",
+          "source_type": "news",
+          "fetched": "2026-09-03",
+          "note": "17 个品牌 20 种构型"
+        },
+        {
+          "field": "cross_embodiment",
+          "url": "https://technology.robbyant.com/lingbot-vla-v2",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "官网列出 20 个具体机型"
+        }
       ]
     },
     {
       "id": "go-1",
       "name": "GO-1 (Genie Operator-1)",
       "org": "智元机器人 (AgiBot)",
-      "release_date": "2025 (月份待核实)",
-      "params_b": null,
+      "release_date": "2025-09",
+      "params_b": 2.82,
       "arch_type": "villa",
       "arch_notes": "Vision-Language-Latent-Action (ViLLA) 架构;向全球开发者免费开放",
-      "license": "开源(许可证名称待核实)",
-      "commercial_ok": null,
-      "weights_url": "待核实",
-      "code_url": "待核实",
-      "paper_url": null,
-      "modalities_in": ["rgb", "language", "state"],
+      "license": "CC BY-NC-SA 4.0",
+      "commercial_ok": false,
+      "weights_url": "https://huggingface.co/agibot-world/GO-1",
+      "code_url": "https://github.com/OpenDriveLab/AgiBot-World",
+      "paper_url": "https://arxiv.org/abs/2503.06669",
+      "modalities_in": [
+        "rgb",
+        "language",
+        "state"
+      ],
       "action_space": "待核实",
       "cross_embodiment": "支持其他本体的数据采集、微调与部署(官方表述)",
       "pretrain_hours": null,
       "data_format": "LeRobot",
-      "target_embodiments": ["humanoid", "dual_arm"],
+      "target_embodiments": [
+        "humanoid",
+        "dual_arm"
+      ],
       "evidence": [
-        {"field": "arch_type,license,data_format,cross_embodiment", "url": "https://cloud.tencent.com/developer/news/3034772", "source_type": "news", "fetched": "2026-08-31"}
-      ]
+        {
+          "field": "license,commercial_ok",
+          "url": "https://huggingface.co/agibot-world/GO-1/raw/main/README.md",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "License: CC BY-NC-SA 4.0"
+        },
+        {
+          "field": "license,release_date,code_url",
+          "url": "https://raw.githubusercontent.com/OpenDriveLab/AgiBot-World/main/README.md",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "2025/09/19 GO-1 open-sourced; CC BY-NC-SA 4.0"
+        },
+        {
+          "field": "params_b,release_date,weights_url",
+          "url": "https://huggingface.co/api/models/agibot-world/GO-1",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "safetensors 2,821,541,905 BF16; created 2025-09-04"
+        },
+        {
+          "field": "paper_url",
+          "url": "https://huggingface.co/agibot-world/GO-1",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "arXiv 2503.06669"
+        }
+      ],
+      "verify_note": "HF 页面显示 3B，safetensors 实际 2.82B，按精确值记录"
     },
     {
       "id": "pi0",
       "name": "π0 (pi-zero)",
       "org": "Physical Intelligence",
-      "release_date": "2024-2025 (待核实)",
-      "params_b": 3,
+      "release_date": "2025-02",
+      "params_b": 3.3,
       "arch_type": "vlm_plus_action_expert",
       "arch_notes": "基于 PaliGemma 类 VLM + flow-matching 动作专家(参数量为常见公开说法,待核实)",
-      "license": "openpi 仓库为 Apache-2.0(待核实权重许可)",
+      "license": "Apache-2.0（openpi 代码）；权重无独立许可证声明，仓库附 Gemma 使用条款",
       "commercial_ok": null,
-      "weights_url": "待核实(openpi)",
-      "code_url": "https://github.com/Physical-Intelligence/openpi (待核实)",
-      "paper_url": null,
-      "modalities_in": ["rgb", "language", "state"],
+      "weights_url": "https://huggingface.co/lerobot/pi0_base",
+      "code_url": "https://github.com/Physical-Intelligence/openpi",
+      "paper_url": "https://arxiv.org/abs/2410.24164",
+      "modalities_in": [
+        "rgb",
+        "language",
+        "state"
+      ],
       "action_space": "关节(机械臂/双臂为主)",
       "cross_embodiment": "多本体预训练(待核实清单)",
       "pretrain_hours": null,
-      "target_embodiments": ["single_arm", "dual_arm", "mobile_manipulator"],
-      "evidence": []
+      "target_embodiments": [
+        "single_arm",
+        "dual_arm",
+        "mobile_manipulator"
+      ],
+      "evidence": [
+        {
+          "field": "license",
+          "url": "https://raw.githubusercontent.com/Physical-Intelligence/openpi/main/LICENSE",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "代码 Apache-2.0"
+        },
+        {
+          "field": "license",
+          "url": "https://raw.githubusercontent.com/Physical-Intelligence/openpi/main/LICENSE_GEMMA.txt",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "Gemma Terms of Use 约束模型衍生物"
+        },
+        {
+          "field": "weights_url,code_url",
+          "url": "https://raw.githubusercontent.com/Physical-Intelligence/openpi/main/README.md",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "官方权重 gs://openpi-assets/checkpoints/pi0_base；README 无权重许可证章节"
+        },
+        {
+          "field": "release_date",
+          "url": "https://www.pi.website/blog/openpi",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "Open Sourcing π0, February 4, 2025"
+        },
+        {
+          "field": "params_b,paper_url",
+          "url": "https://arxiv.org/html/2410.24164v1",
+          "source_type": "literature",
+          "fetched": "2026-09-03",
+          "note": "total 3.3 billion parameters"
+        },
+        {
+          "field": "weights_url,license",
+          "url": "https://huggingface.co/api/models/lerobot/pi0_base",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "LeRobot 移植版 license 标 gemma"
+        }
+      ],
+      "verify_note": "权重许可证与代码不一致：代码 Apache-2.0，权重受 Gemma 条款约束，商用与否置待核实"
     },
     {
       "id": "pi0.5",
       "name": "π0.5",
       "org": "Physical Intelligence",
-      "release_date": "2025 (待核实)",
+      "release_date": "2025-09",
       "params_b": null,
       "arch_type": "vlm_plus_action_expert",
       "arch_notes": "π0 后继,强调开放世界泛化(待核实)",
-      "license": "待核实",
+      "license": "Apache-2.0（openpi 代码）；权重无独立许可证声明，仓库附 Gemma 使用条款",
       "commercial_ok": null,
-      "weights_url": "待核实(openpi)",
-      "code_url": "待核实",
-      "paper_url": null,
-      "modalities_in": ["rgb", "language", "state"],
+      "weights_url": "https://huggingface.co/lerobot/pi05_base",
+      "code_url": "https://github.com/Physical-Intelligence/openpi",
+      "paper_url": "https://arxiv.org/abs/2504.16054",
+      "modalities_in": [
+        "rgb",
+        "language",
+        "state"
+      ],
       "action_space": "关节",
       "cross_embodiment": "待核实",
       "pretrain_hours": null,
-      "target_embodiments": ["single_arm", "dual_arm", "mobile_manipulator"],
-      "evidence": []
+      "target_embodiments": [
+        "single_arm",
+        "dual_arm",
+        "mobile_manipulator"
+      ],
+      "evidence": [
+        {
+          "field": "release_date,weights_url,code_url",
+          "url": "https://raw.githubusercontent.com/Physical-Intelligence/openpi/main/README.md",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "Sept 2025 released pi05; gs://openpi-assets/checkpoints/pi05_base"
+        },
+        {
+          "field": "paper_url",
+          "url": "https://arxiv.org/abs/2504.16054",
+          "source_type": "literature",
+          "fetched": "2026-09-03",
+          "note": "2025-04-22 提交；全文未给参数量"
+        },
+        {
+          "field": "weights_url,license",
+          "url": "https://huggingface.co/api/models/lerobot/pi05_base",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "LeRobot 移植版 license gemma; ≈3.6B F32"
+        },
+        {
+          "field": "license",
+          "url": "https://raw.githubusercontent.com/Physical-Intelligence/openpi/main/LICENSE",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "代码 Apache-2.0"
+        }
+      ],
+      "verify_note": "参数量官方未公布，置待核实；旁证 LeRobot 移植权重 ≈3.6B"
     },
     {
       "id": "smolvla",
       "name": "SmolVLA",
       "org": "Hugging Face (LeRobot)",
-      "release_date": "2025 (待核实)",
+      "release_date": "2025-06",
       "params_b": 0.45,
       "arch_type": "vlm_plus_action_expert",
       "arch_notes": "紧凑型:视觉-语言模型 + 输出控制命令的动作专家;可在 MacBook 级设备运行(参数量为常见公开说法,待核实)",
-      "license": "Apache-2.0 (待核实)",
+      "license": null,
       "commercial_ok": null,
-      "weights_url": "https://huggingface.co/lerobot (待核实具体路径)",
+      "weights_url": "https://huggingface.co/lerobot/smolvla_base",
       "code_url": "https://github.com/huggingface/lerobot",
-      "paper_url": null,
-      "modalities_in": ["rgb", "language", "state"],
+      "paper_url": "https://arxiv.org/abs/2506.01844",
+      "modalities_in": [
+        "rgb",
+        "language",
+        "state"
+      ],
       "action_space": "关节(低成本机械臂为主)",
       "cross_embodiment": "以 SO-100/101 等社区本体为主",
       "pretrain_hours": null,
       "data_format": "LeRobot",
-      "target_embodiments": ["single_arm"],
+      "target_embodiments": [
+        "single_arm"
+      ],
       "evidence": [
-        {"field": "arch_notes", "url": "https://www.hubwiz.com/blog/smolvla-open-source-ai-for-robotics/", "source_type": "news", "fetched": "2026-08-31"}
-      ]
+        {
+          "field": "params_b,release_date,weights_url",
+          "url": "https://huggingface.co/api/models/lerobot/smolvla_base",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "safetensors 450,046,176; created 2025-06-01; 无 license 标签"
+        },
+        {
+          "field": "params_b",
+          "url": "https://arxiv.org/html/2506.01844v1",
+          "source_type": "literature",
+          "fetched": "2026-09-03",
+          "note": "450 million parameters"
+        },
+        {
+          "field": "paper_url,release_date",
+          "url": "https://arxiv.org/abs/2506.01844",
+          "source_type": "literature",
+          "fetched": "2026-09-03",
+          "note": "2025-06-02 提交"
+        },
+        {
+          "field": "release_date,weights_url",
+          "url": "https://huggingface.co/blog/smolvla",
+          "source_type": "hub",
+          "fetched": "2026-09-03",
+          "note": "June 3, 2025; lerobot/smolvla_base"
+        },
+        {
+          "field": "code_url",
+          "url": "https://github.com/huggingface/lerobot",
+          "source_type": "official",
+          "fetched": "2026-09-03",
+          "note": "LeRobot 代码 Apache 2.0"
+        }
+      ],
+      "verify_note": "base 权重模型卡未声明许可证；仅代码与官方微调版为 Apache-2.0，故权重许可证保持待核实"
     },
     {
       "id": "openvla",
@@ -171,11 +445,16 @@
       "weights_url": "待核实",
       "code_url": "待核实",
       "paper_url": null,
-      "modalities_in": ["rgb", "language"],
+      "modalities_in": [
+        "rgb",
+        "language"
+      ],
       "action_space": "末端位姿/关节",
       "cross_embodiment": "Open X-Embodiment 预训练",
       "pretrain_hours": null,
-      "target_embodiments": ["single_arm"],
+      "target_embodiments": [
+        "single_arm"
+      ],
       "evidence": []
     },
     {
@@ -191,13 +470,26 @@
       "weights_url": "待核实",
       "code_url": "https://github.com/2toinf/X-VLA",
       "paper_url": "ICLR 2026 (链接待核实)",
-      "modalities_in": ["rgb", "language", "state"],
+      "modalities_in": [
+        "rgb",
+        "language",
+        "state"
+      ],
       "action_space": "多构型",
       "cross_embodiment": "是(设计目标)",
       "pretrain_hours": null,
-      "target_embodiments": ["single_arm", "dual_arm", "humanoid"],
+      "target_embodiments": [
+        "single_arm",
+        "dual_arm",
+        "humanoid"
+      ],
       "evidence": [
-        {"field": "code_url,arch_notes", "url": "https://github.com/2toinf/X-VLA", "source_type": "hub", "fetched": "2026-08-31"}
+        {
+          "field": "code_url,arch_notes",
+          "url": "https://github.com/2toinf/X-VLA",
+          "source_type": "hub",
+          "fetched": "2026-08-31"
+        }
       ]
     },
     {
@@ -213,11 +505,17 @@
       "weights_url": "待核实",
       "code_url": "待核实",
       "paper_url": null,
-      "modalities_in": ["rgb", "language", "state"],
+      "modalities_in": [
+        "rgb",
+        "language",
+        "state"
+      ],
       "action_space": "末端位姿",
       "cross_embodiment": "Open X-Embodiment 预训练",
       "pretrain_hours": null,
-      "target_embodiments": ["single_arm"],
+      "target_embodiments": [
+        "single_arm"
+      ],
       "evidence": []
     },
     {
@@ -240,23 +538,148 @@
       "target_embodiments": [],
       "status": "announced",
       "evidence": [
-        {"field": "release_date,arch_notes", "url": "https://www.qbitai.com/2026/06/436223.html", "source_type": "news", "fetched": "2026-08-31"}
+        {
+          "field": "release_date,arch_notes",
+          "url": "https://www.qbitai.com/2026/06/436223.html",
+          "source_type": "news",
+          "fetched": "2026-08-31"
+        }
       ]
     }
   ],
   "embodiments": [
-    {"id": "unitree-g1", "name": "Unitree G1", "vendor": "宇树科技", "form": "humanoid", "dof": null, "end_effector": "待核实", "sdk_url": "待核实", "price_range_cny": "约 9.9 万起(2026,待核实)", "data_formats": ["待核实"]},
-    {"id": "unitree-h1", "name": "Unitree H1", "vendor": "宇树科技", "form": "humanoid", "dof": null, "end_effector": "待核实", "sdk_url": "待核实", "price_range_cny": "待核实", "data_formats": ["待核实"]},
-    {"id": "agibot-genie-g1", "name": "智元 精灵 G1", "vendor": "智元机器人", "form": "dual_arm_wheeled", "dof": null, "end_effector": "待核实", "sdk_url": "待核实", "price_range_cny": "待核实", "data_formats": ["LeRobot(GO-1 生态)"]},
-    {"id": "agilex-piper", "name": "松灵 Piper 机械臂", "vendor": "松灵机器人", "form": "single_arm", "dof": 6, "end_effector": "夹爪", "sdk_url": "待核实", "price_range_cny": "待核实", "data_formats": ["LeRobot 社区支持(待核实)"]},
-    {"id": "so-101", "name": "SO-101", "vendor": "开源社区 (LeRobot)", "form": "single_arm", "dof": 6, "end_effector": "夹爪", "sdk_url": "https://github.com/huggingface/lerobot", "price_range_cny": "低成本(几百至千元级,待核实)", "data_formats": ["LeRobot"]},
-    {"id": "franka-fr3", "name": "Franka FR3 / Panda", "vendor": "Franka Robotics", "form": "single_arm", "dof": 7, "end_effector": "夹爪", "sdk_url": "待核实", "price_range_cny": "待核实", "data_formats": ["待核实"]},
-    {"id": "fourier-gr", "name": "傅立叶 GR 系列", "vendor": "傅利叶智能", "form": "humanoid", "dof": null, "end_effector": "待核实", "sdk_url": "待核实", "price_range_cny": "待核实", "data_formats": ["待核实"]}
+    {
+      "id": "unitree-g1",
+      "name": "Unitree G1",
+      "vendor": "宇树科技",
+      "form": "humanoid",
+      "dof": null,
+      "end_effector": "待核实",
+      "sdk_url": "待核实",
+      "price_range_cny": "约 9.9 万起(2026,待核实)",
+      "data_formats": [
+        "待核实"
+      ]
+    },
+    {
+      "id": "unitree-h1",
+      "name": "Unitree H1",
+      "vendor": "宇树科技",
+      "form": "humanoid",
+      "dof": null,
+      "end_effector": "待核实",
+      "sdk_url": "待核实",
+      "price_range_cny": "待核实",
+      "data_formats": [
+        "待核实"
+      ]
+    },
+    {
+      "id": "agibot-genie-g1",
+      "name": "智元 精灵 G1",
+      "vendor": "智元机器人",
+      "form": "dual_arm_wheeled",
+      "dof": null,
+      "end_effector": "待核实",
+      "sdk_url": "待核实",
+      "price_range_cny": "待核实",
+      "data_formats": [
+        "LeRobot(GO-1 生态)"
+      ]
+    },
+    {
+      "id": "agilex-piper",
+      "name": "松灵 Piper 机械臂",
+      "vendor": "松灵机器人",
+      "form": "single_arm",
+      "dof": 6,
+      "end_effector": "夹爪",
+      "sdk_url": "待核实",
+      "price_range_cny": "待核实",
+      "data_formats": [
+        "LeRobot 社区支持(待核实)"
+      ]
+    },
+    {
+      "id": "so-101",
+      "name": "SO-101",
+      "vendor": "开源社区 (LeRobot)",
+      "form": "single_arm",
+      "dof": 6,
+      "end_effector": "夹爪",
+      "sdk_url": "https://github.com/huggingface/lerobot",
+      "price_range_cny": "低成本(几百至千元级,待核实)",
+      "data_formats": [
+        "LeRobot"
+      ]
+    },
+    {
+      "id": "franka-fr3",
+      "name": "Franka FR3 / Panda",
+      "vendor": "Franka Robotics",
+      "form": "single_arm",
+      "dof": 7,
+      "end_effector": "夹爪",
+      "sdk_url": "待核实",
+      "price_range_cny": "待核实",
+      "data_formats": [
+        "待核实"
+      ]
+    },
+    {
+      "id": "fourier-gr",
+      "name": "傅立叶 GR 系列",
+      "vendor": "傅利叶智能",
+      "form": "humanoid",
+      "dof": null,
+      "end_effector": "待核实",
+      "sdk_url": "待核实",
+      "price_range_cny": "待核实",
+      "data_formats": [
+        "待核实"
+      ]
+    }
   ],
   "hardware": [
-    {"id": "rtx-4090", "name": "NVIDIA RTX 4090", "vram_gb": 24, "type": "consumer_gpu", "rental_cny_per_hour_ref": 1.68, "rental_ref_source": "共绩算力 (2026)", "rental_ref_url": "https://zhuanlan.zhihu.com/p/2023511569640821580", "note": "已停产;2026 年全新到手价 15999-24599 元,二手 11000-13000 元"},
-    {"id": "rtx-5090", "name": "NVIDIA RTX 5090", "vram_gb": 32, "type": "consumer_gpu", "rental_cny_per_hour_ref": 2.4, "rental_ref_source": "润云 2.4 / 共绩 2.5 / 并行智算云 2.98 (2026)", "rental_ref_url": "https://xie.infoq.cn/article/3af7e57672688835a46f8e7b8", "note": "包月约 1482 元(润云)"},
-    {"id": "a100-80g", "name": "NVIDIA A100 80GB", "vram_gb": 80, "type": "datacenter_gpu", "rental_cny_per_hour_ref": null, "rental_ref_source": "待核实(由 Sinan Compute 价格库提供)", "rental_ref_url": null, "note": ""},
-    {"id": "jetson-thor", "name": "NVIDIA Jetson AGX Thor", "vram_gb": null, "type": "edge", "rental_cny_per_hour_ref": null, "rental_ref_source": "不适用(机载)", "rental_ref_url": null, "note": "机器人本地快脑常用;用于本地延迟测量列"}
+    {
+      "id": "rtx-4090",
+      "name": "NVIDIA RTX 4090",
+      "vram_gb": 24,
+      "type": "consumer_gpu",
+      "rental_cny_per_hour_ref": 1.68,
+      "rental_ref_source": "共绩算力 (2026)",
+      "rental_ref_url": "https://zhuanlan.zhihu.com/p/2023511569640821580",
+      "note": "已停产;2026 年全新到手价 15999-24599 元,二手 11000-13000 元"
+    },
+    {
+      "id": "rtx-5090",
+      "name": "NVIDIA RTX 5090",
+      "vram_gb": 32,
+      "type": "consumer_gpu",
+      "rental_cny_per_hour_ref": 2.4,
+      "rental_ref_source": "润云 2.4 / 共绩 2.5 / 并行智算云 2.98 (2026)",
+      "rental_ref_url": "https://xie.infoq.cn/article/3af7e57672688835a46f8e7b8",
+      "note": "包月约 1482 元(润云)"
+    },
+    {
+      "id": "a100-80g",
+      "name": "NVIDIA A100 80GB",
+      "vram_gb": 80,
+      "type": "datacenter_gpu",
+      "rental_cny_per_hour_ref": null,
+      "rental_ref_source": "待核实(由 Sinan Compute 价格库提供)",
+      "rental_ref_url": null,
+      "note": ""
+    },
+    {
+      "id": "jetson-thor",
+      "name": "NVIDIA Jetson AGX Thor",
+      "vram_gb": null,
+      "type": "edge",
+      "rental_cny_per_hour_ref": null,
+      "rental_ref_source": "不适用(机载)",
+      "rental_ref_url": null,
+      "note": "机器人本地快脑常用;用于本地延迟测量列"
+    }
   ]
 }
