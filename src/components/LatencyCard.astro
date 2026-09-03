@@ -1,0 +1,38 @@
+---
+/** 模型的延迟与成本卡：按硬件列出 p50/p95/显存/每千次成本；无数据走“— + 原因”。 */
+import { t, type Lang } from '../lib/i18n';
+import { costPer1k, fmtCny, fmtMs } from '../lib/cost';
+interface HW { id: string; name: string; rental_cny_per_hour_ref: number | null; rental_ref_source: string | null }
+interface M { id: string; hardware_id: string; precision: string; metrics: { latency_ms_p50: number; latency_ms_p95: number | null; vram_peak_gb: number | null }; source_type: string; review_status: string }
+interface Props { lang: Lang; hardware: HW[]; measurements: M[] }
+const { lang, hardware, measurements } = Astro.props;
+const rows = hardware.map((h) => {
+  const ms = measurements.filter((m) => m.hardware_id === h.id && m.review_status !== 'rejected');
+  const p50s = ms.map((m) => m.metrics.latency_ms_p50).sort((a, b) => a - b);
+  const med = p50s.length ? p50s[Math.floor(p50s.length / 2)] : null;
+  const p95 = ms.length ? Math.max(...ms.map((m) => m.metrics.latency_ms_p95 ?? 0)) || null : null;
+  const vram = ms.length ? Math.max(...ms.map((m) => m.metrics.vram_peak_gb ?? 0)) || null : null;
+  const cost = costPer1k(med, h.rental_cny_per_hour_ref);
+  const types = Array.from(new Set(ms.map((m) => m.source_type)));
+  return { h, n: ms.length, med, p95, vram, cost, types };
+});
+---
+<div class="card">
+  <div class="pad" style="padding-bottom:12px"><h2 class="sec">{t(lang, 'latency.title')}</h2><div class="sub">{t(lang, 'latency.formula')}</div></div>
+  <div class="tablewrap"><table>
+    <thead><tr><th>{lang === 'en' ? 'Hardware' : '硬件'}</th><th class="num">{t(lang, 'latency.p50')} ms</th><th class="num">{t(lang, 'latency.p95')} ms</th><th class="num">{t(lang, 'latency.vram')}</th><th class="num">{t(lang, 'latency.cost')} ¥</th><th>{t(lang, 'latency.samples')}</th></tr></thead>
+    <tbody>
+      {rows.map((r) => (
+        <tr>
+          <td><div class="name">{r.h.name}</div><div class="dim">{r.h.rental_cny_per_hour_ref != null ? `¥${r.h.rental_cny_per_hour_ref}/h · ${r.h.rental_ref_source}` : t(lang, 'hardware.noRent')}</div></td>
+          <td class="num">{fmtMs(r.med)}</td>
+          <td class="num">{fmtMs(r.p95)}</td>
+          <td class="num">{r.vram != null ? r.vram + ' GB' : '—'}</td>
+          <td class="num">{r.cost.cny != null ? fmtCny(r.cost.cny) : <span><span>—</span> <span class="pill none">{t(lang, 'latency.costWhy_' + r.cost.why)}</span></span>}</td>
+          <td>{r.n ? <span>{r.n} {r.n < 3 && <span class="pill pending">{t(lang, 'badge.preliminary')}</span>} {r.types.map((ty) => <span class={'pill ' + ty}>{t(lang, 'badge.' + ty)}</span>)}</span> : <span class="pill none">{t(lang, 'badge.none')}</span>}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table></div>
+  {measurements.length === 0 && <div class="pad" style="padding-top:10px"><div class="callout"><b>{t(lang, 'latency.none')}</b> · {t(lang, 'latency.noneWhy')}</div></div>}
+</div>

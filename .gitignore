@@ -1,6 +1,11 @@
-public/
 node_modules/
+dist/
+.astro/
+.wrangler/
+.DS_Store
 .env
 .env.*
 *.env
-.DS_Store
+*.pem
+*.key
+src/content/generated/

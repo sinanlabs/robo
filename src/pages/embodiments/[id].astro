@@ -1,0 +1,7 @@
+---
+import V from '../../views/EmbodimentDetail.astro';
+import { getCollection } from 'astro:content';
+export async function getStaticPaths() { return (await getCollection('embodiments')).map((x) => ({ params: { id: x.data.id } })); }
+const { id } = Astro.params;
+---
+<V lang="zh-cn" id={id!} />

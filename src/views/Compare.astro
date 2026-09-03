@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { t, href, type Lang } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const models = (await getCollection('models')).map((m) => m.data);
+const fields = ['org', 'release_date', 'params_b', 'arch_type', 'license', 'commercial_ok', 'weights_url', 'code_url', 'paper_url', 'modalities_in', 'action_space', 'cross_embodiment', 'pretrain_hours', 'target_embodiments'];
+const labels: Record<string, string> = {}; for (const f of fields) labels[f] = t(lang, 'field.' + f);
+const forms: Record<string, string> = {}; for (const f of ['humanoid', 'dual_arm', 'dual_arm_wheeled', 'single_arm', 'wheeled', 'quadruped', 'mobile_manipulator']) forms[f] = t(lang, 'form.' + f);
+const archs: Record<string, string> = {}; for (const a of ['dual_system', 'villa', 'vlm_plus_action_expert', 'monolithic_autoregressive', 'soft_prompted_transformer', 'transformer_policy']) archs[a] = t(lang, 'arch.' + a);
+const payload = { models, fields, labels, forms, archs, pending: t(lang, 'badge.pending'), yes: t(lang, 'badge.commercial_yes'), no: t(lang, 'badge.commercial_no'), unk: t(lang, 'badge.commercial_unknown'), src: t(lang, 'evidence.open'), base: href(lang, '/models/') };
+---
+<Base lang={lang} title={t(lang, 'compare.title') + ' · Sinan Robo'} active="models" path="/compare" crumbs={[{ label: t(lang, 'nav.models'), href: href(lang, '/models') }, { label: t(lang, 'compare.title') }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{t(lang, 'compare.title')}</h1><p class="lead">{t(lang, 'compare.max')} · {en ? 'The URL is shareable.' : '地址栏可直接分享。'}</p></div>
+  <section class="card rise" style="--i:1"><div id="cmp" class="pad"><div class="callout">{t(lang, 'compare.empty')}</div></div></section>
+  <script type="application/json" id="cmpdata" set:html={JSON.stringify(payload).replace(/</g, '\\u003c')}></script>
+  <script>
+    const P = JSON.parse(document.getElementById('cmpdata')!.textContent!);
+    const ids = (new URLSearchParams(location.search).get('ids') || '').split(',').filter(Boolean).slice(0, 4);
+    const ms = ids.map((id: string) => P.models.find((m: any) => m.id === id)).filter(Boolean);
+    const PEND = /待核实|待定|TBA/; const pend = (v: any) => v == null || (typeof v === 'string' && (v.trim() === '' || PEND.test(v))) || (Array.isArray(v) && v.length === 0);
+    const esc = (s: any) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' } as any)[c]);
+    function cell(m: any, f: string) { const v = m[f]; const ev = (m.evidence || []).filter((e: any) => e.field.split(',').map((s: string) => s.trim()).includes(f)).length; const src = `<span class="ev${ev ? '' : ' zero'}">${ev} ${P.src}</span>`;
+      if (f === 'commercial_ok') return v === true ? `<span class="pill yes">${P.yes}</span> ${src}` : v === false ? `<span class="pill no">${P.no}</span> ${src}` : `<span class="pill pending">${P.unk}</span>`;
+      if (pend(v)) { const main = typeof v === 'string' ? v.replace(/[（(][^）)]*[)）]\s*$/, '').trim() : ''; return `${main && !PEND.test(main) ? esc(main) + ' ' : ''}<span class="pill pending">${P.pending}</span>`; }
+      if (/_url$/.test(f) && /^https?:/.test(v)) { let h = v; try { h = new URL(v).host.replace(/^www\./, ''); } catch {} return `<a class="mono" href="${esc(v)}" target="_blank" rel="noopener" style="color:var(--p-ink)">${esc(h)} ↗</a> ${src}`; }
+      if (f === 'target_embodiments') return esc(v.map((x: string) => P.forms[x] || x).join(' · ')) + ' ' + src;
+      if (f === 'modalities_in') return esc(v.join(' · ')) + ' ' + src;
+      if (f === 'arch_type') return esc(P.archs[v] || v) + ' ' + src;
+      if (f === 'params_b') return `<span class="mono">${v >= 1 ? v + 'B' : Math.round(v * 1000) + 'M'}</span> ${src}`;
+      return esc(v) + ' ' + src; }
+    if (ms.length) {
+      let h = '<div class="tablewrap"><table><thead><tr><th style="padding-left:0"></th>' + ms.map((m: any) => `<th style="text-transform:none;letter-spacing:0;font-family:inherit;font-size:14px;color:var(--ink)"><a class="name" href="${P.base + m.id}">${esc(m.name)}</a><div class="dim">${esc(m.org)}</div></th>`).join('') + '</tr></thead><tbody>';
+      for (const f of P.fields) { if (f === 'org') continue; h += `<tr><td style="padding-left:0;color:var(--ink-2)">${P.labels[f]}</td>` + ms.map((m: any) => `<td>${cell(m, f)}</td>`).join('') + '</tr>'; }
+      h += '</tbody></table></div>';
+      document.getElementById('cmp')!.innerHTML = h; document.getElementById('cmp')!.classList.remove('pad');
+    }
+  </script>
+</Base>

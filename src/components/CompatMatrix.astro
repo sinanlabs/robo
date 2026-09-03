@@ -1,0 +1,38 @@
+---
+import { t, href, type Lang } from '../lib/i18n';
+interface Props { lang: Lang; models: any[]; embodiments: any[]; compat: any[]; compact?: boolean }
+const { lang, models, embodiments, compat, compact = false } = Astro.props;
+const idx = new Map(compat.map((c) => [c.model_id + '__' + c.embodiment_id, c]));
+const statuses = ['official', 'community_verified', 'theoretical', 'unsupported', 'unknown'];
+const withStatus = compat.filter((c) => c.status !== 'unknown').length;
+---
+<div class="tablewrap">
+<table class="mx">
+  <thead><tr><th></th>{embodiments.map((e) => <th title={e.vendor}>{compact ? e.name.split(' ')[0] : e.name}</th>)}</tr></thead>
+  <tbody>
+    {models.map((m) => (
+      <tr>
+        <th class="rowh"><a href={href(lang, '/models/' + m.id)}>{m.name}</a></th>
+        {embodiments.map((e) => { const c = idx.get(m.id + '__' + e.id); const st = c?.status ?? 'unknown'; return (
+          <td><button class={'cell ' + st + (c?.declared_target_form ? ' declared' : '')} data-m={m.name} data-e={e.name} data-s={t(lang, 'badge.' + st)} data-d={c?.declared_target_form ? t(lang, 'badge.declared') : ''} data-ev={(c?.evidence ?? []).map((x: any) => x.url).join('\n')} aria-label={`${m.name} × ${e.name}: ${t(lang, 'badge.' + st)}`}></button></td>
+        ); })}
+      </tr>
+    ))}
+  </tbody>
+</table>
+</div>
+<div class="legend">
+  <b style="color:var(--ink-3);font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase">{t(lang, 'matrix.legend')}</b>
+  {statuses.map((s) => <span><i class={'cell ' + s} style="height:14px;width:14px;display:inline-block"></i>{t(lang, 'badge.' + s)}</span>)}
+  <span><i style="background:var(--robo);border-radius:50%;width:8px;height:8px;margin:0 9px 0 3px"></i>{t(lang, 'badge.declared')}</span>
+  <span style="margin-left:auto" class="mono">{withStatus} / {compat.length} {t(lang, 'matrix.cellsWithStatus')}</span>
+</div>
+<div id="mxpop" class="callout" hidden style="margin-top:12px"></div>
+<script>
+  const pop = document.getElementById('mxpop')!;
+  document.querySelectorAll<HTMLButtonElement>('.cell[data-m]').forEach((b) => b.addEventListener('click', () => {
+    const ev = b.dataset.ev ? b.dataset.ev.split('\n').map((u) => `<div class="mono" style="font-size:12px;word-break:break-all"><a href="${u}" target="_blank" rel="noopener">${u}</a></div>`).join('') : `<div class="dim">${(document.documentElement.lang === 'en') ? 'No evidence recorded for this cell yet. Status stays “unknown” until a source is added.' : '这一格还没有任何证据。加上来源之前状态保持“未知”。'}</div>`;
+    pop.innerHTML = `<b>${b.dataset.m} × ${b.dataset.e}</b> · <span class="pill ${b.className.replace('cell','').replace('declared','').trim()}">${b.dataset.s}</span>${b.dataset.d ? ` <span class="pill declared">${b.dataset.d}</span>` : ''}<div style="margin-top:8px">${ev}</div>`;
+    pop.hidden = false; pop.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }));
+</script>

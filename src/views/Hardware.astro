@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { t, href, type Lang } from '../lib/i18n';
+import { isUrl, hostOf } from '../lib/evidence';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const hw = (await getCollection('hardware')).map((h) => h.data);
+const meas = (await getCollection('measurements')).map((m) => m.data);
+---
+<Base lang={lang} title={t(lang, 'hardware.title') + ' · Sinan Robo'} active="hardware" path="/hardware" crumbs={[{ label: t(lang, 'nav.hardware') }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{t(lang, 'hardware.title')}</h1><p class="lead">{t(lang, 'hardware.p')} {en ? 'Rental prices will be fed daily from the Sinan Compute price library once the GPU rental adapters are live.' : 'GPU 租赁采集器上线后，租价会每天从 Sinan Compute 价格库同步。'}</p></div>
+  <div class="grid2" style="margin-top:0;grid-template-columns:repeat(2,1fr)">
+    {hw.map((h, i) => { const n = meas.filter((m) => m.hardware_id === h.id).length; return (
+      <a class="card tile rise" href={href(lang, '/hardware/' + h.id)} style={`--i:${i + 1}`}>
+        <div class="v">{h.rental_cny_per_hour_ref != null ? <span>¥{h.rental_cny_per_hour_ref}<small style="font-size:13px;color:var(--ink-3);font-weight:500"> /h</small></span> : <span style="font-size:18px;color:#B54708">{t(lang, 'hardware.noRent')}</span>}</div>
+        <div class="k">{h.name}</div>
+        <div class="n">{h.vram_gb != null ? h.vram_gb + ' GB' : '—'} · {h.type} · {n ? n + (en ? ' measurements' : ' 条测量') : (en ? 'no measurements yet' : '暂无测量')}</div>
+        <div class="dim" style="margin-top:8px">{h.rental_ref_source ? (en ? 'Ref: ' : '来源：') + h.rental_ref_source : ''}{isUrl(h.rental_ref_url) ? ' · ' + hostOf(h.rental_ref_url) : ''}</div>
+      </a>); })}
+  </div>
+</Base>

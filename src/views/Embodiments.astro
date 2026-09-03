@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { t, href, type Lang } from '../lib/i18n';
+import { isPending, splitPending } from '../lib/evidence';
+import { EMB_REQUIRED, pendingOf } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const embs = (await getCollection('embodiments')).map((e) => e.data);
+const compat = (await getCollection('compat')).map((c) => c.data);
+---
+<Base lang={lang} title={(en ? 'Embodiments' : '本体') + ' · Sinan Robo'} active="embodiments" path="/embodiments" crumbs={[{ label: t(lang, 'nav.embodiments') }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{t(lang, 'nav.embodiments')}</h1><p class="lead">{en ? 'Robot bodies the indexed models are claimed or verified to run on. Prices are public list prices where we could find them.' : '被收录模型声称或被核实能跑的机器人本体。价格取能查到的公开标价。'}</p></div>
+  <section class="card rise" style="--i:1"><div class="tablewrap"><table>
+    <thead><tr><th>{en ? 'Embodiment' : '本体'}</th><th>{t(lang, 'field.form')}</th><th class="num">{t(lang, 'field.dof')}</th><th>{t(lang, 'field.end_effector')}</th><th>{t(lang, 'field.price_range_cny')}</th><th class="num">{en ? 'Evidenced cells' : '有证据的格'}</th><th class="num">{en ? 'Declared by' : '被声明为目标'}</th><th class="num">{en ? 'Verified fields' : '已核实字段'}</th></tr></thead>
+    <tbody>{embs.map((e) => { const cs = compat.filter((c) => c.embodiment_id === e.id); const known = cs.filter((c) => c.status !== 'unknown').length; const decl = cs.filter((c) => c.declared_target_form).length; const p = pendingOf(e as any, EMB_REQUIRED); const price = splitPending(e.price_range_cny); return (
+      <tr>
+        <td><a class="name" href={href(lang, '/embodiments/' + e.id)}>{e.name}</a><div class="dim">{e.vendor}</div></td>
+        <td>{t(lang, 'form.' + e.form)}</td>
+        <td class="num">{e.dof ?? <span class="pill pending">{t(lang, 'badge.pending')}</span>}</td>
+        <td>{isPending(e.end_effector) ? <span class="pill pending">{t(lang, 'badge.pending')}</span> : e.end_effector}</td>
+        <td>{isPending(e.price_range_cny) ? <span>{price.main && !/待核实/.test(price.main) ? price.main + ' ' : ''}<span class="pill pending">{t(lang, 'badge.pending')}</span></span> : e.price_range_cny}</td>
+        <td class="num">{known} / {cs.length}</td>
+        <td class="num">{decl} {en ? 'models' : '个模型'}</td>
+        <td class="num"><span class="mono" style={p.pending > p.total / 2 ? 'color:#B54708' : 'color:#067647'}>{p.ok}/{p.total}</span></td>
+      </tr>); })}</tbody>
+  </table></div></section>
+</Base>

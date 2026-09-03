@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { t, href, type Lang } from '../lib/i18n';
+import { isPending, splitPending } from '../lib/evidence';
+import { MODEL_REQUIRED, pendingOf, licenseClass, crossClass, fmtParams } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const models = (await getCollection('models')).map((m) => m.data);
+const forms = Array.from(new Set(models.flatMap((m) => m.target_embodiments)));
+const rows = models.map((m) => ({ m, p: pendingOf(m as any, MODEL_REQUIRED), lic: licenseClass(m.license), cross: crossClass(m.cross_embodiment), licText: splitPending(m.license).main }));
+---
+<Base lang={lang} title={(en ? 'Models' : '模型索引') + ' · Sinan Robo'} active="models" path="/models" crumbs={[{ label: t(lang, 'nav.models') }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{t(lang, 'nav.models')}</h1><p class="lead">{en ? 'Every row links to a detail page where each field shows its source. Fields we could not verify carry an “Unverified” badge; we never fill them with defaults.' : '每一行都能点进详情，每个字段都能看到来源。没核实的字段带“待核实”徽标，我们不用默认值填空。'}</p></div>
+  <section class="card rise" style="--i:1">
+    <div class="pad" style="padding-bottom:0">
+      <div class="filters" id="filters">
+        <label>{t(lang, 'list.filterEmb')}</label><select data-f="form"><option value="">{t(lang, 'list.all')}</option>{forms.map((f) => <option value={f}>{t(lang, 'form.' + f)}</option>)}</select>
+        <label>{t(lang, 'list.filterLicense')}</label><select data-f="lic"><option value="">{t(lang, 'list.all')}</option><option value="apache">Apache-2.0</option><option value="mit">MIT</option><option value="open_other">{en ? 'Other open' : '其他开源'}</option><option value="pending">{t(lang, 'badge.pending')}</option></select>
+        <label>{t(lang, 'list.filterCommercial')}</label><select data-f="comm"><option value="">{t(lang, 'list.all')}</option><option value="yes">{t(lang, 'list.yes')}</option><option value="no">{t(lang, 'list.no')}</option><option value="unknown">{t(lang, 'list.unknown')}</option></select>
+        <label>{t(lang, 'list.filterCross')}</label><select data-f="cross"><option value="">{t(lang, 'list.all')}</option><option value="yes">{t(lang, 'list.yes')}</option><option value="no">{t(lang, 'list.no')}</option><option value="pending">{t(lang, 'badge.pending')}</option></select>
+        <label>{t(lang, 'list.sort')}</label><select data-f="sort"><option value="release">{t(lang, 'list.sortRelease')}</option><option value="params">{t(lang, 'list.sortParams')}</option><option value="complete">{en ? 'Completeness' : '完整率'}</option></select>
+        <span style="margin-left:auto;display:flex;gap:8px;align-items:center"><span class="dim" id="cnt"></span><a class="btn a" id="cmp" href={href(lang, '/compare')} style="height:34px;padding:0 14px;font-size:12.5px">{t(lang, 'list.compare')} <span id="cmpn">0</span></a></span>
+      </div>
+      <div class="dim" style="padding-bottom:10px">{t(lang, 'list.compareHint')}</div>
+    </div>
+    <div class="tablewrap"><table id="tbl">
+      <thead><tr><th style="width:36px"></th><th>{en ? 'Model' : '模型'}</th><th class="num">{t(lang, 'field.params_b')}</th><th>{t(lang, 'field.arch_type')}</th><th>{t(lang, 'field.license')}</th><th>{t(lang, 'field.commercial_ok')}</th><th>{t(lang, 'field.target_embodiments')}</th><th>{t(lang, 'field.cross_embodiment')}</th><th class="num">{en ? 'Verified fields' : '已核实字段'}</th></tr></thead>
+      <tbody>{rows.map(({ m, p, lic, cross, licText }) => (
+        <tr data-form={m.target_embodiments.join(' ')} data-lic={lic} data-comm={m.commercial_ok === true ? 'yes' : m.commercial_ok === false ? 'no' : 'unknown'} data-cross={cross} data-release={String(m.release_date ?? '')} data-params={m.params_b ?? -1} data-complete={p.ok}>
+          <td><input type="checkbox" class="ck" value={m.id} aria-label={m.name}></td>
+          <td><a class="name" href={href(lang, '/models/' + m.id)}>{m.name}</a><div class="dim">{m.org}{m.release_date && !isPending(m.release_date) ? ' · ' + m.release_date : ''}</div></td>
+          <td class="num">{m.params_b != null ? fmtParams(m.params_b) : <span class="pill pending">{t(lang, 'badge.pending')}</span>}</td>
+          <td>{isPending(m.arch_type) ? <span class="pill pending">{t(lang, 'badge.pending')}</span> : (t(lang, 'arch.' + m.arch_type) === 'arch.' + m.arch_type ? m.arch_type : t(lang, 'arch.' + m.arch_type))}</td>
+          <td>{isPending(m.license) ? <span>{licText && licText !== String(m.license) ? <span>{licText} </span> : null}<span class="pill pending">{t(lang, 'badge.pending')}</span></span> : licText}</td>
+          <td>{m.commercial_ok === true ? <span class="pill yes">{t(lang, 'badge.commercial_yes')}</span> : m.commercial_ok === false ? <span class="pill no">{t(lang, 'badge.commercial_no')}</span> : <span class="pill pending">{t(lang, 'badge.commercial_unknown')}</span>}</td>
+          <td>{m.target_embodiments.length ? m.target_embodiments.map((f) => t(lang, 'form.' + f)).join(' · ') : <span class="pill pending">{t(lang, 'badge.pending')}</span>}</td>
+          <td>{cross === 'pending' ? <span class="pill pending">{t(lang, 'badge.pending')}</span> : cross === 'yes' ? <span class="pill yes">{t(lang, 'list.yes')}</span> : <span class="pill none">{t(lang, 'list.no')}</span>}</td>
+          <td class="num"><span class={p.pending > p.total / 2 ? 'mono' : 'mono'} style={p.pending > p.total / 2 ? 'color:#B54708' : 'color:#067647'}>{p.ok}/{p.total}</span></td>
+        </tr>
+      ))}</tbody>
+    </table></div>
+  </section>
+  <script>
+    const tb = document.querySelector('#tbl tbody')!; const rows = Array.from(tb.querySelectorAll('tr')); const sel = document.querySelectorAll<HTMLSelectElement>('#filters select'); const cnt = document.getElementById('cnt')!; const cmp = document.getElementById('cmp') as HTMLAnchorElement; const cmpn = document.getElementById('cmpn')!;
+    function apply() { const f: Record<string, string> = {}; sel.forEach((s) => f[s.dataset.f!] = s.value); let n = 0; rows.forEach((r) => { const ok = (!f.form || (r.dataset.form || '').split(' ').includes(f.form)) && (!f.lic || r.dataset.lic === f.lic) && (!f.comm || r.dataset.comm === f.comm) && (!f.cross || r.dataset.cross === f.cross); r.style.display = ok ? '' : 'none'; if (ok) n++; }); cnt.textContent = n + ' ' + (document.documentElement.lang === 'en' ? 'models' : '个模型');
+      const key = f.sort || 'release'; const vis = rows.slice().sort((a, b) => key === 'params' ? (+b.dataset.params! - +a.dataset.params!) : key === 'complete' ? (+b.dataset.complete! - +a.dataset.complete!) : (b.dataset.release || '').localeCompare(a.dataset.release || '')); vis.forEach((r) => tb.appendChild(r)); }
+    sel.forEach((s) => s.addEventListener('change', apply)); apply();
+    const base = cmp.getAttribute('href')!; function upd() { const ids = Array.from(document.querySelectorAll<HTMLInputElement>('.ck:checked')).map((c) => c.value); if (ids.length > 4) { alert(document.documentElement.lang === 'en' ? 'Up to 4' : '最多 4 个'); } cmpn.textContent = String(ids.length); cmp.href = ids.length ? base + '?ids=' + ids.slice(0, 4).join(',') : base; }
+    document.querySelectorAll('.ck').forEach((c) => c.addEventListener('change', upd));
+  </script>
+</Base>

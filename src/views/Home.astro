@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import Stars from '../components/Stars.astro';
+import { getCollection } from 'astro:content';
+import { t, href, type Lang } from '../lib/i18n';
+import { MODEL_REQUIRED, EMB_REQUIRED, pendingOf } from '../lib/data';
+import meta from '../content/generated/meta.json';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const models = (await getCollection('models')).map((m) => m.data);
+const embs = (await getCollection('embodiments')).map((e) => e.data);
+const compat = (await getCollection('compat')).map((c) => c.data);
+const hw = (await getCollection('hardware')).map((h) => h.data);
+const cells = compat.length, cellsKnown = compat.filter((c) => c.status !== 'unknown').length;
+let pend = 0, tot = 0;
+for (const m of models) { const p = pendingOf(m as any, MODEL_REQUIRED); pend += p.pending; tot += p.total; }
+for (const e of embs) { const p = pendingOf(e as any, EMB_REQUIRED); pend += p.pending; tot += p.total; }
+const en = lang === 'en';
+const title = en ? 'Sinan Robo' : 'Sinan Robo · 司南·机脑';
+const latest = [...models].sort((a, b) => String(b.release_date).localeCompare(String(a.release_date))).slice(0, 5);
+---
+<Base lang={lang} title={title} active="home" path="/">
+  <section class="hero rise" style="--i:1">
+    <Stars />
+    <div class="gyro"><i></i><i></i><i></i><b></b></div>
+    <div class="txt">
+      <div class="eyebrow">{t(lang, 'hero.eyebrow')}</div>
+      <h1 set:html={t(lang, 'hero.h1')}></h1>
+      <p>{t(lang, 'hero.p')}</p>
+      <div class="cta"><a class="btn w" href={href(lang, '/models')}>{t(lang, 'hero.cta1')}</a><a class="btn g" href={href(lang, '/matrix')}>{t(lang, 'hero.cta2')}</a></div>
+    </div>
+  </section>
+
+  <div class="kpis">
+    <div class="card kpi rise" style="--i:2"><div class="k">{t(lang, 'kpi.models')}</div><div class="v">{models.length}</div><div class="n">{en ? 'Open / open-weight VLA, seed v0.1' : '开源 / 开放权重 VLA · 种子 v0.1'}</div></div>
+    <div class="card kpi rise" style="--i:2.5"><div class="k">{t(lang, 'kpi.embodiments')}</div><div class="v">{embs.length}</div><div class="n">{en ? 'Humanoid, dual-arm, single-arm, wheeled' : '人形、双臂、单臂、轮式'}</div></div>
+    <div class="card kpi rise" style="--i:3"><div class="k">{t(lang, 'kpi.cells')}</div><div class="v">{cellsKnown}<small>/ {cells}</small></div><div class="n">{en ? 'cells with an evidenced status' : '有证据支撑的格数'}</div></div>
+    <div class="card kpi rise" style="--i:3.5"><div class="k">{t(lang, 'kpi.pending')}</div><div class="v" style="color:#B54708">{pend}<small>/ {tot}</small></div><div class="n">{t(lang, 'kpi.pendingSub')}</div></div>
+  </div>
+
+  <div class="grid3 rise" style="margin-top:18px;--i:4">
+    <a class="card tile amber" href={href(lang, '/models')}><span class="orb"></span><div class="v">{models.length}</div><div class="k">{t(lang, 'nav.models')}</div><div class="n">{en ? 'License, weights, architecture, target forms, sources for every field' : '许可证、权重、架构、目标形态，每个字段带来源'}</div></a>
+    <a class="card tile violet" href={href(lang, '/matrix')}><span class="orb"></span><div class="v">{models.length}×{embs.length}</div><div class="k">{t(lang, 'nav.matrix')}</div><div class="n">{en ? 'Model × embodiment; only evidenced states are colored' : '模型 × 本体；只给有证据的格子上色'}</div></a>
+    <a class="card tile teal" href={href(lang, '/hardware')}><span class="orb"></span><div class="v">{hw.length}</div><div class="k">{t(lang, 'nav.hardware')}</div><div class="n">{en ? 'Latency p50/p95 and cost per 1k inferences by GPU' : '按显卡看延迟 p50/p95 与每千次推理成本'}</div></a>
+  </div>
+
+  <div class="grid2">
+    <section class="card pad rise" style="--i:5">
+      <h2 class="sec">{en ? 'Recently indexed' : '最近收录'}</h2>
+      <div class="tablewrap" style="margin-top:8px"><table>
+        <thead><tr><th style="padding-left:0">{en ? 'Model' : '模型'}</th><th>{t(lang, 'field.org')}</th><th>{t(lang, 'field.release_date')}</th><th class="num">{t(lang, 'field.params_b')}</th><th>{t(lang, 'field.commercial_ok')}</th></tr></thead>
+        <tbody>{latest.map((m) => (
+          <tr><td style="padding-left:0"><a class="name" href={href(lang, '/models/' + m.id)}>{m.name}</a></td><td>{m.org}</td><td>{m.release_date && !/待核实/.test(m.release_date) ? m.release_date : <span class="pill pending">{t(lang, 'badge.pending')}</span>}</td><td class="num">{m.params_b != null ? (m.params_b >= 1 ? m.params_b + 'B' : Math.round(m.params_b * 1000) + 'M') : <span class="pill pending">{t(lang, 'badge.pending')}</span>}</td><td>{m.commercial_ok === true ? <span class="pill yes">{t(lang, 'badge.commercial_yes')}</span> : m.commercial_ok === false ? <span class="pill no">{t(lang, 'badge.commercial_no')}</span> : <span class="pill pending">{t(lang, 'badge.commercial_unknown')}</span>}</td></tr>
+        ))}</tbody>
+      </table></div>
+    </section>
+    <section class="card pad feed rise" style="--i:6">
+      <h2 class="sec">{t(lang, 'recent.title')}</h2>
+      <div class="row"><div class="t">{String(meta.imported_at).slice(5, 10)}</div><div>{t(lang, 'recent.seed')}<div class="dim">{models.length} {en ? 'models' : '模型'} · {embs.length} {en ? 'embodiments' : '本体'} · {hw.length} {en ? 'GPUs' : '硬件'}</div></div></div>
+      <div class="row"><div class="t">{String(meta.generated)}</div><div>{en ? 'Seed data compiled' : '种子数据整理完成'}<div class="dim">schema {meta.schema_version}</div></div></div>
+      <div class="notice" style="margin-top:14px">{en ? 'Nothing in this index is a recommendation. We record what sources say and label what we have not verified.' : '索引里没有任何“推荐”。我们只记录来源怎么说，没核实的就标出来。'}</div>
+      <div class="callout" style="margin-top:10px"><b>{t(lang, 'constitution.title')}</b> · {en ? 'No commercial variables in rankings; methods and raw data downloadable; self-hosted and third-party endpoints shown alike.' : '排名不含商业变量；方法与原始数据可下载；自托管与第三方端点同等展示。'} <a href="https://sinanlab.com/constitution" style="color:var(--p-ink)">{en ? 'Full text →' : '全文 →'}</a></div>
+    </section>
+  </div>
+</Base>

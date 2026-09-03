@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import CompatMatrix from '../components/CompatMatrix.astro';
+import { getCollection } from 'astro:content';
+import { t, type Lang } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const models = (await getCollection('models')).map((m) => m.data);
+const embs = (await getCollection('embodiments')).map((e) => e.data);
+const compat = (await getCollection('compat')).map((c) => c.data);
+---
+<Base lang={lang} title={t(lang, 'matrix.title') + ' · Sinan Robo'} active="matrix" path="/matrix" crumbs={[{ label: t(lang, 'nav.matrix') }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{t(lang, 'matrix.title')}</h1><p class="lead">{t(lang, 'matrix.p')}</p></div>
+  <section class="card pad rise" style="--i:1"><CompatMatrix lang={lang} models={models} embodiments={embs} compat={compat} /></section>
+</Base>

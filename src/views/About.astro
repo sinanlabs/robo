@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, tl, type Lang } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+---
+<Base lang={lang} title={t(lang, 'about.title') + ' · Sinan Robo'} active="about" path="/about" crumbs={[{ label: t(lang, 'nav.about') }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{t(lang, 'about.title')}</h1></div>
+  <div class="grid2" style="margin-top:0">
+    <section class="card pad prose rise" style="--i:1">
+      {en ? <>
+        <p><b>Sinan Robo</b> is the embodied-AI arm of <a href="https://sinanlab.com" style="color:var(--p-ink)">Sinan Lab</a>. It answers one question for robot developers: which open model brain to use, where to run it, and what it costs.</p>
+        <p>We index open and open-weight vision-language-action models, the robot bodies they are claimed or verified to run on, and their measured latency and cost on real GPUs. Every field shows its source. Unverified fields say so.</p>
+        <p>Our sister product <a href="https://compute.sinanlab.com" style="color:var(--p-ink)">Sinan Compute</a> measures GPU and model-API prices; its price library feeds the cost column here.</p>
+        <p>Contact: <a href="mailto:hello@sinanlab.com" style="color:var(--p-ink)">hello@sinanlab.com</a></p>
+      </> : <>
+        <p><b>Sinan Robo（司南·机脑）</b>是 <a href="https://sinanlab.com" style="color:var(--p-ink)">司南实验室</a> 的具身智能板块。它替机器人开发者回答一个问题：该用哪个开源大脑、在哪跑、花多少钱。</p>
+        <p>我们收录开源与开放权重的视觉-语言-动作模型、它们声称或被核实能跑的机器人本体、以及在真实显卡上的实测延迟与成本。每个字段都能看到来源，没核实的字段就写“待核实”。</p>
+        <p>兄弟产品 <a href="https://compute.sinanlab.com" style="color:var(--p-ink)">Sinan Compute</a> 测量 GPU 与模型 API 价格，它的价格库给这里的成本列供数。</p>
+        <p>联系：<a href="mailto:hello@sinanlab.com" style="color:var(--p-ink)">hello@sinanlab.com</a></p>
+      </>}
+    </section>
+    <section class="card pad rise" style="--i:2">
+      <h2 class="sec">{t(lang, 'constitution.title')}</h2>
+      <ol style="margin:12px 0 0;padding-left:20px;line-height:1.9">{tl(lang, 'constitution.items').map((x) => <li>{x}</li>)}</ol>
+      <a class="btn w" href="https://sinanlab.com/constitution" style="margin-top:14px;border:1px solid var(--hair-2)">{en ? 'Full text on sinanlab.com →' : '母站全文 →'}</a>
+    </section>
+  </div>
+</Base>

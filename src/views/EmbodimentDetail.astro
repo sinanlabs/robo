@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Field from '../components/Field.astro';
+import EvidenceList from '../components/EvidenceList.astro';
+import CompatMatrix from '../components/CompatMatrix.astro';
+import { getCollection } from 'astro:content';
+import { t, href, type Lang } from '../lib/i18n';
+interface Props { lang: Lang; id: string }
+const { lang, id } = Astro.props;
+const en = lang === 'en';
+const e = (await getCollection('embodiments')).map((x) => x.data).find((x) => x.id === id)!;
+const models = (await getCollection('models')).map((m) => m.data);
+const compat = (await getCollection('compat')).map((c) => c.data).filter((c) => c.embodiment_id === id);
+const declared = compat.filter((c) => c.declared_target_form).map((c) => models.find((m) => m.id === c.model_id)!).filter(Boolean);
+---
+<Base lang={lang} title={`${e.name} · Sinan Robo`} desc={`${e.name} · ${e.vendor} · ${t(lang, 'form.' + e.form)}`} active="embodiments" path={'/embodiments/' + e.id} crumbs={[{ label: t(lang, 'nav.embodiments'), href: href(lang, '/embodiments') }, { label: e.name }]}>
+  <div class="rise" style="--i:0;margin-bottom:16px"><div class="eyebrow" style="color:var(--robo-deep);opacity:1">{e.vendor}</div><h1 style="font-size:30px;margin-top:6px">{e.name}</h1></div>
+  <div class="grid2" style="margin-top:0">
+    <section class="card pad rise" style="--i:1">
+      <h2 class="sec">{en ? 'Facts' : '基本事实'}</h2>
+      <dl class="kv" style="margin-top:14px">
+        <Field lang={lang} field="form" value={e.form} evidence={e.evidence} kind="form" />
+        <Field lang={lang} field="dof" value={e.dof} evidence={e.evidence} kind="number" />
+        <Field lang={lang} field="end_effector" value={e.end_effector} evidence={e.evidence} />
+        <Field lang={lang} field="sdk_url" value={e.sdk_url} evidence={e.evidence} kind="url" />
+        <Field lang={lang} field="price_range_cny" value={e.price_range_cny} evidence={e.evidence} />
+        <Field lang={lang} field="data_formats" value={e.data_formats} evidence={e.evidence} kind="list" />
+      </dl>
+      <EvidenceList lang={lang} evidence={e.evidence} open={true} />
+    </section>
+    <section class="card pad rise" style="--i:2">
+      <h2 class="sec">{en ? 'Models declaring this form as a target' : '把这种形态列为目标的模型'}</h2>
+      <p class="lead" style="margin-bottom:8px">{en ? 'Vendor claims, not verified compatibility. Verified states appear in the matrix below.' : '这是厂商声明，不等于核实过的适配。核实过的状态看下面的矩阵。'}</p>
+      {declared.length ? declared.map((m) => <div class="feed"><div class="row" style="grid-template-columns:1fr"><div><a class="name" href={href(lang, '/models/' + m.id)}>{m.name}</a> <span class="dim">{m.org}</span> <span class="pill declared">{t(lang, 'badge.declared')}</span></div></div></div>) : <div class="callout">{en ? 'None of the indexed models declares this form.' : '目前没有模型把这种形态列为目标。'}</div>}
+    </section>
+  </div>
+  <section class="card pad rise" style="margin-top:16px;--i:3">
+    <h2 class="sec">{en ? 'Compatibility on this embodiment' : '在这个本体上的适配状态'}</h2>
+    <div style="margin-top:10px"><CompatMatrix lang={lang} models={models} embodiments={[e]} compat={compat} /></div>
+  </section>
+</Base>

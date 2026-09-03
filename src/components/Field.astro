@@ -1,0 +1,34 @@
+---
+/** 一个字段：标签 + 值 + 待核实徽标 + 来源计数。禁止用默认值填空。 */
+import { t, type Lang } from '../lib/i18n';
+import { isPending, splitPending, evidenceFor, isUrl, hostOf, type Evidence } from '../lib/evidence';
+interface Props { lang: Lang; field: string; value: unknown; evidence?: Evidence[]; kind?: 'text' | 'url' | 'number' | 'bool' | 'list' | 'form' | 'arch'; unit?: string; label?: string }
+const { lang, field, value, evidence = [], kind = 'text', unit = '', label } = Astro.props;
+const ev = evidenceFor(evidence, field);
+const pending = isPending(value);
+const { main, note } = splitPending(value);
+function fmt(): string {
+  if (kind === 'number') return typeof value === 'number' ? String(value) + (unit ? ' ' + unit : '') : main;
+  if (kind === 'bool') return value === true ? t(lang, 'badge.commercial_yes') : value === false ? t(lang, 'badge.commercial_no') : t(lang, 'badge.commercial_unknown');
+  if (kind === 'list') return Array.isArray(value) ? value.filter((x) => !isPending(x)).join(' · ') : main;
+  if (kind === 'form') return Array.isArray(value) ? value.map((x) => t(lang, 'form.' + x)).join(' · ') : t(lang, 'form.' + main);
+  if (kind === 'arch') return t(lang, 'arch.' + main) === 'arch.' + main ? main : t(lang, 'arch.' + main);
+  return main;
+}
+const shown = fmt();
+---
+<dt>{label ?? t(lang, 'field.' + field)}</dt>
+<dd>
+  {pending && (!shown || shown === 'null' || shown === '') ? (
+    <span class="pill pending">{t(lang, 'badge.pending')}</span>
+  ) : kind === 'url' && isUrl(main) ? (
+    <a class="val mono" href={main} target="_blank" rel="noopener">{hostOf(main)} ↗</a>
+  ) : kind === 'bool' ? (
+    <span class={'pill ' + (value === true ? 'yes' : value === false ? 'no' : 'pending')}>{shown}</span>
+  ) : (
+    <span class={'val' + (kind === 'number' ? ' mono' : '')}>{shown}</span>
+  )}
+  {pending && shown && shown !== 'null' && kind !== 'bool' && <span class="pill pending">{t(lang, 'badge.pending')}</span>}
+  {ev.length ? <span class="ev" title={ev.map((e) => e.url).join('\n')}>{ev.length} {t(lang, 'evidence.open')}</span> : <span class="ev zero">0 {t(lang, 'evidence.open')}</span>}
+  {note && note !== shown && <span class="note">{note}</span>}
+</dd>

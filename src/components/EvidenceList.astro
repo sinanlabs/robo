@@ -1,0 +1,18 @@
+---
+import { t, type Lang } from '../lib/i18n';
+import type { Evidence } from '../lib/evidence';
+interface Props { lang: Lang; evidence: Evidence[]; open?: boolean }
+const { lang, evidence, open = false } = Astro.props;
+---
+<details class="evd" open={open}>
+  <summary>{t(lang, 'evidence.title')} · {evidence.length} {t(lang, 'evidence.count')}</summary>
+  {evidence.length === 0 && <div class="snap"><span>{t(lang, 'evidence.empty')}</span></div>}
+  {evidence.map((e) => (
+    <div class="snap">
+      <b>{e.field}</b>
+      <a href={e.url} target="_blank" rel="noopener">{e.url}</a>
+      <span><span class={'pill ' + (e.source_type === 'official' ? 'official-src' : e.source_type)}>{t(lang, 'evidence.types.' + e.source_type)}</span> · {t(lang, 'evidence.fetched')} {e.fetched} · {e.sha256 ? t(lang, 'evidence.sha') + ' ' + e.sha256.slice(0, 16) + '…' : t(lang, 'evidence.nosha')}</span>
+      {e.note && <span>{e.note}</span>}
+    </div>
+  ))}
+</details>

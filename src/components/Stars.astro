@@ -1,0 +1,17 @@
+---
+/** 首页 hero 的星空层（纯 canvas，无依赖），与 Sinan Compute 同一套。 */
+---
+<canvas class="stars" data-stars></canvas>
+<script>
+  const cv = document.querySelector<HTMLCanvasElement>('canvas[data-stars]');
+  if (cv) {
+    const hero = cv.parentElement!; const ctx = cv.getContext('2d')!;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let W = 0, H = 0, S: any[] = [];
+    function size() { const b = hero.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); W = b.width; H = b.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0); S = []; const n = Math.round(W * H / 3800); for (let i = 0; i < n; i++) S.push({ x: Math.random(), y: Math.random(), z: .3 + Math.random() * .7, s: .35 + Math.random() * 1.1, tw: Math.random() * 6.28, sp: .6 + Math.random() * 1.6, c: Math.random() < .12 ? '200,215,255' : Math.random() < .08 ? '255,220,170' : '255,255,255' }); }
+    size(); addEventListener('resize', size);
+    let mx = 0, my = 0, px = 0, py = 0; addEventListener('pointermove', (e) => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; });
+    function frame(t: number) { px += (mx - px) * .04; py += (my - py) * .04; ctx.clearRect(0, 0, W, H); const tm = t / 1000; for (const s of S) { const x = s.x * W - px * 14 * s.z, y = s.y * H - py * 10 * s.z; const a = (.35 + .65 * (.5 + .5 * Math.sin(tm * s.sp + s.tw))) * s.z; ctx.fillStyle = `rgba(${s.c},${a.toFixed(3)})`; ctx.beginPath(); ctx.arc(x, y, s.s, 0, 6.283); ctx.fill(); } if (!reduce) requestAnimationFrame(frame); }
+    requestAnimationFrame(frame);
+  }
+</script>

@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { t, type Lang } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+---
+<Base lang={lang} title={t(lang, 'subscribe.title') + ' · Sinan Robo'} active="subscribe" path="/subscribe" crumbs={[{ label: t(lang, 'nav.subscribe') }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{t(lang, 'subscribe.title')}</h1><p class="lead">{t(lang, 'subscribe.p')}</p></div>
+  <div class="grid2" style="margin-top:0">
+    <section class="card pad rise" style="--i:1">
+      <h2 class="sec">{t(lang, 'subscribe.email')}</h2>
+      <div class="notice" style="margin-top:12px">{en ? 'The mailing service is being connected. Until it is live the form below is disabled; email hello@sinanlab.com with “subscribe” and we will add you by hand.' : '邮件服务正在接入，接通前下面的表单不可用。先发邮件到 hello@sinanlab.com 写“订阅”，我们手动加你。'}</div>
+      <form class="sub" onsubmit="return false"><input type="email" placeholder={t(lang, 'subscribe.placeholder')} disabled><button class="btn a" type="submit" disabled style="opacity:.5;cursor:not-allowed">{t(lang, 'subscribe.btn')}</button></form>
+      <a class="btn w" href="mailto:hello@sinanlab.com?subject=subscribe%20sinan%20robo" style="margin-top:12px;border:1px solid var(--hair-2)">hello@sinanlab.com →</a>
+    </section>
+    <section class="card pad rise prose" style="--i:2">
+      <h2 class="sec" style="margin:0">{t(lang, 'subscribe.rss')} · {t(lang, 'subscribe.webhook')}</h2>
+      <p>{en ? 'RSS feed and Feishu / DingTalk webhooks ship with the first data update. Both will carry the same change records as email: model added, license or weights link changed, new measurement verified.' : 'RSS 与飞书 / 钉钉 Webhook 随第一次数据更新一起上线。内容和邮件一样：新增模型、许可证或权重链接变化、新测量通过验证。'}</p>
+      <p class="dim">{en ? 'No tracking pixels. Email addresses are stored hashed. Unsubscribe is one click.' : '不放追踪像素。邮箱哈希存储。一键退订。'}</p>
+    </section>
+  </div>
+</Base>

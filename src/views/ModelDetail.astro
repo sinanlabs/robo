@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import Field from '../components/Field.astro';
+import EvidenceList from '../components/EvidenceList.astro';
+import LatencyCard from '../components/LatencyCard.astro';
+import CompatMatrix from '../components/CompatMatrix.astro';
+import { getCollection } from 'astro:content';
+import { t, href, type Lang } from '../lib/i18n';
+import { MODEL_REQUIRED, pendingOf, fmtParams } from '../lib/data';
+import { isPending } from '../lib/evidence';
+interface Props { lang: Lang; id: string }
+const { lang, id } = Astro.props;
+const en = lang === 'en';
+const m = (await getCollection('models')).map((x) => x.data).find((x) => x.id === id)!;
+const embs = (await getCollection('embodiments')).map((e) => e.data);
+const compat = (await getCollection('compat')).map((c) => c.data).filter((c) => c.model_id === id);
+const hw = (await getCollection('hardware')).map((h) => h.data);
+const meas = (await getCollection('measurements')).map((x) => x.data).filter((x) => x.model_id === id);
+const p = pendingOf(m as any, MODEL_REQUIRED);
+const dates = Array.from(new Set(m.evidence.map((e) => e.fetched))).sort();
+---
+<Base lang={lang} title={`${m.name} · Sinan Robo`} desc={`${m.name} · ${m.org} · ${en ? 'license, weights, compatibility, latency and cost, with sources' : '许可证、权重、适配本体、延迟与成本，字字有来源'}`} active="models" path={'/models/' + m.id} crumbs={[{ label: t(lang, 'nav.models'), href: href(lang, '/models') }, { label: m.name }]}>
+  <div class="rise" style="--i:0;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:16px">
+    <div><div class="eyebrow" style="color:var(--robo-deep);opacity:1">{m.org}</div><h1 style="font-size:30px;margin-top:6px">{m.name}</h1></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-left:auto">
+      {m.params_b != null ? <span class="pill none mono">{fmtParams(m.params_b)}</span> : null}
+      {m.commercial_ok === true ? <span class="pill yes">{t(lang, 'badge.commercial_yes')}</span> : m.commercial_ok === false ? <span class="pill no">{t(lang, 'badge.commercial_no')}</span> : <span class="pill pending">{t(lang, 'badge.commercial_unknown')}</span>}
+      <span class="pill none mono">{p.ok}/{p.total} {en ? 'verified' : '已核实'}</span>
+    </div>
+  </div>
+  {p.pending > 0 && <div class="notice rise" style="--i:1;margin-bottom:14px">{en ? `${p.pending} of ${p.total} required fields are unverified. They are shown as badges, not filled with defaults. Sources for verified fields are listed below.` : `${p.total} 个必填字段里有 ${p.pending} 个待核实，前台用徽标标出、不用默认值填空。已核实字段的来源列在下方。`}</div>}
+
+  <div class="grid2" style="margin-top:0">
+    <section class="card pad rise" style="--i:2">
+      <h2 class="sec">{en ? 'Facts' : '基本事实'}</h2>
+      <dl class="kv" style="margin-top:14px">
+        <Field lang={lang} field="release_date" value={m.release_date} evidence={m.evidence} />
+        <Field lang={lang} field="params_b" value={m.params_b} evidence={m.evidence} kind="number" unit="B" />
+        <Field lang={lang} field="arch_type" value={m.arch_type} evidence={m.evidence} kind="arch" />
+        <Field lang={lang} field="license" value={m.license} evidence={m.evidence} />
+        <Field lang={lang} field="commercial_ok" value={m.commercial_ok} evidence={m.evidence} kind="bool" />
+        <Field lang={lang} field="weights_url" value={m.weights_url} evidence={m.evidence} kind="url" />
+        <Field lang={lang} field="code_url" value={m.code_url} evidence={m.evidence} kind="url" />
+        <Field lang={lang} field="paper_url" value={m.paper_url} evidence={m.evidence} kind="url" />
+        <Field lang={lang} field="modalities_in" value={m.modalities_in} evidence={m.evidence} kind="list" />
+        <Field lang={lang} field="action_space" value={m.action_space} evidence={m.evidence} />
+        <Field lang={lang} field="cross_embodiment" value={m.cross_embodiment} evidence={m.evidence} />
+        <Field lang={lang} field="pretrain_hours" value={m.pretrain_hours} evidence={m.evidence} kind="number" unit="h" />
+        <Field lang={lang} field="target_embodiments" value={m.target_embodiments} evidence={m.evidence} kind="form" />
+      </dl>
+      {m.arch_notes && !isPending(m.arch_notes) && <div class="callout" style="margin-top:14px"><b>{t(lang, 'field.arch_type')}</b> · {m.arch_notes}</div>}
+      <EvidenceList lang={lang} evidence={m.evidence} open={true} />
+    </section>
+    <div style="display:grid;gap:16px;align-content:start">
+      <section class="card pad rise" style="--i:3">
+        <h2 class="sec">{en ? 'Tutorials' : '教程'}</h2>
+        <div class="callout" style="margin-top:10px">{en ? 'No tutorial yet. First one planned: running this model on a rented RTX 4090 with a measured latency report.' : '还没有教程。首篇计划：在租用的 RTX 4090 上跑通本模型，附实测延迟报告。'}</div>
+      </section>
+      <section class="card pad rise" style="--i:4">
+        <h2 class="sec">{en ? 'Record history' : '记录历史'}</h2>
+        <div class="feed" style="margin-top:6px">{dates.length ? dates.map((d) => <div class="row"><div class="t">{d}</div><div>{en ? 'Sources fetched' : '来源抓取'}<div class="dim">{m.evidence.filter((e) => e.fetched === d).map((e) => e.field).join(' · ')}</div></div></div>) : <div class="row"><div class="t">—</div><div class="dim">{t(lang, 'evidence.empty')}</div></div>}</div>
+      </section>
+    </div>
+  </div>
+
+  <div class="rise" style="margin-top:16px;--i:4.5"><LatencyCard lang={lang} hardware={hw as any} measurements={meas as any} /></div>
+
+  <section class="card pad rise" style="margin-top:16px;--i:5">
+    <h2 class="sec">{en ? 'Compatibility' : '适配本体'}</h2>
+    <p class="lead" style="margin-bottom:10px">{en ? 'Colored only where we hold evidence. An amber dot means the vendor declares this form as a target; that is a claim, not a verified compatibility.' : '只有有证据的格子才上色。橙点表示厂商声明的目标形态，那是声明，不是核实过的适配。'}</p>
+    <CompatMatrix lang={lang} models={[m]} embodiments={embs} compat={compat} />
+  </section>
+</Base>

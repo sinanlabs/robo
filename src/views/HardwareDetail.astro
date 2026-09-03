@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Field from '../components/Field.astro';
+import EvidenceList from '../components/EvidenceList.astro';
+import { getCollection } from 'astro:content';
+import { t, href, type Lang } from '../lib/i18n';
+import { costPer1k, fmtCny, fmtMs } from '../lib/cost';
+interface Props { lang: Lang; id: string }
+const { lang, id } = Astro.props;
+const en = lang === 'en';
+const h = (await getCollection('hardware')).map((x) => x.data).find((x) => x.id === id)!;
+const models = (await getCollection('models')).map((m) => m.data);
+const meas = (await getCollection('measurements')).map((m) => m.data).filter((m) => m.hardware_id === id && m.review_status !== 'rejected');
+const rank = models.map((m) => { const ms = meas.filter((x) => x.model_id === m.id); const p = ms.map((x) => x.metrics.latency_ms_p50).sort((a, b) => a - b); const med = p.length ? p[Math.floor(p.length / 2)] : null; return { m, n: ms.length, med, cost: costPer1k(med, h.rental_cny_per_hour_ref) }; }).sort((a, b) => (a.med ?? 1e9) - (b.med ?? 1e9));
+---
+<Base lang={lang} title={`${h.name} · Sinan Robo`} active="hardware" path={'/hardware/' + h.id} crumbs={[{ label: t(lang, 'nav.hardware'), href: href(lang, '/hardware') }, { label: h.name }]}>
+  <div class="rise" style="--i:0;margin-bottom:16px"><div class="eyebrow" style="color:var(--robo-deep);opacity:1">{h.type}</div><h1 style="font-size:30px;margin-top:6px">{h.name}</h1></div>
+  <div class="grid2" style="margin-top:0">
+    <section class="card pad rise" style="--i:1">
+      <h2 class="sec">{en ? 'Facts' : '基本事实'}</h2>
+      <dl class="kv" style="margin-top:14px">
+        <Field lang={lang} field="vram_gb" value={h.vram_gb} evidence={h.evidence} kind="number" unit="GB" />
+        <Field lang={lang} field="rental_cny_per_hour_ref" label={t(lang, 'field.rental')} value={h.rental_cny_per_hour_ref} evidence={h.evidence} kind="number" unit="¥/h" />
+        <dt>{en ? 'Rental source' : '租价来源'}</dt><dd>{h.rental_ref_source ? <span class="val">{h.rental_ref_source}</span> : <span class="pill pending">{t(lang, 'badge.pending')}</span>}{h.rental_ref_url && /^https?:/.test(h.rental_ref_url) ? <a class="ev" href={h.rental_ref_url} target="_blank" rel="noopener">{en ? 'link' : '链接'} ↗</a> : null}</dd>
+        {h.note && <><dt>{en ? 'Note' : '备注'}</dt><dd><span class="val" style="font-weight:400;color:var(--ink-2)">{h.note}</span></dd></>}
+      </dl>
+      <div class="callout" style="margin-top:14px">{t(lang, 'latency.formula')}</div>
+      <EvidenceList lang={lang} evidence={h.evidence} />
+    </section>
+    <section class="card rise" style="--i:2">
+      <div class="pad" style="padding-bottom:10px"><h2 class="sec">{t(lang, 'hardware.rankOn')}</h2></div>
+      <div class="tablewrap"><table>
+        <thead><tr><th>{en ? 'Model' : '模型'}</th><th class="num">{t(lang, 'latency.p50')} ms</th><th class="num">{t(lang, 'latency.cost')} ¥</th><th>{t(lang, 'latency.samples')}</th></tr></thead>
+        <tbody>{rank.map((r) => (
+          <tr><td><a class="name" href={href(lang, '/models/' + r.m.id)}>{r.m.name}</a><div class="dim">{r.m.org}</div></td><td class="num">{fmtMs(r.med)}</td><td class="num">{r.cost.cny != null ? fmtCny(r.cost.cny) : <span>— <span class="pill none">{t(lang, 'latency.costWhy_' + r.cost.why)}</span></span>}</td><td>{r.n ? r.n : <span class="pill none">{t(lang, 'badge.none')}</span>}</td></tr>
+        ))}</tbody>
+      </table></div>
+      {meas.length === 0 && <div class="pad" style="padding-top:10px"><div class="callout">{en ? 'No measurements on this card yet. The crowd CLI (sinan-bench) will feed this table; until then rows show “—”.' : '这张卡上还没有测量数据。众包 CLI（sinan-bench）上线后会填进来，在此之前显示“—”。'}</div></div>}
+    </section>
+  </div>
+</Base>
