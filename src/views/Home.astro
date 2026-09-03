@@ -22,7 +22,8 @@ const latest = [...models].sort((a, b) => String(b.release_date).localeCompare(S
 <Base lang={lang} title={title} active="home" path="/">
   <section class="hero rise" style="--i:1">
     <Stars />
-    <div class="gyro"><i></i><i></i><i></i><b></b></div>
+    <canvas id="gyro3d" class="gyro3d" aria-hidden="true"></canvas>
+    <script src="/gyro.js" defer></script>
     <div class="txt">
       <div class="eyebrow">{t(lang, 'hero.eyebrow')}</div>
       <h1 set:html={t(lang, 'hero.h1')}></h1>

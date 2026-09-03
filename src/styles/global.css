@@ -63,6 +63,7 @@ h2.sec{font-size:20px;font-weight:700}
 .btn.g{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(6px)}
 .btn.a{background:var(--robo);color:#1A1204;box-shadow:0 10px 22px -12px rgba(201,106,0,.9)}
 .btn.a:hover{background:#FFA62B}
+.hero .gyro3d{position:absolute;inset:auto;left:auto;right:2%;top:0;bottom:0;width:46%;height:100%;z-index:1;cursor:grab;pointer-events:auto}.hero .gyro3d:active{cursor:grabbing}
 .hero .gyro{position:absolute;right:6%;top:50%;width:300px;height:300px;transform:translateY(-50%);z-index:1;pointer-events:none}
 .hero .gyro i{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);animation:spin 14s linear infinite}
 .hero .gyro i:nth-child(2){inset:26px;border-color:rgba(247,144,9,.7);animation-duration:9s;animation-direction:reverse}
@@ -171,5 +172,5 @@ footer.ft a{color:var(--ink-3)}footer.ft a:hover{color:var(--ink)}
 @keyframes rise{from{opacity:0;transform:translateY(18px) scale(.985)}}
 .tabular{font-variant-numeric:tabular-nums}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.hero .gyro{display:none}}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.hero .gyro{display:none}.hero .gyro3d{left:0;right:0;width:100%;opacity:.55;pointer-events:none}}
 @media (max-width:860px){.app{grid-template-columns:1fr}.rail{position:static;height:auto;flex-direction:row;flex-wrap:wrap;gap:4px;padding:12px}.rail .sect,.rail .xlink{display:none}.rail .brand{padding:4px 8px;width:100%}.nav{padding:8px 10px;font-size:13px}.main{padding:16px}.hero .txt{padding:26px 24px 30px}.hero h1{font-size:30px}.kpis{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr}.kv{grid-template-columns:1fr}.kv dt{padding-top:0;font-size:12px}}
