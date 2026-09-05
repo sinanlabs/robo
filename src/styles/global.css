@@ -23,8 +23,7 @@ button{font:inherit;color:inherit}
 .app{display:grid;grid-template-columns:232px 1fr;min-height:100vh}
 .rail{position:sticky;top:0;height:100vh;background:var(--card);border-right:1px solid var(--hair);padding:22px 16px;display:flex;flex-direction:column;gap:6px;overflow:auto}
 .brand{display:flex;align-items:center;gap:11px;padding:4px 8px 22px}
-.brand .mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(145deg,#FFC46B,#E0740A);box-shadow:0 8px 18px -8px rgba(201,106,0,.7),inset 0 1px 0 rgba(255,255,255,.4);position:relative;flex:none}
-.brand .mark:after{content:"";position:absolute;inset:10px;border-radius:50%;border:2.5px solid #fff;border-right-color:transparent;transform:rotate(-30deg)}
+.brand .mark{width:36px;height:36px;border-radius:10px;background:#07070B url(/brand/sinanlab-mark.svg) center/28px 28px no-repeat;box-shadow:0 8px 18px -10px rgba(7,7,11,.6);flex:none}
 .brand b{font-size:17px;font-weight:700;letter-spacing:-.01em;display:block}
 .brand small{display:block;font-size:10.5px;color:var(--ink-3);font-weight:500;letter-spacing:.04em;margin-top:1px}
 .sect{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:14px 10px 6px;font-weight:600}
@@ -174,3 +173,5 @@ footer.ft a{color:var(--ink-3)}footer.ft a:hover{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.hero .gyro{display:none}.hero .gyro3d{left:0;right:0;width:100%;opacity:.55;pointer-events:none}}
 @media (max-width:860px){.app{grid-template-columns:1fr}.rail{position:static;height:auto;flex-direction:row;flex-wrap:wrap;gap:4px;padding:12px}.rail .sect,.rail .xlink{display:none}.rail .brand{padding:4px 8px;width:100%}.nav{padding:8px 10px;font-size:13px}.main{padding:16px}.hero .txt{padding:26px 24px 30px}.hero h1{font-size:30px}.kpis{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr}.kv{grid-template-columns:1fr}.kv dt{padding-top:0;font-size:12px}}
+
+.brandband{background:#07070B;border-radius:18px;padding:26px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-top:44px}.brandband img{width:480px;max-width:100%;height:auto;display:block}.brandband span{color:#B8A4FA;font-size:13px;letter-spacing:.08em;margin-left:auto}

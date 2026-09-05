@@ -42,7 +42,7 @@ const nav2 = [
 <meta property="og:description" content={description}>
 <meta property="og:url" content={canonical}>
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#050716">
+<meta name="theme-color" content="#07070B">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="sitemap" href="/sitemap-index.xml">
 <!-- Cloudflare Web Analytics 占位：上线后在此粘贴 beacon 片段（无 cookie） -->
@@ -67,6 +67,7 @@ const nav2 = [
     <div class="right"><a class="lang" href={switchPath(lang, Astro.url.pathname)}>{t(lang, 'lang.switch')}</a></div>
   </div>
   <slot />
+  <div class="brandband"><img src="/brand/sinanlab-lockup.png" srcset="/brand/sinanlab-lockup@2x.png 2x" width="480" height="123" alt="SinanLab · 司南实验室" loading="lazy"><span>{lang === 'en' ? 'Clear direction, grounded judgement.' : '方向清晰，判断有据。'}</span></div>
   <footer class="ft"><div class="in">
     <span>{t(lang, 'footer.copy')}</span>
     <a href="https://sinanlab.com/constitution">{t(lang, 'footer.constitution')}</a>
