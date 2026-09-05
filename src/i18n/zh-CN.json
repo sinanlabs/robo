@@ -16,8 +16,8 @@
   "method": { "title": "测量方法论 v0.1" },
   "subscribe": { "title": "订阅更新", "p": "模型发布、许可证变化、新的延迟测量。只发有变化的，不发营销。", "email": "邮箱", "btn": "订阅", "rss": "RSS", "webhook": "飞书 / 钉钉 Webhook 说明", "ok": "已收到，确认邮件稍后送达。", "placeholder": "you@example.com" },
   "about": { "title": "关于 Sinan Robo" },
-  "footer": { "copy": "© 2026 Sinan Lab · 司南实验室", "constitution": "中立宪法", "disclosure": "返佣披露", "privacy": "隐私政策", "disclaimer": "免责声明", "mother": "母站 sinanlab.com", "line": "每个字段可追溯来源 · 不收任何被测厂商的钱" },
+  "footer": { "copy": "© 2026 Sinan Lab · 司南实验室", "constitution": "为什么可信", "disclosure": "收入透明", "privacy": "隐私政策", "disclaimer": "免责声明", "mother": "母站 sinanlab.com", "line": "每个字段可追溯来源 · 不收任何被测厂商的钱" },
   "recent": { "title": "最近更新", "seed": "首批种子数据导入", "pendingList": "待核实清单" },
-  "constitution": { "title": "中立宪法", "items": ["排名与推荐不含商业变量", "所有测量方法与原始数据可下载", "自托管与第三方端点同等展示", "含商业关系的位置显著标注"] },
+  "constitution": { "title": "为什么可信", "items": ["排名与推荐不含商业变量", "所有测量方法与原始数据可下载", "自托管与第三方端点同等展示", "含商业关系的位置显著标注"] },
   "lang": { "switch": "EN" }
 }

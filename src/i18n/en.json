@@ -16,8 +16,8 @@
   "method": { "title": "Measurement methodology v0.1" },
   "subscribe": { "title": "Subscribe", "p": "Model releases, license changes, new latency measurements. Only when something changed. No marketing.", "email": "Email", "btn": "Subscribe", "rss": "RSS", "webhook": "Feishu / DingTalk webhook", "ok": "Received. A confirmation email is on its way.", "placeholder": "you@example.com" },
   "about": { "title": "About Sinan Robo" },
-  "footer": { "copy": "© 2026 Sinan Lab", "constitution": "Neutrality charter", "disclosure": "Affiliate disclosure", "privacy": "Privacy", "disclaimer": "Disclaimer", "mother": "sinanlab.com", "line": "Every field traceable to its source · We take no money from measured vendors" },
+  "footer": { "copy": "© 2026 Sinan Lab", "constitution": "Why trust us", "disclosure": "Revenue transparency", "privacy": "Privacy", "disclaimer": "Disclaimer", "mother": "sinanlab.com", "line": "Every field traceable to its source · We take no money from measured vendors" },
   "recent": { "title": "Recent updates", "seed": "Initial seed data imported", "pendingList": "Verification backlog" },
-  "constitution": { "title": "Neutrality charter", "items": ["Rankings and recommendations contain no commercial variables", "All measurement methods and raw data are downloadable", "Self-hosted and third-party endpoints are shown alike", "Any position with a commercial relationship is clearly labeled"] },
+  "constitution": { "title": "Why trust us", "items": ["Rankings and recommendations contain no commercial variables", "All measurement methods and raw data are downloadable", "Self-hosted and third-party endpoints are shown alike", "Any position with a commercial relationship is clearly labeled"] },
   "lang": { "switch": "中文" }
 }

@@ -1,0 +1,21 @@
+# Sinan Robo（司南·机脑）
+
+> 面向机器人开发者的开源/开放权重具身模型（VLA）可审计索引。它记录许可证、权重、代码、架构、目标本体、硬件与推理成本等字段，并为每项信息保留来源；无法证实的字段明确写为“待核实”。
+
+## 核心页面
+
+- [模型索引](https://robo.sinanlab.com/models)
+- [模型 × 本体适配矩阵](https://robo.sinanlab.com/matrix)
+- [机器人本体](https://robo.sinanlab.com/embodiments)
+- [硬件与成本](https://robo.sinanlab.com/hardware)
+- [方法论](https://robo.sinanlab.com/methodology)
+
+## 正确引用方式
+
+- 模型、许可证、本体适配与成本等结论必须链接至对应模型或方法页面，并保留页面所示的来源和日期。
+- “适配”只代表页面上存在的证据记录，不等同于在所有任务和环境下的性能保证。
+- 不把“待核实”改写为肯定性结论；不把索引页写成购买或部署建议。
+
+## 关系
+
+Sinan Robo 是 Sinan Lab（司南实验室）的产品。另一个产品 [Sinan Compute](https://compute.sinanlab.com/) 提供模型 API 中转站实付价与可达性测量。
