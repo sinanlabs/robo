@@ -2,7 +2,7 @@
  "_meta": {
   "schema_version": "0.1",
   "generated": "2026-09-05",
-  "notes": "Sinan Robo 首批种子数据。字段值为 null 或标注 '待核实' 的,必须在入库前由维护者核实并补充 evidence。所有已填字段的来源见 evidence 数组;source_type: literature=论文/官方文档, news=媒体报道, hub=模型仓库页。 2026-09-03：GR00T N1.7 / LingBot-VLA 2.0 / GO-1 / π0 / π0.5 / SmolVLA 六条按一手来源核实并补 evidence。 2026-09-04：第二批 17 个模型（OpenVLA / Octo 更新；RDT-1B、CogACT、SpatialVLA、UniVLA、MolmoAct、RynnVLA-001、WALL-OSS、InternVLA-M1、GraspVLA、Being-H0、EO-1、X-VLA、LingBot-VLA 4B、NORA、VLA-Adapter 新增）与 5 个本体，全部按 GitHub README + Hugging Face 模型卡 API 核实并附 evidence；许可证只抄原文，代码与权重许可证不一致时 commercial_ok 置 null。 2026-09-05：第三批 10 个模型（HPT、LAPA、LLaVA-VLA、RoboVLMs、Magma、V-JEPA 2-AC、DexVLA、GR-1、Spirit v1.5、Galaxea G0.5）；未纳入 WholebodyVLA/HybridVLA/TinyVLA/3D-VLA（权重不可得或元数据缺失）。"
+  "notes": "Sinan Robo 首批种子数据。字段值为 null 或标注 '待核实' 的,必须在入库前由维护者核实并补充 evidence。所有已填字段的来源见 evidence 数组;source_type: literature=论文/官方文档, news=媒体报道, hub=模型仓库页。 2026-09-03：GR00T N1.7 / LingBot-VLA 2.0 / GO-1 / π0 / π0.5 / SmolVLA 六条按一手来源核实并补 evidence。 2026-09-04：第二批 17 个模型（OpenVLA / Octo 更新；RDT-1B、CogACT、SpatialVLA、UniVLA、MolmoAct、RynnVLA-001、WALL-OSS、InternVLA-M1、GraspVLA、Being-H0、EO-1、X-VLA、LingBot-VLA 4B、NORA、VLA-Adapter 新增）与 5 个本体，全部按 GitHub README + Hugging Face 模型卡 API 核实并附 evidence；许可证只抄原文，代码与权重许可证不一致时 commercial_ok 置 null。 2026-09-05：第三批 10 个模型（HPT、LAPA、LLaVA-VLA、RoboVLMs、Magma、V-JEPA 2-AC、DexVLA、GR-1、Spirit v1.5、Galaxea G0.5）；未纳入 WholebodyVLA/HybridVLA/TinyVLA/3D-VLA（权重不可得或元数据缺失）。 2026-09-05：10 个本体按厂商官网核实自由度/末端/负载/价格/SDK。"
  },
  "models": [
   {
@@ -1613,12 +1613,22 @@
    "name": "Unitree G1",
    "vendor": "宇树科技",
    "form": "humanoid",
-   "dof": null,
-   "end_effector": "待核实",
-   "sdk_url": "待核实",
-   "price_range_cny": "约 9.9 万起(2026,待核实)",
+   "dof": 23,
+   "end_effector": "标准版无手；G1 EDU 可选 Dex3-1 三指力控手（7 DoF）+ 2 腕部自由度",
+   "sdk_url": "https://github.com/unitreerobotics",
+   "price_range_cny": "官网标价 US$13.5K（G1 标准版，不含税运）；EDU 版询价",
    "data_formats": [
-    "待核实"
+    "unitree_sdk2（DDS）",
+    "LeRobot 社区数据集"
+   ],
+   "evidence": [
+    {
+     "field": "dof,end_effector,price_range_cny,sdk_url",
+     "url": "https://www.unitree.com/g1",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "官网：G1 23 DOF；G1 EDU 23–43；Dex3-1 三指力控手；US $13.5K；Resource Center github.com/unitreerobotics"
+    }
    ]
   },
   {
@@ -1626,12 +1636,21 @@
    "name": "Unitree H1",
    "vendor": "宇树科技",
    "form": "humanoid",
-   "dof": null,
-   "end_effector": "待核实",
-   "sdk_url": "待核实",
-   "price_range_cny": "待核实",
+   "dof": 18,
+   "end_effector": "可选；H1-2 可选 Dex5-1 等双手",
+   "sdk_url": "https://github.com/unitreerobotics",
+   "price_range_cny": "官网未标价",
    "data_formats": [
-    "待核实"
+    "unitree_sdk2（DDS）"
+   ],
+   "evidence": [
+    {
+     "field": "dof,end_effector,sdk_url",
+     "url": "https://www.unitree.com/h1",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "官网：H1 18 DOF（腿 5×2 + 臂 4×2）；H1-2 27 DOF（腿 6×2 + 臂 7×2）；H1-2 可选 Dex5-1"
+    }
    ]
   },
   {
@@ -1639,12 +1658,21 @@
    "name": "智元 精灵 G1",
    "vendor": "智元机器人",
    "form": "dual_arm_wheeled",
-   "dof": null,
-   "end_effector": "待核实",
-   "sdk_url": "待核实",
-   "price_range_cny": "待核实",
+   "dof": 20,
+   "end_effector": "6 自由度灵巧手，可换二指夹爪",
+   "sdk_url": "https://www.agibot.com.cn/products/G1",
+   "price_range_cny": "官网未标价",
    "data_formats": [
-    "LeRobot(GO-1 生态)"
+    "AgiBot World（LeRobot 格式发布）"
+   ],
+   "evidence": [
+    {
+     "field": "dof,end_effector,sdk_url",
+     "url": "https://www.agibot.com.cn/products/G1",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "官网：20 个自主自由度（不含末端）；单臂 6 DoF；6 自由度灵巧手可替换二指夹爪；单手 3kg；开放 GDK；Agibotworld 百万条数据"
+    }
    ]
   },
   {
@@ -1653,11 +1681,21 @@
    "vendor": "松灵机器人",
    "form": "single_arm",
    "dof": 6,
-   "end_effector": "夹爪",
-   "sdk_url": "待核实",
-   "price_range_cny": "待核实",
+   "end_effector": "平行夹爪（可选）",
+   "sdk_url": "https://global.agilex.ai/products/piper",
+   "price_range_cny": "官网标价 US$1,999",
    "data_formats": [
-    "LeRobot 社区支持(待核实)"
+    "Python API / ROS1 / ROS2",
+    "LeRobot 社区数据集"
+   ],
+   "evidence": [
+    {
+     "field": "dof,price_range_cny,sdk_url",
+     "url": "https://global.agilex.ai/products/piper",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "官网：6 dof；1.5kg payload；626 mm reach；$1,999.00；Python API，ROS1/ROS2"
+    }
    ]
   },
   {
@@ -1666,11 +1704,27 @@
    "vendor": "开源社区 (LeRobot)",
    "form": "single_arm",
    "dof": 6,
-   "end_effector": "夹爪",
-   "sdk_url": "https://github.com/huggingface/lerobot",
-   "price_range_cny": "低成本(几百至千元级,待核实)",
+   "end_effector": "平行夹爪（3D 打印）",
+   "sdk_url": "https://github.com/TheRobotStudio/SO-ARM100",
+   "price_range_cny": "BOM 约 US$122（从动臂）/ US$230（主从双臂），自行打印装配",
    "data_formats": [
-    "LeRobot"
+    "LeRobotDataset"
+   ],
+   "evidence": [
+    {
+     "field": "dof,price_range_cny,sdk_url",
+     "url": "https://github.com/TheRobotStudio/SO-ARM100",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "README：The RobotStudio 与 Hugging Face 合作；Apache-2.0；follower $121.94 / 双臂 $229.88；6× STS3215"
+    },
+    {
+     "field": "data_formats",
+     "url": "https://huggingface.co/docs/lerobot/so101",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "LeRobot 官方文档 SO-101 装配与标定"
+    }
    ]
   },
   {
@@ -1679,24 +1733,46 @@
    "vendor": "Franka Robotics",
    "form": "single_arm",
    "dof": 7,
-   "end_effector": "夹爪",
-   "sdk_url": "待核实",
-   "price_range_cny": "待核实",
+   "end_effector": "Franka Hand 平行夹爪",
+   "sdk_url": "https://frankarobotics.github.io/docs/",
+   "price_range_cny": "官网未标价",
    "data_formats": [
-    "待核实"
+    "libfranka / FCI（1 kHz）",
+    "ROS 2",
+    "DROID（RLDS）"
+   ],
+   "evidence": [
+    {
+     "field": "dof,end_effector,sdk_url,data_formats",
+     "url": "https://franka.de/products/franka-research-3",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "官网：7 Degrees of freedom；Payload 3 kg；855 mm；libfranka open source C++；FCI 1 kHz；ROS 2"
+    }
    ]
   },
   {
    "id": "fourier-gr",
-   "name": "傅立叶 GR 系列",
+   "name": "Fourier GR-2",
    "vendor": "傅利叶智能",
    "form": "humanoid",
-   "dof": null,
-   "end_effector": "待核实",
-   "sdk_url": "待核实",
-   "price_range_cny": "待核实",
+   "dof": 53,
+   "end_effector": "12 自由度灵巧手，含 6 个阵列触觉传感器",
+   "sdk_url": "https://www.fftai.com/",
+   "price_range_cny": "仅企业/机构销售，官网未标价",
    "data_formats": [
-    "待核实"
+    "NVIDIA Isaac Lab",
+    "ROS",
+    "MuJoCo"
+   ],
+   "evidence": [
+    {
+     "field": "dof,end_effector,data_formats",
+     "url": "https://www.therobotreport.com/fourier-launches-gr-2-humanoid-software-platform/",
+     "source_type": "news",
+     "fetched": "2026-09-05",
+     "note": "The Robot Report：GR-2 175 cm / 63 kg，53 DoF，12-DoF hands with 6 array-type tactile sensors；兼容 Isaac Lab / ROS / MuJoCo"
+    }
    ]
   },
   {
@@ -1705,11 +1781,12 @@
    "vendor": "Trossen Robotics",
    "form": "single_arm",
    "dof": 6,
-   "end_effector": "平行夹爪",
-   "sdk_url": "https://www.trossenrobotics.com/",
-   "price_range_cny": "待核实",
+   "end_effector": "X-Series 可换指夹爪",
+   "sdk_url": "https://www.trossenrobotics.com/widowx-250",
+   "price_range_cny": "已停产，官网未标价",
    "data_formats": [
-    "BridgeData V2 / RLDS",
+    "Interbotix ROS/ROS 2",
+    "BridgeData V2（RLDS）",
     "LeRobot"
    ],
    "evidence": [
@@ -1726,6 +1803,13 @@
      "source_type": "official",
      "fetched": "2026-09-04",
      "note": "EO-1 README 列 WidowX 250 S 为评测本体"
+    },
+    {
+     "field": "dof,end_effector,sdk_url",
+     "url": "https://www.trossenrobotics.com/widowx-250",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "官网：6 DOF；250g payload；650mm reach；Interbotix Python/ROS；THIS PRODUCT HAS BEEN DISCONTINUED"
     }
    ]
   },
@@ -1793,12 +1877,13 @@
    "name": "Galaxea R1 Pro",
    "vendor": "星海图（Galaxea）",
    "form": "dual_arm_wheeled",
-   "dof": null,
-   "end_effector": "待核实",
-   "sdk_url": "待核实",
-   "price_range_cny": "待核实",
+   "dof": 26,
+   "end_effector": "力控平行夹爪",
+   "sdk_url": "https://docs.galaxea-dynamics.com/",
+   "price_range_cny": "官网未标价",
    "data_formats": [
-    "待核实"
+    "Galaxea Open-World Dataset",
+    "ROS（GitHub userguide-galaxea）"
    ],
    "evidence": [
     {
@@ -1807,6 +1892,13 @@
      "source_type": "official",
      "fetched": "2026-09-04",
      "note": "LingBot-VLA README 实测本体：Agibot G1 / AgileX / Galaxea R1Pro"
+    },
+    {
+     "field": "dof,end_effector,sdk_url",
+     "url": "https://galaxea-dynamics.com/pages/r1-pro-product-specification",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "官网规格：Total 26 DoF；Per-arm 7；Torso 4；Chassis 6；Force-controlled parallel gripper；3.5 kg rated / 5 kg max @500mm；docs.galaxea-dynamics.com"
     }
    ]
   },
@@ -1817,9 +1909,10 @@
    "form": "single_arm",
    "dof": 7,
    "end_effector": "Franka Hand 平行夹爪",
-   "sdk_url": "https://frankaemika.github.io/docs/",
-   "price_range_cny": "待核实",
+   "sdk_url": "https://frankarobotics.github.io/docs/",
+   "price_range_cny": "已停产，由 FR3 接替；官网未标价",
    "data_formats": [
+    "libfranka / FCI",
     "RLDS",
     "LeRobot"
    ],
@@ -1837,6 +1930,13 @@
      "source_type": "official",
      "fetched": "2026-09-04",
      "note": "GraspVLA 基于 LeRobot Franka 数据集"
+    },
+    {
+     "field": "dof,end_effector,sdk_url",
+     "url": "https://franka.de/products/franka-research-3",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "Franka Research 3 页面（Panda 后继型号，同 7 DoF / Franka Hand / libfranka）"
     }
    ]
   }
