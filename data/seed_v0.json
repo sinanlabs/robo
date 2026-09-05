@@ -2,7 +2,7 @@
  "_meta": {
   "schema_version": "0.1",
   "generated": "2026-09-05",
-  "notes": "Sinan Robo 首批种子数据。字段值为 null 或标注 '待核实' 的,必须在入库前由维护者核实并补充 evidence。所有已填字段的来源见 evidence 数组;source_type: literature=论文/官方文档, news=媒体报道, hub=模型仓库页。 2026-09-03：GR00T N1.7 / LingBot-VLA 2.0 / GO-1 / π0 / π0.5 / SmolVLA 六条按一手来源核实并补 evidence。 2026-09-04：第二批 17 个模型（OpenVLA / Octo 更新；RDT-1B、CogACT、SpatialVLA、UniVLA、MolmoAct、RynnVLA-001、WALL-OSS、InternVLA-M1、GraspVLA、Being-H0、EO-1、X-VLA、LingBot-VLA 4B、NORA、VLA-Adapter 新增）与 5 个本体，全部按 GitHub README + Hugging Face 模型卡 API 核实并附 evidence；许可证只抄原文，代码与权重许可证不一致时 commercial_ok 置 null。 2026-09-05：第三批 10 个模型（HPT、LAPA、LLaVA-VLA、RoboVLMs、Magma、V-JEPA 2-AC、DexVLA、GR-1、Spirit v1.5、Galaxea G0.5）；未纳入 WholebodyVLA/HybridVLA/TinyVLA/3D-VLA（权重不可得或元数据缺失）。 2026-09-05：10 个本体按厂商官网核实自由度/末端/负载/价格/SDK。 2026-09-05（第四批）：RDT2-VQ、InternVLA-A1.5、VLA-0、MiniVLA、Genie Envisioner。"
+  "notes": "Sinan Robo 首批种子数据。字段值为 null 或标注 '待核实' 的,必须在入库前由维护者核实并补充 evidence。所有已填字段的来源见 evidence 数组;source_type: literature=论文/官方文档, news=媒体报道, hub=模型仓库页。 2026-09-03：GR00T N1.7 / LingBot-VLA 2.0 / GO-1 / π0 / π0.5 / SmolVLA 六条按一手来源核实并补 evidence。 2026-09-04：第二批 17 个模型（OpenVLA / Octo 更新；RDT-1B、CogACT、SpatialVLA、UniVLA、MolmoAct、RynnVLA-001、WALL-OSS、InternVLA-M1、GraspVLA、Being-H0、EO-1、X-VLA、LingBot-VLA 4B、NORA、VLA-Adapter 新增）与 5 个本体，全部按 GitHub README + Hugging Face 模型卡 API 核实并附 evidence；许可证只抄原文，代码与权重许可证不一致时 commercial_ok 置 null。 2026-09-05：第三批 10 个模型（HPT、LAPA、LLaVA-VLA、RoboVLMs、Magma、V-JEPA 2-AC、DexVLA、GR-1、Spirit v1.5、Galaxea G0.5）；未纳入 WholebodyVLA/HybridVLA/TinyVLA/3D-VLA（权重不可得或元数据缺失）。 2026-09-05：10 个本体按厂商官网核实自由度/末端/负载/价格/SDK。 2026-09-05（第四批）：RDT2-VQ、InternVLA-A1.5、VLA-0、MiniVLA、Genie Envisioner。 2026-09-05：补 GR00T N1.5（历史版本）。"
  },
  "models": [
   {
@@ -1805,6 +1805,57 @@
     }
    ],
    "verify_note": "世界模型 + 动作模型组合，权重许可证未标注；参数量未标注"
+  },
+  {
+   "id": "gr00t-n1.5-3b",
+   "name": "GR00T N1.5 3B",
+   "org": "NVIDIA",
+   "release_date": "2025-05",
+   "params_b": 2.72,
+   "arch_type": "dual_system",
+   "arch_notes": "SigLIP2 视觉 + T5 语言编码 + flow matching 动作 Transformer（adaptive layernorm）；按本体 ID 索引可变维本体感知；已被 N1.6 / N1.7 接替",
+   "license": "模型卡标 Nvidia License（页面注明仅限非商用）",
+   "commercial_ok": false,
+   "weights_url": "https://huggingface.co/nvidia/GR00T-N1.5-3B",
+   "code_url": "https://github.com/NVIDIA/Isaac-GR00T",
+   "paper_url": "https://arxiv.org/abs/2503.14734",
+   "modalities_in": [
+    "rgb",
+    "language",
+    "state"
+   ],
+   "action_space": "关节（flow matching 动作块）",
+   "cross_embodiment": "跨本体模型，人形 / 双臂 / 单臂（模型卡未列具体机型）",
+   "pretrain_hours": null,
+   "target_embodiments": [
+    "humanoid",
+    "dual_arm",
+    "single_arm"
+   ],
+   "evidence": [
+    {
+     "field": "params_b,release_date,weights_url",
+     "url": "https://huggingface.co/api/models/nvidia/GR00T-N1.5-3B",
+     "source_type": "hub",
+     "fetched": "2026-09-05",
+     "note": "safetensors 2,724,163,520；createdAt 2025-05-28"
+    },
+    {
+     "field": "license,arch_notes",
+     "url": "https://huggingface.co/nvidia/GR00T-N1.5-3B",
+     "source_type": "hub",
+     "fetched": "2026-09-05",
+     "note": "模型卡：Nvidia License（Non-commercial use only）；SigLip2 + T5 + flow matching transformer；cross-embodiment"
+    },
+    {
+     "field": "code_url",
+     "url": "https://github.com/NVIDIA/Isaac-GR00T",
+     "source_type": "official",
+     "fetched": "2026-09-05",
+     "note": "Isaac-GR00T 代码仓库（Apache-2.0）"
+    }
+   ],
+   "verify_note": "历史版本，已被 N1.6/N1.7 接替；许可证条款以模型卡链接的 LICENSE 为准"
   }
  ],
  "embodiments": [
