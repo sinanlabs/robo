@@ -1,23 +1,200 @@
 {
-  "site": { "name": "Sinan Robo", "cn": "司南·机脑", "lab": "Sinan Lab · 司南实验室", "tagline": "开源具身模型的可审计索引", "desc": "面向机器人开发者的中立模型选择层：该用哪个大脑、在哪跑、花多少钱。每个字段带来源，未核实一律标注。" },
-  "nav": { "home": "总览", "models": "模型索引", "matrix": "适配矩阵", "embodiments": "本体", "hardware": "硬件与成本", "methodology": "方法论", "subscribe": "订阅", "about": "关于", "compute": "Sinan Compute", "lab": "← 司南实验室" },
-  "hero": { "eyebrow": "开源 VLA · 适配矩阵 · 延迟与成本 · 每字可溯源", "h1": "该用哪个大脑，<br>在哪跑，花多少钱。", "p": "我们把公开的具身基础模型（VLA）做成一份可审计的索引：许可证、权重、能上哪些本体、在哪张卡上多少毫秒、每千次推理几块钱。没核实的字段就写“待核实”，不猜。", "cta1": "看模型索引", "cta2": "看适配矩阵" },
-  "kpi": { "models": "已收录模型", "embodiments": "本体", "cells": "矩阵格", "pending": "待核实字段", "pendingSub": "我们不用默认值填空", "verified": "已核实" },
-  "badge": { "pending": "待核实", "none": "无数据", "official": "官方声明支持", "community_verified": "社区复现成功", "theoretical": "理论可微调", "unsupported": "不支持", "unknown": "未知", "declared": "厂商声明的目标形态", "commercial_yes": "可商用", "commercial_no": "禁商用", "commercial_unknown": "商用许可待核实", "literature": "文献值", "maintainer": "维护者实测", "crowd": "众包上传", "preliminary": "初步（样本<3）" },
-  "field": { "org": "组织", "release_date": "发布日期", "params_b": "参数量", "arch_type": "架构", "license": "许可证", "commercial_ok": "商用", "weights_url": "权重", "code_url": "代码", "paper_url": "论文", "modalities_in": "输入模态", "action_space": "动作空间", "cross_embodiment": "跨本体", "pretrain_hours": "预训练数据（小时）", "target_embodiments": "目标形态", "vendor": "厂商", "form": "形态", "dof": "自由度", "end_effector": "末端", "sdk_url": "SDK / ROS", "price_range_cny": "公开价（元）", "data_formats": "数据格式", "vram_gb": "显存", "rental": "参考租价（元/小时）" },
-  "form": { "humanoid": "人形", "dual_arm": "双臂", "dual_arm_wheeled": "双臂轮式", "single_arm": "单臂", "wheeled": "轮式", "quadruped": "四足", "mobile_manipulator": "移动操作" },
-  "arch": { "dual_system": "双系统", "villa": "ViLLA", "vlm_plus_action_expert": "VLM + 动作专家", "monolithic_autoregressive": "单体自回归", "soft_prompted_transformer": "软提示 Transformer", "transformer_policy": "Transformer 策略" },
-  "evidence": { "title": "来源", "open": "来源", "fetched": "抓取", "sha": "快照哈希", "nosha": "尚未存快照", "count": "条来源", "empty": "这条记录还没有任何来源，全部字段按待核实处理。", "types": { "literature": "论文 / 官方文档", "news": "媒体报道", "hub": "模型仓库页", "official": "官方页面" } },
-  "latency": { "title": "延迟与成本", "none": "还没有这个模型的延迟测量", "noneWhy": "数据来自文献、维护者实测或众包 CLI 上传；三者都还没有。", "cost": "每千次推理成本", "costNone": "—", "costWhy_noLatency": "无延迟数据", "costWhy_noRent": "无该硬件租价", "formula": "成本 = 延迟 p50 ÷ 1000 × 租价 ÷ 3600 × 1000", "p50": "p50", "p95": "p95", "vram": "峰值显存", "samples": "样本" },
-  "list": { "filterEmb": "本体形态", "filterLicense": "许可证", "filterCommercial": "商用", "filterCross": "跨本体", "sort": "排序", "sortRelease": "发布日期", "sortParams": "参数量", "all": "全部", "count": "个模型", "compare": "对比", "compareHint": "勾选最多 4 个模型，然后点对比", "yes": "是", "no": "否", "unknown": "未知" },
-  "compare": { "title": "模型对比", "empty": "在地址栏加 ?ids=模型1,模型2 或从模型索引勾选", "max": "最多 4 个" },
-  "matrix": { "title": "模型 × 本体 适配矩阵", "p": "颜色表示状态，点格子看证据。初期大多数是“未知”——我们只写有证据的状态。", "legend": "图例", "cellsWithStatus": "格有明确状态" },
-  "hardware": { "title": "硬件与成本", "p": "每千次推理成本按该卡的公开参考租价折算。租价来源和日期写在旁边。", "rankOn": "在这张卡上的延迟排名", "noRent": "无租价" },
-  "method": { "title": "测量方法论 v0.1" },
-  "subscribe": { "title": "订阅更新", "p": "模型发布、许可证变化、新的延迟测量。只发有变化的，不发营销。", "email": "邮箱", "btn": "订阅", "rss": "RSS", "webhook": "飞书 / 钉钉 Webhook 说明", "ok": "已收到，确认邮件稍后送达。", "placeholder": "you@example.com" },
-  "about": { "title": "关于 Sinan Robo" },
-  "footer": { "copy": "© 2026 Sinan Lab · 司南实验室", "constitution": "为什么可信", "disclosure": "收入透明", "privacy": "隐私政策", "disclaimer": "免责声明", "mother": "母站 sinanlab.com", "line": "每个字段可追溯来源 · 不收任何被测厂商的钱" },
-  "recent": { "title": "最近更新", "seed": "首批种子数据导入", "pendingList": "待核实清单" },
-  "constitution": { "title": "为什么可信", "items": ["排名与推荐不含商业变量", "所有测量方法与原始数据可下载", "自托管与第三方端点同等展示", "含商业关系的位置显著标注"] },
-  "lang": { "switch": "EN" }
+  "site": {
+    "name": "Sinan Robo",
+    "cn": "司南·机脑",
+    "lab": "Sinan Lab · 司南实验室",
+    "tagline": "开源具身模型的可审计索引",
+    "desc": "面向机器人开发者的中立模型选择层：该用哪个大脑、在哪跑、花多少钱。每个字段带来源，未核实一律标注。"
+  },
+  "nav": {
+    "home": "总览",
+    "models": "模型索引",
+    "matrix": "适配矩阵",
+    "embodiments": "本体",
+    "hardware": "硬件与成本",
+    "methodology": "方法论",
+    "subscribe": "订阅",
+    "about": "关于",
+    "compute": "Sinan Compute",
+    "lab": "← 司南实验室",
+    "rank": "司南榜"
+  },
+  "hero": {
+    "eyebrow": "开源 VLA · 适配矩阵 · 延迟与成本 · 每字可溯源",
+    "h1": "该用哪个大脑，<br>在哪跑，花多少钱。",
+    "p": "我们把公开的具身基础模型（VLA）做成一份可审计的索引：许可证、权重、能上哪些本体、在哪张卡上多少毫秒、每千次推理几块钱。没核实的字段就写“待核实”，不猜。",
+    "cta1": "看模型索引",
+    "cta2": "看适配矩阵"
+  },
+  "kpi": {
+    "models": "已收录模型",
+    "embodiments": "本体",
+    "cells": "矩阵格",
+    "pending": "待核实字段",
+    "pendingSub": "我们不用默认值填空",
+    "verified": "已核实"
+  },
+  "badge": {
+    "pending": "待核实",
+    "none": "无数据",
+    "official": "官方声明支持",
+    "community_verified": "社区复现成功",
+    "theoretical": "理论可微调",
+    "unsupported": "不支持",
+    "unknown": "未知",
+    "declared": "厂商声明的目标形态",
+    "commercial_yes": "可商用",
+    "commercial_no": "禁商用",
+    "commercial_unknown": "商用许可待核实",
+    "literature": "文献值",
+    "maintainer": "维护者实测",
+    "crowd": "众包上传",
+    "preliminary": "初步（样本<3）"
+  },
+  "field": {
+    "org": "组织",
+    "release_date": "发布日期",
+    "params_b": "参数量",
+    "arch_type": "架构",
+    "license": "许可证",
+    "commercial_ok": "商用",
+    "weights_url": "权重",
+    "code_url": "代码",
+    "paper_url": "论文",
+    "modalities_in": "输入模态",
+    "action_space": "动作空间",
+    "cross_embodiment": "跨本体",
+    "pretrain_hours": "预训练数据（小时）",
+    "target_embodiments": "目标形态",
+    "vendor": "厂商",
+    "form": "形态",
+    "dof": "自由度",
+    "end_effector": "末端",
+    "sdk_url": "SDK / ROS",
+    "price_range_cny": "公开价（元）",
+    "data_formats": "数据格式",
+    "vram_gb": "显存",
+    "rental": "参考租价（元/小时）"
+  },
+  "form": {
+    "humanoid": "人形",
+    "dual_arm": "双臂",
+    "dual_arm_wheeled": "双臂轮式",
+    "single_arm": "单臂",
+    "wheeled": "轮式",
+    "quadruped": "四足",
+    "mobile_manipulator": "移动操作"
+  },
+  "arch": {
+    "dual_system": "双系统",
+    "villa": "ViLLA",
+    "vlm_plus_action_expert": "VLM + 动作专家",
+    "monolithic_autoregressive": "单体自回归",
+    "soft_prompted_transformer": "软提示 Transformer",
+    "transformer_policy": "Transformer 策略"
+  },
+  "evidence": {
+    "title": "来源",
+    "open": "来源",
+    "fetched": "抓取",
+    "sha": "快照哈希",
+    "nosha": "尚未存快照",
+    "count": "条来源",
+    "empty": "这条记录还没有任何来源，全部字段按待核实处理。",
+    "types": {
+      "literature": "论文 / 官方文档",
+      "news": "媒体报道",
+      "hub": "模型仓库页",
+      "official": "官方页面"
+    }
+  },
+  "latency": {
+    "title": "延迟与成本",
+    "none": "还没有这个模型的延迟测量",
+    "noneWhy": "数据来自文献、维护者实测或众包 CLI 上传；三者都还没有。",
+    "cost": "每千次推理成本",
+    "costNone": "—",
+    "costWhy_noLatency": "无延迟数据",
+    "costWhy_noRent": "无该硬件租价",
+    "formula": "成本 = 延迟 p50 ÷ 1000 × 租价 ÷ 3600 × 1000",
+    "p50": "p50",
+    "p95": "p95",
+    "vram": "峰值显存",
+    "samples": "样本"
+  },
+  "list": {
+    "filterEmb": "本体形态",
+    "filterLicense": "许可证",
+    "filterCommercial": "商用",
+    "filterCross": "跨本体",
+    "sort": "排序",
+    "sortRelease": "发布日期",
+    "sortParams": "参数量",
+    "all": "全部",
+    "count": "个模型",
+    "compare": "对比",
+    "compareHint": "勾选最多 4 个模型，然后点对比",
+    "yes": "是",
+    "no": "否",
+    "unknown": "未知"
+  },
+  "compare": {
+    "title": "模型对比",
+    "empty": "在地址栏加 ?ids=模型1,模型2 或从模型索引勾选",
+    "max": "最多 4 个"
+  },
+  "matrix": {
+    "title": "模型 × 本体 适配矩阵",
+    "p": "颜色表示状态，点格子看证据。初期大多数是“未知”——我们只写有证据的状态。",
+    "legend": "图例",
+    "cellsWithStatus": "格有明确状态"
+  },
+  "hardware": {
+    "title": "硬件与成本",
+    "p": "每千次推理成本按该卡的公开参考租价折算。租价来源和日期写在旁边。",
+    "rankOn": "在这张卡上的延迟排名",
+    "noRent": "无租价"
+  },
+  "method": {
+    "title": "测量方法论 v0.1"
+  },
+  "subscribe": {
+    "title": "订阅更新",
+    "p": "模型发布、许可证变化、新的延迟测量。只发有变化的，不发营销。",
+    "email": "邮箱",
+    "btn": "订阅",
+    "rss": "RSS",
+    "webhook": "飞书 / 钉钉 Webhook 说明",
+    "ok": "已收到，确认邮件稍后送达。",
+    "placeholder": "you@example.com"
+  },
+  "about": {
+    "title": "关于 Sinan Robo"
+  },
+  "footer": {
+    "copy": "© 2026 Sinan Lab · 司南实验室",
+    "constitution": "为什么可信",
+    "disclosure": "收入透明",
+    "privacy": "隐私政策",
+    "disclaimer": "免责声明",
+    "mother": "母站 sinanlab.com",
+    "line": "每个字段可追溯来源 · 不收任何被测厂商的钱"
+  },
+  "recent": {
+    "title": "最近更新",
+    "seed": "首批种子数据导入",
+    "pendingList": "待核实清单"
+  },
+  "constitution": {
+    "title": "为什么可信",
+    "items": [
+      "排名与推荐不含商业变量",
+      "所有测量方法与原始数据可下载",
+      "自托管与第三方端点同等展示",
+      "含商业关系的位置显著标注"
+    ]
+  },
+  "lang": {
+    "switch": "EN"
+  }
 }

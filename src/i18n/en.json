@@ -1,23 +1,200 @@
 {
-  "site": { "name": "Sinan Robo", "cn": "司南·机脑", "lab": "Sinan Lab", "tagline": "An auditable index of open embodied models", "desc": "A neutral model-selection layer for robot developers: which brain, where to run it, what it costs. Every field carries its source; unverified fields are labeled as such." },
-  "nav": { "home": "Overview", "models": "Models", "matrix": "Compatibility", "embodiments": "Embodiments", "hardware": "Hardware & cost", "methodology": "Methodology", "subscribe": "Subscribe", "about": "About", "compute": "Sinan Compute", "lab": "← Sinan Lab" },
-  "hero": { "eyebrow": "Open VLA · compatibility matrix · latency & cost · every field sourced", "h1": "Which brain,<br>where to run it, at what cost.", "p": "An auditable index of open embodied foundation models (VLA): license, weights, which robots they run on, milliseconds on which GPU, and cost per thousand inferences. Unverified fields say so. We do not guess.", "cta1": "Browse models", "cta2": "Compatibility matrix" },
-  "kpi": { "models": "Models indexed", "embodiments": "Embodiments", "cells": "Matrix cells", "pending": "Fields pending verification", "pendingSub": "We never fill blanks with defaults", "verified": "Verified" },
-  "badge": { "pending": "Unverified", "none": "No data", "official": "Officially supported", "community_verified": "Community reproduced", "theoretical": "Fine-tunable in theory", "unsupported": "Unsupported", "unknown": "Unknown", "declared": "Vendor-declared target form", "commercial_yes": "Commercial use OK", "commercial_no": "Non-commercial", "commercial_unknown": "Commercial terms unverified", "literature": "Literature", "maintainer": "Maintainer measured", "crowd": "Crowd upload", "preliminary": "Preliminary (n<3)" },
-  "field": { "org": "Organization", "release_date": "Released", "params_b": "Parameters", "arch_type": "Architecture", "license": "License", "commercial_ok": "Commercial", "weights_url": "Weights", "code_url": "Code", "paper_url": "Paper", "modalities_in": "Input modalities", "action_space": "Action space", "cross_embodiment": "Cross-embodiment", "pretrain_hours": "Pretraining data (hours)", "target_embodiments": "Target forms", "vendor": "Vendor", "form": "Form", "dof": "DoF", "end_effector": "End effector", "sdk_url": "SDK / ROS", "price_range_cny": "Public price (CNY)", "data_formats": "Data formats", "vram_gb": "VRAM", "rental": "Reference rental (CNY/h)" },
-  "form": { "humanoid": "Humanoid", "dual_arm": "Dual arm", "dual_arm_wheeled": "Dual arm, wheeled", "single_arm": "Single arm", "wheeled": "Wheeled", "quadruped": "Quadruped", "mobile_manipulator": "Mobile manipulator" },
-  "arch": { "dual_system": "Dual system", "villa": "ViLLA", "vlm_plus_action_expert": "VLM + action expert", "monolithic_autoregressive": "Monolithic autoregressive", "soft_prompted_transformer": "Soft-prompted transformer", "transformer_policy": "Transformer policy" },
-  "evidence": { "title": "Sources", "open": "Source", "fetched": "Fetched", "sha": "Snapshot hash", "nosha": "No snapshot stored yet", "count": "sources", "empty": "This record has no sources yet; every field is treated as unverified.", "types": { "literature": "Paper / official docs", "news": "Press", "hub": "Model hub page", "official": "Official page" } },
-  "latency": { "title": "Latency & cost", "none": "No latency measurements for this model yet", "noneWhy": "Data comes from literature, maintainer runs, or crowd CLI uploads. None exist so far.", "cost": "Cost per 1k inferences", "costNone": "—", "costWhy_noLatency": "no latency data", "costWhy_noRent": "no rental price for this hardware", "formula": "cost = p50 ms ÷ 1000 × rental ÷ 3600 × 1000", "p50": "p50", "p95": "p95", "vram": "Peak VRAM", "samples": "samples" },
-  "list": { "filterEmb": "Embodiment form", "filterLicense": "License", "filterCommercial": "Commercial", "filterCross": "Cross-embodiment", "sort": "Sort", "sortRelease": "Release date", "sortParams": "Parameters", "all": "All", "count": "models", "compare": "Compare", "compareHint": "Tick up to 4 models, then compare", "yes": "Yes", "no": "No", "unknown": "Unknown" },
-  "compare": { "title": "Compare models", "empty": "Add ?ids=model1,model2 to the URL or tick models in the index", "max": "Up to 4" },
-  "matrix": { "title": "Model × embodiment compatibility", "p": "Color is status; click a cell for evidence. Most cells start as “unknown” — we only record states we have evidence for.", "legend": "Legend", "cellsWithStatus": "cells with a definite status" },
-  "hardware": { "title": "Hardware & cost", "p": "Cost per 1k inferences uses the card's public reference rental price. Source and date are shown alongside.", "rankOn": "Latency ranking on this card", "noRent": "no rental price" },
-  "method": { "title": "Measurement methodology v0.1" },
-  "subscribe": { "title": "Subscribe", "p": "Model releases, license changes, new latency measurements. Only when something changed. No marketing.", "email": "Email", "btn": "Subscribe", "rss": "RSS", "webhook": "Feishu / DingTalk webhook", "ok": "Received. A confirmation email is on its way.", "placeholder": "you@example.com" },
-  "about": { "title": "About Sinan Robo" },
-  "footer": { "copy": "© 2026 Sinan Lab", "constitution": "Why trust us", "disclosure": "Revenue transparency", "privacy": "Privacy", "disclaimer": "Disclaimer", "mother": "sinanlab.com", "line": "Every field traceable to its source · We take no money from measured vendors" },
-  "recent": { "title": "Recent updates", "seed": "Initial seed data imported", "pendingList": "Verification backlog" },
-  "constitution": { "title": "Why trust us", "items": ["Rankings and recommendations contain no commercial variables", "All measurement methods and raw data are downloadable", "Self-hosted and third-party endpoints are shown alike", "Any position with a commercial relationship is clearly labeled"] },
-  "lang": { "switch": "中文" }
+  "site": {
+    "name": "Sinan Robo",
+    "cn": "司南·机脑",
+    "lab": "Sinan Lab",
+    "tagline": "An auditable index of open embodied models",
+    "desc": "A neutral model-selection layer for robot developers: which brain, where to run it, what it costs. Every field carries its source; unverified fields are labeled as such."
+  },
+  "nav": {
+    "home": "Overview",
+    "models": "Models",
+    "matrix": "Compatibility",
+    "embodiments": "Embodiments",
+    "hardware": "Hardware & cost",
+    "methodology": "Methodology",
+    "subscribe": "Subscribe",
+    "about": "About",
+    "compute": "Sinan Compute",
+    "lab": "← Sinan Lab",
+    "rank": "Rankings"
+  },
+  "hero": {
+    "eyebrow": "Open VLA · compatibility matrix · latency & cost · every field sourced",
+    "h1": "Which brain,<br>where to run it, at what cost.",
+    "p": "An auditable index of open embodied foundation models (VLA): license, weights, which robots they run on, milliseconds on which GPU, and cost per thousand inferences. Unverified fields say so. We do not guess.",
+    "cta1": "Browse models",
+    "cta2": "Compatibility matrix"
+  },
+  "kpi": {
+    "models": "Models indexed",
+    "embodiments": "Embodiments",
+    "cells": "Matrix cells",
+    "pending": "Fields pending verification",
+    "pendingSub": "We never fill blanks with defaults",
+    "verified": "Verified"
+  },
+  "badge": {
+    "pending": "Unverified",
+    "none": "No data",
+    "official": "Officially supported",
+    "community_verified": "Community reproduced",
+    "theoretical": "Fine-tunable in theory",
+    "unsupported": "Unsupported",
+    "unknown": "Unknown",
+    "declared": "Vendor-declared target form",
+    "commercial_yes": "Commercial use OK",
+    "commercial_no": "Non-commercial",
+    "commercial_unknown": "Commercial terms unverified",
+    "literature": "Literature",
+    "maintainer": "Maintainer measured",
+    "crowd": "Crowd upload",
+    "preliminary": "Preliminary (n<3)"
+  },
+  "field": {
+    "org": "Organization",
+    "release_date": "Released",
+    "params_b": "Parameters",
+    "arch_type": "Architecture",
+    "license": "License",
+    "commercial_ok": "Commercial",
+    "weights_url": "Weights",
+    "code_url": "Code",
+    "paper_url": "Paper",
+    "modalities_in": "Input modalities",
+    "action_space": "Action space",
+    "cross_embodiment": "Cross-embodiment",
+    "pretrain_hours": "Pretraining data (hours)",
+    "target_embodiments": "Target forms",
+    "vendor": "Vendor",
+    "form": "Form",
+    "dof": "DoF",
+    "end_effector": "End effector",
+    "sdk_url": "SDK / ROS",
+    "price_range_cny": "Public price (CNY)",
+    "data_formats": "Data formats",
+    "vram_gb": "VRAM",
+    "rental": "Reference rental (CNY/h)"
+  },
+  "form": {
+    "humanoid": "Humanoid",
+    "dual_arm": "Dual arm",
+    "dual_arm_wheeled": "Dual arm, wheeled",
+    "single_arm": "Single arm",
+    "wheeled": "Wheeled",
+    "quadruped": "Quadruped",
+    "mobile_manipulator": "Mobile manipulator"
+  },
+  "arch": {
+    "dual_system": "Dual system",
+    "villa": "ViLLA",
+    "vlm_plus_action_expert": "VLM + action expert",
+    "monolithic_autoregressive": "Monolithic autoregressive",
+    "soft_prompted_transformer": "Soft-prompted transformer",
+    "transformer_policy": "Transformer policy"
+  },
+  "evidence": {
+    "title": "Sources",
+    "open": "Source",
+    "fetched": "Fetched",
+    "sha": "Snapshot hash",
+    "nosha": "No snapshot stored yet",
+    "count": "sources",
+    "empty": "This record has no sources yet; every field is treated as unverified.",
+    "types": {
+      "literature": "Paper / official docs",
+      "news": "Press",
+      "hub": "Model hub page",
+      "official": "Official page"
+    }
+  },
+  "latency": {
+    "title": "Latency & cost",
+    "none": "No latency measurements for this model yet",
+    "noneWhy": "Data comes from literature, maintainer runs, or crowd CLI uploads. None exist so far.",
+    "cost": "Cost per 1k inferences",
+    "costNone": "—",
+    "costWhy_noLatency": "no latency data",
+    "costWhy_noRent": "no rental price for this hardware",
+    "formula": "cost = p50 ms ÷ 1000 × rental ÷ 3600 × 1000",
+    "p50": "p50",
+    "p95": "p95",
+    "vram": "Peak VRAM",
+    "samples": "samples"
+  },
+  "list": {
+    "filterEmb": "Embodiment form",
+    "filterLicense": "License",
+    "filterCommercial": "Commercial",
+    "filterCross": "Cross-embodiment",
+    "sort": "Sort",
+    "sortRelease": "Release date",
+    "sortParams": "Parameters",
+    "all": "All",
+    "count": "models",
+    "compare": "Compare",
+    "compareHint": "Tick up to 4 models, then compare",
+    "yes": "Yes",
+    "no": "No",
+    "unknown": "Unknown"
+  },
+  "compare": {
+    "title": "Compare models",
+    "empty": "Add ?ids=model1,model2 to the URL or tick models in the index",
+    "max": "Up to 4"
+  },
+  "matrix": {
+    "title": "Model × embodiment compatibility",
+    "p": "Color is status; click a cell for evidence. Most cells start as “unknown” — we only record states we have evidence for.",
+    "legend": "Legend",
+    "cellsWithStatus": "cells with a definite status"
+  },
+  "hardware": {
+    "title": "Hardware & cost",
+    "p": "Cost per 1k inferences uses the card's public reference rental price. Source and date are shown alongside.",
+    "rankOn": "Latency ranking on this card",
+    "noRent": "no rental price"
+  },
+  "method": {
+    "title": "Measurement methodology v0.1"
+  },
+  "subscribe": {
+    "title": "Subscribe",
+    "p": "Model releases, license changes, new latency measurements. Only when something changed. No marketing.",
+    "email": "Email",
+    "btn": "Subscribe",
+    "rss": "RSS",
+    "webhook": "Feishu / DingTalk webhook",
+    "ok": "Received. A confirmation email is on its way.",
+    "placeholder": "you@example.com"
+  },
+  "about": {
+    "title": "About Sinan Robo"
+  },
+  "footer": {
+    "copy": "© 2026 Sinan Lab",
+    "constitution": "Why trust us",
+    "disclosure": "Revenue transparency",
+    "privacy": "Privacy",
+    "disclaimer": "Disclaimer",
+    "mother": "sinanlab.com",
+    "line": "Every field traceable to its source · We take no money from measured vendors"
+  },
+  "recent": {
+    "title": "Recent updates",
+    "seed": "Initial seed data imported",
+    "pendingList": "Verification backlog"
+  },
+  "constitution": {
+    "title": "Why trust us",
+    "items": [
+      "Rankings and recommendations contain no commercial variables",
+      "All measurement methods and raw data are downloadable",
+      "Self-hosted and third-party endpoints are shown alike",
+      "Any position with a commercial relationship is clearly labeled"
+    ]
+  },
+  "lang": {
+    "switch": "中文"
+  }
 }

@@ -1,0 +1,90 @@
+---
+// 司南榜 · Robo：只排事实字段（发布时间、参数量、预训练小时、声明本体数、许可证），每项都带来源；不做综合分，不做推荐。
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { t, type Lang, href } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const models = (await getCollection('models')).map((m) => m.data);
+const embs = (await getCollection('embodiments')).map((e) => e.data);
+const compat = (await getCollection('compat')).map((c) => c.data);
+const meta = (await getCollection('meta').catch(() => []))[0]?.data as any;
+const asOf = meta?.generated ?? new Date().toISOString().slice(0, 10);
+
+const N = 8;
+const newest = [...models].filter((m) => m.release_date).sort((a, b) => (b.release_date! > a.release_date! ? 1 : -1)).slice(0, N);
+const hours = [...models].filter((m) => m.pretrain_hours).sort((a, b) => b.pretrain_hours! - a.pretrain_hours!).slice(0, N);
+const bodies = [...models].map((m) => ({ ...m, nb: (m.target_embodiments ?? []).length })).filter((m) => m.nb > 0).sort((a, b) => b.nb - a.nb || (b.release_date ?? '').localeCompare(a.release_date ?? '')).slice(0, N);
+const smallOpen = [...models].filter((m) => m.commercial_ok === true && m.params_b).sort((a, b) => a.params_b! - b.params_b!).slice(0, N);
+const large = [...models].filter((m) => m.params_b).sort((a, b) => b.params_b! - a.params_b!).slice(0, N);
+const lic = { yes: models.filter((m) => m.commercial_ok === true).length, no: models.filter((m) => m.commercial_ok === false).length, unk: models.filter((m) => m.commercial_ok == null).length };
+const declared: Record<string, number> = {};
+for (const c of compat) if (c.declared_target_form) declared[c.embodiment_id] = (declared[c.embodiment_id] ?? 0) + 1;
+const embBoard = embs.map((e) => ({ ...e, n: declared[e.id] ?? 0 })).filter((e) => e.n > 0).sort((a, b) => b.n - a.n).slice(0, N);
+
+const T = en ? {
+  eyebrow: 'Sinan Rankings · measured boards · updated with the index', h1: 'Sinan Rankings · Robo', lead: 'Only fields with a source get ranked: release date, parameter count from the model card, pretraining hours as published, declared target bodies, licence as written. No composite score, no recommendation.',
+  k1: 'models indexed', k2: 'robot bodies', k3: 'commercial licence, clearly', k4: 'non-commercial, clearly',
+  newest: 'Newest releases', newest_s: 'By release month on the model card or README', hours: 'Most pretraining data', hours_s: 'Published real-robot / human pretraining hours; only models that state a number',
+  bodies: 'Broadest declared coverage', bodies_s: 'Number of body forms the vendor declares as targets (declaration, not verified compatibility)', small: 'Smallest with a commercial licence', small_s: 'Parameter count from the model card, licence clearly allows commercial use',
+  large: 'Largest open weights', large_s: 'Parameter count from safetensors metadata where available', emb: 'Most-targeted bodies', emb_s: 'How many indexed models declare this body form as a target',
+  lic: 'Licence at a glance', lic_s: 'Counted from licence text as written; when code and weight licences disagree we count it as unverified',
+  yes: 'commercial OK', no: 'non-commercial', unk: 'unverified', h: 'h', b: 'B params', bodies_u: 'body forms', models_u: 'models', foot: 'Sorted by recorded facts; not a recommendation. Every field links to its evidence on the model page. Data ' + asOf + '.',
+} : {
+  eyebrow: '司南榜 · 测量榜单 · 随索引更新', h1: '司南榜 · Robo', lead: '只排有来源的字段：发布时间、模型卡参数量、公开的预训练小时数、厂商声明的目标本体、许可证原文。不做综合分，不构成推荐。',
+  k1: '已索引模型', k2: '机器人本体', k3: '许可证明确可商用', k4: '许可证明确禁商用',
+  newest: '最新发布榜', newest_s: '按模型卡或 README 的发布月份', hours: '预训练数据榜', hours_s: '公开的真机 / 人类操作预训练小时数；只列写明数字的模型',
+  bodies: '声明覆盖榜', bodies_s: '厂商声明的目标本体形态数（是声明，不是核实过的适配）', small: '最小可商用榜', small_s: '模型卡参数量最小、且许可证明确允许商用',
+  large: '最大开放权重榜', large_s: '参数量取 safetensors 元数据', emb: '被瞄准最多的本体', emb_s: '有多少已索引模型把这种本体形态声明为目标',
+  lic: '许可证一眼看', lic_s: '按许可证原文计数；代码与权重许可证不一致的按待核实计',
+  yes: '可商用', no: '禁商用', unk: '待核实', h: '小时', b: 'B 参数', bodies_u: '种本体', models_u: '个模型', foot: '按记录的事实排序，不构成推荐。每个字段在模型页都能点到来源。数据 ' + asOf + '。',
+};
+const mhref = (id: string) => href(lang, '/models/' + id);
+const rows = (items: any[], val: (x: any) => string, sub: (x: any) => string, key: (x: any) => number | null, lowerBetter = false) => {
+  const vals = items.map(key).filter((v): v is number => v != null);
+  const lo = Math.min(...vals), hi = Math.max(...vals);
+  return items.map((x, i) => {
+    const v = key(x); const tt = v == null || hi === lo ? 0.5 : (v - lo) / (hi - lo); const w = 8 + 92 * (lowerBetter ? 1 - tt : tt);
+    return { x, i, val: val(x), sub: sub(x), w };
+  });
+};
+const fmtB = (v: number) => (v >= 1 ? v.toFixed(v >= 10 ? 1 : 2) : (v * 1000).toFixed(0) + 'M').replace('M', 'M');
+---
+<Base lang={lang} title={T.h1 + ' · Sinan Robo'} desc={T.lead} active="rank" path="/rank" crumbs={[{ label: T.h1 }]}>
+  <div class="rkhead rise" style="--i:0"><div class="eyebrow">{T.eyebrow}</div><h1>{T.h1}</h1><p class="lead">{T.lead}</p>
+    <div class="meta"><span><b>{models.length}</b>{T.k1}</span><span><b>{embs.length}</b>{T.k2}</span><span><b>{lic.yes}</b>{T.k3}</span><span><b>{lic.no}</b>{T.k4}</span></div></div>
+  <div class="rkgrid">
+    <section class="card pad rise" style="--i:1"><h2 class="sec">{T.newest}</h2><p class="lead" style="margin-top:4px">{T.newest_s}</p>
+      <ol class="rk">{rows(newest, (m) => m.release_date, (m) => m.org, () => null).map(({ x, i, val, sub }) => (
+        <li class={i < 3 ? 'top' : ''}><span class="no">{String(i + 1).padStart(2, '0')}</span><span class="who"><a href={mhref(x.id)}>{x.name}</a><small>{sub}</small></span><span class="val">{val}<small>{x.params_b ? fmtB(x.params_b) + ' ' + T.b : '—'}</small></span></li>))}</ol></section>
+    <section class="card pad rise" style="--i:2"><h2 class="sec">{T.hours}</h2><p class="lead" style="margin-top:4px">{T.hours_s}</p>
+      <ol class="rk">{rows(hours, (m) => m.pretrain_hours!.toLocaleString() + ' ' + T.h, (m) => m.org, (m) => m.pretrain_hours).map(({ x, i, val, sub, w }) => (
+        <li class={i < 3 ? 'top' : ''}><span class="no">{String(i + 1).padStart(2, '0')}</span><span class="who"><a href={mhref(x.id)}>{x.name}</a><small>{sub}</small></span><span class="bar" aria-hidden="true"><i style={`width:${w}%`}></i></span><span class="val">{val}</span></li>))}</ol></section>
+  </div>
+  <div class="rkgrid">
+    <section class="card pad rise" style="--i:3"><h2 class="sec">{T.bodies}</h2><p class="lead" style="margin-top:4px">{T.bodies_s}</p>
+      <ol class="rk">{rows(bodies, (m) => m.nb + ' ' + T.bodies_u, (m) => (m.target_embodiments ?? []).join(' · '), (m) => m.nb).map(({ x, i, val, sub, w }) => (
+        <li class={i < 3 ? 'top' : ''}><span class="no">{String(i + 1).padStart(2, '0')}</span><span class="who"><a href={mhref(x.id)}>{x.name}</a><small>{sub}</small></span><span class="bar" aria-hidden="true"><i style={`width:${w}%`}></i></span><span class="val">{val}</span></li>))}</ol></section>
+    <section class="card pad rise" style="--i:4"><h2 class="sec">{T.small}</h2><p class="lead" style="margin-top:4px">{T.small_s}</p>
+      <ol class="rk">{rows(smallOpen, (m) => fmtB(m.params_b) + ' ' + T.b, (m) => (m.license ?? '').slice(0, 40), (m) => m.params_b, true).map(({ x, i, val, sub, w }) => (
+        <li class={i < 3 ? 'top' : ''}><span class="no">{String(i + 1).padStart(2, '0')}</span><span class="who"><a href={mhref(x.id)}>{x.name}</a><small>{sub}</small></span><span class="bar" aria-hidden="true"><i style={`width:${w}%`}></i></span><span class="val">{val}</span></li>))}</ol></section>
+  </div>
+  <div class="rkgrid">
+    <section class="card pad rise" style="--i:5"><h2 class="sec">{T.large}</h2><p class="lead" style="margin-top:4px">{T.large_s}</p>
+      <ol class="rk">{rows(large, (m) => fmtB(m.params_b) + ' ' + T.b, (m) => m.org, (m) => m.params_b).map(({ x, i, val, sub, w }) => (
+        <li class={i < 3 ? 'top' : ''}><span class="no">{String(i + 1).padStart(2, '0')}</span><span class="who"><a href={mhref(x.id)}>{x.name}</a><small>{sub}</small></span><span class="bar" aria-hidden="true"><i style={`width:${w}%`}></i></span><span class="val">{val}</span></li>))}</ol></section>
+    <section class="card pad rise" style="--i:6"><h2 class="sec">{T.emb}</h2><p class="lead" style="margin-top:4px">{T.emb_s}</p>
+      <ol class="rk">{rows(embBoard, (e) => e.n + ' ' + T.models_u, (e) => e.vendor + ' · ' + e.form, (e) => e.n).map(({ x, i, val, sub, w }) => (
+        <li class={i < 3 ? 'top' : ''}><span class="no">{String(i + 1).padStart(2, '0')}</span><span class="who"><a href={href(lang, '/embodiments/' + x.id)}>{x.name}</a><small>{sub}</small></span><span class="bar" aria-hidden="true"><i style={`width:${w}%`}></i></span><span class="val">{val}</span></li>))}</ol></section>
+  </div>
+  <section class="card pad rise" style="--i:7;margin-top:16px"><h2 class="sec">{T.lic}</h2><p class="lead" style="margin-top:4px">{T.lic_s}</p>
+    <div class="licbar"><i class="yes" style={`flex:${lic.yes}`}>{lic.yes} {T.yes}</i><i class="no" style={`flex:${lic.no}`}>{lic.no} {T.no}</i><i class="unk" style={`flex:${lic.unk}`}>{lic.unk} {T.unk}</i></div></section>
+  <div class="tfoot" style="margin-top:16px"><span>{T.foot}</span></div>
+</Base>
+<style>
+.rkhead{background:linear-gradient(135deg,#0B0D1F 0%,#3A2410 55%,#F79009 100%);color:#fff;border-radius:22px;padding:34px 34px 30px}.rkhead .eyebrow{color:#FFD59A}.rkhead h1{font-size:40px;letter-spacing:-.02em;margin:8px 0 6px}.rkhead .lead{color:rgba(255,255,255,.8);max-width:720px}.rkhead .meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-family:var(--mono);font-size:12px;color:#FFD59A}.rkhead .meta b{color:#fff;font-size:20px;display:block;font-weight:600}
+.rkgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}@media (max-width:860px){.rkgrid{grid-template-columns:1fr}.rkhead h1{font-size:30px}}
+.rk{list-style:none;margin:8px 0 0;padding:0}.rk li{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--hair)}.rk li:last-child{border-bottom:0}.rk .no{font-family:var(--mono);font-size:18px;font-weight:600;width:34px;color:var(--ink-3);flex:none}.rk li.top .no{color:var(--robo,#F79009);font-size:22px}.rk .who{flex:1;min-width:0}.rk .who a{font-size:13.5px;color:var(--ink);font-weight:500}.rk li.top .who a{font-size:15px;font-weight:600}.rk .who small{display:block;color:var(--ink-3);font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rk .val{font-family:var(--mono);font-size:14px;text-align:right;flex:none}.rk .val small{display:block;color:var(--ink-3);font-size:11px;font-weight:400}.rk .bar{height:4px;border-radius:2px;background:var(--hair);width:110px;position:relative;overflow:hidden;flex:none}.rk .bar i{position:absolute;inset:0;right:auto;background:var(--robo,#F79009);border-radius:2px}
+.licbar{display:flex;gap:4px;margin-top:12px;font-family:var(--mono);font-size:12px}.licbar i{font-style:normal;padding:10px 12px;border-radius:10px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.licbar .yes{background:#17B26A}.licbar .no{background:#B42318}.licbar .unk{background:#9AA0B8}
+</style>
