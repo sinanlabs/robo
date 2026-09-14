@@ -1,0 +1,902 @@
+[
+ {
+  "model_id": "gr00t-n1.7",
+  "embodiment_id": "so-101",
+  "status": "official",
+  "note": "README 提供 SO100 机械臂 5 段示教的微调示例（NEW_EMBODIMENT），真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/NVIDIA/Isaac-GR00T",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 提供 SO100 机械臂 5 段示教的微调示例（NEW_EMBODIMENT），真机"
+   }
+  ]
+ },
+ {
+  "model_id": "gr00t-n1.7",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "官方发布 GR00T-N1.7-LIBERO 检查点：LIBERO 基准（Franka Panda）仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/NVIDIA/Isaac-GR00T",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "官方发布 GR00T-N1.7-LIBERO 检查点：LIBERO 基准（Franka Panda）仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "gr00t-n1.7",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "官方发布 GR00T-N1.7-SimplerEnv-Bridge 检查点：SimplerEnv Bridge（WidowX）仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/NVIDIA/Isaac-GR00T",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "官方发布 GR00T-N1.7-SimplerEnv-Bridge 检查点：SimplerEnv Bridge（WidowX）仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "gr00t-n1.7",
+  "embodiment_id": "google-robot",
+  "status": "official",
+  "note": "官方发布 GR00T-N1.7-SimplerEnv-Fractal 检查点：SimplerEnv Fractal（Google Robot）仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/NVIDIA/Isaac-GR00T",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "官方发布 GR00T-N1.7-SimplerEnv-Fractal 检查点：SimplerEnv Fractal（Google Robot）仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "gr00t-n1.5-3b",
+  "embodiment_id": "fourier-gr",
+  "status": "official",
+  "note": "GR00T N1 论文：部署在 Fourier GR-1 人形机器人上做语言条件双臂操作，真机（本站收录本体为 GR-2，同厂前代）",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/abs/2503.14734",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "GR00T N1 论文：部署在 Fourier GR-1 人形机器人上做语言条件双臂操作，真机（本站收录本体为 GR-2，同厂前代）"
+   }
+  ]
+ },
+ {
+  "model_id": "lingbot-vla-2.0",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "README GM-100 双臂基准：AgileX Cobot Magic 真机成功率 66.2 / 34.4",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/robbyant/lingbot-vla-v2",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README GM-100 双臂基准：AgileX Cobot Magic 真机成功率 66.2 / 34.4"
+   }
+  ]
+ },
+ {
+  "model_id": "lingbot-vla-2.0",
+  "embodiment_id": "galaxea-r1pro",
+  "status": "official",
+  "note": "README GM-100 双臂基准：Galaxea R1Pro 真机成功率 34.6 / 15.6",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/robbyant/lingbot-vla-v2",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README GM-100 双臂基准：Galaxea R1Pro 真机成功率 34.6 / 15.6"
+   }
+  ]
+ },
+ {
+  "model_id": "go-1",
+  "embodiment_id": "agibot-genie-g1",
+  "status": "official",
+  "note": "README 真机演示 Fold Shirt (AgiBot G1)；AgiBot World 数据集在 Genie-1 上采集",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/OpenDriveLab/AgiBot-World",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 真机演示 Fold Shirt (AgiBot G1)；AgiBot World 数据集在 Genie-1 上采集"
+   }
+  ]
+ },
+ {
+  "model_id": "go-1",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "README 真机演示 Fold Shirt (Dual Franka)",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/OpenDriveLab/AgiBot-World",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 真机演示 Fold Shirt (Dual Franka)"
+   }
+  ]
+ },
+ {
+  "model_id": "go-1",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "README 评测流水线 evaluate/agilex：AgileX Cobot Magic (Aloha)；另有 RoboTwin 仿真 (Aloha)",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/OpenDriveLab/AgiBot-World",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 评测流水线 evaluate/agilex：AgileX Cobot Magic (Aloha)；另有 RoboTwin 仿真 (Aloha)"
+   }
+  ]
+ },
+ {
+  "model_id": "pi0",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "openpi README：发布在 ALOHA 上微调的检查点（如 ALOHA towel 折叠），真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/Physical-Intelligence/openpi",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "openpi README：发布在 ALOHA 上微调的检查点（如 ALOHA towel 折叠），真机"
+   }
+  ]
+ },
+ {
+  "model_id": "pi0",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "openpi README：发布在 DROID Franka 配置上微调的检查点，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/Physical-Intelligence/openpi",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "openpi README：发布在 DROID Franka 配置上微调的检查点，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "pi0.5",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "openpi README：发布在 ALOHA 上微调的检查点（如 ALOHA towel 折叠），真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/Physical-Intelligence/openpi",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "openpi README：发布在 ALOHA 上微调的检查点（如 ALOHA towel 折叠），真机"
+   }
+  ]
+ },
+ {
+  "model_id": "pi0.5",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "openpi README：发布在 DROID Franka 配置上微调的检查点，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/Physical-Intelligence/openpi",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "openpi README：发布在 DROID Franka 配置上微调的检查点，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "smolvla",
+  "embodiment_id": "so-101",
+  "status": "official",
+  "note": "SmolVLA 在 SO-100/101 社区数据上训练与真机评测；LeRobot 原生支持 SO100",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/huggingface/lerobot",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "SmolVLA 在 SO-100/101 社区数据上训练与真机评测；LeRobot 原生支持 SO100"
+   }
+  ]
+ },
+ {
+  "model_id": "smolvla",
+  "embodiment_id": "unitree-g1",
+  "status": "theoretical",
+  "note": "LeRobot 框架列为支持/插件硬件（Unitree G1、AgileX Piper、Franka、Trossen WidowX 等），未见 SmolVLA 在该本体上的公开结果",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/huggingface/lerobot",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "LeRobot 框架列为支持/插件硬件（Unitree G1、AgileX Piper、Franka、Trossen WidowX 等），未见 SmolVLA 在该本体上的公开结果"
+   }
+  ]
+ },
+ {
+  "model_id": "smolvla",
+  "embodiment_id": "agilex-piper",
+  "status": "theoretical",
+  "note": "LeRobot 框架列为支持/插件硬件（Unitree G1、AgileX Piper、Franka、Trossen WidowX 等），未见 SmolVLA 在该本体上的公开结果",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/huggingface/lerobot",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "LeRobot 框架列为支持/插件硬件（Unitree G1、AgileX Piper、Franka、Trossen WidowX 等），未见 SmolVLA 在该本体上的公开结果"
+   }
+  ]
+ },
+ {
+  "model_id": "smolvla",
+  "embodiment_id": "franka-panda",
+  "status": "theoretical",
+  "note": "LeRobot 框架列为支持/插件硬件（Unitree G1、AgileX Piper、Franka、Trossen WidowX 等），未见 SmolVLA 在该本体上的公开结果",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/huggingface/lerobot",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "LeRobot 框架列为支持/插件硬件（Unitree G1、AgileX Piper、Franka、Trossen WidowX 等），未见 SmolVLA 在该本体上的公开结果"
+   }
+  ]
+ },
+ {
+  "model_id": "smolvla",
+  "embodiment_id": "widowx-250s",
+  "status": "theoretical",
+  "note": "LeRobot 框架列为支持/插件硬件（Unitree G1、AgileX Piper、Franka、Trossen WidowX 等），未见 SmolVLA 在该本体上的公开结果",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/huggingface/lerobot",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "LeRobot 框架列为支持/插件硬件（Unitree G1、AgileX Piper、Franka、Trossen WidowX 等），未见 SmolVLA 在该本体上的公开结果"
+   }
+  ]
+ },
+ {
+  "model_id": "smolvla",
+  "embodiment_id": "aloha-2",
+  "status": "theoretical",
+  "note": "LeRobot 框架列为支持/插件硬件（Unitree G1、AgileX Piper、Franka、Trossen WidowX 等），未见 SmolVLA 在该本体上的公开结果",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/huggingface/lerobot",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "LeRobot 框架列为支持/插件硬件（Unitree G1、AgileX Piper、Franka、Trossen WidowX 等），未见 SmolVLA 在该本体上的公开结果"
+   }
+  ]
+ },
+ {
+  "model_id": "openvla",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "README：BridgeData V2 环境 WidowX 真机评测说明与零样本示例",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/openvla/openvla",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README：BridgeData V2 环境 WidowX 真机评测说明与零样本示例"
+   }
+  ]
+ },
+ {
+  "model_id": "openvla",
+  "embodiment_id": "google-robot",
+  "status": "theoretical",
+  "note": "预训练数据含 RT-1 Google Robot 数据（fractal20220817）；论文另有 Google Robot 真机评测，README 未给复现入口",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/openvla/openvla",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "预训练数据含 RT-1 Google Robot 数据（fractal20220817）；论文另有 Google Robot 真机评测，README 未给复现入口"
+   }
+  ]
+ },
+ {
+  "model_id": "x-vla",
+  "embodiment_id": "agibot-genie-g1",
+  "status": "official",
+  "note": "IROS 2025 AgiBot World Challenge 冠军（AgiBot 平台真机赛）",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/2toinf/X-VLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "IROS 2025 AgiBot World Challenge 冠军（AgiBot 平台真机赛）"
+   }
+  ]
+ },
+ {
+  "model_id": "x-vla",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "官方检查点 X-VLA-Libero / X-VLA-Calvin（Franka）仿真基准",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/2toinf/X-VLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "官方检查点 X-VLA-Libero / X-VLA-Calvin（Franka）仿真基准"
+   }
+  ]
+ },
+ {
+  "model_id": "x-vla",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "官方检查点 X-VLA-WidowX：BridgeDataV2 微调，SimplerEnv 仿真 95.8%",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/2toinf/X-VLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "官方检查点 X-VLA-WidowX：BridgeDataV2 微调，SimplerEnv 仿真 95.8%"
+   }
+  ]
+ },
+ {
+  "model_id": "x-vla",
+  "embodiment_id": "google-robot",
+  "status": "official",
+  "note": "官方检查点 X-VLA-Google-Robot：SimplerEnv 仿真 83.5%/76.4%",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/2toinf/X-VLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "官方检查点 X-VLA-Google-Robot：SimplerEnv 仿真 83.5%/76.4%"
+   }
+  ]
+ },
+ {
+  "model_id": "octo",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "README 提供在真机 WidowX 上评测的脚本 examples/04_eval_finetuned_on_robot.py",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/octo-models/octo",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 提供在真机 WidowX 上评测的脚本 examples/04_eval_finetuned_on_robot.py"
+   }
+  ]
+ },
+ {
+  "model_id": "rdt-1b",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "README：在 6K+ 自采双臂数据上微调并部署于 ALOHA 双臂机器人，提供 Mobile ALOHA 部署代码",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/thu-ml/RoboticsDiffusionTransformer",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README：在 6K+ 自采双臂数据上微调并部署于 ALOHA 双臂机器人，提供 Mobile ALOHA 部署代码"
+   }
+  ]
+ },
+ {
+  "model_id": "cogact",
+  "embodiment_id": "google-robot",
+  "status": "official",
+  "note": "README 推理示例按 RT-1 Google Robot 数据反归一化；论文 SimplerEnv 仿真评测",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/microsoft/CogACT",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 推理示例按 RT-1 Google Robot 数据反归一化；论文 SimplerEnv 仿真评测"
+   }
+  ]
+ },
+ {
+  "model_id": "spatialvla",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "README：Adapting to New Robot Setups on Franka Robot，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/SpatialVLA/SpatialVLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README：Adapting to New Robot Setups on Franka Robot，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "spatialvla",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "官方检查点 spatialvla-4b-224-sft-bridge：SimplerEnv WidowX 仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/SpatialVLA/SpatialVLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "官方检查点 spatialvla-4b-224-sft-bridge：SimplerEnv WidowX 仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "spatialvla",
+  "embodiment_id": "google-robot",
+  "status": "official",
+  "note": "SimplerEnv Google Robot 仿真评测",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/SpatialVLA/SpatialVLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "SimplerEnv Google Robot 仿真评测"
+   }
+  ]
+ },
+ {
+  "model_id": "univla",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "README：SimplerEnv WidowX 仿真评测；发布 BridgeV2 预训练检查点",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/OpenDriveLab/UniVLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README：SimplerEnv WidowX 仿真评测；发布 BridgeV2 预训练检查点"
+   }
+  ]
+ },
+ {
+  "model_id": "molmoact",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "README 5.4：在贴近 DROID 配置的 Franka 上零样本评测指引，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/allenai/MolmoAct",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 5.4：在贴近 DROID 配置的 Franka 上零样本评测指引，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "molmoact",
+  "embodiment_id": "google-robot",
+  "status": "official",
+  "note": "官方检查点 MolmoAct-7B-D-Pretrain：SimplerEnv（Google Robot）仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/allenai/MolmoAct",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "官方检查点 MolmoAct-7B-D-Pretrain：SimplerEnv（Google Robot）仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "molmoact",
+  "embodiment_id": "widowx-250s",
+  "status": "theoretical",
+  "note": "预训练/VQVAE 数据含 BridgeData V2（WidowX），未见该本体评测入口",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/allenai/MolmoAct",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "预训练/VQVAE 数据含 BridgeData V2（WidowX），未见该本体评测入口"
+   }
+  ]
+ },
+ {
+  "model_id": "internvla-m1",
+  "embodiment_id": "google-robot",
+  "status": "official",
+  "note": "论文与 README 报告：SimplerEnv Google Robot 仿真 +14.6%",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/InternRobotics/InternVLA-M1",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "论文与 README 报告：SimplerEnv Google Robot 仿真 +14.6%"
+   }
+  ]
+ },
+ {
+  "model_id": "internvla-m1",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "论文与 README 报告：SimplerEnv WidowX 仿真 +17%",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/InternRobotics/InternVLA-M1",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "论文与 README 报告：SimplerEnv WidowX 仿真 +17%"
+   }
+  ]
+ },
+ {
+  "model_id": "internvla-m1",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文与 README 报告：LIBERO Franka 仿真 +4.3%",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/InternRobotics/InternVLA-M1",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "论文与 README 报告：LIBERO Franka 仿真 +4.3%"
+   }
+  ]
+ },
+ {
+  "model_id": "graspvla",
+  "embodiment_id": "franka-panda",
+  "status": "theoretical",
+  "note": "README 训练配置使用 lerobot_franka_dataset；论文含 Franka 真机抓取评测，README 未给部署入口",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/PKU-EPIC/GraspVLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 训练配置使用 lerobot_franka_dataset；论文含 Franka 真机抓取评测，README 未给部署入口"
+   }
+  ]
+ },
+ {
+  "model_id": "eo-1",
+  "embodiment_id": "agibot-genie-g1",
+  "status": "official",
+  "note": "README experiments/6_agibot：AgiBot 平台训练与部署，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/IPEC-PUBLIC/EO-1",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README experiments/6_agibot：AgiBot 平台训练与部署，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "eo-1",
+  "embodiment_id": "so-101",
+  "status": "official",
+  "note": "README experiments/4_so101：SO100/101 采集操作任务，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/IPEC-PUBLIC/EO-1",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README experiments/4_so101：SO100/101 采集操作任务，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "eo-1",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "README experiments/7_franka：Franka 操作任务，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/IPEC-PUBLIC/EO-1",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README experiments/7_franka：Franka 操作任务，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "eo-1",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "README experiments/5_widowx：WidowX 真机训练与评测；另有 SimplerEnv 仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/IPEC-PUBLIC/EO-1",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README experiments/5_widowx：WidowX 真机训练与评测；另有 SimplerEnv 仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "eo-1",
+  "embodiment_id": "google-robot",
+  "status": "official",
+  "note": "README experiments/3_simpler：SimplerEnv（Google Robot）仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/IPEC-PUBLIC/EO-1",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README experiments/3_simpler：SimplerEnv（Google Robot）仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "lingbot-vla-4b",
+  "embodiment_id": "agibot-genie-g1",
+  "status": "official",
+  "note": "README 真机评测表：Agibot G1 成功率/进度分",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/robbyant/lingbot-vla",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 真机评测表：Agibot G1 成功率/进度分"
+   }
+  ]
+ },
+ {
+  "model_id": "lingbot-vla-4b",
+  "embodiment_id": "galaxea-r1pro",
+  "status": "official",
+  "note": "README 真机评测表：Galaxea R1Pro 成功率/进度分",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/robbyant/lingbot-vla",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 真机评测表：Galaxea R1Pro 成功率/进度分"
+   }
+  ]
+ },
+ {
+  "model_id": "nora",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "README：WidowX 真机任务演示视频",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/declare-lab/nora",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README：WidowX 真机任务演示视频"
+   }
+  ]
+ },
+ {
+  "model_id": "vla-adapter",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "README 2026-03-16：真机 ALOHA 部署支持，在 Cobot Magic 上验证",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/OpenHelix-Team/VLA-Adapter",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 2026-03-16：真机 ALOHA 部署支持，在 Cobot Magic 上验证"
+   }
+  ]
+ },
+ {
+  "model_id": "vla-adapter",
+  "embodiment_id": "franka-panda",
+  "status": "theoretical",
+  "note": "README TODO：计划适配 Franka 真机，尚未完成",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/OpenHelix-Team/VLA-Adapter",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README TODO：计划适配 Franka 真机，尚未完成"
+   }
+  ]
+ },
+ {
+  "model_id": "vla-adapter",
+  "embodiment_id": "agilex-piper",
+  "status": "theoretical",
+  "note": "README TODO：计划适配 AgileX Piper 真机，尚未完成",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/OpenHelix-Team/VLA-Adapter",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README TODO：计划适配 AgileX Piper 真机，尚未完成"
+   }
+  ]
+ },
+ {
+  "model_id": "robovlms",
+  "embodiment_id": "google-robot",
+  "status": "official",
+  "note": "README：SimplerEnv Google Robot 仿真评测命令",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/Robot-VLAs/RoboVLMs",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README：SimplerEnv Google Robot 仿真评测命令"
+   }
+  ]
+ },
+ {
+  "model_id": "vjepa2-ac",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文：在两个实验室的 Franka 机械臂上零样本部署抓取与放置，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/abs/2506.09985",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：在两个实验室的 Franka 机械臂上零样本部署抓取与放置，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "galaxea-g0.5",
+  "embodiment_id": "galaxea-r1pro",
+  "status": "official",
+  "note": "论文：在 R1lite / R1pro 上真机微调 76.7% vs π0.5 53.3%",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/abs/2608.11739",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：在 R1lite / R1pro 上真机微调 76.7% vs π0.5 53.3%"
+   }
+  ]
+ },
+ {
+  "model_id": "galaxea-g0.5",
+  "embodiment_id": "so-101",
+  "status": "official",
+  "note": "README 2026-06-17：SO-100/101 零样本推理部署入口与 g05-so101 检查点，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/OpenGalaxea/GalaxeaVLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README 2026-06-17：SO-100/101 零样本推理部署入口与 g05-so101 检查点，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "galaxea-g0.5",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "README：DROID / Franka 部署客户端 droid-franka-client，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/OpenGalaxea/GalaxeaVLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README：DROID / Franka 部署客户端 droid-franka-client，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "galaxea-g0.5",
+  "embodiment_id": "widowx-250s",
+  "status": "theoretical",
+  "note": "训练数据含 BridgeV2（WidowX），未见该本体部署入口",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/OpenGalaxea/GalaxeaVLA",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "训练数据含 BridgeV2（WidowX），未见该本体部署入口"
+   }
+  ]
+ },
+ {
+  "model_id": "rdt2-vq",
+  "embodiment_id": "franka-fr3",
+  "status": "official",
+  "note": "README：Bimanual Franka Research 3 真机验证与部署配置 eval_bimanual_fr3_config.yaml",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/thu-ml/RDT2",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README：Bimanual Franka Research 3 真机验证与部署配置 eval_bimanual_fr3_config.yaml"
+   }
+  ]
+ },
+ {
+  "model_id": "vla-0",
+  "embodiment_id": "so-101",
+  "status": "official",
+  "note": "README：SO-100 真机较 SmolVLA +12.5%",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/NVlabs/vla0",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "README：SO-100 真机较 SmolVLA +12.5%"
+   }
+  ]
+ },
+ {
+  "model_id": "genie-envisioner",
+  "embodiment_id": "agibot-genie-g1",
+  "status": "official",
+  "note": "GE-Act 在 AgiBot G1 平台真机部署；GE-Sim 在 AgiBotWorld（Genie-1 采集）上预训练",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://github.com/AgibotTech/Genie-Envisioner",
+    "source_type": "official",
+    "fetched": "2026-09-14",
+    "note": "GE-Act 在 AgiBot G1 平台真机部署；GE-Sim 在 AgiBotWorld（Genie-1 采集）上预训练"
+   }
+  ]
+ }
+]

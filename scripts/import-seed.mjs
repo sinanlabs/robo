@@ -40,6 +40,18 @@ for (const m of models) {
   }
 }
 
+// 逐格证据覆盖：data/compat_overrides.json（人工复核过的原文证据，每格带 URL）
+const ovPath = path.join(root, 'data/compat_overrides.json');
+if (fs.existsSync(ovPath)) {
+  const ov = JSON.parse(fs.readFileSync(ovPath, 'utf8'));
+  for (const o of ov) {
+    const cell = compat.find((c) => c.model_id === o.model_id && c.embodiment_id === o.embodiment_id);
+    if (!cell) { console.warn('override 找不到格：', o.model_id, o.embodiment_id); continue; }
+    cell.status = o.status; cell.evidence = o.evidence ?? []; if (o.note) cell.note = o.note;
+  }
+  console.log(`适配矩阵证据覆盖：${ov.length} 格`);
+}
+
 // 延迟测量：Sprint 0 无数据，写空数组让页面走“— / 原因徽标”路径
 const measurements = [];
 

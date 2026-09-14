@@ -47,7 +47,7 @@ const compat = defineCollection({
   schema: z.object({
     id: z.string(), model_id: z.string(), embodiment_id: z.string(),
     status: z.enum(['official', 'community_verified', 'theoretical', 'unsupported', 'unknown']),
-    declared_target_form: z.boolean(), evidence: z.array(Evidence),
+    declared_target_form: z.boolean(), evidence: z.array(Evidence), note: z.string().optional(),
   }),
 });
 
