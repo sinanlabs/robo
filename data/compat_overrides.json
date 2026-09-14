@@ -898,5 +898,545 @@
     "note": "GE-Act 在 AgiBot G1 平台真机部署；GE-Sim 在 AgiBotWorld（Genie-1 采集）上预训练"
    }
   ]
+ },
+ {
+  "model_id": "gr00t-n1.7",
+  "embodiment_id": "fourier-gr",
+  "status": "official",
+  "note": "模型卡：24 个 Digital Cousin 仿真 GR-1 人形操作任务作为评测基准，仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://huggingface.co/nvidia/GR00T-N1.7-3B",
+    "source_type": "hub",
+    "fetched": "2026-09-14",
+    "note": "模型卡：24 个 Digital Cousin 仿真 GR-1 人形操作任务作为评测基准，仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "pi0",
+  "embodiment_id": "so-101",
+  "status": "theoretical",
+  "note": "LeRobot 移植版模型卡给出 SO100 机械臂评测命令示例，非官方结果",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://huggingface.co/lerobot/pi0_base",
+    "source_type": "hub",
+    "fetched": "2026-09-14",
+    "note": "LeRobot 移植版模型卡给出 SO100 机械臂评测命令示例，非官方结果"
+   }
+  ]
+ },
+ {
+  "model_id": "pi0.5",
+  "embodiment_id": "so-101",
+  "status": "theoretical",
+  "note": "LeRobot 移植版模型卡给出 SO100 机械臂评测命令示例，非官方结果",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://huggingface.co/lerobot/pi05_base",
+    "source_type": "hub",
+    "fetched": "2026-09-14",
+    "note": "LeRobot 移植版模型卡给出 SO100 机械臂评测命令示例，非官方结果"
+   }
+  ]
+ },
+ {
+  "model_id": "openvla",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文附录 B.3：Franka-Tabletop 与 Franka-DROID 数据高效适配实验，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2406.09246",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文附录 B.3：Franka-Tabletop 与 Franka-DROID 数据高效适配实验，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "octo",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文：微调策略在 Franka 上执行（R2D2 Franka 控制器），真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2405.12213",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：微调策略在 Franka 上执行（R2D2 Franka 控制器），真机"
+   }
+  ]
+ },
+ {
+  "model_id": "octo",
+  "embodiment_id": "google-robot",
+  "status": "official",
+  "note": "论文致谢：Google 团队在 Google Robot 上完成模型评测，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2405.12213",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文致谢：Google 团队在 Google Robot 上完成模型评测，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "octo",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "论文 Berkeley Bimanual 任务：ALOHA 双臂（两台 ViperX），真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2405.12213",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文 Berkeley Bimanual 任务：ALOHA 双臂（两台 ViperX），真机"
+   }
+  ]
+ },
+ {
+  "model_id": "cogact",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文 4.3：Franka 机器人真机评测",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2411.19650",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文 4.3：Franka 机器人真机评测"
+   }
+  ]
+ },
+ {
+  "model_id": "cogact",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "论文表 2：SIMPLER 视觉匹配设置下 WidowX 评测，仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2411.19650",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文表 2：SIMPLER 视觉匹配设置下 WidowX 评测，仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "univla",
+  "embodiment_id": "agilex-piper",
+  "status": "official",
+  "note": "论文 IV-A：全部真机实验在 AgileX Piper 机械臂上完成",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2505.06111",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文 IV-A：全部真机实验在 AgileX Piper 机械臂上完成"
+   }
+  ]
+ },
+ {
+  "model_id": "rynnvla-001",
+  "embodiment_id": "so-101",
+  "status": "official",
+  "note": "论文 5.1：用三台 LeRobot SO100 机械臂采集真机数据并评测",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2509.15212",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文 5.1：用三台 LeRobot SO100 机械臂采集真机数据并评测"
+   }
+  ]
+ },
+ {
+  "model_id": "wall-oss",
+  "embodiment_id": "agibot-genie-g1",
+  "status": "theoretical",
+  "note": "论文训练数据表含 AgibotWorld（Genie-1 采集），未见该本体部署结果",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2509.11766",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文训练数据表含 AgibotWorld（Genie-1 采集），未见该本体部署结果"
+   }
+  ]
+ },
+ {
+  "model_id": "internvla-m1",
+  "embodiment_id": "franka-fr3",
+  "status": "official",
+  "note": "论文真机杂乱场景抓放：Franka Research 3 + Robotiq 2F-85",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2510.13778",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文真机杂乱场景抓放：Franka Research 3 + Robotiq 2F-85"
+   }
+  ]
+ },
+ {
+  "model_id": "being-h0",
+  "embodiment_id": "franka-fr3",
+  "status": "official",
+  "note": "论文图 6 硬件系统：7-DoF Franka Research 3 + Inspire 灵巧手，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2507.15597",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文图 6 硬件系统：7-DoF Franka Research 3 + Inspire 灵巧手，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "lingbot-vla-4b",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文评测平台之一：Bimanual Franka（两台 7-DoF 臂），真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2601.18692",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文评测平台之一：Bimanual Franka（两台 7-DoF 臂），真机"
+   }
+  ]
+ },
+ {
+  "model_id": "hpt",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文真机工具使用任务：两套 Franka Panda 配置",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2409.20537",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文真机工具使用任务：两套 Franka Panda 配置"
+   }
+  ]
+ },
+ {
+  "model_id": "hpt",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "论文：Aloha Transfer Box 任务与 ACT 对比，仿真基准",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2409.20537",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：Aloha Transfer Box 任务与 ACT 对比，仿真基准"
+   }
+  ]
+ },
+ {
+  "model_id": "lapa",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文 4.4：Franka Emika Panda 真机桌面操作实验",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2410.11758",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文 4.4：Franka Emika Panda 真机桌面操作实验"
+   }
+  ]
+ },
+ {
+  "model_id": "lapa",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "论文：SIMPLER 仿真中 WidowX 4 项任务评测；BridgeV2（WidowX）预训练",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2410.11758",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：SIMPLER 仿真中 WidowX 4 项任务评测；BridgeV2（WidowX）预训练"
+   }
+  ]
+ },
+ {
+  "model_id": "llava-vla",
+  "embodiment_id": "agilex-piper",
+  "status": "official",
+  "note": "论文图 2：Cobot-Magic 双臂移动机器人（四台 Piper 臂）真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2602.22663",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文图 2：Cobot-Magic 双臂移动机器人（四台 Piper 臂）真机"
+   }
+  ]
+ },
+ {
+  "model_id": "llava-vla",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "论文：Cobot-Magic 双臂移动操作真机实验",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2602.22663",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：Cobot-Magic 双臂移动操作真机实验"
+   }
+  ]
+ },
+ {
+  "model_id": "llava-vla",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文：CALVIN 基准（Franka Panda）仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2602.22663",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：CALVIN 基准（Franka Panda）仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "robovlms",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "论文：SimplerEnv WidowX+Bridge 仿真评测",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2412.14058",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：SimplerEnv WidowX+Bridge 仿真评测"
+   }
+  ]
+ },
+ {
+  "model_id": "magma",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "论文图 9/14：WidowX 250 真机少样本微调与厨房操作",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2502.13130",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文图 9/14：WidowX 250 真机少样本微调与厨房操作"
+   }
+  ]
+ },
+ {
+  "model_id": "magma",
+  "embodiment_id": "google-robot",
+  "status": "official",
+  "note": "论文图 8：SimplerEnv Google Robot 仿真评测",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2502.13130",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文图 8：SimplerEnv Google Robot 仿真评测"
+   }
+  ]
+ },
+ {
+  "model_id": "dexvla",
+  "embodiment_id": "agilex-piper",
+  "status": "official",
+  "note": "论文：数据采集与实验使用 AgileX 平台（ARX / PIPER 臂配置），真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2502.05855",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：数据采集与实验使用 AgileX 平台（ARX / PIPER 臂配置），真机"
+   }
+  ]
+ },
+ {
+  "model_id": "dexvla",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文图 4：Franka 及带灵巧手的 Franka 真机实验",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2502.05855",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文图 4：Franka 及带灵巧手的 Franka 真机实验"
+   }
+  ]
+ },
+ {
+  "model_id": "dexvla",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "论文图 4：bimanual AgileX 双臂平台真机实验",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2502.05855",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文图 4：bimanual AgileX 双臂平台真机实验"
+   }
+  ]
+ },
+ {
+  "model_id": "gr-1",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文：CALVIN 基准（Franka Emika Panda）仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2312.13139",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：CALVIN 基准（Franka Emika Panda）仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "galaxea-g0.5",
+  "embodiment_id": "franka-fr3",
+  "status": "official",
+  "note": "论文 5.1.1：Franka Research 3 + Robotiq 2F-85 真机评测 10 项任务",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2608.11739",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文 5.1.1：Franka Research 3 + Robotiq 2F-85 真机评测 10 项任务"
+   }
+  ]
+ },
+ {
+  "model_id": "internvla-a1.5",
+  "embodiment_id": "widowx-250s",
+  "status": "official",
+  "note": "论文表 2：SimplerEnv（WidowX）仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2607.04988",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文表 2：SimplerEnv（WidowX）仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "internvla-a1.5",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "论文：在 ALOHA-AgileX 本体上用 RoboTwin 2.0 微调评测，仿真",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2607.04988",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文：在 ALOHA-AgileX 本体上用 RoboTwin 2.0 微调评测，仿真"
+   }
+  ]
+ },
+ {
+  "model_id": "internvla-a1.5",
+  "embodiment_id": "agibot-genie-g1",
+  "status": "theoretical",
+  "note": "论文训练数据含 AgiBotWorld，未见该本体部署结果",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2607.04988",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文训练数据含 AgiBotWorld，未见该本体部署结果"
+   }
+  ]
+ },
+ {
+  "model_id": "internvla-a1.5",
+  "embodiment_id": "galaxea-r1pro",
+  "status": "theoretical",
+  "note": "论文训练数据含 Galaxea 数据集，未见该本体部署结果",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2607.04988",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文训练数据含 Galaxea 数据集，未见该本体部署结果"
+   }
+  ]
+ },
+ {
+  "model_id": "genie-envisioner",
+  "embodiment_id": "franka-panda",
+  "status": "official",
+  "note": "论文 4.3：泛化到 Dual Franka 本体，1 小时示教，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2508.05635",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文 4.3：泛化到 Dual Franka 本体，1 小时示教，真机"
+   }
+  ]
+ },
+ {
+  "model_id": "genie-envisioner",
+  "embodiment_id": "aloha-2",
+  "status": "official",
+  "note": "论文 4.2：泛化到 Agilex Cobot Magic 本体，真机",
+  "evidence": [
+   {
+    "field": "status",
+    "url": "https://arxiv.org/html/2508.05635",
+    "source_type": "literature",
+    "fetched": "2026-09-14",
+    "note": "论文 4.2：泛化到 Agilex Cobot Magic 本体，真机"
+   }
+  ]
  }
 ]

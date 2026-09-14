@@ -42,6 +42,17 @@ with httpx.Client(timeout=25, follow_redirects=True, headers={"User-Agent": "sin
             t = fetch(c, m["paper_url"].replace("/pdf/", "/abs/"))
             if t:
                 t = html.unescape(re.sub(r"<[^>]+>", " ", t)); texts.append((m["paper_url"], t))
+            # 第二轮：arXiv 全文 HTML（正文里的实验部分才写用了哪台机器人）
+            aid = re.search(r"arxiv\.org/(?:abs|pdf)/([\d.]+)", m["paper_url"])
+            if aid:
+                t2 = fetch(c, "https://arxiv.org/html/" + aid.group(1))
+                if t2:
+                    t2 = html.unescape(re.sub(r"<[^>]+>", " ", t2)); texts.append(("https://arxiv.org/html/" + aid.group(1), t2[:400000]))
+        # 第二轮：Hugging Face 模型卡
+        hf = re.match(r"https?://huggingface\.co/([^/\s]+/[^/\s#?]+)", m.get("weights_url") or "")
+        if hf:
+            t3 = fetch(c, "https://huggingface.co/%s/raw/main/README.md" % hf.group(1))
+            if t3: texts.append((m["weights_url"], t3))
         cands = []
         for emb, pats in KW.items():
             for src, t in texts:
@@ -50,7 +61,7 @@ with httpx.Client(timeout=25, follow_redirects=True, headers={"User-Agent": "sin
                         s0 = max(0, mm.start() - 160); s1 = min(len(t), mm.end() + 160)
                         snip = re.sub(r"\s+", " ", t[s0:s1]).strip()
                         cands.append({"embodiment": emb, "src": src, "pattern": p, "snippet": snip, "sim_context": bool(SIM.search(snip))})
-                        if sum(1 for x in cands if x["embodiment"] == emb and x["src"] == src) >= 3: break
+                        if sum(1 for x in cands if x["embodiment"] == emb and x["src"] == src) >= 4: break
         out[m["id"]] = {"name": m["name"], "sources": [u for u, _ in texts], "candidates": cands}
         print("%-20s 源 %d · 候选 %d · 本体 %s" % (m["id"], len(texts), len(cands), sorted({x["embodiment"] for x in cands})))
         time.sleep(0.5)
