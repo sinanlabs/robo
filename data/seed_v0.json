@@ -2219,8 +2219,8 @@
    "vram_gb": 80,
    "type": "datacenter_gpu",
    "rental_cny_per_hour_ref": null,
-   "rental_ref_source": "待核实(由 Sinan Compute 价格库提供)",
-   "rental_ref_url": null,
+   "rental_ref_source": "由 Sinan Compute 算力租赁账本每日提供",
+   "rental_ref_url": "https://compute.sinanlab.com/gpu",
    "note": ""
   },
   {
@@ -2232,6 +2232,17 @@
    "rental_ref_source": "不适用(机载)",
    "rental_ref_url": null,
    "note": "机器人本地快脑常用;用于本地延迟测量列"
+  },
+  {
+   "id": "h100-80g",
+   "name": "NVIDIA H100 80GB",
+   "vram_gb": 80,
+   "type": "datacenter_gpu",
+   "rental_cny_per_hour_ref": null,
+   "rental_ref_source": "由 Sinan Compute 算力租赁账本每日提供",
+   "rental_ref_url": "https://compute.sinanlab.com/gpu",
+   "note": "数据中心主力卡；人形公司训练与云端推理常用",
+   "evidence": []
   }
  ]
 }
