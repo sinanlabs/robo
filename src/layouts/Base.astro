@@ -64,9 +64,20 @@ const nav2 = [
 <div class="main">
   <div class="top">
     <div class="crumb"><a href="https://sinanlab.com">{t(lang, 'nav.lab')}</a>{crumbs && crumbs.map((c) => (<span> › {c.href ? <a href={c.href}>{c.label}</a> : c.label}</span>))}</div>
-    <div class="right"><a class="lang" href={switchPath(lang, Astro.url.pathname)}>{t(lang, 'lang.switch')}</a></div>
+    <div class="right"><div id="auth" data-lang={lang}></div><a class="lang" href={switchPath(lang, Astro.url.pathname)}>{t(lang, 'lang.switch')}</a></div>
   </div>
   <slot />
+<script is:inline>
+(function(){var box=document.getElementById("auth");if(!box)return;var en=box.dataset.lang==="en";var C="https://compute.sinanlab.com";
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function here(){return encodeURIComponent(location.origin+location.pathname+location.search);}
+function login(mode){return C+"/login?return_to="+here()+(mode?"&mode="+mode:"");}
+function render(m){if(m&&m.user){box.innerHTML='<div class="menu"><a href="'+C+'/me" style="display:flex;align-items:center;gap:8px">'+(m.user.avatar_url?'<img src="'+esc(m.user.avatar_url)+'" alt="">':'')+'<span style="font-size:13px">'+esc(m.user.handle||(en?"Me":"我"))+'</span></a><div class="dd"><a href="'+C+'/me">'+(en?"My watchlist":"我的关注")+'</a><a href="'+C+'/api/auth/logout?return_to='+here()+'">'+(en?"Sign out":"退出登录")+'</a></div></div>';}
+ else if(m&&m.login){box.innerHTML='<a class="lang" href="'+login("")+'">'+(en?"Sign in":"登录")+'</a><a class="lang" href="'+login("signup")+'">'+(en?"Sign up":"注册")+'</a>';}
+ else{box.innerHTML="";}}
+fetch(C+"/api/me",{credentials:"include"}).then(function(r){return r.json();}).then(render).catch(function(){render({user:null,login:true});});
+})();
+</script>
   <div class="brandband"><img src="/brand/sinanlab-lockup.png" srcset="/brand/sinanlab-lockup@2x.png 2x" width="480" height="123" alt="SinanLab · 司南实验室" loading="lazy"><span>{lang === 'en' ? 'Clear direction, grounded judgement.' : '方向清晰，判断有据。'}</span></div>
   <footer class="ft"><div class="in">
     <span>{t(lang, 'footer.copy')}</span>

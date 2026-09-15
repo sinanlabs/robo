@@ -33,6 +33,8 @@ export function href(lang: Lang, path: string): string {
 export function otherLang(lang: Lang): Lang { return lang === 'en' ? 'zh-cn' : 'en'; }
 /** 把当前路径切换到另一语言 */
 export function switchPath(lang: Lang, pathname: string): string {
-  const stripped = pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+  // 静态构建时 Astro.url.pathname 形如 /en.html、/en/models.html、/en/index.html：先去掉 .html 与 index，再摘掉 /en 前缀
+  const clean = pathname.replace(/\.html$/, '').replace(/\/index$/, '') || '/';
+  const stripped = clean.replace(/^\/en(?=\/|$)/, '') || '/';
   return href(otherLang(lang), stripped);
 }
