@@ -17,7 +17,8 @@
     "about": "关于",
     "compute": "Sinan Compute",
     "lab": "← 司南实验室",
-    "rank": "司南榜"
+    "rank": "司南榜",
+    "select": "选模型"
   },
   "hero": {
     "eyebrow": "开源 VLA · 适配矩阵 · 延迟与成本 · 每字可溯源",
@@ -196,5 +197,40 @@
   },
   "lang": {
     "switch": "EN"
+  },
+  "select": {
+    "title": "按你的条件筛开源具身模型",
+    "lead": "选本体、输入模态、许可证要求和显卡，我们按已核实的字段把候选摆出来：适配状态、参数量、显存估算、证据完整度。只给测量与来源，不给推荐；空着的格子就是我们还没核实。",
+    "emb": "目标本体",
+    "anyEmb": "不限本体",
+    "mods": "必须支持的输入",
+    "comm": "许可证",
+    "commAny": "不限",
+    "commYes": "允许商用（已核实）",
+    "gpu": "推理显卡",
+    "gpuAny": "不限",
+    "sort": "排序",
+    "sortRelease": "发布日期",
+    "sortParams": "参数量",
+    "sortEvidence": "证据完整度",
+    "n": "符合条件的模型",
+    "colModel": "模型",
+    "colCompat": "与所选本体的适配",
+    "colParams": "参数量",
+    "colVram": "fp16 显存估算",
+    "colLic": "许可证",
+    "colEv": "证据",
+    "fits": "放得下",
+    "nofit": "放不下",
+    "noMeasure": "延迟：暂无测量数据；我们不填估算值。",
+    "vramNote": "显存估算 = 参数量 × 2 字节 × 1.2（激活与缓存余量），只用于排除，不代表实测。",
+    "st": {
+      "official": "官方支持",
+      "community_verified": "社区验证",
+      "theoretical": "理论可行",
+      "unsupported": "不支持",
+      "unknown": "未知"
+    },
+    "empty": "没有符合全部条件的模型。放宽一个条件试试；空白不是模型不行，是我们没有证据。"
   }
 }

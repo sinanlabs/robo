@@ -17,7 +17,8 @@
     "about": "About",
     "compute": "Sinan Compute",
     "lab": "← Sinan Lab",
-    "rank": "Rankings"
+    "rank": "Rankings",
+    "select": "Select a model"
   },
   "hero": {
     "eyebrow": "Open VLA · compatibility matrix · latency & cost · every field sourced",
@@ -196,5 +197,40 @@
   },
   "lang": {
     "switch": "中文"
+  },
+  "select": {
+    "title": "Filter open embodied models by your constraints",
+    "lead": "Pick an embodiment, required inputs, licence terms and a GPU. We lay out the candidates by verified fields: compatibility status, parameters, VRAM estimate, evidence completeness. Measurements and sources only, no recommendations; an empty cell means we have not verified it.",
+    "emb": "Target embodiment",
+    "anyEmb": "Any",
+    "mods": "Required inputs",
+    "comm": "Licence",
+    "commAny": "Any",
+    "commYes": "Commercial use OK (verified)",
+    "gpu": "Inference GPU",
+    "gpuAny": "Any",
+    "sort": "Sort",
+    "sortRelease": "Release date",
+    "sortParams": "Parameters",
+    "sortEvidence": "Evidence completeness",
+    "n": "models match",
+    "colModel": "Model",
+    "colCompat": "Compatibility with chosen embodiment",
+    "colParams": "Params",
+    "colVram": "fp16 VRAM est.",
+    "colLic": "Licence",
+    "colEv": "Evidence",
+    "fits": "fits",
+    "nofit": "does not fit",
+    "noMeasure": "Latency: no measurements yet; we do not fill in estimates.",
+    "vramNote": "VRAM estimate = params × 2 bytes × 1.2 (activation/cache headroom); for exclusion only, not a measurement.",
+    "st": {
+      "official": "Official",
+      "community_verified": "Community verified",
+      "theoretical": "Theoretical",
+      "unsupported": "Unsupported",
+      "unknown": "Unknown"
+    },
+    "empty": "No model matches every constraint. Relax one; a blank is missing evidence, not a verdict."
   }
 }

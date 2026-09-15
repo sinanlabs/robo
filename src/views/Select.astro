@@ -1,0 +1,78 @@
+---
+// 模型选择器：按用户给的条件（本体 / 输入模态 / 许可证 / 显卡）筛选并排序，只显示已核实字段与证据数；不打分、不推荐。
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { t, href, type Lang } from '../lib/i18n';
+import { MODEL_REQUIRED, pendingOf, fmtParams } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const models = (await getCollection('models')).map((m) => m.data);
+const embs = (await getCollection('embodiments')).map((e) => e.data);
+const hw = (await getCollection('hardware')).map((h) => h.data).filter((h) => h.vram_gb);
+const compat = (await getCollection('compat')).map((c) => c.data);
+const meas = (await getCollection('measurements')).map((m) => m.data);
+const mods = Array.from(new Set(models.flatMap((m) => m.modalities_in))).sort();
+const rows = models.map((m) => {
+  const p = pendingOf(m as any, MODEL_REQUIRED);
+  const cm: Record<string, { s: string; n: number }> = {};
+  for (const c of compat) if (c.model_id === m.id) cm[c.embodiment_id] = { s: c.status, n: c.evidence.length };
+  return { id: m.id, name: m.name, org: m.org, rd: m.release_date, pb: m.params_b, comm: m.commercial_ok, lic: m.license, mods: m.modalities_in, ev: p.ok, evt: p.total, cm, vram: m.params_b ? Math.round(m.params_b * 2 * 1.2 * 10) / 10 : null, nmeas: meas.filter((x) => x.model_id === m.id && x.review_status === 'verified').length };
+});
+const S = (k: string) => t(lang, 'select.' + k);
+---
+<Base lang={lang} title={S('title') + ' · Sinan Robo'} desc={S('lead')} active="select" path="/select" crumbs={[{ label: t(lang, 'nav.select') }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{S('title')}</h1><p class="lead">{S('lead')}</p></div>
+  <section class="card rise" style="--i:1"><div class="pad">
+    <div class="filters" id="sf">
+      <label>{S('emb')}</label><select data-f="emb"><option value="">{S('anyEmb')}</option>{embs.map((e) => <option value={e.id}>{e.name} · {e.vendor}</option>)}</select>
+      <label>{S('comm')}</label><select data-f="comm"><option value="">{S('commAny')}</option><option value="yes">{S('commYes')}</option></select>
+      <label>{S('gpu')}</label><select data-f="gpu"><option value="">{S('gpuAny')}</option>{hw.map((h) => <option value={h.vram_gb}>{h.name} · {h.vram_gb} GB</option>)}</select>
+      <label>{S('sort')}</label><select data-f="sort"><option value="release">{S('sortRelease')}</option><option value="params">{S('sortParams')}</option><option value="evidence">{S('sortEvidence')}</option></select>
+    </div>
+    <div class="mods" id="mods"><span class="sub">{S('mods')}：</span>{mods.map((m) => <label class="chip"><input type="checkbox" value={m}> {m}</label>)}</div>
+    <p class="sub" style="margin-top:8px"><b id="cnt">{rows.length}</b> {S('n')} · {S('vramNote')} {S('noMeasure')}</p>
+  </div>
+  <div class="tablewrap"><table id="tbl"><thead><tr><th>{S('colModel')}</th><th>{S('colCompat')}</th><th class="num">{S('colParams')}</th><th class="num">{S('colVram')}</th><th>{S('colLic')}</th><th class="num">{S('colEv')}</th></tr></thead><tbody>
+    {rows.map((r) => (
+      <tr data-id={r.id} data-release={r.rd ?? ''} data-params={r.pb ?? 0} data-comm={r.comm === true ? 'yes' : r.comm === false ? 'no' : 'unk'} data-vram={r.vram ?? ''} data-mods={r.mods.join(' ')} data-ev={r.evt ? r.ev / r.evt : 0} data-cm={JSON.stringify(r.cm)}>
+        <td><a href={href(lang, '/models/' + r.id)}><b>{r.name}</b></a><div class="sub">{r.org}{r.rd ? ' · ' + r.rd : ''}</div></td>
+        <td class="cm"><span class="sub">—</span></td>
+        <td class="num mono">{r.pb ? fmtParams(r.pb) : <span class="pending">?</span>}</td>
+        <td class="num mono">{r.vram ? <span>{r.vram} GB <span class="fit sub"></span></span> : <span class="pending">?</span>}</td>
+        <td class="sub" style="max-width:220px">{r.comm === true ? '✓ ' : r.comm === false ? '✗ ' : '? '}{(r.lic ?? '').slice(0, 60)}</td>
+        <td class="num mono">{r.ev}/{r.evt}</td>
+      </tr>
+    ))}
+  </tbody></table></div>
+  <p class="sub pad" id="empty" style="display:none">{S('empty')}</p>
+  </section>
+  <style>.mods{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}.chip{font-size:12.5px;border:1px solid var(--hair-2);border-radius:999px;padding:4px 10px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.chip input{margin:0}.pending{color:#B54708}.cm .st{font-size:12px;border-radius:999px;padding:2px 8px;background:var(--ground-2)}.cm .official{background:#DCFAE6;color:#067647}.cm .community_verified{background:#E0EAFF;color:#3538CD}.cm .theoretical{background:#FEF0C7;color:#B54708}.cm .unsupported{background:#FEE4E2;color:#B42318}</style>
+  <script id="stl" type="application/json" set:html={JSON.stringify({ st: { official: S('st.official'), community_verified: S('st.community_verified'), theoretical: S('st.theoretical'), unsupported: S('st.unsupported'), unknown: S('st.unknown') }, fits: S('fits'), nofit: S('nofit') })}></script>
+  <script>
+    const L = JSON.parse(document.getElementById('stl')!.textContent!);
+    const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>('#tbl tbody tr'));
+    const sel = Array.from(document.querySelectorAll<HTMLSelectElement>('#sf select'));
+    const boxes = Array.from(document.querySelectorAll<HTMLInputElement>('#mods input'));
+    const cnt = document.getElementById('cnt')!, empty = document.getElementById('empty')!, tb = document.querySelector('#tbl tbody')!;
+    function apply() {
+      const f: Record<string, string> = {}; sel.forEach((s) => (f[s.dataset.f!] = s.value));
+      const need = boxes.filter((b) => b.checked).map((b) => b.value);
+      const vram = f.gpu ? +f.gpu : 0; let n = 0;
+      rows.forEach((r) => {
+        const cm = JSON.parse(r.dataset.cm || '{}'); const c = f.emb ? cm[f.emb] : null;
+        const cell = r.querySelector('.cm')!;
+        cell.innerHTML = f.emb ? (c ? `<span class="st ${c.s}">${L.st[c.s] || c.s}</span>${c.n ? ` <span class="sub">· ${c.n}</span>` : ''}` : `<span class="st unknown">${L.st.unknown}</span>`) : '<span class="sub">—</span>';
+        const mods = (r.dataset.mods || '').split(' ');
+        const rv = r.dataset.vram ? +r.dataset.vram : null; const fit = r.querySelector('.fit');
+        if (fit) fit.textContent = vram && rv ? (rv <= vram ? '· ' + L.fits : '· ' + L.nofit) : '';
+        const ok = (!f.emb || (c && c.s !== 'unsupported')) && (!f.comm || r.dataset.comm === 'yes') && need.every((m) => mods.includes(m)) && (!vram || !rv || rv <= vram);
+        (r as HTMLElement).style.display = ok ? '' : 'none'; if (ok) n++;
+      });
+      const key = f.sort || 'release';
+      rows.slice().sort((a, b) => key === 'params' ? +b.dataset.params! - +a.dataset.params! : key === 'evidence' ? +b.dataset.ev! - +a.dataset.ev! : (b.dataset.release || '').localeCompare(a.dataset.release || '')).forEach((r) => tb.appendChild(r));
+      cnt.textContent = String(n); empty.style.display = n ? 'none' : '';
+    }
+    sel.forEach((s) => s.addEventListener('change', apply)); boxes.forEach((b) => b.addEventListener('change', apply)); apply();
+  </script>
+</Base>
