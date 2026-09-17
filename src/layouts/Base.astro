@@ -69,6 +69,7 @@ const nav2 = [
   </div>
   <slot />
 <script is:inline>
+(function(){try{var C="https://compute.sinanlab.com",l=document.documentElement.lang==="en"?"en":"zh";fetch(C+"/api/hit?s=robo&t=pv&l="+l+"&p="+encodeURIComponent(location.pathname),{method:"POST"});if(!sessionStorage.getItem("sess")){sessionStorage.setItem("sess","1");fetch(C+"/api/hit?s=robo&t=sess&l="+l,{method:"POST"});}if(document.referrer){var h=new URL(document.referrer).hostname;if(!/(^|\.)sinanlab\.com$/.test(h)&&!sessionStorage.getItem("ref")){fetch(C+"/api/hit?s=robo&r="+encodeURIComponent(h)+"&p="+encodeURIComponent("robo:"+location.pathname),{method:"POST"});sessionStorage.setItem("ref","1");}}}catch(e){}})();
 (function(){var box=document.getElementById("auth");if(!box)return;var en=box.dataset.lang==="en";var C="https://compute.sinanlab.com";
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function here(){return encodeURIComponent(location.origin+location.pathname+location.search);}
