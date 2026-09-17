@@ -7,8 +7,14 @@ class Adapter(Base):
     def load(self, precision):
         import torch; from transformers import AutoModelForImageTextToText, AutoProcessor
         self.dtype = self._dtype(precision)
+        from transformers import AutoConfig, PretrainedConfig
         self.processor = AutoProcessor.from_pretrained(self.hf_repo, trust_remote_code=True)
-        self.model = AutoModelForImageTextToText.from_pretrained(self.hf_repo, torch_dtype=self.dtype, trust_remote_code=True, attn_implementation="sdpa").to(self.device).eval()
+        # MolmoAct 的嵌套子配置（vision / adapter / llm）不会自动继承顶层的注意力实现，逐个设上
+        cfg = AutoConfig.from_pretrained(self.hf_repo, trust_remote_code=True)
+        for sub in vars(cfg).values():
+            if isinstance(sub, PretrainedConfig): sub._attn_implementation = "sdpa"
+        cfg._attn_implementation = "sdpa"
+        self.model = AutoModelForImageTextToText.from_pretrained(self.hf_repo, config=cfg, torch_dtype=self.dtype, trust_remote_code=True, attn_implementation="sdpa").to(self.device).eval()
         self.revision = self._hf_revision(); return {"revision": self.revision, "repo": self.hf_repo}
     def make_inputs(self, image_res, seed):
         img = self.make_image(image_res, seed)
