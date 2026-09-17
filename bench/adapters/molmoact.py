@@ -8,7 +8,7 @@ class Adapter(Base):
         import torch; from transformers import AutoModelForImageTextToText, AutoProcessor
         self.dtype = self._dtype(precision)
         self.processor = AutoProcessor.from_pretrained(self.hf_repo, trust_remote_code=True)
-        self.model = AutoModelForImageTextToText.from_pretrained(self.hf_repo, torch_dtype=self.dtype, trust_remote_code=True).to(self.device).eval()
+        self.model = AutoModelForImageTextToText.from_pretrained(self.hf_repo, torch_dtype=self.dtype, trust_remote_code=True, attn_implementation="sdpa").to(self.device).eval()
         self.revision = self._hf_revision(); return {"revision": self.revision, "repo": self.hf_repo}
     def make_inputs(self, image_res, seed):
         img = self.make_image(image_res, seed)

@@ -7,8 +7,8 @@ declare -A REPO=( [openvla]="openvla--openvla-7b" [minivla]="Stanford-ILIAD--min
 MODELS=${@:-smolvla openvla spatialvla molmoact nora pi0 pi0.5 minivla vla-adapter}
 for M in $MODELS; do
   PY=/root/envs/${ENV[$M]}/bin/python; echo "=== $M on $HW ($PY) $(date +%H:%M)"
-  $PY bench.py --model $M --hardware $HW --precision bf16 > logs_$M.log 2>&1 && tail -1 logs_$M.log || { echo "$M $(date +%F) FAILED" | tee -a results/failed.txt; grep -v -E "Fetching|Loading|Warning|warn" logs_$M.log | tail -3; }
-  rm -rf $HF_HOME/hub/models--${REPO[$M]} 2>/dev/null
+  if $PY bench.py --model $M --hardware $HW --precision bf16 > logs_$M.log 2>&1; then tail -1 logs_$M.log; rm -rf $HF_HOME/hub/models--${REPO[$M]} 2>/dev/null   # 成功才删权重，失败留着好重试
+  else echo "$M $(date +%F) FAILED" | tee -a results/failed.txt; grep -v -E "Fetching|Loading|Warning|warn" logs_$M.log | tail -3; fi
   df -h $HF_HOME | tail -1 | awk '{print "disk used", $3, "of", $2}'
 done
 echo "matrix done"

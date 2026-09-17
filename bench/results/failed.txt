@@ -1,0 +1,9 @@
+spatialvla 2026-09-18 FAILED
+molmoact 2026-09-18 FAILED
+pi0 2026-09-18 FAILED
+pi0.5 2026-09-18 FAILED
+minivla 2026-09-18 FAILED
+vla-adapter 2026-09-18 FAILED
+spatialvla 2026-09-18 FAILED
+molmoact 2026-09-18 FAILED
+molmoact 2026-09-18 FAILED
