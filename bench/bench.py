@@ -42,13 +42,19 @@ def main():
     total = time.time() - t_all
     vram = adapter.vram_peak_gb()
     chunk = adapter.action_chunk()
+    # 记录参数实际精度：有的运行时不接受强转，标签以实际为准
+    try:
+        import torch; pdt = str(next(adapter.model.parameters()).dtype).replace("torch.", "")
+        actual = {"bfloat16": "bf16", "float16": "fp16", "float32": "fp32"}.get(pdt, pdt)
+        if actual != a.precision: print("注意：请求 %s，模型实际参数精度 %s，按实际记录" % (a.precision, actual)); a.precision = actual
+    except Exception: pdt = None
     rec = {"id": "%s__%s__%s__%s" % (a.model, a.hardware, a.precision, dt.date.today().isoformat()), "model_id": a.model, "hardware_id": a.hardware, "precision": a.precision,
            "config": {"batch": 1, "image_res": "%dx%d" % (a.image_res, a.image_res), "action_chunk": chunk, "warmup_steps": a.warmup, "steps": a.steps},
            "metrics": {"latency_ms_p50": round(percentile(lat, 0.5), 2), "latency_ms_p95": round(percentile(lat, 0.95), 2), "throughput_chunks_s": round(a.steps / total, 3), "vram_peak_gb": vram, "load_s": round(load_s, 1)},
            "source_type": "maintainer", "review_status": "verified",
            "evidence": [{"field": "metrics", "url": "https://github.com/sinanlabs/robo/tree/main/bench", "source_type": "official", "fetched": dt.date.today().isoformat(), "note": "Sinan Robo bench v1 · %s · %s · weights %s" % (json.dumps(gpu_info(), ensure_ascii=False), platform.platform(), model_info.get("revision", "?"))}],
            "created_at": dt.datetime.now().astimezone().isoformat(timespec="seconds"),
-           "env": gpu_info(), "model_info": model_info, "raw_latency_ms": [round(x, 3) for x in lat]}
+           "env": gpu_info(), "model_info": dict(model_info, param_dtype=pdt), "raw_latency_ms": [round(x, 3) for x in lat]}
     os.makedirs(a.out, exist_ok=True); p = os.path.join(a.out, rec["id"] + ".json")
     json.dump(rec, open(p, "w"), ensure_ascii=False, indent=1)
     print("%s · %s · %s · p50 %.1f ms · p95 %.1f ms · %.2f chunks/s · VRAM %s GB · 加载 %.0fs → %s" % (a.model, a.hardware, a.precision, rec["metrics"]["latency_ms_p50"], rec["metrics"]["latency_ms_p95"], rec["metrics"]["throughput_chunks_s"], vram, load_s, p))
