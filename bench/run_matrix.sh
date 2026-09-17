@@ -1,7 +1,7 @@
 #!/bin/bash
 # 用法：bash run_matrix.sh rtx-4090 [model ...]  —— 按模型选对应 venv 跑分；失败记 results/failed.txt；跑完清该模型权重（数据盘 50 GB）
 HW=${1:?hardware id}; shift; cd "$(dirname "$0")"
-export HF_ENDPOINT=https://hf-mirror.com HF_HOME=/root/autodl-tmp/hf
+export HF_ENDPOINT=https://hf-mirror.com HF_HOME=/root/autodl-tmp/hf HF_HUB_DISABLE_XET=1
 declare -A ENV=( [openvla]=openvla [minivla]=openvla [vla-adapter]=openvla [spatialvla]=spatialvla [molmoact]=qwen [nora]=qwen [smolvla]=lerobot [pi0]=lerobot [pi0.5]=lerobot )
 MODELS=${@:-smolvla openvla spatialvla molmoact nora pi0 pi0.5 minivla vla-adapter}
 for M in $MODELS; do

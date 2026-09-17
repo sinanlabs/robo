@@ -5,7 +5,7 @@ set -u
 export PATH=/root/miniconda3/bin:$PATH
 pip config set global.index-url https://repo.huaweicloud.com/repository/pypi/simple >/dev/null; pip config set global.trusted-host repo.huaweicloud.com >/dev/null
 grep -q HF_ENDPOINT ~/.bashrc || { echo 'export HF_ENDPOINT=https://hf-mirror.com' >> ~/.bashrc; echo 'export HF_HOME=/root/autodl-tmp/hf' >> ~/.bashrc; }
-export HF_ENDPOINT=https://hf-mirror.com HF_HOME=/root/autodl-tmp/hf; mkdir -p $HF_HOME /root/envs
+export HF_ENDPOINT=https://hf-mirror.com HF_HOME=/root/autodl-tmp/hf HF_HUB_DISABLE_XET=1; mkdir -p $HF_HOME /root/envs
 pip install -q -U "huggingface_hub[cli]" pillow numpy 2>&1 | grep -v WARNING
 mk() { # name, packages...
   local n=$1; shift

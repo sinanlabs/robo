@@ -11,7 +11,7 @@
 
 ## 在 AutoDL 上跑
 1. 镜像选 PyTorch 2.5 / CUDA 12.4 / Python 3.12，数据盘 ≥100 GB。
-2. `bash setup_autodl.sh`（装依赖、设 hf-mirror）。
+2. `bash setup_autodl.sh`（装依赖、设 hf-mirror；必须 `HF_HUB_DISABLE_XET=1`，镜像不支持 Xet 传输，否则部分仓库下载会 401）。
 3. `bash run_matrix.sh rtx-4090`（第一批 9 个 HF 可直接加载的模型）。
 4. 需要专用运行时的模型（GR00T、RDT、CogACT、UniVLA、X-VLA、Octo）按各自 README 装好后补 `adapters/<name>.py` 的三个函数，跑不通就记"未能复现"，同样是有价值的结果。
 
