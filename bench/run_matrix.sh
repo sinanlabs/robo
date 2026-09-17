@@ -1,6 +1,12 @@
 #!/bin/bash
-# 用法：bash run_matrix.sh rtx-4090   —— 依次跑第一批模型，失败的记录到 results/failed.txt 继续下一个
-HW=${1:?hardware id}; cd "$(dirname "$0")"
-for M in smolvla openvla spatialvla molmoact nora pi0 pi0.5 minivla vla-adapter; do
-  echo "=== $M on $HW"; python3 bench.py --model $M --hardware $HW --precision bf16 || echo "$M $(date +%F)" >> results/failed.txt
+# 用法：bash run_matrix.sh rtx-4090 [model ...]  —— 按模型选对应 venv 跑分；失败记 results/failed.txt；跑完清该模型权重（数据盘 50 GB）
+HW=${1:?hardware id}; shift; cd "$(dirname "$0")"
+export HF_ENDPOINT=https://hf-mirror.com HF_HOME=/root/autodl-tmp/hf
+declare -A ENV=( [openvla]=openvla [minivla]=openvla [vla-adapter]=openvla [spatialvla]=spatialvla [molmoact]=qwen [nora]=qwen [smolvla]=lerobot [pi0]=lerobot [pi0.5]=lerobot )
+MODELS=${@:-smolvla openvla spatialvla molmoact nora pi0 pi0.5 minivla vla-adapter}
+for M in $MODELS; do
+  PY=/root/envs/${ENV[$M]}/bin/python; echo "=== $M on $HW ($PY) $(date +%H:%M)"
+  $PY bench.py --model $M --hardware $HW --precision bf16 || echo "$M $(date +%F)" >> results/failed.txt
+  rm -rf $HF_HOME/hub/models--* 2>/dev/null
 done
+echo "matrix done"
