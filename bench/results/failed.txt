@@ -7,3 +7,5 @@ vla-adapter 2026-09-18 FAILED
 spatialvla 2026-09-18 FAILED
 molmoact 2026-09-18 FAILED
 molmoact 2026-09-18 FAILED
+molmoact 2026-09-18 FAILED
+molmoact 2026-09-18 FAILED

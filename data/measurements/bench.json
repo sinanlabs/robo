@@ -1,5 +1,36 @@
 [
  {
+  "id": "molmoact__rtx-4090__bf16__2026-09-18",
+  "model_id": "molmoact",
+  "hardware_id": "rtx-4090",
+  "precision": "bf16",
+  "config": {
+   "batch": 1,
+   "image_res": "224x224",
+   "action_chunk": 1,
+   "warmup_steps": 50,
+   "steps": 500
+  },
+  "metrics": {
+   "latency_ms_p50": 934.45,
+   "latency_ms_p95": 940.06,
+   "throughput_chunks_s": 1.069,
+   "vram_peak_gb": 16.25
+  },
+  "source_type": "maintainer",
+  "review_status": "verified",
+  "evidence": [
+   {
+    "field": "metrics",
+    "url": "https://github.com/sinanlabs/robo/tree/main/bench",
+    "source_type": "official",
+    "fetched": "2026-09-18",
+    "note": "Sinan Robo bench v1 · {\"gpu\": \"NVIDIA GeForce RTX 4090\", \"vram_gb\": 23.5, \"driver\": \"595.71.05\", \"cuda\": \"12.4\", \"torch\": \"2.5.1+cu124\"} · Linux-5.15.0-78-generic-x86_64-with-glibc2.35 · weights None"
+   }
+  ],
+  "created_at": "2026-09-18T06:25:13+08:00"
+ },
+ {
   "id": "nora__rtx-4090__bf16__2026-09-18",
   "model_id": "nora",
   "hardware_id": "rtx-4090",
