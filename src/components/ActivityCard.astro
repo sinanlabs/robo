@@ -1,0 +1,48 @@
+---
+/** 活性信号卡：GitHub / Hugging Face / ModelScope 的公开数字，每日抓取。只记录，不评价；没抓到就说明原因。 */
+import type { Lang } from '../lib/i18n';
+interface Props { lang: Lang; a: any | undefined; codeUrl: string | null; weightsUrl: string | null }
+const { lang, a, codeUrl, weightsUrl } = Astro.props;
+const en = lang === 'en';
+const g = a?.github ?? { ok: false }, h = a?.hf ?? { ok: false }, ms = a?.modelscope ?? { ok: false };
+const n = (v: any) => (v == null ? '—' : Number(v).toLocaleString('en-US'));
+const days = (d: string | null | undefined) => (d ? Math.round((Date.now() - new Date(d).getTime()) / 864e5) : null);
+const ago = (d: string | null | undefined) => { const x = days(d); return x == null ? '—' : en ? (x === 0 ? 'today' : `${x} d ago`) : (x === 0 ? '今天' : `${x} 天前`); };
+const sgn = (v: number | null | undefined) => (v == null ? '' : v > 0 ? `+${n(v)}` : v < 0 ? n(v) : '±0');
+const series: { d: string; stars: number | null }[] = (a?.series ?? []).filter((p: any) => p.stars != null);
+let spark = '';
+if (series.length >= 3) {
+  const vals = series.map((p) => p.stars as number); const lo = Math.min(...vals), hi = Math.max(...vals);
+  const W = 160, H = 36; const pts = vals.map((v, i) => `${((i / (vals.length - 1)) * W).toFixed(1)},${(H - 3 - (hi === lo ? 0.5 : (v - lo) / (hi - lo)) * (H - 6)).toFixed(1)}`);
+  spark = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true"><polyline fill="none" stroke="var(--robo-deep)" stroke-width="1.6" points="${pts.join(' ')}"/></svg>`;
+}
+const stale = g.ok && g.days_since_push != null && g.days_since_push > 180;
+---
+<section class="card pad">
+  <h2 class="sec">{en ? 'Activity signals' : '活性信号'}</h2>
+  <p class="sub" style="margin-top:4px">{en ? 'Public counters fetched daily from GitHub, Hugging Face and ModelScope. Numbers only; no judgement.' : '每天从 GitHub、Hugging Face、ModelScope 公开接口抓取的数字。只记录，不评价。'}{a?.fetched ? ` · ${en ? 'fetched' : '抓取于'} ${a.fetched}` : ''}</p>
+  {!a ? <div class="callout" style="margin-top:10px">{en ? 'No activity data yet for this model; the daily fetch will fill it.' : '这个模型还没有活性数据，每日抓取会补上。'}</div> : (
+  <div>
+    <div class="act">
+      <div class="tile"><div class="k">GitHub stars</div><div class="v mono">{g.ok ? n(g.stars) : '—'}</div><div class="s">{g.ok ? (a.delta?.stars != null ? `${sgn(a.delta.stars)} / ${a.delta.days} ${en ? 'd' : '天'}` : (en ? 'trend starts today' : '走势从今天起积累')) : (en ? 'no GitHub repo recorded' : '未记录 GitHub 仓库')}</div></div>
+      <div class="tile"><div class="k">{en ? 'Commits · 90 d' : '近 90 天提交'}</div><div class="v mono">{g.ok && g.commits_90d != null ? (g.commits_90d_capped ? '100+' : n(g.commits_90d)) : '—'}</div><div class="s">{g.ok ? `${en ? 'last push' : '最近推送'} ${ago(g.pushed_at)}` : ''}</div></div>
+      <div class="tile"><div class="k">{en ? 'HF downloads · 30 d' : 'HF 近 30 天下载'}</div><div class="v mono">{h.ok ? n(h.downloads_30d) : '—'}</div><div class="s">{h.ok ? `${en ? 'all-time' : '累计'} ${n(h.downloads_all)} · ${n(h.likes)} likes` : (en ? 'weights not on Hugging Face' : '权重不在 Hugging Face')}</div></div>
+      <div class="tile"><div class="k">{en ? 'Weights last modified' : '权重最后更新'}</div><div class="v mono" style="font-size:16px">{h.ok && h.last_modified ? h.last_modified : '—'}</div><div class="s">{h.ok ? `${ago(h.last_modified)}${h.gated ? (en ? ' · gated (request access)' : ' · 需申请访问') : ''}` : ''}</div></div>
+    </div>
+    <div class="lines">
+      {g.ok && <div><span class="lab">GitHub</span><a href={codeUrl ?? '#'} rel="noopener">{g.repo}</a> · {n(g.forks)} forks · {n(g.open_issues)} {en ? 'open issues' : '未关闭 issue'}{g.latest_release ? ` · ${en ? 'latest release' : '最新 release'} ${g.latest_release.tag} (${g.latest_release.at})` : ` · ${en ? 'no GitHub release' : '无 GitHub release'}`}{g.archived ? <span class="pill pending" style="margin-left:6px">{en ? 'archived' : '仓库已归档'}</span> : null}{stale && !g.archived ? <span class="pill pending" style="margin-left:6px">{en ? `no push for ${g.days_since_push} d` : `${g.days_since_push} 天无推送`}</span> : null}</div>}
+      {ms.ok ? <div><span class="lab">ModelScope</span><a href={'https://modelscope.cn/models/' + ms.path} rel="noopener">{ms.path}</a> · {n(ms.downloads)} {en ? 'downloads' : '次下载'}{ms.updated ? ` · ${en ? 'updated' : '更新'} ${ms.updated}` : ''} · <span class="dim">{ms.official_org ? (en ? 'same org as Hugging Face' : '与 HF 同组织') : (en ? 'same-name mirror, not the vendor org' : '同名镜像，非厂商组织')}</span></div>
+        : <div><span class="lab">ModelScope</span><span class="dim">{en ? 'no same-name mirror found (searched by repo name)' : '未找到同名镜像（按仓库名搜索）'}</span></div>}
+      {h.ok && <div><span class="lab">Hugging Face</span><a href={weightsUrl ?? '#'} rel="noopener">{h.repo}</a></div>}
+    </div>
+    {spark ? <div class="spark"><span class="dim">{en ? 'stars · last 30 d' : 'stars · 近 30 天'}</span><Fragment set:html={spark} /></div> : null}
+  </div>)}
+</section>
+<style>
+  .act{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+  @media (max-width:760px){.act{grid-template-columns:repeat(2,1fr)}}
+  .tile{border:1px solid var(--hair-2);border-radius:12px;padding:10px 12px;background:var(--bg-2, transparent)}
+  .tile .k{font-size:11.5px;color:var(--ink-3);letter-spacing:.02em}.tile .v{font-size:20px;font-weight:700;margin-top:4px;color:var(--ink)}.tile .s{font-size:11.5px;color:var(--ink-3);margin-top:3px;line-height:1.4}
+  .lines{margin-top:12px;font-size:13px;line-height:1.9}.lines .lab{display:inline-block;min-width:92px;color:var(--ink-3);font-size:12px}
+  .spark{margin-top:10px;display:flex;align-items:center;gap:10px;font-size:12px}
+</style>

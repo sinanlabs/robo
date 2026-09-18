@@ -63,4 +63,21 @@ const measurements = defineCollection({
   }),
 });
 
-export const collections = { models, embodiments, hardware, compat, measurements };
+
+const activity = defineCollection({
+  loader: file('src/content/generated/activity.json'),
+  schema: z.object({
+    id: z.string(), fetched: z.string(),
+    github: z.object({ ok: z.boolean() }).passthrough(),
+    hf: z.object({ ok: z.boolean() }).passthrough(),
+    modelscope: z.object({ ok: z.boolean() }).passthrough(),
+    series: z.array(z.object({ d: z.string(), stars: z.number().nullable(), hf30: z.number().nullable(), c90: z.number().nullable() })),
+    delta: z.object({ days: z.number(), stars: z.number().nullable(), hf30: z.number().nullable() }).nullable(),
+  }),
+});
+
+
+const recipes = defineCollection({ loader: file('src/content/generated/recipes.json'), schema: z.object({ id: z.string(), model_id: z.string(), env: z.string() }).passthrough() });
+const recipes_meta = defineCollection({ loader: file('src/content/generated/recipes_meta.json'), schema: z.object({ id: z.string() }).passthrough() });
+
+export const collections = { models, embodiments, hardware, compat, measurements, activity, recipes, recipes_meta };

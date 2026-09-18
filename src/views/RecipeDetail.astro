@@ -1,0 +1,60 @@
+---
+// 单个模型的部署配方：环境 → 权重 → 运行 → 加载方式 → 坑位 → 实测。命令照抄 bench/，实测来自 measurements。
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { href, type Lang } from '../lib/i18n';
+import { fmtMs } from '../lib/cost';
+interface Props { lang: Lang; id: string }
+const { lang, id } = Astro.props;
+const en = lang === 'en';
+const r = (await getCollection('recipes')).map((x) => x.data as any).find((x) => x.id === id)!;
+const meta = ((await getCollection('recipes_meta')).map((x) => x.data as any)[0]) || { common: [], envs: [] };
+const m = (await getCollection('models')).map((x) => x.data).find((x) => x.id === r.model_id);
+const hw = (await getCollection('hardware')).map((h) => h.data);
+const meas = (await getCollection('measurements')).map((x) => x.data).filter((x) => x.model_id === r.model_id && x.review_status !== 'rejected');
+const env = (meta.envs || []).find((e: any) => e.id === r.env);
+const L = en ? 'en' : 'zh';
+const rows = hw.filter((h) => meas.some((x) => x.hardware_id === h.id)).map((h) => { const xs = meas.filter((x) => x.hardware_id === h.id); const p50 = xs.map((x) => x.metrics.latency_ms_p50).sort((a, b) => a - b); return { h, n: xs.length, p50: p50[Math.floor(p50.length / 2)], p95: Math.max(...xs.map((x) => x.metrics.latency_ms_p95 ?? 0)) || null, vram: Math.max(...xs.map((x) => x.metrics.vram_peak_gb ?? 0)) || null, prec: Array.from(new Set(xs.map((x) => x.precision))).join('/'), date: xs.map((x) => x.created_at.slice(0, 10)).sort().slice(-1)[0] }; });
+const gb = (r.weights || []).reduce((a: number, w: any) => a + (w.size_gb || 0), 0);
+const T = en ? { h1: 'Recipe', lead: 'Commands and version pins exactly as executed for our measurements. Replace <hardware> with the card id (rtx-4090 / rtx-5090 / a800-80g).',
+  env: '1 · Environment', weights: '2 · Weights', run: '3 · Run', load: 'How it is loaded', pit: 'Pitfalls we hit', sym: 'Symptom', fix: 'Fix', meas: 'Measured on this recipe', hwc: 'Hardware', p50: 'p50 ms', p95: 'p95 ms', vram: 'peak VRAM', prec: 'precision', n: 'runs', date: 'latest',
+  nomeas: 'No measurement yet.', src: 'Source: the bench/ directory of the public repository; every number links back to a JSON result file.', common: 'Common steps (mirrors, disk, nohup) are on the recipes index.', dl: 'download', model: 'Model page →' }
+  : { h1: '部署配方', lead: '与我们实测时执行的命令、版本号一字不差。把 <hardware> 换成显卡 id（rtx-4090 / rtx-5090 / a800-80g）。',
+  env: '1 · 环境', weights: '2 · 权重', run: '3 · 运行', load: '加载方式', pit: '我们踩过的坑', sym: '症状', fix: '修法', meas: '按本配方的实测', hwc: '硬件', p50: 'p50 ms', p95: 'p95 ms', vram: '显存峰值', prec: '精度', n: '次', date: '最近',
+  nomeas: '暂无实测。', src: '来源：公开仓库的 bench/ 目录；每个数字都能回溯到一份 JSON 结果文件。', common: '通用步骤（镜像、磁盘、nohup）见配方总览。', dl: '下载', model: '模型页 →' };
+---
+<Base lang={lang} title={`${m?.name ?? id} · ${T.h1} · Sinan Robo`} desc={`${m?.name ?? id}: ${r['load_' + L] ?? ''}`} active="recipes" path={'/recipes/' + id} crumbs={[{ label: T.h1, href: href(lang, '/recipes') }, { label: m?.name ?? id }]}>
+  <div class="rise" style="--i:0;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:14px">
+    <div><div class="eyebrow" style="color:var(--robo-deep);opacity:1">{T.h1} · {m?.org}</div><h1 style="font-size:28px;margin-top:6px">{m?.name ?? id}</h1></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-left:auto"><span class="pill none mono">venv {r.env}</span><span class="pill none mono">{gb.toFixed(1)} GB</span>{m && <a class="btn" href={href(lang, '/models/' + m.id)}>{T.model}</a>}</div>
+  </div>
+  <p class="lead rise" style="--i:0.5">{T.lead} <a href={href(lang, '/recipes')}>{T.common}</a></p>
+
+  <div class="grid2" style="margin-top:14px">
+    <section class="card pad rise" style="--i:1"><h2 class="sec">{T.env}</h2>
+      {env && <p class="sub" style="margin-top:6px">transformers <b class="mono">{env.transformers}</b> · torch {env.torch} · {env.extra}</p>}
+      <pre><code>{(r.install || []).join('\n')}</code></pre>
+    </section>
+    <section class="card pad rise" style="--i:2"><h2 class="sec">{T.weights}</h2>
+      <ul class="wl">{(r.weights || []).map((w: any) => (<li><a href={'https://huggingface.co/' + w.repo} rel="noopener" class="mono">{w.repo}</a> · {w.size_gb} GB{w['note_' + L] ? <span class="dim"> · {w['note_' + L]}</span> : null}</li>))}</ul>
+      <pre><code>{`export HF_ENDPOINT=https://hf-mirror.com HF_HOME=/root/autodl-tmp/hf HF_HUB_DISABLE_XET=1\n` + (r.weights || []).map((w: any) => `python -c "from huggingface_hub import snapshot_download as s; s('${w.repo}')"`).join('\n')}</code></pre>
+    </section>
+  </div>
+
+  <section class="card pad rise" style="--i:3;margin-top:16px"><h2 class="sec">{T.run}</h2>
+    <pre><code>{r.run}</code></pre>
+    {r['load_' + L] && <div class="callout" style="margin-top:10px"><b>{T.load}</b> · {r['load_' + L]}</div>}
+  </section>
+
+  <section class="card rise" style="--i:4;margin-top:16px"><div class="pad" style="padding-bottom:10px"><h2 class="sec">{T.pit}</h2></div>
+    <div class="tablewrap"><table><thead><tr><th style="width:50%">{T.sym}</th><th>{T.fix}</th></tr></thead>
+      <tbody>{(r.pitfalls || []).map((p: any) => (<tr><td>{p[L]}</td><td>{p['fix_' + L]}</td></tr>))}</tbody></table></div>
+  </section>
+
+  <section class="card rise" style="--i:5;margin-top:16px"><div class="pad" style="padding-bottom:10px"><h2 class="sec">{T.meas}</h2><p class="sub" style="margin-top:4px">{T.src}</p></div>
+    {rows.length ? <div class="tablewrap"><table><thead><tr><th>{T.hwc}</th><th>{T.prec}</th><th class="num">{T.p50}</th><th class="num">{T.p95}</th><th class="num">{T.vram}</th><th class="num">{T.n}</th><th>{T.date}</th></tr></thead>
+      <tbody>{rows.map((x) => (<tr><td><a href={href(lang, '/hardware/' + x.h.id)}>{x.h.name}</a></td><td class="mono">{x.prec}</td><td class="num mono">{fmtMs(x.p50)}</td><td class="num mono">{fmtMs(x.p95)}</td><td class="num mono">{x.vram != null ? x.vram + ' GB' : '—'}</td><td class="num mono">{x.n}</td><td class="mono dim">{x.date}</td></tr>))}</tbody></table></div>
+      : <div class="pad"><div class="callout">{T.nomeas}</div></div>}
+  </section>
+  <style>pre{margin:10px 0 0;background:var(--bg-2,#f6f7fb);border:1px solid var(--hair-2);border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:1.6;overflow:auto;white-space:pre-wrap;word-break:break-all}.wl{margin:8px 0 0;padding-left:18px;font-size:13.5px;line-height:1.8}</style>
+</Base>

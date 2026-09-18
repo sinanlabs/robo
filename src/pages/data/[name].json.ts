@@ -1,8 +1,8 @@
-// 公开数据文件：/data/models.json · compat.json · embodiments.json · hardware.json · measurements.json —— 与网页同批次生成，字段说明见 compute.sinanlab.com/api-docs
+// 公开数据文件：/data/models.json · compat.json · embodiments.json · hardware.json · measurements.json · activity.json —— 与网页同批次生成，字段说明见 compute.sinanlab.com/api-docs
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import fs from 'node:fs';
-const NAMES = ['models', 'compat', 'embodiments', 'hardware', 'measurements'] as const;
+const NAMES = ['models', 'compat', 'embodiments', 'hardware', 'measurements', 'activity'] as const;
 export function getStaticPaths() { return NAMES.map((name) => ({ params: { name } })); }
 export const GET: APIRoute = async ({ params }) => {
   const name = params.name as (typeof NAMES)[number];

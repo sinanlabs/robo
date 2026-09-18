@@ -64,12 +64,44 @@ if (fs.existsSync(mdir)) {
   }
 }
 
+
+// 活性信号：data/activity/latest.json + history.jsonl（scripts/activity.py 每日生成；只记录数字，不评价）
+const activity = [];
+const actP = path.join(root, 'data/activity/latest.json'), histP = path.join(root, 'data/activity/history.jsonl');
+if (fs.existsSync(actP)) {
+  const A = JSON.parse(fs.readFileSync(actP, 'utf8'));
+  const hist = fs.existsSync(histP) ? fs.readFileSync(histP, 'utf8').split('\n').filter(Boolean).map((l) => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean) : [];
+  const cutoff = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+  for (const m of models) {
+    const r = A.items[m.id]; if (!r) continue;
+    const series = hist.filter((h) => h.id === m.id && h.d >= cutoff).sort((a, b) => a.d.localeCompare(b.d)).map((h) => ({ d: h.d, stars: h.stars ?? null, hf30: h.hf30 ?? null, c90: h.c90 ?? null }));
+    const first = series[0], last = series[series.length - 1];
+    const delta = first && last && first.d !== last.d ? { days: Math.round((new Date(last.d) - new Date(first.d)) / 864e5), stars: last.stars != null && first.stars != null ? last.stars - first.stars : null, hf30: last.hf30 != null && first.hf30 != null ? last.hf30 - first.hf30 : null } : null;
+    activity.push({ id: m.id, fetched: r.fetched, github: r.github ?? { ok: false }, hf: r.hf ?? { ok: false }, modelscope: r.modelscope ?? { ok: false }, series, delta });
+  }
+  console.log(`活性信号：${activity.length} 个模型（${A.generated}）`);
+}
+
+
+// 部署配方：data/recipes.json（来自 bench/ 真正跑通的脚本与日志）
+let recipes = [], recipesMeta = [];
+const rcP = path.join(root, 'data/recipes.json');
+if (fs.existsSync(rcP)) {
+  const R = JSON.parse(fs.readFileSync(rcP, 'utf8'));
+  recipes = (R.recipes || []).map((r) => ({ id: r.model_id, ...r }));
+  recipesMeta = [{ id: 'meta', generated: R._meta?.generated ?? null, machine: R._meta?.machine ?? null, common: R.common || [], envs: R.envs || [], not_reproduced: R.not_reproduced || [] }];
+  console.log(`部署配方：${recipes.length} 篇 · 未复现 ${recipesMeta[0].not_reproduced.length}`);
+}
+
 const write = (name, data) => fs.writeFileSync(path.join(out, `${name}.json`), JSON.stringify(data, null, 2));
 write('models', models);
 write('embodiments', embodiments);
 write('hardware', hardware);
 write('compat', compat);
 write('measurements', measurements);
+write('activity', activity);
+write('recipes', recipes);
+write('recipes_meta', recipesMeta);
 write('meta', { ...seed._meta, imported_at: new Date().toISOString() });
 
 console.log(`导入完成：模型 ${models.length} · 本体 ${embodiments.length} · 硬件 ${hardware.length} · 矩阵格 ${compat.length} · 测量 ${measurements.length}`);

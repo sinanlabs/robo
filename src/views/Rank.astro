@@ -10,6 +10,8 @@ const models = (await getCollection('models')).map((m) => m.data);
 const embs = (await getCollection('embodiments')).map((e) => e.data);
 const compat = (await getCollection('compat')).map((c) => c.data);
 const meta = (await getCollection('meta').catch(() => []))[0]?.data as any;
+const act = (await getCollection('activity').catch(() => [])).map((x: any) => x.data);
+const byId: Record<string, any> = {}; for (const m of models) byId[m.id] = m;
 const asOf = meta?.generated ?? new Date().toISOString().slice(0, 10);
 
 const N = 8;
@@ -40,6 +42,16 @@ const T = en ? {
   lic: '许可证一眼看', lic_s: '按许可证原文计数；代码与权重许可证不一致的按待核实计',
   yes: '可商用', no: '禁商用', unk: '待核实', h: '小时', b: 'B 参数', bodies_u: '种本体', models_u: '个模型', foot: '按记录的事实排序，不构成推荐。每个字段在模型页都能点到来源。数据 ' + asOf + '。',
 };
+const A = act.filter((a) => byId[a.id]);
+const active90 = A.filter((a) => a.github?.ok && a.github.commits_90d != null && a.github.commits_90d > 0).sort((a, b) => b.github.commits_90d - a.github.commits_90d || (b.github.stars ?? 0) - (a.github.stars ?? 0)).slice(0, N);
+const dl30 = A.filter((a) => a.hf?.ok && a.hf.downloads_30d != null).sort((a, b) => b.hf.downloads_30d - a.hf.downloads_30d).slice(0, N);
+const stale = A.filter((a) => a.github?.ok && a.github.days_since_push != null && a.github.days_since_push > 180).sort((a, b) => b.github.days_since_push - a.github.days_since_push).slice(0, N);
+const actDate = A[0]?.fetched ?? '';
+const TA = en ? { active: 'Most commits · last 90 days', active_s: 'GitHub commits on the default branch in the last 90 days (capped at 100); fetched ' + actDate,
+  dl: 'Most downloaded weights · 30 days', dl_s: 'Hugging Face downloads in the last 30 days, as reported by the Hub API', stale: 'Longest without a push', stale_s: 'Repositories with no push for more than 180 days. A fact about the repository, not a verdict on the model',
+  commits: 'commits', dls: 'downloads', d: 'd', capped: '100+' } : { active: '近 90 天提交榜', active_s: 'GitHub 默认分支近 90 天的提交数（上限 100）；抓取于 ' + actDate,
+  dl: '权重下载榜 · 近 30 天', dl_s: 'Hugging Face Hub 接口报告的近 30 天下载量', stale: '最久无推送', stale_s: '超过 180 天没有推送的仓库。这是仓库的事实，不是对模型的评价',
+  commits: '次提交', dls: '次下载', d: '天', capped: '100+' };
 const mhref = (id: string) => href(lang, '/models/' + id);
 const rows = (items: any[], val: (x: any) => string, sub: (x: any) => string, key: (x: any) => number | null, lowerBetter = false) => {
   const vals = items.map(key).filter((v): v is number => v != null);
@@ -81,6 +93,19 @@ const fmtB = (v: number) => (v >= 1 ? v.toFixed(v >= 10 ? 1 : 2) : (v * 1000).to
   <section class="card pad rise" style="--i:7;margin-top:16px"><h2 class="sec">{T.lic}</h2><p class="lead" style="margin-top:4px">{T.lic_s}</p>
     <div class="licbar"><i class="yes" style={`flex:${lic.yes}`}>{lic.yes} {T.yes}</i><i class="no" style={`flex:${lic.no}`}>{lic.no} {T.no}</i><i class="unk" style={`flex:${lic.unk}`}>{lic.unk} {T.unk}</i></div></section>
   <div class="tfoot" style="margin-top:16px"><span>{T.foot}</span></div>
+  {A.length > 0 && <div class="rkgrid">
+    <section class="card pad rise" style="--i:7"><h2 class="sec">{TA.active}</h2><p class="lead" style="margin-top:4px">{TA.active_s}</p>
+      <ol class="rk">{rows(active90, (a) => (a.github.commits_90d_capped ? TA.capped : a.github.commits_90d) + ' ' + TA.commits, (a) => byId[a.id].org + ' · ' + (a.github.stars ?? 0).toLocaleString() + ' stars', (a) => a.github.commits_90d).map(({ x, i, val, sub, w }) => (
+        <li class={i < 3 ? 'top' : ''}><span class="no">{String(i + 1).padStart(2, '0')}</span><span class="who"><a href={mhref(x.id)}>{byId[x.id].name}</a><small>{sub}</small></span><span class="bar" aria-hidden="true"><i style={`width:${w}%`}></i></span><span class="val">{val}</span></li>))}</ol></section>
+    <section class="card pad rise" style="--i:8"><h2 class="sec">{TA.dl}</h2><p class="lead" style="margin-top:4px">{TA.dl_s}</p>
+      <ol class="rk">{rows(dl30, (a) => a.hf.downloads_30d.toLocaleString() + ' ' + TA.dls, (a) => a.hf.repo, (a) => a.hf.downloads_30d).map(({ x, i, val, sub, w }) => (
+        <li class={i < 3 ? 'top' : ''}><span class="no">{String(i + 1).padStart(2, '0')}</span><span class="who"><a href={mhref(x.id)}>{byId[x.id].name}</a><small>{sub}</small></span><span class="bar" aria-hidden="true"><i style={`width:${w}%`}></i></span><span class="val">{val}</span></li>))}</ol></section>
+  </div>}
+  {stale.length > 0 && <div class="rkgrid">
+    <section class="card pad rise" style="--i:9"><h2 class="sec">{TA.stale}</h2><p class="lead" style="margin-top:4px">{TA.stale_s}</p>
+      <ol class="rk">{rows(stale, (a) => a.github.days_since_push + ' ' + TA.d, (a) => byId[a.id].org + ' · ' + (en ? 'last push ' : '最近推送 ') + a.github.pushed_at, (a) => a.github.days_since_push).map(({ x, i, val, sub, w }) => (
+        <li><span class="no">{String(i + 1).padStart(2, '0')}</span><span class="who"><a href={mhref(x.id)}>{byId[x.id].name}</a><small>{sub}</small></span><span class="bar" aria-hidden="true"><i style={`width:${w}%`}></i></span><span class="val">{val}</span></li>))}</ol></section>
+  </div>}
 </Base>
 <style>
 .rkhead{background:linear-gradient(135deg,#0B0D1F 0%,#3A2410 55%,#F79009 100%);color:#fff;border-radius:22px;padding:34px 34px 30px}.rkhead .eyebrow{color:#FFD59A}.rkhead h1{font-size:40px;letter-spacing:-.02em;margin:8px 0 6px}.rkhead .lead{color:rgba(255,255,255,.8);max-width:720px}.rkhead .meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-family:var(--mono);font-size:12px;color:#FFD59A}.rkhead .meta b{color:#fff;font-size:20px;display:block;font-weight:600}

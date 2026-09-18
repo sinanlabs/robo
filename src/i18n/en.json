@@ -18,7 +18,8 @@
     "compute": "Sinan Compute",
     "lab": "← Sinan Lab",
     "rank": "Rankings",
-    "select": "Select a model"
+    "select": "Select a model",
+    "recipes": "Recipes"
   },
   "hero": {
     "eyebrow": "Open VLA · compatibility matrix · latency & cost · every field sourced",

@@ -18,7 +18,8 @@
     "compute": "Sinan Compute",
     "lab": "← 司南实验室",
     "rank": "司南榜",
-    "select": "选模型"
+    "select": "选模型",
+    "recipes": "部署配方"
   },
   "hero": {
     "eyebrow": "开源 VLA · 适配矩阵 · 延迟与成本 · 每字可溯源",

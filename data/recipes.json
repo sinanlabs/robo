@@ -1,0 +1,130 @@
+{
+  "_meta": {
+    "generated": "2026-09-18",
+    "note": "部署配方来自 bench/ 目录里真正跑通的脚本与日志（AutoDL 按量机器：RTX 4090 西北B区、RTX 5090 北京B区、A800 80GB 北京B区）。命令与版本号照抄自 setup_autodl.sh / run_matrix.sh / adapters/*.py；坑位来自逐模型日志。只陈述我们遇到与解决的问题，不评价模型。",
+    "machine": {
+      "zh": "AutoDL 按量实例，镜像 PyTorch 2.5.1 + CUDA 12.4（miniconda，Python 3.12），数据盘 50 GB 挂在 /root/autodl-tmp",
+      "en": "AutoDL pay-as-you-go instance, image PyTorch 2.5.1 + CUDA 12.4 (miniconda, Python 3.12), 50 GB data disk at /root/autodl-tmp"
+    }
+  },
+  "common": [
+    {
+      "id": "pypi-mirror",
+      "zh": "pip 换华为云镜像。同机房实测华为云 8 MB/s，阿里云与清华只有 KB 级。",
+      "en": "Point pip at the Huawei Cloud mirror. Measured 8 MB/s from that datacenter; Aliyun and Tsinghua mirrors only did KB/s there.",
+      "cmd": "pip config set global.index-url https://repo.huaweicloud.com/repository/pypi/simple && pip config set global.trusted-host repo.huaweicloud.com"
+    },
+    {
+      "id": "hf-mirror",
+      "zh": "权重走 hf-mirror.com，缓存放数据盘，并关掉 Xet 传输（镜像上 Xet 会 401 或卡死），再卸载 hf_xet。",
+      "en": "Fetch weights through hf-mirror.com, keep the cache on the data disk, and disable Xet transfer (it 401s or stalls on the mirror); uninstall hf_xet as well.",
+      "cmd": "export HF_ENDPOINT=https://hf-mirror.com HF_HOME=/root/autodl-tmp/hf HF_HUB_DISABLE_XET=1 && pip uninstall -y hf_xet hf-xet"
+    },
+    {
+      "id": "venv-per-group",
+      "zh": "不同模型要求的 transformers 版本互相冲突，按组建 venv（--system-site-packages 共享系统 torch）：openvla 组 4.40.1、spatialvla 组 4.47.0、qwen 组 4.57.1；lerobot 要 torch ≥ 2.7，单独建完整 venv。",
+      "en": "Models pin conflicting transformers versions, so build one venv per group (sharing the system torch via --system-site-packages): openvla group 4.40.1, spatialvla group 4.47.0, qwen group 4.57.1; lerobot needs torch ≥ 2.7 and gets its own full venv.",
+      "cmd": "python -m venv --system-site-packages /root/envs/<group>"
+    },
+    {
+      "id": "predownload",
+      "zh": "大权重先串行下完再跑；镜像上 7B 级权重要 20–40 分钟，并行下会互相拖慢。下载加重试循环。跑成功后删该模型权重，50 GB 数据盘放不下第二个 7B。",
+      "en": "Download large weights sequentially before running; a 7B checkpoint takes 20–40 min on the mirror and parallel downloads slow each other down. Wrap the download in a retry loop. Delete the weights after a successful run: the 50 GB disk will not hold a second 7B model.",
+      "cmd": "for i in 1 2 3 4; do python -c \"from huggingface_hub import snapshot_download as s; s('<repo>')\" && break; sleep 15; done"
+    },
+    {
+      "id": "nohup",
+      "zh": "SSH 会话会断，长任务用 nohup 起并 disown；结束进程用精确匹配（pgrep -f \"^/root/envs/...\"），pkill -f 会连自己的 shell 一起杀。",
+      "en": "SSH sessions drop. Start long jobs with nohup and disown; kill by exact match (pgrep -f \"^/root/envs/...\") because a loose pkill -f takes your own shell down too.",
+      "cmd": "nohup bash run_matrix.sh <hardware> <model> > run.log 2>&1 & disown"
+    },
+    {
+      "id": "blackwell",
+      "zh": "RTX 5090（Blackwell，sm_120）跑不了镜像自带的 torch 2.5.1；先升到 torch 2.8.0（cu128）。setup_autodl.sh 会自动判断。",
+      "en": "The RTX 5090 (Blackwell, sm_120) cannot run the image's torch 2.5.1; upgrade to torch 2.8.0 (cu128) first. setup_autodl.sh detects this automatically.",
+      "cmd": "pip install torch==2.8.0 torchvision==0.23.0"
+    }
+  ],
+  "envs": [
+    { "id": "lerobot", "transformers": "随 lerobot", "torch": ">= 2.7（独立 venv）", "extra": "lerobot[smolvla]", "models": ["smolvla", "pi0", "pi0.5"] },
+    { "id": "openvla", "transformers": "4.40.1", "torch": "系统 2.5.1（5090 需 2.8）", "extra": "timm==0.9.10 · tokenizers==0.19.1 · accelerate", "models": ["openvla", "minivla", "vla-adapter"] },
+    { "id": "spatialvla", "transformers": "4.47.0", "torch": "系统 2.5.1（5090 需 2.8）", "extra": "accelerate · scipy", "models": ["spatialvla"] },
+    { "id": "qwen", "transformers": "4.57.1", "torch": "系统 2.5.1（5090 需 2.8）", "extra": "accelerate · qwen-vl-utils · einops", "models": ["nora", "molmoact"] }
+  ],
+  "recipes": [
+    {
+      "model_id": "smolvla",
+      "env": "lerobot",
+      "install": ["python -m venv /root/envs/lerobot && /root/envs/lerobot/bin/pip install -U pip", "/root/envs/lerobot/bin/pip install \"lerobot[smolvla]\""],
+      "weights": [{ "repo": "lerobot/smolvla_base", "size_gb": 1.0 }, { "repo": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct", "size_gb": 1.0, "note_zh": "VLM 底座，策略加载时会再拉一次", "note_en": "VLM backbone, pulled again when the policy loads" }],
+      "run": "/root/envs/lerobot/bin/python bench.py --model smolvla --hardware <hardware> --precision bf16",
+      "load_zh": "lerobot.policies.factory 加载策略后，用 make_pre_post_processors 建预处理流水线；每步输出 50 步动作块（flow matching 10 步去噪）。",
+      "load_en": "Load the policy via lerobot.policies.factory, then build the pre/post-processing pipeline with make_pre_post_processors; each step emits a 50-step action chunk (flow matching, 10 denoising steps).",
+      "pitfalls": [
+        { "zh": "KeyError 'tokens' 之类的分词错误：lerobot 0.6 起把分词与归一化挪进了预处理流水线，不能直接把原始 batch 喂给 select_action。", "en": "Tokenizer KeyErrors: since lerobot 0.6 tokenisation and normalisation live in the preprocessing pipeline; do not feed a raw batch straight into select_action.", "fix_zh": "先 make_pre_post_processors，再 predict_action_chunk。", "fix_en": "Run make_pre_post_processors first, then predict_action_chunk." },
+        { "zh": "\"Reducing the number of VLM layers to 16\" 与 torch_dtype 弃用提示是正常输出，不是错误。", "en": "\"Reducing the number of VLM layers to 16\" and the torch_dtype deprecation notice are normal output, not errors.", "fix_zh": "忽略。", "fix_en": "Ignore." }
+      ]
+    },
+    {
+      "model_id": "openvla",
+      "env": "openvla",
+      "install": ["python -m venv --system-site-packages /root/envs/openvla", "/root/envs/openvla/bin/pip install transformers==4.40.1 timm==0.9.10 tokenizers==0.19.1 accelerate"],
+      "weights": [{ "repo": "openvla/openvla-7b", "size_gb": 15.2, "note_zh": "3 个 safetensors 分片", "note_en": "3 safetensors shards" }],
+      "run": "/root/envs/openvla/bin/python bench.py --model openvla --hardware <hardware> --precision bf16",
+      "load_zh": "AutoModelForVision2Seq + AutoProcessor，trust_remote_code=True，low_cpu_mem_usage=True；输出 7 个离散动作 token。",
+      "load_en": "AutoModelForVision2Seq + AutoProcessor with trust_remote_code=True and low_cpu_mem_usage=True; outputs 7 discrete action tokens.",
+      "pitfalls": [
+        { "zh": "新版 transformers 下远程代码报错（processor / tokenizer 接口变了）。", "en": "Remote code breaks on newer transformers (processor / tokenizer interfaces changed).", "fix_zh": "钉死 transformers==4.40.1、tokenizers==0.19.1、timm==0.9.10。", "fix_en": "Pin transformers==4.40.1, tokenizers==0.19.1, timm==0.9.10." },
+        { "zh": "启动时打印 \"The cache for model files in Transformers v4.22.0 has been updated\"。", "en": "Startup prints \"The cache for model files in Transformers v4.22.0 has been updated\".", "fix_zh": "一次性缓存迁移提示，忽略。", "fix_en": "One-off cache migration notice; ignore." }
+      ]
+    },
+    {
+      "model_id": "spatialvla",
+      "env": "spatialvla",
+      "install": ["python -m venv --system-site-packages /root/envs/spatialvla", "/root/envs/spatialvla/bin/pip install transformers==4.47.0 accelerate scipy"],
+      "weights": [{ "repo": "IPEC-COMMUNITY/spatialvla-4b-224-pt", "size_gb": 8.5 }],
+      "run": "/root/envs/spatialvla/bin/python bench.py --model spatialvla --hardware <hardware> --precision bf16",
+      "load_zh": "AutoModel + AutoProcessor，trust_remote_code=True；反归一化键 unnorm_key 必须是模型统计表里存在的键。",
+      "load_en": "AutoModel + AutoProcessor with trust_remote_code=True; the unnorm_key must exist in the model's statistics table.",
+      "pitfalls": [
+        { "zh": "ModuleNotFoundError: scipy。", "en": "ModuleNotFoundError: scipy.", "fix_zh": "pip install scipy（README 没写，远程代码要用）。", "fix_en": "pip install scipy (not listed in the README, but the remote code imports it)." },
+        { "zh": "unnorm_key 不存在导致 KeyError。", "en": "KeyError on unnorm_key.", "fix_zh": "从 processor.statistics 或 model.statistics 里取一个存在的键；没有就跳过反归一化。", "fix_en": "Pick a key present in processor.statistics or model.statistics; skip un-normalisation if there is none." },
+        { "zh": "HybridCache batch_size 弃用警告、\"Add 0 TRANSLATION TOKENS\" 等输出。", "en": "HybridCache batch_size deprecation warning and \"Add 0 TRANSLATION TOKENS\" lines.", "fix_zh": "正常输出，忽略。", "fix_en": "Normal output; ignore." }
+      ]
+    },
+    {
+      "model_id": "nora",
+      "env": "qwen",
+      "install": ["python -m venv --system-site-packages /root/envs/qwen", "/root/envs/qwen/bin/pip install transformers==4.57.1 accelerate qwen-vl-utils einops"],
+      "weights": [{ "repo": "declare-lab/nora", "size_gb": 7.5, "note_zh": "Qwen2.5-VL 3B 底座", "note_en": "Qwen2.5-VL 3B backbone" }],
+      "run": "/root/envs/qwen/bin/python bench.py --model nora --hardware <hardware> --precision bf16",
+      "load_zh": "AutoModelForImageTextToText + AutoProcessor，trust_remote_code=True；每步生成 16 个动作 token。",
+      "load_en": "AutoModelForImageTextToText + AutoProcessor with trust_remote_code=True; generates 16 action tokens per step.",
+      "pitfalls": [
+        { "zh": "ModuleNotFoundError: transformers —— 镜像偶发拿不到 4.57.1（\"from versions: none\"），venv 建好了但包没装上。", "en": "ModuleNotFoundError: transformers — the mirror occasionally fails to serve 4.57.1 (\"from versions: none\"), leaving the venv without the package.", "fix_zh": "跑前用 python -c \"import transformers\" 验一遍；失败换清华或官方源重装。", "fix_en": "Verify with python -c \"import transformers\" before running; on failure reinstall from the Tsinghua or official index." },
+        { "zh": "Qwen2.5-VL 需要较新的 transformers。", "en": "Qwen2.5-VL requires a recent transformers.", "fix_zh": "用 4.57.1 的 qwen 组环境，不要和 OpenVLA 混装。", "fix_en": "Use the 4.57.1 qwen-group venv; do not mix with the OpenVLA venv." }
+      ]
+    },
+    {
+      "model_id": "molmoact",
+      "env": "qwen",
+      "install": ["python -m venv --system-site-packages /root/envs/qwen", "/root/envs/qwen/bin/pip install transformers==4.57.1 accelerate einops"],
+      "weights": [{ "repo": "allenai/MolmoAct-7B-D-0812", "size_gb": 30.0, "note_zh": "32 个文件；镜像上要 40 分钟以上，务必单独串行下", "note_en": "32 files; 40+ minutes on the mirror, download alone and sequentially" }],
+      "run": "/root/envs/qwen/bin/python bench.py --model molmoact --hardware <hardware> --precision bf16",
+      "load_zh": "AutoModelForImageTextToText + AutoProcessor，trust_remote_code=True；每步生成 64 个 token（含推理轨迹），所以延迟明显高于其它模型。",
+      "load_en": "AutoModelForImageTextToText + AutoProcessor with trust_remote_code=True; generates 64 tokens per step (including a reasoning trace), hence much higher latency than the others.",
+      "pitfalls": [
+        { "zh": "ModuleNotFoundError: einops。", "en": "ModuleNotFoundError: einops.", "fix_zh": "pip install einops。", "fix_en": "pip install einops." },
+        { "zh": "attn_implementation 为 None 报错：嵌套子配置（vision / adapter / llm）不继承顶层的注意力实现。", "en": "Error about attn_implementation being None: the nested sub-configs (vision / adapter / llm) do not inherit the top-level attention implementation.", "fix_zh": "加载前对每个子配置设 _attn_implementation=\"sdpa\"。", "fix_en": "Set _attn_implementation=\"sdpa\" on each sub-config before loading." },
+        { "zh": "数据盘写满导致下载中断、其它模型权重被挤掉。", "en": "Data disk fills up, aborting the download and evicting other weights.", "fix_zh": "下 MolmoAct 前先删掉已跑完模型的权重；只在 50 GB 盘上留它一个。", "fix_en": "Delete weights of finished models before downloading MolmoAct; keep only this one on the 50 GB disk." },
+        { "zh": "镜像下载中途断线。", "en": "Mirror download drops mid-way.", "fix_zh": "snapshot_download 放进重试循环，断点续传会接着下。", "fix_en": "Wrap snapshot_download in a retry loop; it resumes from where it stopped." }
+      ]
+    }
+  ],
+  "not_reproduced": [
+    { "model_id": "pi0", "zh": "需要 Google PaliGemma 分词器，Hugging Face 上要先申请并接受许可（gated），我们的镜像通道拿不到。", "en": "Needs the Google PaliGemma tokenizer, which is gated on Hugging Face (licence acceptance required); not reachable through the mirror route." },
+    { "model_id": "pi0.5", "zh": "同 π0：PaliGemma 分词器为 gated 资源。", "en": "Same as π0: the PaliGemma tokenizer is gated." },
+    { "model_id": "minivla", "zh": "权重是 prismatic 格式，需要 openvla-mini 仓库自己的运行时，不是 transformers 远程代码；第一阶段未装。", "en": "Weights are in the prismatic format and need the openvla-mini runtime rather than transformers remote code; not set up in phase one." },
+    { "model_id": "vla-adapter", "zh": "同 MiniVLA：依赖 prismatic 运行时。", "en": "Same as MiniVLA: depends on the prismatic runtime." }
+  ]
+}

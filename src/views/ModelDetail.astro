@@ -4,6 +4,7 @@ import Field from '../components/Field.astro';
 import EvidenceList from '../components/EvidenceList.astro';
 import LatencyCard from '../components/LatencyCard.astro';
 import CompatMatrix from '../components/CompatMatrix.astro';
+import ActivityCard from '../components/ActivityCard.astro';
 import { getCollection } from 'astro:content';
 import { t, href, type Lang } from '../lib/i18n';
 import { MODEL_REQUIRED, pendingOf, fmtParams } from '../lib/data';
@@ -16,6 +17,9 @@ const embs = (await getCollection('embodiments')).map((e) => e.data);
 const compat = (await getCollection('compat')).map((c) => c.data).filter((c) => c.model_id === id);
 const hw = (await getCollection('hardware')).map((h) => h.data);
 const meas = (await getCollection('measurements')).map((x) => x.data).filter((x) => x.model_id === id);
+const act = (await getCollection('activity').catch(() => [])).map((x: any) => x.data).find((x: any) => x.id === id);
+const recipe = (await getCollection('recipes').catch(() => [])).map((x: any) => x.data).find((x: any) => x.model_id === id);
+const notRep = (((await getCollection('recipes_meta').catch(() => [])).map((x: any) => x.data)[0] || {}).not_reproduced || []).find((x: any) => x.model_id === id);
 const p = pendingOf(m as any, MODEL_REQUIRED);
 const dates = Array.from(new Set(m.evidence.map((e) => e.fetched))).sort();
 ---
@@ -52,9 +56,12 @@ const dates = Array.from(new Set(m.evidence.map((e) => e.fetched))).sort();
       <EvidenceList lang={lang} evidence={m.evidence} open={true} />
     </section>
     <div style="display:grid;gap:16px;align-content:start">
+      <div class="rise" style="--i:2.5"><ActivityCard lang={lang} a={act} codeUrl={m.code_url} weightsUrl={m.weights_url} /></div>
       <section class="card pad rise" style="--i:3">
-        <h2 class="sec">{en ? 'Tutorials' : '教程'}</h2>
-        <div class="callout" style="margin-top:10px">{en ? 'No tutorial yet. First one planned: running this model on a rented RTX 4090 with a measured latency report.' : '还没有教程。首篇计划：在租用的 RTX 4090 上跑通本模型，附实测延迟报告。'}</div>
+        <h2 class="sec">{en ? 'Deployment recipe' : '部署配方'}</h2>
+        {recipe ? <div style="margin-top:10px"><p class="sub">{en ? `Environment, weights, run command and the pitfalls we hit, exactly as executed on rented GPUs (venv ${recipe.env}, ${(recipe.weights || []).reduce((a: number, w: any) => a + (w.size_gb || 0), 0).toFixed(1)} GB of weights, ${(recipe.pitfalls || []).length} pitfalls).` : `环境、权重、运行命令和我们踩过的坑，与在租用 GPU 上实际执行的一字不差（venv ${recipe.env}，权重 ${(recipe.weights || []).reduce((a: number, w: any) => a + (w.size_gb || 0), 0).toFixed(1)} GB，${(recipe.pitfalls || []).length} 个坑位）。`}</p><a class="btn" href={href(lang, '/recipes/' + m.id)} style="margin-top:10px">{en ? 'Open recipe →' : '查看配方 →'}</a></div>
+        : notRep ? <div class="callout" style="margin-top:10px"><b>{en ? 'Not reproduced yet' : '尚未复现'}</b> · {notRep[en ? 'en' : 'zh']}</div>
+        : <div class="callout" style="margin-top:10px">{en ? 'No recipe yet. We publish only steps that actually ran on a rented GPU with a measured latency; this model has not been through that yet.' : '还没有配方。我们只发布在租用 GPU 上真正跑通、带实测延迟的步骤；这个模型还没轮到。'}</div>}
       </section>
       <section class="card pad rise" style="--i:4">
         <h2 class="sec">{en ? 'Record history' : '记录历史'}</h2>

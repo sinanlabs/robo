@@ -1,0 +1,7 @@
+---
+import V from '../../../views/RecipeDetail.astro';
+import { getCollection } from 'astro:content';
+export async function getStaticPaths() { return (await getCollection('recipes')).map((x) => ({ params: { id: x.data.id } })); }
+const { id } = Astro.params;
+---
+<V lang="en" id={id!} />
