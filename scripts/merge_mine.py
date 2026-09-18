@@ -26,6 +26,11 @@ def num(v):
     return None
 
 
+UNIT_MAP = {"fraction (as printed)": "fraction", "score (0-1)": "score 0-1", "task completion score (0-1)": "score 0-1", "progress score (max 1.0)": "score 0-1", "% (progress score)": "% progress", "% task progress": "% progress", "% (printed without unit; success rate)": "%", "% (printed without unit)": "%"}
+def norm_unit(u):
+    u = (u or "%").strip(); return UNIT_MAP.get(u, u)
+
+
 def main():
     seed = load(J("data", "seed_v0.json")); model_ids = {m["id"] for m in seed["models"]}
     defs = load(J("data", "benchmark_defs.json")); bench_ids = {b["id"] for b in defs["benchmarks"]}
@@ -49,7 +54,7 @@ def main():
             seen.add(key)
             scores.append({"id": "%s__%s__%s__%s__%d" % (mid, bid, (s.get("subset") or "na").replace(" ", "_"), (s.get("variant") or "base").replace(" ", "_").replace("/", "-"), len(scores)),
                            "model_id": mid, "variant": s.get("variant") or None, "benchmark_id": bid, "benchmark_name": s.get("benchmark_name") or None, "subset": s.get("subset") or None,
-                           "score": v, "unit": s.get("unit") or "%", "source_type": s["source_type"], "source_url": s["source_url"], "source_ref": s.get("source_ref") or "", "eval_notes": s.get("eval_notes") or "", "date": s.get("date") or None})
+                           "score": v, "unit": norm_unit(s.get("unit")), "source_type": s["source_type"], "source_url": s["source_url"], "source_ref": s.get("source_ref") or "", "eval_notes": s.get("eval_notes") or "", "date": s.get("date") or None})
     json.dump({"generated": TODAY, "benchmarks": defs["benchmarks"], "scores": scores}, io.open(J("data", "benchmarks.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     # ---- 数据集 ----
     datasets, ids = [], set()

@@ -37,7 +37,7 @@ const n = (v: number | null) => (v == null ? null : Math.round(v).toLocaleString
           <td><a href={href(lang, '/datasets/' + d.id)}><b>{d.name}</b></a><div class="sub">{d.org}{d.release_date ? ' · ' + d.release_date : ''}</div></td>
           <td class="sub" style="max-width:220px">{(d.form_tags || []).map((f: string) => <span class="pill none" style="margin:0 4px 4px 0">{FORM[f] || f}</span>)}<div class="dim" style="font-size:11.5px">{(d.embodiments || []).slice(0, 4).join(' · ')}{(d.embodiments || []).length > 4 ? ' …' : ''}</div></td>
           <td class="num mono" style="white-space:nowrap">{d.hours != null ? <div>{n(d.hours)} {T.hrs}</div> : null}{d.episodes != null ? <div>{n(d.episodes)} {T.eps}</div> : null}{d.hours == null && d.episodes == null ? <span class="pending">?</span> : null}</td>
-          <td class="mono" style="font-size:12.5px">{d.format || <span class="pending">?</span>}</td>
+          <td class="mono" style="font-size:12.5px;max-width:160px" title={d.format || ""}>{d.format ? (d.format.length > 26 ? d.format.slice(0, 26) + "…" : d.format) : <span class="pending">?</span>}</td>
           <td class="sub" style="max-width:200px">{d.commercial_ok === true ? '✓ ' : d.commercial_ok === false ? '✗ ' : '? '}{(d.license || '').slice(0, 48)}</td>
           <td class="sub">{d.mirror_url ? <a href={d.mirror_url} rel="noopener">{/modelscope/.test(d.mirror_url) ? 'ModelScope' : /opendatalab/.test(d.mirror_url) ? 'OpenDataLab' : (en ? 'mirror' : '镜像')}</a> : '—'}</td>
         </tr>))}

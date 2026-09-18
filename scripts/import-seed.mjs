@@ -52,6 +52,22 @@ if (fs.existsSync(ovPath)) {
   console.log(`适配矩阵证据覆盖：${ov.length} 格`);
 }
 
+
+// 社区复现（后台核验通过的众测记录）：跑通 / 需微调 → 该格升为 community_verified，并附证据链接；未跑通只作记录不改状态
+const rpP = path.join(root, 'data/compat_repro.json');
+let repro = [];
+if (fs.existsSync(rpP)) {
+  repro = JSON.parse(fs.readFileSync(rpP, 'utf8')).items || [];
+  let up = 0;
+  for (const r of repro) {
+    if (!['works', 'finetune'].includes(r.outcome)) continue;
+    const cell = compat.find((c) => c.model_id === r.model_id && c.embodiment_id === r.embodiment_id); if (!cell) continue;
+    if (cell.status === 'unknown' || cell.status === 'theoretical') { cell.status = 'community_verified'; up++; }
+    cell.evidence.push({ field: 'status', url: r.evidence_url || ('https://compute.sinanlab.com/api/robo/repro?model=' + r.model_id), source_type: 'official', fetched: r.verified_at, note: `社区复现 #${r.id}：${r.outcome === 'works' ? '跑通' : '需微调后跑通'}${r.setting ? '（' + (r.setting === 'real' ? '真机' : '仿真') + '）' : ''}${r.note ? ' · ' + String(r.note).slice(0, 120) : ''}` });
+  }
+  console.log(`社区复现：${repro.length} 条，升格 ${up} 格`);
+}
+
 // 延迟测量：Sprint 0 无数据，写空数组让页面走“— / 原因徽标”路径
 const measurements = [];
 
@@ -138,6 +154,7 @@ write('benchmarks', benchDefs);
 write('scores', scores);
 write('datasets', datasets);
 write('reports', reports);
+write('repro', repro.map((r) => ({ id: String(r.id), ...r })));
 write('meta', { ...seed._meta, imported_at: new Date().toISOString() });
 
 console.log(`导入完成：模型 ${models.length} · 本体 ${embodiments.length} · 硬件 ${hardware.length} · 矩阵格 ${compat.length} · 测量 ${measurements.length}`);

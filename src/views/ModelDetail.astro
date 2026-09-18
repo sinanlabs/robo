@@ -22,6 +22,7 @@ const recipe = (await getCollection('recipes').catch(() => [])).map((x: any) => 
 const notRep = (((await getCollection('recipes_meta').catch(() => [])).map((x: any) => x.data)[0] || {}).not_reproduced || []).find((x: any) => x.model_id === id);
 const myScores = (await getCollection('scores').catch(() => [])).map((x: any) => x.data).filter((x: any) => x.model_id === id);
 const benchDefs = Object.fromEntries((await getCollection('benchmarks').catch(() => [])).map((x: any) => [x.data.id, x.data]));
+const myRepro = (await getCollection('repro').catch(() => [])).map((x: any) => x.data).filter((x: any) => x.model_id === id);
 const p = pendingOf(m as any, MODEL_REQUIRED);
 const dates = Array.from(new Set(m.evidence.map((e) => e.fetched))).sort();
 ---
@@ -63,8 +64,8 @@ const dates = Array.from(new Set(m.evidence.map((e) => e.fetched))).sort();
         <h2 class="sec">{en ? 'Public benchmark scores' : '公开基准分数'}</h2>
         {myScores.length ? <div><p class="sub" style="margin-top:4px">{en ? 'As printed in the source; protocols differ between papers. Full table with notes on the benchmarks page.' : '照抄来源；各论文协议不同。带备注的完整表见基准分数页。'}</p>
           <div class="tablewrap" style="margin-top:8px"><table><thead><tr><th>{en ? 'Benchmark' : '基准'}</th><th>{en ? 'Subset' : '子集'}</th><th class="num">{en ? 'Score' : '分数'}</th><th>{en ? 'Source' : '来源'}</th></tr></thead>
-          <tbody>{myScores.map((s: any) => <tr><td>{benchDefs[s.benchmark_id]?.[en ? 'name_en' : 'name'] || benchDefs[s.benchmark_id]?.name || s.benchmark_name || s.benchmark_id}{s.variant ? <span class="pill none mono" style="margin-left:6px">{s.variant}</span> : null}</td><td class="mono sub">{s.subset || '—'}</td><td class="num mono">{Math.round(s.score * 10) / 10}{s.unit === '%' ? '' : ' ' + s.unit}</td><td class="sub" style="max-width:220px"><a href={s.source_url} rel="noopener">{s.source_type === 'paper' ? (en ? 'paper' : '论文') : s.source_type === 'official' ? (en ? 'official' : '官方') : (en ? 'third-party' : '第三方')}</a>{s.source_ref ? ' · ' + s.source_ref : ''}</td></tr>)}</tbody></table></div>
-          <a class="btn" href={href(lang, '/benchmarks')} style="margin-top:10px">{en ? 'All benchmarks →' : '全部基准 →'}</a></div>
+          <tbody>{[...myScores].sort((a: any, b: any) => (a.benchmark_id + (a.subset || '')).localeCompare(b.benchmark_id + (b.subset || '')) || (a.variant || '').localeCompare(b.variant || '')).slice(0, 14).map((s: any) => <tr><td>{benchDefs[s.benchmark_id]?.[en ? 'name_en' : 'name'] || benchDefs[s.benchmark_id]?.name || s.benchmark_name || s.benchmark_id}{s.variant ? <span class="pill none mono" style="margin-left:6px">{s.variant}</span> : null}</td><td class="mono sub">{s.subset || '—'}</td><td class="num mono">{Math.round(s.score * 10) / 10}{s.unit === '%' ? '' : ' ' + s.unit}</td><td class="sub" style="max-width:220px"><a href={s.source_url} rel="noopener">{s.source_type === 'paper' ? (en ? 'paper' : '论文') : s.source_type === 'official' ? (en ? 'official' : '官方') : (en ? 'third-party' : '第三方')}</a>{s.source_ref ? ' · ' + s.source_ref : ''}</td></tr>)}</tbody></table></div>
+          <a class="btn" href={href(lang, '/benchmarks')} style="margin-top:10px">{myScores.length > 14 ? (en ? `All ${myScores.length} scores with notes →` : `全部 ${myScores.length} 条分数与备注 →`) : (en ? 'All benchmarks →' : '全部基准 →')}</a></div>
         : <div class="callout" style="margin-top:10px">{en ? 'No public benchmark score recorded for this model yet (we only copy numbers printed in a paper, README or model card).' : '还没有记录这个模型的公开基准分数（我们只抄论文、README 或模型卡里印出来的数字）。'}</div>}
       </section>
       <section class="card pad rise" style="--i:3">
@@ -86,5 +87,34 @@ const dates = Array.from(new Set(m.evidence.map((e) => e.fetched))).sort();
     <h2 class="sec">{en ? 'Compatibility' : '适配本体'}</h2>
     <p class="lead" style="margin-bottom:10px">{en ? 'Colored only where we hold evidence. An amber dot means the vendor declares this form as a target; that is a claim, not a verified compatibility.' : '只有有证据的格子才上色。橙点表示厂商声明的目标形态，那是声明，不是核实过的适配。'}</p>
     <CompatMatrix lang={lang} models={[m]} embodiments={embs} compat={compat} />
+  </section>
+
+  <section class="card pad rise" style="margin-top:16px;--i:6">
+    <h2 class="sec">{en ? 'Reproduction records' : '复现记录'}</h2>
+    <p class="lead" style="margin-bottom:10px">{en ? 'Did this model run on your robot? Report it with a link (log, video or repo). Records are reviewed by the maintainers; a verified “works” or “works after fine-tuning” upgrades the matrix cell to “community verified” with your link as evidence. Anonymous is fine; nothing but the fields below is stored.' : '这个模型在你的机器人上跑起来了吗？报一条，附链接（日志、视频或仓库）。记录由维护者核验；核验通过的“跑通”或“微调后跑通”会把矩阵格子升为“社区复现”，你的链接就是证据。可匿名；只存下面这几个字段。'}</p>
+    {myRepro.length ? <div class="tablewrap" style="margin-bottom:12px"><table><thead><tr><th>{en ? 'Body' : '本体'}</th><th>{en ? 'Outcome' : '结果'}</th><th>{en ? 'Setting' : '真机/仿真'}</th><th>{en ? 'Evidence' : '证据'}</th><th>{en ? 'Verified' : '核验'}</th></tr></thead>
+      <tbody>{myRepro.map((r: any) => <tr><td><a href={href(lang, '/embodiments/' + r.embodiment_id)}>{embs.find((e) => e.id === r.embodiment_id)?.name || r.embodiment_id}</a></td><td>{r.outcome === 'works' ? (en ? 'works' : '跑通') : r.outcome === 'finetune' ? (en ? 'works after fine-tuning' : '微调后跑通') : (en ? 'did not run' : '未跑通')}</td><td class="sub">{r.setting === 'real' ? (en ? 'real robot' : '真机') : r.setting === 'sim' ? (en ? 'simulation' : '仿真') : '—'}</td><td>{r.evidence_url ? <a href={r.evidence_url} rel="noopener">{en ? 'link' : '链接'}</a> : <span class="sub">{(r.note || '').slice(0, 60)}</span>}</td><td class="mono dim">{r.verified_at}</td></tr>)}</tbody></table></div>
+      : <p class="sub" style="margin-bottom:10px">{en ? 'No verified record yet for this model.' : '这个模型还没有核验通过的复现记录。'}</p>}
+    <form id="rf" class="rf" onsubmit="return false">
+      <select name="embodiment_id" required><option value="">{en ? 'Body…' : '选本体…'}</option>{embs.map((e) => <option value={e.id}>{e.name} · {e.vendor}</option>)}</select>
+      <select name="outcome" required><option value="">{en ? 'Outcome…' : '结果…'}</option><option value="works">{en ? 'works out of the box' : '直接跑通'}</option><option value="finetune">{en ? 'works after fine-tuning' : '微调后跑通'}</option><option value="failed">{en ? 'did not run' : '没跑通'}</option></select>
+      <select name="setting"><option value="">{en ? 'Real / sim…' : '真机 / 仿真…'}</option><option value="real">{en ? 'real robot' : '真机'}</option><option value="sim">{en ? 'simulation' : '仿真'}</option></select>
+      <input name="evidence_url" type="url" placeholder={en ? 'Evidence link (log / video / repo)' : '证据链接（日志 / 视频 / 仓库）'}>
+      <input name="note" maxlength="500" placeholder={en ? 'One line: setup, what happened' : '一句话：环境、发生了什么'}>
+      <button class="btn a" type="submit">{en ? 'Submit for review' : '提交待核验'}</button>
+      <span class="sub" id="rmsg"></span>
+    </form>
+    <script id="rmeta" type="application/json" set:html={JSON.stringify({ model_id: m.id, ok: en ? 'Submitted. It shows here after review.' : '已提交，核验通过后会出现在这里。', fail: en ? 'Not sent: ' : '未发送：', need: en ? 'Give a link or a note.' : '请给一个链接或写一句说明。' })}></script>
+    <script>
+      const M = JSON.parse(document.getElementById('rmeta')!.textContent!); const f = document.getElementById('rf') as HTMLFormElement; const msg = document.getElementById('rmsg')!;
+      f.addEventListener('submit', async () => {
+        const d = Object.fromEntries(new FormData(f).entries()) as Record<string, string>;
+        if (!d.embodiment_id || !d.outcome) return; if (!d.evidence_url && !d.note) { msg.textContent = M.need; return; }
+        msg.textContent = '…';
+        try { const r = await fetch('https://compute.sinanlab.com/api/robo/repro', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model_id: M.model_id, ...d }) }); const j = await r.json().catch(() => ({})); msg.textContent = r.ok ? M.ok : M.fail + (j.message || j.error || r.status); if (r.ok) f.reset(); }
+        catch (e) { msg.textContent = M.fail + String(e); }
+      });
+    </script>
+    <style>.rf{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.rf select,.rf input{padding:7px 9px;border:1px solid var(--hair-2);border-radius:8px;font:inherit;font-size:13px}.rf input[name=evidence_url]{min-width:260px;flex:1}.rf input[name=note]{min-width:220px;flex:1}</style>
   </section>
 </Base>

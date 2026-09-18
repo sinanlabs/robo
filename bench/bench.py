@@ -29,6 +29,8 @@ def main():
     ap.add_argument("--precision", default="bf16", choices=["bf16", "fp16", "fp32"]); ap.add_argument("--warmup", type=int, default=50); ap.add_argument("--steps", type=int, default=500)
     ap.add_argument("--image-res", type=int, default=224); ap.add_argument("--dry-run", action="store_true", help="用假模型验证流程与输出格式")
     ap.add_argument("--out", default=os.path.join(HERE, "results"))
+    ap.add_argument("--upload", action="store_true", help="跑完把指标与硬件指纹（不含图像 / 数据 / 密钥）上传到 Sinan Robo 众测队列，待核验后进站")
+    ap.add_argument("--endpoint", default=os.environ.get("SINAN_ROBO_ENDPOINT", "https://compute.sinanlab.com/api/robo/measure"))
     a = ap.parse_args()
     adapter = get_adapter("dummy" if a.dry_run else a.model)
     t0 = time.time(); model_info = adapter.load(precision=a.precision); load_s = time.time() - t0
@@ -58,5 +60,18 @@ def main():
     os.makedirs(a.out, exist_ok=True); p = os.path.join(a.out, rec["id"] + ".json")
     json.dump(rec, open(p, "w"), ensure_ascii=False, indent=1)
     print("%s · %s · %s · p50 %.1f ms · p95 %.1f ms · %.2f chunks/s · VRAM %s GB · 加载 %.0fs → %s" % (a.model, a.hardware, a.precision, rec["metrics"]["latency_ms_p50"], rec["metrics"]["latency_ms_p95"], rec["metrics"]["throughput_chunks_s"], vram, load_s, p))
+    if a.upload and not a.dry_run: upload(rec, a.endpoint)
+
+def upload(rec, endpoint):
+    """众测上传：只发 model_id / precision / config / metrics / env（显卡型号、驱动、CUDA、torch、系统、权重版本）。不发逐步延迟、不发任何本地路径。"""
+    import urllib.request
+    env = dict(rec.get("env") or {}); env["os"] = platform.platform()[:80]; env["revision"] = str((rec.get("model_info") or {}).get("revision") or "")[:80]
+    body = {"model_id": rec["model_id"], "precision": rec["precision"], "config": rec["config"], "metrics": {k: rec["metrics"].get(k) for k in ("latency_ms_p50", "latency_ms_p95", "throughput_chunks_s", "vram_peak_gb")}, "env": env, "client_version": "bench-1.1"}
+    req = urllib.request.Request(endpoint, data=json.dumps(body).encode(), headers={"Content-Type": "application/json", "User-Agent": "sinan-robo-bench/1.1"}, method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r: out = json.loads(r.read().decode())
+        print("已上传到众测队列（待核验）：id=%s 显卡映射=%s" % (out.get("id"), out.get("hardware_id") or "未映射"))
+    except Exception as e:
+        print("上传失败（本地结果已保存，不影响）：%s" % str(e)[:200])
 
 if __name__ == "__main__": main()
