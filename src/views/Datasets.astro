@@ -1,0 +1,60 @@
+---
+// 数据集索引：公开机器人学习数据集，按本体形态 / 许可证 / 格式筛选；规模、许可证、镜像逐条带来源。只记录，不推荐。
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { href, type Lang } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const ds = (await getCollection('datasets')).map((d) => d.data as any);
+const forms = Array.from(new Set(ds.flatMap((d) => d.form_tags || []))).sort();
+const fmts = Array.from(new Set(ds.map((d) => d.format).filter(Boolean))).sort();
+const FORM: Record<string, string> = en ? { single_arm: 'single arm', dual_arm: 'dual arm', humanoid: 'humanoid', mobile_manipulator: 'mobile manipulator', wheeled: 'wheeled', quadruped: 'quadruped', human_hand: 'human hand', human_video: 'human video', multi: 'multi-embodiment', sim: 'simulation' }
+  : { single_arm: '单臂', dual_arm: '双臂', humanoid: '人形', mobile_manipulator: '移动操作', wheeled: '轮式', quadruped: '四足', human_hand: '人手', human_video: '人类视频', multi: '多本体', sim: '仿真' };
+const T = en ? { h1: 'Public robot datasets', lead: 'The other half of the model index: what data exists to fine-tune a model to your robot. Scale, embodiments, format, licence and China mirrors, each field with a source. Only what the dataset page or paper states; blanks are unknowns, not zeros.',
+  k1: 'datasets', k2: 'hours stated in total', k3: 'episodes stated in total', form: 'Embodiment', any: 'any', lic: 'Licence', licYes: 'commercial OK (stated)', fmt: 'Format', mirror: 'China mirror', mirrorYes: 'has ModelScope / OpenDataLab mirror', n: 'datasets match',
+  colName: 'Dataset', colEmb: 'Embodiments', colScale: 'Scale', colFmt: 'Format', colLic: 'Licence', colMirror: 'Mirror', eps: 'episodes', hrs: 'h', frames: 'frames', empty: 'Nothing matches all conditions.', foot: 'Sorted by stated hours, then episodes. Simulation datasets are tagged “simulation”. Licence classification is literal: CC-BY / Apache / MIT → commercial OK, CC-BY-NC → not, anything else → unknown.' }
+  : { h1: '公开机器人数据集', lead: '模型索引的另一半：有哪些数据能把模型微调到你的机器人上。规模、本体、格式、许可证、国内镜像，每个字段带来源。只记录数据集页面或论文写明的内容；空白是“不知道”，不是零。',
+  k1: '个数据集', k2: '小时（已写明的合计）', k3: '条轨迹（已写明的合计）', form: '本体形态', any: '不限', lic: '许可证', licYes: '明确允许商用', fmt: '格式', mirror: '国内镜像', mirrorYes: '有 ModelScope / OpenDataLab 镜像', n: '个符合条件',
+  colName: '数据集', colEmb: '本体', colScale: '规模', colFmt: '格式', colLic: '许可证', colMirror: '镜像', eps: '条轨迹', hrs: '小时', frames: '帧', empty: '没有同时满足所有条件的数据集。', foot: '按写明的小时数、其次轨迹数排序。仿真数据标“仿真”。许可证按原文机械分类：CC-BY / Apache / MIT 记为可商用，CC-BY-NC 记为禁商用，其余记为待核实。' };
+const hoursTotal = ds.reduce((a, d) => a + (d.hours || 0), 0), epsTotal = ds.reduce((a, d) => a + (d.episodes || 0), 0);
+const n = (v: number | null) => (v == null ? null : Math.round(v).toLocaleString('en-US'));
+---
+<Base lang={lang} title={T.h1 + ' · Sinan Robo'} desc={T.lead} active="datasets" path="/datasets" crumbs={[{ label: T.h1 }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{T.h1}</h1><p class="lead">{T.lead}</p>
+    <div class="kp"><span><b>{ds.length}</b> {T.k1}</span><span><b>{n(hoursTotal)}</b> {T.k2}</span><span><b>{n(epsTotal)}</b> {T.k3}</span></div></div>
+  <section class="card rise" style="--i:1"><div class="pad">
+    <div class="filters" id="df">
+      <label>{T.form}</label><select data-f="form"><option value="">{T.any}</option>{forms.map((f) => <option value={f}>{FORM[f] || f}</option>)}</select>
+      <label>{T.lic}</label><select data-f="lic"><option value="">{T.any}</option><option value="yes">{T.licYes}</option></select>
+      <label>{T.fmt}</label><select data-f="fmt"><option value="">{T.any}</option>{fmts.map((f) => <option value={f}>{f}</option>)}</select>
+      <label>{T.mirror}</label><select data-f="mirror"><option value="">{T.any}</option><option value="yes">{T.mirrorYes}</option></select>
+    </div>
+    <p class="sub" style="margin-top:8px"><b id="cnt">{ds.length}</b> {T.n}</p></div>
+    <div class="tablewrap"><table id="tbl"><thead><tr><th>{T.colName}</th><th>{T.colEmb}</th><th class="num">{T.colScale}</th><th>{T.colFmt}</th><th>{T.colLic}</th><th>{T.colMirror}</th></tr></thead><tbody>
+      {ds.map((d) => (
+        <tr data-forms={(d.form_tags || []).join(' ')} data-lic={d.commercial_ok === true ? 'yes' : d.commercial_ok === false ? 'no' : 'unk'} data-fmt={d.format || ''} data-mirror={d.mirror_url ? 'yes' : 'no'}>
+          <td><a href={href(lang, '/datasets/' + d.id)}><b>{d.name}</b></a><div class="sub">{d.org}{d.release_date ? ' · ' + d.release_date : ''}</div></td>
+          <td class="sub" style="max-width:220px">{(d.form_tags || []).map((f: string) => <span class="pill none" style="margin:0 4px 4px 0">{FORM[f] || f}</span>)}<div class="dim" style="font-size:11.5px">{(d.embodiments || []).slice(0, 4).join(' · ')}{(d.embodiments || []).length > 4 ? ' …' : ''}</div></td>
+          <td class="num mono" style="white-space:nowrap">{d.hours != null ? <div>{n(d.hours)} {T.hrs}</div> : null}{d.episodes != null ? <div>{n(d.episodes)} {T.eps}</div> : null}{d.hours == null && d.episodes == null ? <span class="pending">?</span> : null}</td>
+          <td class="mono" style="font-size:12.5px">{d.format || <span class="pending">?</span>}</td>
+          <td class="sub" style="max-width:200px">{d.commercial_ok === true ? '✓ ' : d.commercial_ok === false ? '✗ ' : '? '}{(d.license || '').slice(0, 48)}</td>
+          <td class="sub">{d.mirror_url ? <a href={d.mirror_url} rel="noopener">{/modelscope/.test(d.mirror_url) ? 'ModelScope' : /opendatalab/.test(d.mirror_url) ? 'OpenDataLab' : (en ? 'mirror' : '镜像')}</a> : '—'}</td>
+        </tr>))}
+    </tbody></table></div>
+    <p class="sub pad" id="empty" style="display:none">{T.empty}</p>
+  </section>
+  <p class="sub" style="margin-top:14px">{T.foot}</p>
+  <style>.kp{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--ink-3)}.kp b{color:var(--ink);font-size:16px;margin-right:4px}</style>
+  <script>
+    const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>('#tbl tbody tr'));
+    const sel = Array.from(document.querySelectorAll<HTMLSelectElement>('#df select'));
+    const cnt = document.getElementById('cnt')!, empty = document.getElementById('empty')!;
+    function apply() {
+      const f: Record<string, string> = {}; sel.forEach((s) => (f[s.dataset.f!] = s.value)); let k = 0;
+      rows.forEach((r) => { const ok = (!f.form || (r.dataset.forms || '').split(' ').includes(f.form)) && (!f.lic || r.dataset.lic === 'yes') && (!f.fmt || r.dataset.fmt === f.fmt) && (!f.mirror || r.dataset.mirror === 'yes'); r.style.display = ok ? '' : 'none'; if (ok) k++; });
+      cnt.textContent = String(k); empty.style.display = k ? 'none' : '';
+    }
+    sel.forEach((s) => s.addEventListener('change', apply)); apply();
+  </script>
+</Base>

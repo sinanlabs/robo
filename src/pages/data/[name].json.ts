@@ -2,7 +2,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import fs from 'node:fs';
-const NAMES = ['models', 'compat', 'embodiments', 'hardware', 'measurements', 'activity', 'weekly'] as const;
+const NAMES = ['models', 'compat', 'embodiments', 'hardware', 'measurements', 'activity', 'weekly', 'benchmarks', 'scores', 'datasets', 'reports'] as const;
 export function getStaticPaths() { return NAMES.map((name) => ({ params: { name } })); }
 export const GET: APIRoute = async ({ params }) => {
   const name = params.name as (typeof NAMES)[number];

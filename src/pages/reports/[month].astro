@@ -1,0 +1,7 @@
+---
+import V from '../../views/Report.astro';
+import { getCollection } from 'astro:content';
+export async function getStaticPaths() { return (await getCollection('reports')).map((x) => ({ params: { month: x.data.id } })); }
+const { month } = Astro.params;
+---
+<V lang="zh-cn" month={month!} />

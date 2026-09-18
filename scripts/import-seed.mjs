@@ -102,6 +102,28 @@ if (fs.existsSync(wkDir)) {
   console.log(`周报：${weekly.length} 期`);
 }
 
+
+// 公开基准分数与数据集索引：data/benchmarks.json · data/datasets.json（scripts/merge_mine.py 合并研究结果生成；缺文件则为空）
+let benchDefs = [], scores = [], datasets = [];
+const bdP = path.join(root, 'data/benchmark_defs.json'), bP = path.join(root, 'data/benchmarks.json'), dP = path.join(root, 'data/datasets.json');
+if (fs.existsSync(bP)) { const B = JSON.parse(fs.readFileSync(bP, 'utf8')); benchDefs = B.benchmarks || []; scores = B.scores || []; }
+else if (fs.existsSync(bdP)) benchDefs = JSON.parse(fs.readFileSync(bdP, 'utf8')).benchmarks || [];
+if (fs.existsSync(dP)) datasets = JSON.parse(fs.readFileSync(dP, 'utf8')).datasets || [];
+console.log(`基准分数：${scores.length} 条 · 数据集：${datasets.length} 个`);
+
+
+// 月报：data/reports/<月>.json（结构块）+ <月>.analysis.md / .analysis.en.md（署名分析）
+let reports = [];
+const rpDir = path.join(root, 'data/reports');
+if (fs.existsSync(rpDir)) {
+  reports = fs.readdirSync(rpDir).filter((f) => /^\d{4}-\d{2}\.json$/.test(f)).map((f) => {
+    const r = JSON.parse(fs.readFileSync(path.join(rpDir, f), 'utf8')); const m = f.slice(0, 7);
+    const rd = (x) => (fs.existsSync(path.join(rpDir, x)) ? fs.readFileSync(path.join(rpDir, x), 'utf8') : '');
+    return { id: m, ...r, analysis_zh: rd(m + '.analysis.md'), analysis_en: rd(m + '.analysis.en.md') };
+  }).sort((a, b) => b.month.localeCompare(a.month));
+  console.log(`月报：${reports.length} 期`);
+}
+
 const write = (name, data) => fs.writeFileSync(path.join(out, `${name}.json`), JSON.stringify(data, null, 2));
 write('models', models);
 write('embodiments', embodiments);
@@ -112,6 +134,10 @@ write('activity', activity);
 write('recipes', recipes);
 write('recipes_meta', recipesMeta);
 write('weekly', weekly);
+write('benchmarks', benchDefs);
+write('scores', scores);
+write('datasets', datasets);
+write('reports', reports);
 write('meta', { ...seed._meta, imported_at: new Date().toISOString() });
 
 console.log(`导入完成：模型 ${models.length} · 本体 ${embodiments.length} · 硬件 ${hardware.length} · 矩阵格 ${compat.length} · 测量 ${measurements.length}`);

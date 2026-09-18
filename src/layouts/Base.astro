@@ -20,8 +20,11 @@ const nav = [
   ['rank', '/rank', '<path d="M8 21h8M12 17v4M6 3h12v5a6 6 0 0 1-12 0z"/><path d="M6 5H3v2a3 3 0 0 0 3 3M18 5h3v2a3 3 0 0 1-3 3"/>', ''],
   ['select', '/select', '<path d="M4 6h16M7 12h10M10 18h4"/>', ''],
   ['recipes', '/recipes', '<path d="M4 5h16v14H4z"/><path d="m8 10 3 2-3 2M13 14h3"/>', ''],
+  ['benchmarks', '/benchmarks', '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>', ''],
+  ['datasets', '/datasets', '<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>', ''],
 ] as const;
 const nav2 = [
+  ['reports', '/reports', '<path d="M6 3h9l5 5v13H6z"/><path d="M9 12h6M9 16h6M14 3v5h5"/>'],
   ['weekly', '/weekly', '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>'],
   ['methodology', '/methodology', '<path d="M4 6h16M4 12h10M4 18h7"/>'],
   ['subscribe', '/subscribe', '<path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/>'],
@@ -71,7 +74,7 @@ const nav2 = [
   </div>
   <slot />
 <script is:inline>
-(function(){try{var C="https://compute.sinanlab.com",l=document.documentElement.lang==="en"?"en":"zh";fetch(C+"/api/hit?s=robo&t=pv&l="+l+"&p="+encodeURIComponent(location.pathname),{method:"POST"});if(!sessionStorage.getItem("sess")){sessionStorage.setItem("sess","1");fetch(C+"/api/hit?s=robo&t=sess&l="+l,{method:"POST"});}if(document.referrer){var h=new URL(document.referrer).hostname;if(!/(^|\.)sinanlab\.com$/.test(h)&&!sessionStorage.getItem("ref")){fetch(C+"/api/hit?s=robo&r="+encodeURIComponent(h)+"&p="+encodeURIComponent("robo:"+location.pathname),{method:"POST"});sessionStorage.setItem("ref","1");}}}catch(e){}})();
+(function(){try{var C="https://compute.sinanlab.com",l=document.documentElement.lang==="en"?"en":"zh";fetch(C+"/api/hit?s=robo&t=pv&l="+l+"&p="+encodeURIComponent(location.pathname),{method:"POST"}).catch(function(){});if(!sessionStorage.getItem("sess")){sessionStorage.setItem("sess","1");fetch(C+"/api/hit?s=robo&t=sess&l="+l,{method:"POST"}).catch(function(){});}if(document.referrer){var h=new URL(document.referrer).hostname;if(!/(^|\.)sinanlab\.com$/.test(h)&&!sessionStorage.getItem("ref")){fetch(C+"/api/hit?s=robo&r="+encodeURIComponent(h)+"&p="+encodeURIComponent("robo:"+location.pathname),{method:"POST"}).catch(function(){});sessionStorage.setItem("ref","1");}}}catch(e){}})();
 (function(){var box=document.getElementById("auth");if(!box)return;var en=box.dataset.lang==="en";var C="https://compute.sinanlab.com";
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function here(){return encodeURIComponent(location.origin+location.pathname+location.search);}

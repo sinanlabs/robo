@@ -116,3 +116,16 @@ bench/ 里五个适配器是我们已经踩平的路：transformers 版本互相
 2. 第二批要不要全做，还是先做 D 或 E 其中一个。
 3. F：要不要花约 ¥2,000 买一块 Jetson Orin Nano Super。
 4. 周报与月报的发送节奏（建议：周报每周一自动发，月报月末我写分析）。
+
+## 5. 进展（2026-09-18 更新）
+
+| 项 | 状态 | 落点 |
+|---|---|---|
+| A 活性信号 | 已上线 | scripts/activity.py 每日；模型页活性卡；司南榜三张活性榜；/data/activity.json；周报 scripts/weekly_brief.py 周一生成 → /weekly、/feed.xml、社媒源 |
+| B 工作台 | 已上线 | /select：所选显卡的实测 p50/p95、可达频率、每千次成本、每天/每月租金（国内 AutoDL / 海外 Vast 两档） |
+| C 部署配方 | 已上线 | /recipes：通用步骤、环境坑位表、5 篇配方、4 个未复现原因；模型页入口 |
+| D 基准分数表 | 数据采集中 | /benchmarks 页面与 /data/scores.json 已就位；scripts/merge_mine.py 合并研究结果 |
+| E 数据集索引 | 数据采集中 | /datasets、/datasets/<id>、本体页“覆盖这个本体的公开数据集”卡已就位 |
+| I 月报 | 创刊号已上线 | /reports/2026-09：脚本结构块（scripts/monthly_brief.py）+ 署名分析（zh/en） |
+| F Jetson | 不做（不花钱） | — |
+| G 众测 CLI / H 复现记录 | 待第三批 | — |

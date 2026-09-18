@@ -1,0 +1,402 @@
+{
+ "month": "2026-09",
+ "from": "2026-09-01",
+ "to": "2026-09-30",
+ "generated": "2026-09-19T01:21:55+08:00",
+ "index": {
+  "models": 40,
+  "embodiments": 12,
+  "hardware": 6,
+  "chinese_org": 23,
+  "license": {
+   "yes": 17,
+   "no": 8,
+   "unk": 15
+  },
+  "size": {
+   "lt1": 6,
+   "b1_4": 14,
+   "b4_8": 10,
+   "ge8": 4
+  },
+  "release_years": {
+   "2026": 7,
+   "2025": 24,
+   "2024": 8,
+   "2023": 1
+  },
+  "new_this_month": []
+ },
+ "activity": {
+  "repos": 39,
+  "stale_180": 20,
+  "stale_list": [
+   {
+    "id": "gr-1",
+    "name": "GR-1",
+    "days": 879,
+    "pushed": "2024-04-22"
+   },
+   {
+    "id": "octo",
+    "name": "Octo",
+    "days": 779,
+    "pushed": "2024-07-31"
+   },
+   {
+    "id": "hpt",
+    "name": "HPT（Heterogeneous Pre-trained Transformers）",
+    "days": 651,
+    "pushed": "2024-12-06"
+   },
+   {
+    "id": "lapa",
+    "name": "LAPA",
+    "days": 604,
+    "pushed": "2025-01-22"
+   },
+   {
+    "id": "minivla",
+    "name": "MiniVLA",
+    "days": 548,
+    "pushed": "2025-03-19"
+   },
+   {
+    "id": "openvla",
+    "name": "OpenVLA",
+    "days": 544,
+    "pushed": "2025-03-23"
+   },
+   {
+    "id": "dexvla",
+    "name": "DexVLA",
+    "days": 521,
+    "pushed": "2025-04-15"
+   },
+   {
+    "id": "spatialvla",
+    "name": "SpatialVLA",
+    "days": 452,
+    "pushed": "2025-06-23"
+   },
+   {
+    "id": "eo-1",
+    "name": "EO-1",
+    "days": 359,
+    "pushed": "2025-09-24"
+   },
+   {
+    "id": "cogact",
+    "name": "CogACT",
+    "days": 323,
+    "pushed": "2025-10-30"
+   }
+  ],
+  "zero_commits_90": 28,
+  "active_list": [
+   {
+    "id": "smolvla",
+    "name": "SmolVLA",
+    "c90": 100,
+    "capped": true
+   },
+   {
+    "id": "lingbot-vla-2.0",
+    "name": "LingBot-VLA 2.0",
+    "c90": 23,
+    "capped": false
+   },
+   {
+    "id": "internvla-a1.5",
+    "name": "InternVLA-A1.5",
+    "c90": 17,
+    "capped": false
+   },
+   {
+    "id": "gr00t-n1.7",
+    "name": "Isaac GR00T N1.7",
+    "c90": 10,
+    "capped": false
+   },
+   {
+    "id": "galaxea-g0.5",
+    "name": "Galaxea G0.5",
+    "c90": 10,
+    "capped": false
+   },
+   {
+    "id": "gr00t-n1.5-3b",
+    "name": "GR00T N1.5 3B",
+    "c90": 10,
+    "capped": false
+   },
+   {
+    "id": "wall-oss",
+    "name": "WALL-OSS",
+    "c90": 6,
+    "capped": false
+   },
+   {
+    "id": "genie-envisioner",
+    "name": "Genie Envisioner（GE-Act）",
+    "c90": 5,
+    "capped": false
+   },
+   {
+    "id": "graspvla",
+    "name": "GraspVLA",
+    "c90": 2,
+    "capped": false
+   },
+   {
+    "id": "pi0",
+    "name": "π0 (pi-zero)",
+    "c90": 1,
+    "capped": false
+   }
+  ],
+  "hf_repos": 37,
+  "dl30_total": 809037,
+  "dl30_top3_share": 0.855,
+  "dl_top": [
+   {
+    "id": "openvla",
+    "name": "OpenVLA",
+    "dl30": 434598,
+    "repo": "openvla/openvla-7b"
+   },
+   {
+    "id": "smolvla",
+    "name": "SmolVLA",
+    "dl30": 159287,
+    "repo": "lerobot/smolvla_base"
+   },
+   {
+    "id": "gr00t-n1.7",
+    "name": "Isaac GR00T N1.7",
+    "dl30": 97805,
+    "repo": "nvidia/GR00T-N1.7-3B"
+   },
+   {
+    "id": "pi0",
+    "name": "π0 (pi-zero)",
+    "dl30": 41435,
+    "repo": "lerobot/pi0_base"
+   },
+   {
+    "id": "gr00t-n1.6-3b",
+    "name": "GR00T N1.6 3B",
+    "dl30": 32474,
+    "repo": "nvidia/GR00T-N1.6-3B"
+   },
+   {
+    "id": "pi0.5",
+    "name": "π0.5",
+    "dl30": 20319,
+    "repo": "lerobot/pi05_base"
+   },
+   {
+    "id": "x-vla",
+    "name": "X-VLA",
+    "dl30": 10593,
+    "repo": "2toINF/X-VLA-Pt"
+   },
+   {
+    "id": "rdt-1b",
+    "name": "RDT-1B",
+    "dl30": 1392,
+    "repo": "robotics-diffusion-transformer/rdt-1b"
+   }
+  ],
+  "stars_top": [
+   {
+    "id": "smolvla",
+    "name": "SmolVLA",
+    "stars": 27608
+   },
+   {
+    "id": "pi0",
+    "name": "π0 (pi-zero)",
+    "stars": 13877
+   },
+   {
+    "id": "pi0.5",
+    "name": "π0.5",
+    "stars": 13877
+   },
+   {
+    "id": "gr00t-n1.7",
+    "name": "Isaac GR00T N1.7",
+    "stars": 8084
+   },
+   {
+    "id": "gr00t-n1.5-3b",
+    "name": "GR00T N1.5 3B",
+    "stars": 8084
+   },
+   {
+    "id": "openvla",
+    "name": "OpenVLA",
+    "stars": 7039
+   }
+  ],
+  "modelscope_mirrors": 23,
+  "gated": [
+   "galaxea-g0.5"
+  ],
+  "snapshot_days": 1
+ },
+ "measurements": {
+  "total": 15,
+  "this_month": 15,
+  "by_hardware": {
+   "a800-80g": [
+    {
+     "model_id": "nora",
+     "name": "NORA",
+     "p50": 145.95,
+     "p95": 150.77,
+     "vram": 7.13,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "openvla",
+     "name": "OpenVLA",
+     "p50": 187.17,
+     "p95": 201.53,
+     "vram": 14.41,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "smolvla",
+     "name": "SmolVLA",
+     "p50": 225.56,
+     "p95": 234.59,
+     "vram": 0.9,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "spatialvla",
+     "name": "SpatialVLA",
+     "p50": 450.77,
+     "p95": 472.74,
+     "vram": 7.82,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "molmoact",
+     "name": "MolmoAct",
+     "p50": 936.84,
+     "p95": 968.64,
+     "vram": 16.25,
+     "precision": "bf16"
+    }
+   ],
+   "rtx-4090": [
+    {
+     "model_id": "nora",
+     "name": "NORA",
+     "p50": 112.42,
+     "p95": 126.76,
+     "vram": 7.13,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "openvla",
+     "name": "OpenVLA",
+     "p50": 161.65,
+     "p95": 173.24,
+     "vram": 14.41,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "smolvla",
+     "name": "SmolVLA",
+     "p50": 170.28,
+     "p95": 197.42,
+     "vram": 0.91,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "spatialvla",
+     "name": "SpatialVLA",
+     "p50": 376.37,
+     "p95": 404.8,
+     "vram": 7.82,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "molmoact",
+     "name": "MolmoAct",
+     "p50": 934.45,
+     "p95": 940.06,
+     "vram": 16.25,
+     "precision": "bf16"
+    }
+   ],
+   "rtx-5090": [
+    {
+     "model_id": "nora",
+     "name": "NORA",
+     "p50": 128.75,
+     "p95": 134.71,
+     "vram": 7.13,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "openvla",
+     "name": "OpenVLA",
+     "p50": 146.35,
+     "p95": 150.04,
+     "vram": 14.41,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "smolvla",
+     "name": "SmolVLA",
+     "p50": 165.53,
+     "p95": 169.94,
+     "vram": 0.91,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "spatialvla",
+     "name": "SpatialVLA",
+     "p50": 362.3,
+     "p95": 370.01,
+     "vram": 7.82,
+     "precision": "bf16"
+    },
+    {
+     "model_id": "molmoact",
+     "name": "MolmoAct",
+     "p50": 674.55,
+     "p95": 713.32,
+     "vram": 16.25,
+     "precision": "bf16"
+    }
+   ]
+  },
+  "recipes": 5,
+  "not_reproduced": [
+   "pi0",
+   "pi0.5",
+   "minivla",
+   "vla-adapter"
+  ]
+ },
+ "benchmarks": {
+  "scores": 0,
+  "models_with_score": 0,
+  "by_benchmark": {}
+ },
+ "datasets": {
+  "count": 0,
+  "hours_total": 0,
+  "episodes_total": 0,
+  "forms": {},
+  "license": {},
+  "mirrors": 0,
+  "top_hours": []
+ }
+}

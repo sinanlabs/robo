@@ -82,4 +82,10 @@ const recipes_meta = defineCollection({ loader: file('src/content/generated/reci
 
 const weekly = defineCollection({ loader: file('src/content/generated/weekly.json'), schema: z.object({ id: z.string(), week: z.string(), from: z.string(), to: z.string() }).passthrough() });
 
-export const collections = { models, embodiments, hardware, compat, measurements, activity, recipes, recipes_meta, weekly };
+const benchmarks = defineCollection({ loader: file('src/content/generated/benchmarks.json'), schema: z.object({ id: z.string(), name: z.string(), kind: z.string() }).passthrough() });
+const scores = defineCollection({ loader: file('src/content/generated/scores.json'), schema: z.object({ id: z.string(), model_id: z.string(), benchmark_id: z.string(), score: z.number(), source_url: z.string() }).passthrough() });
+const datasets = defineCollection({ loader: file('src/content/generated/datasets.json'), schema: z.object({ id: z.string(), name: z.string(), url: z.string() }).passthrough() });
+
+const reports = defineCollection({ loader: file('src/content/generated/reports.json'), schema: z.object({ id: z.string(), month: z.string(), from: z.string(), to: z.string() }).passthrough() });
+
+export const collections = { models, embodiments, hardware, compat, measurements, activity, recipes, recipes_meta, weekly, benchmarks, scores, datasets, reports };

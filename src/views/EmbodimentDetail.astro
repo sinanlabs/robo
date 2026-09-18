@@ -5,6 +5,7 @@ import EvidenceList from '../components/EvidenceList.astro';
 import CompatMatrix from '../components/CompatMatrix.astro';
 import { getCollection } from 'astro:content';
 import { t, href, type Lang } from '../lib/i18n';
+const _norm = (v: string) => (v || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 interface Props { lang: Lang; id: string }
 const { lang, id } = Astro.props;
 const en = lang === 'en';
@@ -12,6 +13,8 @@ const e = (await getCollection('embodiments')).map((x) => x.data).find((x) => x.
 const models = (await getCollection('models')).map((m) => m.data);
 const compat = (await getCollection('compat')).map((c) => c.data).filter((c) => c.embodiment_id === id);
 const declared = compat.filter((c) => c.declared_target_form).map((c) => models.find((m) => m.id === c.model_id)!).filter(Boolean);
+const dsAll = (await getCollection('datasets').catch(() => [])).map((x: any) => x.data);
+const dsRel = dsAll.filter((d: any) => (d.embodiments || []).some((x: string) => _norm(x).includes(_norm(e.name).slice(0, 6)) || _norm(e.name).includes(_norm(x).slice(0, 6))) || (d.form_tags || []).includes(e.form) || ((d.form_tags || []).includes('dual_arm') && e.form === 'dual_arm_wheeled'));
 ---
 <Base lang={lang} title={`${e.name} · Sinan Robo`} desc={`${e.name} · ${e.vendor} · ${t(lang, 'form.' + e.form)}`} active="embodiments" path={'/embodiments/' + e.id} crumbs={[{ label: t(lang, 'nav.embodiments'), href: href(lang, '/embodiments') }, { label: e.name }]}>
   <div class="rise" style="--i:0;margin-bottom:16px"><div class="eyebrow" style="color:var(--robo-deep);opacity:1">{e.vendor}</div><h1 style="font-size:30px;margin-top:6px">{e.name}</h1></div>
@@ -37,5 +40,12 @@ const declared = compat.filter((c) => c.declared_target_form).map((c) => models.
   <section class="card pad rise" style="margin-top:16px;--i:3">
     <h2 class="sec">{en ? 'Compatibility on this embodiment' : '在这个本体上的适配状态'}</h2>
     <div style="margin-top:10px"><CompatMatrix lang={lang} models={models} embodiments={[e]} compat={compat} /></div>
+  </section>
+  <section class="card pad rise" style="margin-top:16px;--i:6">
+    <h2 class="sec">{lang === 'en' ? 'Public datasets covering this body' : '覆盖这个本体的公开数据集'}</h2>
+    <p class="sub" style="margin-top:4px">{lang === 'en' ? 'Matched by the robot names or form the dataset states. Scale as stated; blanks are unknowns.' : '按数据集写明的机器人名或形态匹配。规模按原文；空白是不知道。'}</p>
+    {dsRel.length ? <div class="tablewrap" style="margin-top:8px"><table><thead><tr><th>{lang === 'en' ? 'Dataset' : '数据集'}</th><th class="num">{lang === 'en' ? 'Hours' : '小时'}</th><th class="num">{lang === 'en' ? 'Episodes' : '轨迹'}</th><th>{lang === 'en' ? 'Format' : '格式'}</th><th>{lang === 'en' ? 'Licence' : '许可证'}</th></tr></thead>
+      <tbody>{dsRel.map((d: any) => <tr><td><a href={href(lang, '/datasets/' + d.id)}><b>{d.name}</b></a><div class="sub">{d.org}</div></td><td class="num mono">{d.hours != null ? Math.round(d.hours).toLocaleString('en-US') : '—'}</td><td class="num mono">{d.episodes != null ? Math.round(d.episodes).toLocaleString('en-US') : '—'}</td><td class="mono" style="font-size:12.5px">{d.format || '—'}</td><td class="sub">{d.commercial_ok === true ? '✓ ' : d.commercial_ok === false ? '✗ ' : '? '}{(d.license || '').slice(0, 30)}</td></tr>)}</tbody></table></div>
+      : <div class="callout" style="margin-top:10px">{lang === 'en' ? 'No indexed dataset states this body yet.' : '索引里还没有数据集写明覆盖这个本体。'}</div>}
   </section>
 </Base>

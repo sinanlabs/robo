@@ -20,7 +20,10 @@
     "rank": "司南榜",
     "select": "选模型",
     "recipes": "部署配方",
-    "weekly": "周报"
+    "weekly": "周报",
+    "benchmarks": "基准分数",
+    "datasets": "数据集",
+    "reports": "月报"
   },
   "hero": {
     "eyebrow": "开源 VLA · 适配矩阵 · 延迟与成本 · 每字可溯源",

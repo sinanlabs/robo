@@ -11,6 +11,11 @@ const models = (await getCollection('models')).map((m) => m.data);
 const embs = (await getCollection('embodiments')).map((e) => e.data);
 const compat = (await getCollection('compat')).map((c) => c.data);
 const hw = (await getCollection('hardware')).map((h) => h.data);
+const nMeas = (await getCollection('measurements')).filter((m) => m.data.review_status !== 'rejected').length;
+const nRecipes = (await getCollection('recipes').catch(() => [])).length;
+const nScores = (await getCollection('scores').catch(() => [])).length;
+const nDatasets = (await getCollection('datasets').catch(() => [])).length;
+const nWeekly = (await getCollection('weekly').catch(() => [])).length;
 const cells = compat.length, cellsKnown = compat.filter((c) => c.status !== 'unknown').length;
 let pend = 0, tot = 0;
 for (const m of models) { const p = pendingOf(m as any, MODEL_REQUIRED); pend += p.pending; tot += p.total; }
@@ -43,6 +48,11 @@ const latest = [...models].sort((a, b) => String(b.release_date).localeCompare(S
     <a class="card tile amber" href={href(lang, '/models')}><span class="orb"></span><div class="v">{models.length}</div><div class="k">{t(lang, 'nav.models')}</div><div class="n">{en ? 'License, weights, architecture, target forms, sources for every field' : '许可证、权重、架构、目标形态，每个字段带来源'}</div></a>
     <a class="card tile violet" href={href(lang, '/matrix')}><span class="orb"></span><div class="v">{models.length}×{embs.length}</div><div class="k">{t(lang, 'nav.matrix')}</div><div class="n">{en ? 'Model × embodiment; only evidenced states are colored' : '模型 × 本体；只给有证据的格子上色'}</div></a>
     <a class="card tile teal" href={href(lang, '/hardware')}><span class="orb"></span><div class="v">{hw.length}</div><div class="k">{t(lang, 'nav.hardware')}</div><div class="n">{en ? 'Latency p50/p95 and cost per 1k inferences by GPU' : '按显卡看延迟 p50/p95 与每千次推理成本'}</div></a>
+    <a class="card tile amber" href={href(lang, '/select')}><span class="orb"></span><div class="v">{nMeas}</div><div class="k">{t(lang, 'nav.select')}</div><div class="n">{en ? 'Measured p50/p95, achievable Hz and cost per 1k on the GPU you pick' : '选一张卡：实测 p50/p95、能跑几赫兹、每千次多少钱'}</div></a>
+    <a class="card tile violet" href={href(lang, '/recipes')}><span class="orb"></span><div class="v">{nRecipes}</div><div class="k">{t(lang, 'nav.recipes')}</div><div class="n">{en ? 'Exact commands, version pins and pitfalls from runs that actually worked' : '真正跑通的命令、版本号和踩过的坑'}</div></a>
+    <a class="card tile teal" href={href(lang, '/benchmarks')}><span class="orb"></span><div class="v">{nScores}</div><div class="k">{t(lang, 'nav.benchmarks')}</div><div class="n">{en ? 'Scores as printed in papers and READMEs, grouped by benchmark, never aggregated' : '论文与 README 里印出来的分数，按基准分组，不合成'}</div></a>
+    <a class="card tile amber" href={href(lang, '/datasets')}><span class="orb"></span><div class="v">{nDatasets}</div><div class="k">{t(lang, 'nav.datasets')}</div><div class="n">{en ? 'Public datasets: scale, embodiments, format, licence, China mirrors' : '公开数据集：规模、本体、格式、许可证、国内镜像'}</div></a>
+    <a class="card tile violet" href={href(lang, '/weekly')}><span class="orb"></span><div class="v">{nWeekly}</div><div class="k">{t(lang, 'nav.weekly')}</div><div class="n">{en ? 'Weekly change record from daily snapshots; RSS at /feed.xml' : '每周一从每日快照生成的变化记录；RSS 在 /feed.xml'}</div></a>
   </div>
 
   <div class="grid2">

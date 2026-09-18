@@ -1,0 +1,41 @@
+---
+// 单个数据集：字段 + 逐条来源 + 关联本体。只记录来源怎么说。
+import Base from '../layouts/Base.astro';
+import EvidenceList from '../components/EvidenceList.astro';
+import { getCollection } from 'astro:content';
+import { href, type Lang } from '../lib/i18n';
+interface Props { lang: Lang; id: string }
+const { lang, id } = Astro.props;
+const en = lang === 'en';
+const d = (await getCollection('datasets')).map((x) => x.data as any).find((x) => x.id === id)!;
+const embs = (await getCollection('embodiments')).map((e) => e.data);
+const FORM: Record<string, string> = en ? { single_arm: 'single arm', dual_arm: 'dual arm', humanoid: 'humanoid', mobile_manipulator: 'mobile manipulator', wheeled: 'wheeled', quadruped: 'quadruped', human_hand: 'human hand', human_video: 'human video', multi: 'multi-embodiment', sim: 'simulation' }
+  : { single_arm: '单臂', dual_arm: '双臂', humanoid: '人形', mobile_manipulator: '移动操作', wheeled: '轮式', quadruped: '四足', human_hand: '人手', human_video: '人类视频', multi: '多本体', sim: '仿真' };
+// 关联本体：数据集写明的本体名与索引本体名 / 厂商模糊匹配，或形态标签一致
+const norm = (s: string) => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+const related = embs.filter((e) => (d.embodiments || []).some((x: string) => norm(x).includes(norm(e.name).slice(0, 6)) || norm(e.name).includes(norm(x).slice(0, 6))) || (d.form_tags || []).includes(e.form) || ((d.form_tags || []).includes('dual_arm') && e.form === 'dual_arm_wheeled'));
+const n = (v: number | null) => (v == null ? '—' : Math.round(v).toLocaleString('en-US'));
+const T = en ? { h1: 'Dataset', back: 'All datasets', facts: 'Facts', org: 'Organisation', url: 'Landing page', hf: 'Hugging Face', mirror: 'China mirror', emb: 'Embodiments (as stated)', forms: 'Form tags', eps: 'Episodes', hrs: 'Hours', frames: 'Frames', tasks: 'Tasks', scenes: 'Scenes', mods: 'Modalities', fmt: 'Format', lic: 'Licence', comm: 'Commercial use', date: 'Released', size: 'Size', notes: 'Notes', rel: 'Related bodies in the index', relS: 'Matched by stated robot names or form; a match means the form is covered, not that a model was trained on it.', yes: 'allowed (stated)', no: 'not allowed (stated)', unk: 'unverified' }
+  : { h1: '数据集', back: '全部数据集', facts: '基本事实', org: '机构', url: '主页', hf: 'Hugging Face', mirror: '国内镜像', emb: '本体（按原文）', forms: '形态标签', eps: '轨迹数', hrs: '小时数', frames: '帧数', tasks: '任务', scenes: '场景', mods: '模态', fmt: '格式', lic: '许可证', comm: '商用', date: '发布', size: '体积', notes: '备注', rel: '索引里的相关本体', relS: '按写明的机器人名或形态匹配；匹配只说明形态覆盖，不代表某个模型在其上训练过。', yes: '允许（原文）', no: '不允许（原文）', unk: '待核实' };
+const row = (k: string, v: any) => ({ k, v });
+const facts = [row(T.org, d.org), row(T.forms, (d.form_tags || []).map((f: string) => FORM[f] || f).join(' · ') || null), row(T.emb, (d.embodiments || []).join(' · ') || null), row(T.eps, d.episodes != null ? n(d.episodes) : null), row(T.hrs, d.hours != null ? n(d.hours) : null), row(T.frames, d.frames != null ? n(d.frames) : null), row(T.tasks, d.tasks), row(T.scenes, d.scenes), row(T.mods, (d.modalities || []).join(' · ') || null), row(T.fmt, d.format), row(T.lic, d.license), row(T.comm, d.commercial_ok === true ? T.yes : d.commercial_ok === false ? T.no : T.unk), row(T.date, d.release_date), row(T.size, d.size_gb != null ? d.size_gb + ' GB' : null)];
+---
+<Base lang={lang} title={`${d.name} · ${T.h1} · Sinan Robo`} desc={`${d.name} · ${d.org || ''} · ${d.notes || ''}`} active="datasets" path={'/datasets/' + d.id} crumbs={[{ label: T.back, href: href(lang, '/datasets') }, { label: d.name }]}>
+  <div class="rise" style="--i:0;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:14px">
+    <div><div class="eyebrow" style="color:var(--robo-deep);opacity:1">{T.h1} · {d.org}</div><h1 style="font-size:28px;margin-top:6px">{d.name}</h1></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-left:auto">
+      <a class="btn" href={d.url} rel="noopener">{T.url} →</a>{d.hf_url && <a class="btn" href={d.hf_url} rel="noopener">{T.hf} →</a>}{d.mirror_url && <a class="btn" href={d.mirror_url} rel="noopener">{T.mirror} →</a>}
+    </div>
+  </div>
+  {d.notes && <p class="lead rise" style="--i:0.5">{d.notes}</p>}
+  <div class="grid2" style="margin-top:12px">
+    <section class="card pad rise" style="--i:1"><h2 class="sec">{T.facts}</h2>
+      <dl class="kv" style="margin-top:12px">{facts.map((f) => <div class="row"><dt>{f.k}</dt><dd>{f.v == null || f.v === '' ? <span class="pill pending">{T.unk}</span> : f.v}</dd></div>)}</dl>
+      <EvidenceList lang={lang} evidence={d.evidence} open={true} />
+    </section>
+    <section class="card pad rise" style="--i:2"><h2 class="sec">{T.rel}</h2><p class="sub" style="margin-top:4px">{T.relS}</p>
+      {related.length ? <ul class="rel">{related.map((e) => <li><a href={href(lang, '/embodiments/' + e.id)}>{e.name}</a> <span class="dim">{e.vendor} · {FORM[e.form] || e.form}</span></li>)}</ul> : <p class="dim" style="margin-top:8px">—</p>}
+    </section>
+  </div>
+  <style>.kv .row{display:grid;grid-template-columns:130px 1fr;gap:8px;padding:6px 0;border-bottom:1px solid var(--hair-2);font-size:13.5px}.kv dt{color:var(--ink-3)}.kv dd{margin:0;word-break:break-word}.rel{margin:10px 0 0;padding-left:18px;font-size:13.5px;line-height:1.9}</style>
+</Base>

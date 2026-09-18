@@ -20,7 +20,10 @@
     "rank": "Rankings",
     "select": "Select a model",
     "recipes": "Recipes",
-    "weekly": "Weekly"
+    "weekly": "Weekly",
+    "benchmarks": "Benchmarks",
+    "datasets": "Datasets",
+    "reports": "Monthly"
   },
   "hero": {
     "eyebrow": "Open VLA · compatibility matrix · latency & cost · every field sourced",

@@ -1,0 +1,45 @@
+---
+// 公开基准分数表：按基准分组，模型 × 子集，每个数字带来源类型与链接；不做跨基准合成，不排"综合分"。
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { href, type Lang } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const L = en ? 'en' : 'zh';
+const models = (await getCollection('models')).map((m) => m.data);
+const byId: Record<string, any> = {}; for (const m of models) byId[m.id] = m;
+const defs = (await getCollection('benchmarks')).map((b) => b.data as any);
+const scores = (await getCollection('scores')).map((s) => s.data as any);
+const groups = defs.map((b) => {
+  const rows = scores.filter((s) => s.benchmark_id === b.id);
+  const subsets: string[] = Array.from(new Set([...(b.subsets || []).filter((x: string) => rows.some((r) => r.subset === x)), ...rows.map((r) => r.subset || 'na')]));
+  const keys = Array.from(new Set(rows.map((r) => r.model_id + '||' + (r.variant || ''))));
+  const table = keys.map((k) => { const [mid, variant] = k.split('||'); const cells: Record<string, any[]> = {}; for (const s of subsets) cells[s] = rows.filter((r) => r.model_id === mid && (r.variant || '') === variant && (r.subset || 'na') === s); return { mid, variant, cells, sortv: (cells['avg'] || cells[subsets[0]] || [])[0]?.score ?? -1 }; })
+    .sort((a, b) => b.sortv - a.sortv);
+  return { b, rows, subsets, table };
+}).filter((g) => g.rows.length);
+const nModels = new Set(scores.map((s) => s.model_id)).size;
+const T = en ? { h1: 'Public benchmark scores', lead: 'Scores as printed in each model’s paper, official README or model card; third-party reproductions are labelled. Grouped by benchmark, never aggregated across benchmarks. Protocols differ between papers (fine-tuning, trials, checkpoints), so read the notes before comparing rows.',
+  k1: 'scores', k2: 'models with at least one score', k3: 'benchmarks', st: { paper: 'paper', official: 'official', third_party: 'third-party' }, model: 'Model', src: 'Source', notes: 'protocol notes', none: 'No scores collected yet.', metric: 'metric', variant: 'variant', foot: 'Sorted by the avg column (or the first subset) within a benchmark; not a ranking across benchmarks. Missing cells mean the source did not print that number.' }
+  : { h1: '公开基准分数表', lead: '分数照抄各模型论文、官方 README 或模型卡；第三方复现单独标注。按基准分组，绝不跨基准合成。各论文的评测协议不同（是否微调、试验次数、检查点），比较前先看备注。',
+  k1: '条分数', k2: '个模型至少有一项', k3: '个基准', st: { paper: '论文', official: '官方', third_party: '第三方' }, model: '模型', src: '来源', notes: '协议备注', none: '还没有收集到分数。', metric: '指标', variant: '变体', foot: '同一基准内按 avg 列（或第一子集）排序，不构成跨基准排名。空格表示来源没有印这个数字。' };
+const fmt = (s: any) => (s == null ? '' : (Math.round(s.score * 10) / 10).toString() + (s.unit === '%' ? '' : ' ' + s.unit));
+---
+<Base lang={lang} title={T.h1 + ' · Sinan Robo'} desc={T.lead} active="benchmarks" path="/benchmarks" crumbs={[{ label: T.h1 }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{T.h1}</h1><p class="lead">{T.lead}</p>
+    <div class="kp"><span><b>{scores.length}</b> {T.k1}</span><span><b>{nModels}</b> {T.k2}</span><span><b>{groups.length}</b> {T.k3}</span></div></div>
+  {groups.length === 0 && <div class="card pad"><div class="callout">{T.none}</div></div>}
+  {groups.map((g, gi) => (
+    <section class="card rise" style={`--i:${1 + gi * 0.4};margin-top:16px`}>
+      <div class="pad" style="padding-bottom:10px"><h2 class="sec">{g.b[en ? 'name_en' : 'name'] || g.b.name} <span class="pill none mono" style="margin-left:8px">{g.b.kind}</span></h2>
+        <p class="sub" style="margin-top:4px">{g.b[L]} · {T.metric}：{g.b[en ? 'metric_en' : 'metric']}{g.b.url ? <span> · <a href={g.b.url} rel="noopener">{g.b.url.replace(/^https?:\/\//, '')}</a></span> : null}</p></div>
+      <div class="tablewrap"><table><thead><tr><th>{T.model}</th>{g.subsets.map((s) => <th class="num">{s}</th>)}<th>{T.src}</th></tr></thead>
+        <tbody>{g.table.map((r) => { const first = Object.values(r.cells).flat()[0]; return (
+          <tr><td><a href={href(lang, '/models/' + r.mid)}><b>{byId[r.mid]?.name ?? r.mid}</b></a>{r.variant ? <span class="pill none mono" style="margin-left:6px">{r.variant}</span> : null}<div class="sub">{byId[r.mid]?.org}{g.b.id === 'other' && first?.benchmark_name ? ' · ' + first.benchmark_name : ''}</div></td>
+            {g.subsets.map((s) => { const c = r.cells[s]?.[0]; return <td class="num mono" title={c ? `${c.source_ref} · ${c.eval_notes}` : ''}>{c ? fmt(c) : ''}</td>; })}
+            <td class="sub" style="max-width:340px">{first ? <span><span class={'st ' + first.source_type}>{T.st[first.source_type as 'paper'] || first.source_type}</span> <a href={first.source_url} rel="noopener">{first.source_ref || first.source_url.replace(/^https?:\/\//, '').slice(0, 40)}</a>{first.eval_notes ? <div class="dim" style="font-size:11.5px;line-height:1.4">{first.eval_notes}</div> : null}</span> : null}</td></tr>); })}</tbody></table></div>
+    </section>))}
+  <p class="sub" style="margin-top:14px">{T.foot}</p>
+  <style>.kp{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--ink-3)}.kp b{color:var(--ink);font-size:16px;margin-right:4px}.st{font-size:11px;border-radius:999px;padding:2px 8px;border:1px solid var(--hair-2)}.st.paper{background:rgba(120,110,255,.08)}.st.official{background:rgba(20,140,90,.08)}.st.third_party{background:rgba(220,140,20,.10)}</style>
+</Base>
