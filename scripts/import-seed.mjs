@@ -93,6 +93,15 @@ if (fs.existsSync(rcP)) {
   console.log(`部署配方：${recipes.length} 篇 · 未复现 ${recipesMeta[0].not_reproduced.length}`);
 }
 
+
+// 周报：data/weekly/<周>.json（scripts/weekly_brief.py 每周一生成）
+let weekly = [];
+const wkDir = path.join(root, 'data/weekly');
+if (fs.existsSync(wkDir)) {
+  weekly = fs.readdirSync(wkDir).filter((f) => f.endsWith('.json')).map((f) => { const w = JSON.parse(fs.readFileSync(path.join(wkDir, f), 'utf8')); return { id: w.week, ...w }; }).sort((a, b) => b.week.localeCompare(a.week));
+  console.log(`周报：${weekly.length} 期`);
+}
+
 const write = (name, data) => fs.writeFileSync(path.join(out, `${name}.json`), JSON.stringify(data, null, 2));
 write('models', models);
 write('embodiments', embodiments);
@@ -102,6 +111,7 @@ write('measurements', measurements);
 write('activity', activity);
 write('recipes', recipes);
 write('recipes_meta', recipesMeta);
+write('weekly', weekly);
 write('meta', { ...seed._meta, imported_at: new Date().toISOString() });
 
 console.log(`导入完成：模型 ${models.length} · 本体 ${embodiments.length} · 硬件 ${hardware.length} · 矩阵格 ${compat.length} · 测量 ${measurements.length}`);

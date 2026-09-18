@@ -28,3 +28,15 @@ export async function allQuotes(hardwareId: string): Promise<{ platform: string;
   const KD: Record<string, string> = { secure: '安全云', community: '社区云', min: '按需最低', median: '按需中位', starting: '官网起步价' };
   return g.quotes.map((q: any) => ({ platform: PF[q.platform] || q.platform, kind: KD[q.kind] || q.kind, usd: q.usd, cny: q.cny, n: q.n }));
 }
+
+/** 工作台用：国内（AutoDL 按量中位）与海外（Vast 按需中位，退 RunPod 社区云）两档代表价，¥/h。 */
+export async function rentPair(hardwareId: string): Promise<{ cn: { cny: number; label: string; ts: string } | null; intl: { cny: number; usd: number; label: string; ts: string } | null }> {
+  const L = await ledger(); const name = MAP[hardwareId]; const out: any = { cn: null, intl: null };
+  if (!L || !name) return out;
+  const g = (L.gpus || []).find((x: any) => x.gpu === name); if (!g) return out;
+  const cn = g.quotes.find((q: any) => q.platform === 'autodl' && q.kind === 'median') || g.quotes.find((q: any) => q.platform === 'suanli');
+  const intl = g.quotes.find((q: any) => q.platform === 'vast' && q.kind === 'median') || g.quotes.find((q: any) => q.platform === 'runpod' && q.kind === 'community');
+  if (cn) out.cn = { cny: cn.cny, label: cn.platform === 'autodl' ? 'AutoDL 按量中位' : '共绩算力', ts: cn.ts };
+  if (intl) out.intl = { cny: intl.cny, usd: intl.usd, label: intl.platform === 'vast' ? 'Vast.ai 按需中位' : 'RunPod 社区云', ts: intl.ts };
+  return out;
+}

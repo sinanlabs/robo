@@ -1,0 +1,47 @@
+---
+// 单期周报：自动结构块，每一项可回溯到当日快照或结果文件。
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { href, type Lang } from '../lib/i18n';
+import { fmtMs } from '../lib/cost';
+interface Props { lang: Lang; week: string }
+const { lang, week } = Astro.props;
+const en = lang === 'en';
+const w = (await getCollection('weekly')).map((x) => x.data as any).find((x) => x.week === week)!;
+const hw = Object.fromEntries((await getCollection('hardware')).map((h) => [h.data.id, h.data.name]));
+const L = en ? 'en' : 'zh';
+const T = en ? { h1: 'Weekly', back: '← All weeks', sum: 'Summary', newm: 'Newly indexed', wu: 'Weights modified this week', lic: 'Licence text changed', moved: 'Weights link changed', commits: 'Most commits · last 90 days', stars: 'Stars change over the window', dl: 'Most downloaded · 30 days', stale: 'No push for over 180 days', meas: 'New measurements', none: 'none', snaps: 'daily snapshots used', model: 'Model', hwc: 'Hardware', p50: 'p50 ms', p95: 'p95 ms', vram: 'VRAM', date: 'date', days: 'd', from: 'from', to: 'to', note: 'Every number comes from a dated snapshot of public APIs (GitHub, Hugging Face, ModelScope) or from our own measurement files. We record; we do not judge.' }
+  : { h1: '周报', back: '← 全部周报', sum: '摘要', newm: '新收录', wu: '本周权重有更新', lic: '许可证文本变化', moved: '权重链接变化', commits: '近 90 天提交最多', stars: '窗口内 stars 变化', dl: '近 30 天下载最多', stale: '超过 180 天无推送', meas: '新增实测', none: '无', snaps: '天快照', model: '模型', hwc: '硬件', p50: 'p50 ms', p95: 'p95 ms', vram: '显存', date: '日期', days: '天', from: '从', to: '到', note: '每个数字都来自带日期的公开接口快照（GitHub、Hugging Face、ModelScope）或我们自己的实测结果文件。只记录，不评价。' };
+const M = (id: string) => href(lang, '/models/' + id);
+---
+<Base lang={lang} title={`${T.h1} ${w.week} · Sinan Robo`} desc={w.summary?.[L]} active="weekly" path={'/weekly/' + w.week} crumbs={[{ label: T.h1, href: href(lang, '/weekly') }, { label: w.week }]}>
+  <div class="rise" style="--i:0;margin-bottom:12px"><div class="eyebrow" style="color:var(--robo-deep);opacity:1">{w.week} · {w.from} → {w.to} · {w.snapshot_days?.length ?? 0} {T.snaps}</div><h1 style="font-size:26px;margin-top:6px">{T.h1} {w.week}</h1><p class="lead">{w.summary?.[L]}</p><a href={href(lang, '/weekly')} class="sub">{T.back}</a></div>
+
+  <div class="grid2" style="margin-top:12px">
+    <section class="card pad rise" style="--i:1"><h2 class="sec">{T.newm} · {w.new_models?.length ?? 0}</h2>
+      {w.new_models?.length ? <ul class="ls">{w.new_models.map((m: any) => <li><a href={M(m.id)}>{m.name}</a> <span class="dim">{m.org}{m.release_date ? ' · ' + m.release_date : ''}</span></li>)}</ul> : <p class="dim">{T.none}</p>}
+      <h2 class="sec" style="margin-top:14px">{T.wu} · {w.weights_updated?.length ?? 0}</h2>
+      {w.weights_updated?.length ? <ul class="ls">{w.weights_updated.map((m: any) => <li><a href={M(m.id)}>{m.name}</a> <span class="dim mono">{m.repo} · {m.last_modified}</span></li>)}</ul> : <p class="dim">{T.none}</p>}
+      <h2 class="sec" style="margin-top:14px">{T.lic} · {w.license_changed?.length ?? 0}</h2>
+      {w.license_changed?.length ? <ul class="ls">{w.license_changed.map((m: any) => <li><a href={M(m.id)}>{m.name}</a><div class="dim">{T.from} “{m.from}” {T.to} “{m.to}”</div></li>)}</ul> : <p class="dim">{T.none}</p>}
+      {w.weights_moved?.length ? <div><h2 class="sec" style="margin-top:14px">{T.moved} · {w.weights_moved.length}</h2><ul class="ls">{w.weights_moved.map((m: any) => <li><a href={M(m.id)}>{m.name}</a><div class="dim mono">{m.from} → {m.to}</div></li>)}</ul></div> : null}
+    </section>
+    <section class="card pad rise" style="--i:2"><h2 class="sec">{T.commits}</h2>
+      <ol class="ls">{(w.commits || []).map((c: any) => <li><a href={M(c.id)}>{c.name}</a> <b class="mono">{c.capped ? '100+' : c.c90}</b> <span class="dim">· {c.pushed}</span></li>)}</ol>
+      {w.stars_gain?.length ? <div><h2 class="sec" style="margin-top:14px">{T.stars}</h2><ol class="ls">{w.stars_gain.map((c: any) => <li><a href={M(c.id)}>{c.name}</a> <b class="mono">{c.delta > 0 ? '+' : ''}{c.delta}</b> <span class="dim">· {c.stars.toLocaleString()} stars</span></li>)}</ol></div> : null}
+      <h2 class="sec" style="margin-top:14px">{T.dl}</h2>
+      <ol class="ls">{(w.downloads || []).map((c: any) => <li><a href={M(c.id)}>{c.name}</a> <b class="mono">{c.dl30.toLocaleString()}</b> <span class="dim mono">· {c.repo}</span></li>)}</ol>
+    </section>
+  </div>
+
+  <section class="card rise" style="--i:3;margin-top:16px"><div class="pad" style="padding-bottom:10px"><h2 class="sec">{T.meas} · {w.new_measurements?.length ?? 0}</h2></div>
+    {w.new_measurements?.length ? <div class="tablewrap"><table><thead><tr><th>{T.model}</th><th>{T.hwc}</th><th class="num">{T.p50}</th><th class="num">{T.p95}</th><th class="num">{T.vram}</th><th>{T.date}</th></tr></thead>
+      <tbody>{w.new_measurements.map((m: any) => <tr><td><a href={M(m.model_id)}>{m.name}</a></td><td><a href={href(lang, '/hardware/' + m.hardware_id)}>{hw[m.hardware_id] || m.hardware_id}</a> <span class="dim mono">{m.precision}</span></td><td class="num mono">{fmtMs(m.p50)}</td><td class="num mono">{fmtMs(m.p95)}</td><td class="num mono">{m.vram != null ? m.vram + ' GB' : '—'}</td><td class="mono dim">{m.date}</td></tr>)}</tbody></table></div> : <p class="dim pad">{T.none}</p>}
+  </section>
+
+  <section class="card pad rise" style="--i:4;margin-top:16px"><h2 class="sec">{T.stale} · {w.stale?.length ?? 0}</h2>
+    {w.stale?.length ? <ul class="ls cols">{w.stale.map((m: any) => <li><a href={M(m.id)}>{m.name}</a> <b class="mono">{m.days} {T.days}</b> <span class="dim">· {m.pushed}{m.archived ? (en ? ' · archived' : ' · 已归档') : ''}</span></li>)}</ul> : <p class="dim">{T.none}</p>}
+    <p class="sub" style="margin-top:12px">{T.note}</p>
+  </section>
+  <style>.ls{margin:8px 0 0;padding-left:18px;font-size:13.5px;line-height:1.8}.ls.cols{columns:2;column-gap:24px}@media (max-width:760px){.ls.cols{columns:1}}</style>
+</Base>

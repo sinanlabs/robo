@@ -1,9 +1,11 @@
 ---
-// 模型选择器：按用户给的条件（本体 / 输入模态 / 许可证 / 显卡）筛选并排序，只显示已核实字段与证据数；不打分、不推荐。
+// 模型选择器 + 工作台：按用户条件（本体 / 输入模态 / 许可证 / 显卡）筛选，并在所选显卡上给出实测 p50/p95、可达频率（1000 ms ÷ p95）、每千次成本（p50 × 租价）。
+// 只用已核实字段与实测；没有实测的写“未测”，不估。不打分、不推荐。
 import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { t, href, type Lang } from '../lib/i18n';
 import { MODEL_REQUIRED, pendingOf, fmtParams } from '../lib/data';
+import { rentPair } from '../lib/gpuledger';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const en = lang === 'en';
@@ -11,15 +13,26 @@ const models = (await getCollection('models')).map((m) => m.data);
 const embs = (await getCollection('embodiments')).map((e) => e.data);
 const hw = (await getCollection('hardware')).map((h) => h.data).filter((h) => h.vram_gb);
 const compat = (await getCollection('compat')).map((c) => c.data);
-const meas = (await getCollection('measurements')).map((m) => m.data);
+const meas = (await getCollection('measurements')).map((m) => m.data).filter((m) => m.review_status !== 'rejected');
 const mods = Array.from(new Set(models.flatMap((m) => m.modalities_in))).sort();
+// 实测汇总：模型 × 硬件 → p50 中位、p95 最大、显存峰值、条数
+const M: Record<string, Record<string, { p50: number; p95: number | null; vram: number | null; n: number }>> = {};
+for (const x of meas) {
+  const g = (M[x.model_id] ??= {}); const c = (g[x.hardware_id] ??= { p50: 0, p95: null, vram: null, n: 0 } as any);
+  (c as any)._p50s = [...((c as any)._p50s || []), x.metrics.latency_ms_p50]; c.p95 = Math.max(c.p95 ?? 0, x.metrics.latency_ms_p95 ?? 0) || null; c.vram = Math.max(c.vram ?? 0, x.metrics.vram_peak_gb ?? 0) || null; c.n++;
+}
+for (const g of Object.values(M)) for (const c of Object.values(g) as any[]) { const s = c._p50s.sort((a: number, b: number) => a - b); c.p50 = s[Math.floor(s.length / 2)]; delete c._p50s; }
+// 租价：国内 / 海外两档（构建时从算力账本读；读不到退回 seed 静态参考价）
+const R: Record<string, { cn: any; intl: any; seed: number | null; seedSrc: string | null }> = {};
+for (const h of hw) { const p = await rentPair(h.id); R[h.id] = { cn: p.cn, intl: p.intl, seed: h.rental_cny_per_hour_ref, seedSrc: h.rental_ref_source }; }
 const rows = models.map((m) => {
   const p = pendingOf(m as any, MODEL_REQUIRED);
   const cm: Record<string, { s: string; n: number }> = {};
   for (const c of compat) if (c.model_id === m.id) cm[c.embodiment_id] = { s: c.status, n: c.evidence.length };
-  return { id: m.id, name: m.name, org: m.org, rd: m.release_date, pb: m.params_b, comm: m.commercial_ok, lic: m.license, mods: m.modalities_in, ev: p.ok, evt: p.total, cm, vram: m.params_b ? Math.round(m.params_b * 2 * 1.2 * 10) / 10 : null, nmeas: meas.filter((x) => x.model_id === m.id && x.review_status === 'verified').length };
+  return { id: m.id, name: m.name, org: m.org, rd: m.release_date, pb: m.params_b, comm: m.commercial_ok, lic: m.license, mods: m.modalities_in, ev: p.ok, evt: p.total, cm, vram: m.params_b ? Math.round(m.params_b * 2 * 1.2) : null };
 });
 const S = (k: string) => t(lang, 'select.' + k);
+const CLIENT = { st: { official: S('st.official'), community_verified: S('st.community_verified'), theoretical: S('st.theoretical'), unsupported: S('st.unsupported'), unknown: S('st.unknown') }, fits: S('fits'), nofit: S('nofit'), meets: S('meets'), fails: S('fails'), untested: S('untested'), noRent: S('noRent'), perDay: S('perDay'), perMonth: S('perMonth'), rentAt: S('rentAt'), pickGpu: S('pickGpu'), hz: S('hzUnit'), M, R, hwName: Object.fromEntries(hw.map((h) => [h.id, h.name])) };
 ---
 <Base lang={lang} title={S('title') + ' · Sinan Robo'} desc={S('lead')} active="select" path="/select" crumbs={[{ label: t(lang, 'nav.select') }]}>
   <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{S('title')}</h1><p class="lead">{S('lead')}</p></div>
@@ -27,19 +40,29 @@ const S = (k: string) => t(lang, 'select.' + k);
     <div class="filters" id="sf">
       <label>{S('emb')}</label><select data-f="emb"><option value="">{S('anyEmb')}</option>{embs.map((e) => <option value={e.id}>{e.name} · {e.vendor}</option>)}</select>
       <label>{S('comm')}</label><select data-f="comm"><option value="">{S('commAny')}</option><option value="yes">{S('commYes')}</option></select>
-      <label>{S('gpu')}</label><select data-f="gpu"><option value="">{S('gpuAny')}</option>{hw.map((h) => <option value={h.vram_gb}>{h.name} · {h.vram_gb} GB</option>)}</select>
-      <label>{S('sort')}</label><select data-f="sort"><option value="release">{S('sortRelease')}</option><option value="params">{S('sortParams')}</option><option value="evidence">{S('sortEvidence')}</option></select>
+      <label>{S('gpu')}</label><select data-f="gpu"><option value="">{S('gpuAny')}</option>{hw.map((h) => <option value={h.id} data-vram={h.vram_gb}>{h.name} · {h.vram_gb} GB{M && Object.values(M).some((g) => g[h.id]) ? (en ? ' · measured' : ' · 有实测') : ''}</option>)}</select>
+      <label>{S('sort')}</label><select data-f="sort"><option value="release">{S('sortRelease')}</option><option value="params">{S('sortParams')}</option><option value="evidence">{S('sortEvidence')}</option><option value="hz">{S('sortHz')}</option><option value="cost">{S('sortCost')}</option></select>
     </div>
     <div class="mods" id="mods"><span class="sub">{S('mods')}：</span>{mods.map((m) => <label class="chip"><input type="checkbox" value={m}> {m}</label>)}</div>
-    <p class="sub" style="margin-top:8px"><b id="cnt">{rows.length}</b> {S('n')} · {S('vramNote')} {S('noMeasure')}</p>
+    <div class="wb" id="wb">
+      <div class="wbh"><b>{S('wb')}</b><span class="sub">{S('wbLead')}</span></div>
+      <div class="wbf">
+        <label>{S('hz')}</label><input type="number" id="hz" min="0.5" max="100" step="0.5" value="5"><span class="sub">{S('hzUnit')}</span>
+        <label>{S('hours')}</label><input type="number" id="hrs" min="1" max="24" step="1" value="8"><span class="sub">{S('hoursUnit')}</span>
+        <label>{S('priceSrc')}</label><select id="psrc"><option value="cn">{S('priceCn')}</option><option value="intl">{S('priceIntl')}</option></select>
+      </div>
+      <div class="wbo sub" id="wbo">{S('pickGpu')}</div>
+    </div>
+    <p class="sub" style="margin-top:8px"><b id="cnt">{rows.length}</b> {S('n')} · {S('vramNote')} {S('measNote')}</p>
   </div>
-  <div class="tablewrap"><table id="tbl"><thead><tr><th>{S('colModel')}</th><th>{S('colCompat')}</th><th class="num">{S('colParams')}</th><th class="num">{S('colVram')}</th><th>{S('colLic')}</th><th class="num">{S('colEv')}</th></tr></thead><tbody>
+  <div class="tablewrap"><table id="tbl"><thead><tr><th>{S('colModel')}</th><th>{S('colCompat')}</th><th class="num">{S('colParams')}</th><th class="num">{S('colVram')}</th><th class="num wbc">{S('colMeas')}</th><th class="num wbc">{S('colHz')}</th><th class="num wbc">{S('colCost')}</th><th>{S('colLic')}</th><th class="num">{S('colEv')}</th></tr></thead><tbody>
     {rows.map((r) => (
-      <tr data-id={r.id} data-release={r.rd ?? ''} data-params={r.pb ?? 0} data-comm={r.comm === true ? 'yes' : r.comm === false ? 'no' : 'unk'} data-vram={r.vram ?? ''} data-mods={r.mods.join(' ')} data-ev={r.evt ? r.ev / r.evt : 0} data-cm={JSON.stringify(r.cm)}>
+      <tr data-id={r.id} data-release={r.rd ?? ''} data-params={r.pb ?? 0} data-comm={r.comm === true ? 'yes' : r.comm === false ? 'no' : 'unk'} data-vram={r.vram ?? ''} data-mods={r.mods.join(' ')} data-ev={r.evt ? r.ev / r.evt : 0} data-cm={JSON.stringify(r.cm)} data-hz="" data-cost="">
         <td><a href={href(lang, '/models/' + r.id)}><b>{r.name}</b></a><div class="sub">{r.org}{r.rd ? ' · ' + r.rd : ''}</div></td>
         <td class="cm"><span class="sub">—</span></td>
         <td class="num mono">{r.pb ? fmtParams(r.pb) : <span class="pending">?</span>}</td>
         <td class="num mono">{r.vram ? <span>{r.vram} GB <span class="fit sub"></span></span> : <span class="pending">?</span>}</td>
+        <td class="num mono wbc c-meas">—</td><td class="num mono wbc c-hz">—</td><td class="num mono wbc c-cost">—</td>
         <td class="sub" style="max-width:220px">{r.comm === true ? '✓ ' : r.comm === false ? '✗ ' : '? '}{(r.lic ?? '').slice(0, 60)}</td>
         <td class="num mono">{r.ev}/{r.evt}</td>
       </tr>
@@ -47,18 +70,35 @@ const S = (k: string) => t(lang, 'select.' + k);
   </tbody></table></div>
   <p class="sub pad" id="empty" style="display:none">{S('empty')}</p>
   </section>
-  <style>.mods{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}.chip{font-size:12.5px;border:1px solid var(--hair-2);border-radius:999px;padding:4px 10px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.chip input{margin:0}.pending{color:#B54708}.cm .st{font-size:12px;border-radius:999px;padding:2px 8px;background:var(--ground-2)}.cm .official{background:#DCFAE6;color:#067647}.cm .community_verified{background:#E0EAFF;color:#3538CD}.cm .theoretical{background:#FEF0C7;color:#B54708}.cm .unsupported{background:#FEE4E2;color:#B42318}</style>
-  <script id="stl" type="application/json" set:html={JSON.stringify({ st: { official: S('st.official'), community_verified: S('st.community_verified'), theoretical: S('st.theoretical'), unsupported: S('st.unsupported'), unknown: S('st.unknown') }, fits: S('fits'), nofit: S('nofit') })}></script>
+  <style>
+    .mods{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}.chip{font-size:12.5px;border:1px solid var(--hair-2);border-radius:999px;padding:4px 10px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+    .wb{margin-top:14px;border:1px solid var(--hair-2);border-radius:14px;padding:12px 14px;background:var(--bg-2,rgba(120,110,255,.04))}.wbh{display:grid;gap:4px;font-size:14px}.wbh .sub{font-size:12.5px;line-height:1.5}
+    .wbf{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin-top:10px;font-size:13px}.wbf input{width:76px;padding:6px 8px;border:1px solid var(--hair-2);border-radius:8px;font:inherit}.wbf select{padding:6px 8px;border:1px solid var(--hair-2);border-radius:8px;font:inherit}.wbf label{color:var(--ink-3);font-size:12.5px;margin-left:6px}
+    .wbo{margin-top:10px;font-size:13px;line-height:1.6}.wbo b{color:var(--ink)}
+    td.c-hz .ok{color:#15803d;font-weight:700}td.c-hz .no{color:#b45309;font-weight:700}td.wbc .sub{font-size:11px;display:block}
+  </style>
+  <script id="stl" type="application/json" set:html={JSON.stringify(CLIENT)}></script>
   <script>
     const L = JSON.parse(document.getElementById('stl')!.textContent!);
     const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>('#tbl tbody tr'));
     const sel = Array.from(document.querySelectorAll<HTMLSelectElement>('#sf select'));
     const boxes = Array.from(document.querySelectorAll<HTMLInputElement>('#mods input'));
     const cnt = document.getElementById('cnt')!, empty = document.getElementById('empty')!, tb = document.querySelector('#tbl tbody')!;
+    const hzIn = document.getElementById('hz') as HTMLInputElement, hrsIn = document.getElementById('hrs') as HTMLInputElement, psrc = document.getElementById('psrc') as HTMLSelectElement, wbo = document.getElementById('wbo')!;
+    const fmt = (v: number) => (v < 10 ? v.toFixed(1) : Math.round(v).toString());
+    const cny = (v: number) => (v < 0.01 ? v.toFixed(4) : v < 1 ? v.toFixed(3) : v.toFixed(2));
     function apply() {
       const f: Record<string, string> = {}; sel.forEach((s) => (f[s.dataset.f!] = s.value));
       const need = boxes.filter((b) => b.checked).map((b) => b.value);
-      const vram = f.gpu ? +f.gpu : 0; let n = 0;
+      const gpuSel = sel.find((s) => s.dataset.f === 'gpu')!; const opt = gpuSel.selectedOptions[0]; const vram = f.gpu && opt ? +(opt.dataset.vram || 0) : 0;
+      const hz = Math.max(0.1, +hzIn.value || 5), hrs = Math.max(0, +hrsIn.value || 0), src = psrc.value;
+      const rent = f.gpu ? (L.R[f.gpu] ? (src === 'cn' ? L.R[f.gpu].cn : L.R[f.gpu].intl) : null) : null;
+      const rentCny: number | null = rent ? rent.cny : (f.gpu && L.R[f.gpu] && L.R[f.gpu].seed ? L.R[f.gpu].seed : null);
+      const rentLabel = rent ? `${rent.label}${rent.usd ? ` · $${rent.usd.toFixed(2)}/h` : ''} · ${L.rentAt} ${String(rent.ts).slice(0, 10)}` : (rentCny && f.gpu ? `${L.R[f.gpu].seedSrc || ''}` : '');
+      if (!f.gpu) wbo.innerHTML = L.pickGpu;
+      else if (rentCny == null) wbo.innerHTML = `<b>${L.hwName[f.gpu]}</b> · ${L.noRent}`;
+      else wbo.innerHTML = `<b>${L.hwName[f.gpu]}</b> · ¥${rentCny.toFixed(2)}/h（${rentLabel}）· ${hrs} h ⇒ <b>¥${(rentCny * hrs).toFixed(1)}</b> ${L.perDay} · <b>¥${(rentCny * hrs * 30).toFixed(0)}</b> ${L.perMonth}`;
+      let n = 0;
       rows.forEach((r) => {
         const cm = JSON.parse(r.dataset.cm || '{}'); const c = f.emb ? cm[f.emb] : null;
         const cell = r.querySelector('.cm')!;
@@ -66,13 +106,29 @@ const S = (k: string) => t(lang, 'select.' + k);
         const mods = (r.dataset.mods || '').split(' ');
         const rv = r.dataset.vram ? +r.dataset.vram : null; const fit = r.querySelector('.fit');
         if (fit) fit.textContent = vram && rv ? (rv <= vram ? '· ' + L.fits : '· ' + L.nofit) : '';
-        const ok = (!f.emb || (c && c.s !== 'unsupported')) && (!f.comm || r.dataset.comm === 'yes') && need.every((m) => mods.includes(m)) && (!vram || !rv || rv <= vram);
-        (r as HTMLElement).style.display = ok ? '' : 'none'; if (ok) n++;
+        // 工作台三列
+        const m = f.gpu && L.M[r.dataset.id!] ? L.M[r.dataset.id!][f.gpu] : null;
+        const cMeas = r.querySelector('.c-meas')!, cHz = r.querySelector('.c-hz')!, cCost = r.querySelector('.c-cost')!;
+        if (!f.gpu) { cMeas.textContent = '—'; cHz.textContent = '—'; cCost.textContent = '—'; r.dataset.hz = ''; r.dataset.cost = ''; }
+        else if (!m) { cMeas.innerHTML = `<span class="sub">${L.untested}</span>`; cHz.textContent = '—'; cCost.textContent = '—'; r.dataset.hz = ''; r.dataset.cost = ''; }
+        else {
+          const ach = m.p95 ? 1000 / m.p95 : 1000 / m.p50; const ok = ach >= hz;
+          cMeas.innerHTML = `${fmt(m.p50)} / ${m.p95 ? fmt(m.p95) : '—'} ms<span class="sub">${m.vram ? m.vram + ' GB · ' : ''}n=${m.n}</span>`;
+          cHz.innerHTML = `<span class="${ok ? 'ok' : 'no'}">${ach.toFixed(1)} ${L.hz}</span><span class="sub">${ok ? L.meets : L.fails} @ ${hz} ${L.hz}</span>`;
+          const cost = rentCny != null ? (m.p50 / 1000) * (rentCny / 3600) * 1000 : null;
+          cCost.innerHTML = cost != null ? `¥${cny(cost)}` : `<span class="sub">${L.noRent}</span>`;
+          r.dataset.hz = String(ach); r.dataset.cost = cost != null ? String(cost) : '';
+        }
+        const okRow = (!f.emb || (c && c.s !== 'unsupported')) && (!f.comm || r.dataset.comm === 'yes') && need.every((x) => mods.includes(x)) && (!vram || !rv || rv <= vram);
+        (r as HTMLElement).style.display = okRow ? '' : 'none'; if (okRow) n++;
       });
       const key = f.sort || 'release';
-      rows.slice().sort((a, b) => key === 'params' ? +b.dataset.params! - +a.dataset.params! : key === 'evidence' ? +b.dataset.ev! - +a.dataset.ev! : (b.dataset.release || '').localeCompare(a.dataset.release || '')).forEach((r) => tb.appendChild(r));
+      const num = (v: string | undefined, dflt: number) => (v === '' || v == null ? dflt : +v);
+      rows.slice().sort((a, b) => key === 'params' ? +b.dataset.params! - +a.dataset.params! : key === 'evidence' ? +b.dataset.ev! - +a.dataset.ev! : key === 'hz' ? num(b.dataset.hz, -1) - num(a.dataset.hz, -1) : key === 'cost' ? num(a.dataset.cost, 1e9) - num(b.dataset.cost, 1e9) : (b.dataset.release || '').localeCompare(a.dataset.release || '')).forEach((r) => tb.appendChild(r));
       cnt.textContent = String(n); empty.style.display = n ? 'none' : '';
     }
-    sel.forEach((s) => s.addEventListener('change', apply)); boxes.forEach((b) => b.addEventListener('change', apply)); apply();
+    sel.forEach((s) => s.addEventListener('change', apply)); boxes.forEach((b) => b.addEventListener('change', apply));
+    [hzIn, hrsIn].forEach((i) => i.addEventListener('input', apply)); psrc.addEventListener('change', apply);
+    apply();
   </script>
 </Base>

@@ -1,0 +1,462 @@
+{
+ "week": "2026-W38",
+ "from": "2026-09-12",
+ "to": "2026-09-19",
+ "generated": "2026-09-19T01:03:23+08:00",
+ "snapshot_days": [
+  "2026-09-18"
+ ],
+ "counts": {
+  "models": 40,
+  "measurements": 15,
+  "recipes": 5,
+  "snap_days": 1,
+  "tracked": 40
+ },
+ "new_models": [],
+ "weights_updated": [
+  {
+   "id": "smolvla",
+   "name": "SmolVLA",
+   "repo": "lerobot/smolvla_base",
+   "last_modified": "2026-09-17"
+  }
+ ],
+ "license_changed": [],
+ "weights_moved": [],
+ "commits": [
+  {
+   "id": "smolvla",
+   "name": "SmolVLA",
+   "c90": 100,
+   "capped": true,
+   "pushed": "2026-09-18"
+  },
+  {
+   "id": "lingbot-vla-2.0",
+   "name": "LingBot-VLA 2.0",
+   "c90": 23,
+   "capped": false,
+   "pushed": "2026-09-13"
+  },
+  {
+   "id": "internvla-a1.5",
+   "name": "InternVLA-A1.5",
+   "c90": 17,
+   "capped": false,
+   "pushed": "2026-09-14"
+  },
+  {
+   "id": "gr00t-n1.7",
+   "name": "Isaac GR00T N1.7",
+   "c90": 10,
+   "capped": false,
+   "pushed": "2026-08-20"
+  },
+  {
+   "id": "galaxea-g0.5",
+   "name": "Galaxea G0.5",
+   "c90": 10,
+   "capped": false,
+   "pushed": "2026-08-13"
+  },
+  {
+   "id": "gr00t-n1.5-3b",
+   "name": "GR00T N1.5 3B",
+   "c90": 10,
+   "capped": false,
+   "pushed": "2026-08-20"
+  },
+  {
+   "id": "wall-oss",
+   "name": "WALL-OSS",
+   "c90": 6,
+   "capped": false,
+   "pushed": "2026-09-18"
+  },
+  {
+   "id": "genie-envisioner",
+   "name": "Genie Envisioner（GE-Act）",
+   "c90": 5,
+   "capped": false,
+   "pushed": "2026-09-10"
+  },
+  {
+   "id": "graspvla",
+   "name": "GraspVLA",
+   "c90": 2,
+   "capped": false,
+   "pushed": "2026-08-19"
+  },
+  {
+   "id": "pi0",
+   "name": "π0 (pi-zero)",
+   "c90": 1,
+   "capped": false,
+   "pushed": "2026-08-24"
+  }
+ ],
+ "stars_gain": [],
+ "downloads": [
+  {
+   "id": "openvla",
+   "name": "OpenVLA",
+   "dl30": 434598,
+   "repo": "openvla/openvla-7b"
+  },
+  {
+   "id": "smolvla",
+   "name": "SmolVLA",
+   "dl30": 159287,
+   "repo": "lerobot/smolvla_base"
+  },
+  {
+   "id": "gr00t-n1.7",
+   "name": "Isaac GR00T N1.7",
+   "dl30": 97805,
+   "repo": "nvidia/GR00T-N1.7-3B"
+  },
+  {
+   "id": "pi0",
+   "name": "π0 (pi-zero)",
+   "dl30": 41435,
+   "repo": "lerobot/pi0_base"
+  },
+  {
+   "id": "gr00t-n1.6-3b",
+   "name": "GR00T N1.6 3B",
+   "dl30": 32474,
+   "repo": "nvidia/GR00T-N1.6-3B"
+  },
+  {
+   "id": "pi0.5",
+   "name": "π0.5",
+   "dl30": 20319,
+   "repo": "lerobot/pi05_base"
+  },
+  {
+   "id": "x-vla",
+   "name": "X-VLA",
+   "dl30": 10593,
+   "repo": "2toINF/X-VLA-Pt"
+  },
+  {
+   "id": "rdt-1b",
+   "name": "RDT-1B",
+   "dl30": 1392,
+   "repo": "robotics-diffusion-transformer/rdt-1b"
+  },
+  {
+   "id": "gr00t-n1.5-3b",
+   "name": "GR00T N1.5 3B",
+   "dl30": 1359,
+   "repo": "nvidia/GR00T-N1.5-3B"
+  },
+  {
+   "id": "lingbot-vla-2.0",
+   "name": "LingBot-VLA 2.0",
+   "dl30": 1213,
+   "repo": "robbyant/lingbot-vla-v2-6b"
+  }
+ ],
+ "stale": [
+  {
+   "id": "gr-1",
+   "name": "GR-1",
+   "days": 879,
+   "pushed": "2024-04-22",
+   "archived": false
+  },
+  {
+   "id": "octo",
+   "name": "Octo",
+   "days": 779,
+   "pushed": "2024-07-31",
+   "archived": false
+  },
+  {
+   "id": "hpt",
+   "name": "HPT（Heterogeneous Pre-trained Transformers）",
+   "days": 651,
+   "pushed": "2024-12-06",
+   "archived": false
+  },
+  {
+   "id": "lapa",
+   "name": "LAPA",
+   "days": 604,
+   "pushed": "2025-01-22",
+   "archived": false
+  },
+  {
+   "id": "minivla",
+   "name": "MiniVLA",
+   "days": 548,
+   "pushed": "2025-03-19",
+   "archived": false
+  },
+  {
+   "id": "openvla",
+   "name": "OpenVLA",
+   "days": 544,
+   "pushed": "2025-03-23",
+   "archived": false
+  },
+  {
+   "id": "dexvla",
+   "name": "DexVLA",
+   "days": 521,
+   "pushed": "2025-04-15",
+   "archived": false
+  },
+  {
+   "id": "spatialvla",
+   "name": "SpatialVLA",
+   "days": 452,
+   "pushed": "2025-06-23",
+   "archived": false
+  },
+  {
+   "id": "eo-1",
+   "name": "EO-1",
+   "days": 359,
+   "pushed": "2025-09-24",
+   "archived": false
+  },
+  {
+   "id": "cogact",
+   "name": "CogACT",
+   "days": 323,
+   "pushed": "2025-10-30",
+   "archived": false
+  },
+  {
+   "id": "univla",
+   "name": "UniVLA",
+   "days": 303,
+   "pushed": "2025-11-19",
+   "archived": false
+  },
+  {
+   "id": "nora",
+   "name": "NORA",
+   "days": 252,
+   "pushed": "2026-01-09",
+   "archived": false
+  },
+  {
+   "id": "rdt-1b",
+   "name": "RDT-1B",
+   "days": 240,
+   "pushed": "2026-01-21",
+   "archived": false
+  },
+  {
+   "id": "rynnvla-001",
+   "name": "RynnVLA-001",
+   "days": 238,
+   "pushed": "2026-01-23",
+   "archived": false
+  },
+  {
+   "id": "rdt2-vq",
+   "name": "RDT2-VQ",
+   "days": 223,
+   "pushed": "2026-02-07",
+   "archived": false
+  },
+  {
+   "id": "internvla-m1",
+   "name": "InternVLA-M1",
+   "days": 219,
+   "pushed": "2026-02-11",
+   "archived": false
+  },
+  {
+   "id": "vla-0",
+   "name": "VLA-0",
+   "days": 209,
+   "pushed": "2026-02-21",
+   "archived": false
+  },
+  {
+   "id": "magma",
+   "name": "Magma-8B",
+   "days": 199,
+   "pushed": "2026-03-03",
+   "archived": false
+  },
+  {
+   "id": "llava-vla",
+   "name": "LLaVA-VLA",
+   "days": 190,
+   "pushed": "2026-03-12",
+   "archived": false
+  },
+  {
+   "id": "vla-adapter",
+   "name": "VLA-Adapter",
+   "days": 183,
+   "pushed": "2026-03-19",
+   "archived": false
+  }
+ ],
+ "new_measurements": [
+  {
+   "model_id": "nora",
+   "name": "NORA",
+   "hardware_id": "a800-80g",
+   "precision": "bf16",
+   "p50": 145.95,
+   "p95": 150.77,
+   "vram": 7.13,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "openvla",
+   "name": "OpenVLA",
+   "hardware_id": "a800-80g",
+   "precision": "bf16",
+   "p50": 187.17,
+   "p95": 201.53,
+   "vram": 14.41,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "smolvla",
+   "name": "SmolVLA",
+   "hardware_id": "a800-80g",
+   "precision": "bf16",
+   "p50": 225.56,
+   "p95": 234.59,
+   "vram": 0.9,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "spatialvla",
+   "name": "SpatialVLA",
+   "hardware_id": "a800-80g",
+   "precision": "bf16",
+   "p50": 450.77,
+   "p95": 472.74,
+   "vram": 7.82,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "molmoact",
+   "name": "MolmoAct",
+   "hardware_id": "a800-80g",
+   "precision": "bf16",
+   "p50": 936.84,
+   "p95": 968.64,
+   "vram": 16.25,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "nora",
+   "name": "NORA",
+   "hardware_id": "rtx-4090",
+   "precision": "bf16",
+   "p50": 112.42,
+   "p95": 126.76,
+   "vram": 7.13,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "openvla",
+   "name": "OpenVLA",
+   "hardware_id": "rtx-4090",
+   "precision": "bf16",
+   "p50": 161.65,
+   "p95": 173.24,
+   "vram": 14.41,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "smolvla",
+   "name": "SmolVLA",
+   "hardware_id": "rtx-4090",
+   "precision": "bf16",
+   "p50": 170.28,
+   "p95": 197.42,
+   "vram": 0.91,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "spatialvla",
+   "name": "SpatialVLA",
+   "hardware_id": "rtx-4090",
+   "precision": "bf16",
+   "p50": 376.37,
+   "p95": 404.8,
+   "vram": 7.82,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "molmoact",
+   "name": "MolmoAct",
+   "hardware_id": "rtx-4090",
+   "precision": "bf16",
+   "p50": 934.45,
+   "p95": 940.06,
+   "vram": 16.25,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "nora",
+   "name": "NORA",
+   "hardware_id": "rtx-5090",
+   "precision": "bf16",
+   "p50": 128.75,
+   "p95": 134.71,
+   "vram": 7.13,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "openvla",
+   "name": "OpenVLA",
+   "hardware_id": "rtx-5090",
+   "precision": "bf16",
+   "p50": 146.35,
+   "p95": 150.04,
+   "vram": 14.41,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "smolvla",
+   "name": "SmolVLA",
+   "hardware_id": "rtx-5090",
+   "precision": "bf16",
+   "p50": 165.53,
+   "p95": 169.94,
+   "vram": 0.91,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "spatialvla",
+   "name": "SpatialVLA",
+   "hardware_id": "rtx-5090",
+   "precision": "bf16",
+   "p50": 362.3,
+   "p95": 370.01,
+   "vram": 7.82,
+   "date": "2026-09-18"
+  },
+  {
+   "model_id": "molmoact",
+   "name": "MolmoAct",
+   "hardware_id": "rtx-5090",
+   "precision": "bf16",
+   "p50": 674.55,
+   "p95": 713.32,
+   "vram": 16.25,
+   "date": "2026-09-18"
+  }
+ ],
+ "summary": {
+  "zh": "2026-09-12 至 2026-09-19：索引 40 个模型；本周新收录 0 个，权重在本周内更新的 1 个，许可证文本变化 0 个；实测新增 15 条（累计 15 条）；超过 180 天无推送的仓库 20 个。数据取自 1 天的每日快照。",
+  "en": "2026-09-12 to 2026-09-19: 40 models indexed; 0 newly indexed this week, 1 with weights modified this week, 0 licence-text changes; 15 new measurements (15 total); 20 repositories with no push for over 180 days. Based on 1 daily snapshots."
+ },
+ "x_en": "Open VLA weekly 2026-W38: 40 models tracked, 1 weights updated, 15 new latency measurements. Most commits in 90 d: SmolVLA (100+). Numbers only, sources on every row.",
+ "url": "https://robo.sinanlab.com/weekly/2026-W38"
+}

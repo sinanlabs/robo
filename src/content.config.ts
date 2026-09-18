@@ -80,4 +80,6 @@ const activity = defineCollection({
 const recipes = defineCollection({ loader: file('src/content/generated/recipes.json'), schema: z.object({ id: z.string(), model_id: z.string(), env: z.string() }).passthrough() });
 const recipes_meta = defineCollection({ loader: file('src/content/generated/recipes_meta.json'), schema: z.object({ id: z.string() }).passthrough() });
 
-export const collections = { models, embodiments, hardware, compat, measurements, activity, recipes, recipes_meta };
+const weekly = defineCollection({ loader: file('src/content/generated/weekly.json'), schema: z.object({ id: z.string(), week: z.string(), from: z.string(), to: z.string() }).passthrough() });
+
+export const collections = { models, embodiments, hardware, compat, measurements, activity, recipes, recipes_meta, weekly };

@@ -19,7 +19,8 @@
     "lab": "← Sinan Lab",
     "rank": "Rankings",
     "select": "Select a model",
-    "recipes": "Recipes"
+    "recipes": "Recipes",
+    "weekly": "Weekly"
   },
   "hero": {
     "eyebrow": "Open VLA · compatibility matrix · latency & cost · every field sourced",
@@ -232,6 +233,29 @@
       "unsupported": "Unsupported",
       "unknown": "Unknown"
     },
-    "empty": "No model matches every constraint. Relax one; a blank is missing evidence, not a verdict."
+    "empty": "No model matches every constraint. Relax one; a blank is missing evidence, not a verdict.",
+    "wb": "Workbench: how many Hz on this card, at what cost",
+    "wbLead": "Pick a GPU, set the target control frequency and hours per day. Achievable Hz is computed from measured p95 (1000 ms ÷ p95); cost per 1k inferences from measured p50 × rental price. Models without a measurement say “untested”; we do not estimate.",
+    "hz": "Target control frequency",
+    "hzUnit": "Hz",
+    "hours": "Run per day",
+    "hoursUnit": "h",
+    "priceSrc": "Price basis",
+    "priceCn": "China (AutoDL on-demand median)",
+    "priceIntl": "International (Vast.ai on-demand median)",
+    "noRent": "No rental quote of this basis for this card",
+    "perDay": "per day",
+    "perMonth": "per month (30 d)",
+    "colMeas": "Measured p50 / p95",
+    "colHz": "Achievable Hz",
+    "colCost": "Cost per 1k",
+    "meets": "meets",
+    "fails": "below target",
+    "untested": "untested",
+    "sortHz": "Achievable Hz",
+    "sortCost": "Cost per 1k",
+    "pickGpu": "Pick a GPU first; the workbench columns fill in after that.",
+    "measNote": "Measurements come from our runs on rented GPUs (bf16, batch 1, fixed input); each row links back to its raw result file on the model page.",
+    "rentAt": "rental price fetched"
   }
 }

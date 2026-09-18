@@ -1,0 +1,7 @@
+---
+import V from '../../views/WeeklyDetail.astro';
+import { getCollection } from 'astro:content';
+export async function getStaticPaths() { return (await getCollection('weekly')).map((x) => ({ params: { week: x.data.id } })); }
+const { week } = Astro.params;
+---
+<V lang="zh-cn" week={week!} />

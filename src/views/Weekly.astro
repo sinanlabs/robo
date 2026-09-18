@@ -1,0 +1,24 @@
+---
+// 周报列表：每周一由 scripts/weekly_brief.py 自动生成的变化记录。只数数，不评价。
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { href, type Lang } from '../lib/i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const weeks = (await getCollection('weekly')).map((w) => w.data as any).sort((a, b) => b.week.localeCompare(a.week));
+const T = en ? { h1: 'Weekly change record', lead: 'Generated every Monday from the daily snapshots: models newly indexed, weights modified, licence text changed, repositories without a push for over 180 days, new latency measurements. Numbers only; every line links to its source. RSS at /feed.xml.', open: 'Open →', none: 'The first issue is generated on the coming Monday.', rss: 'RSS' }
+  : { h1: '周报 · 变化记录', lead: '每周一由每日快照自动生成：新收录的模型、权重更新、许可证文本变化、超过 180 天无推送的仓库、新增实测。只数数，不评价；每一行都能点到来源。RSS 在 /feed.xml。', open: '打开 →', none: '第一期将在下周一生成。', rss: 'RSS' };
+---
+<Base lang={lang} title={T.h1 + ' · Sinan Robo'} desc={T.lead} active="weekly" path="/weekly" crumbs={[{ label: T.h1 }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px;display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap"><div><h1 style="font-size:24px">{T.h1}</h1><p class="lead">{T.lead}</p></div><a class="btn" href="/feed.xml" style="margin-left:auto">{T.rss}</a></div>
+  {weeks.length === 0 && <div class="card pad"><div class="callout">{T.none}</div></div>}
+  <div class="wk">{weeks.map((w, i) => (
+    <a class="card pad rise" style={`--i:${1 + i * 0.3}`} href={href(lang, '/weekly/' + w.week)}>
+      <div class="eyebrow" style="color:var(--robo-deep);opacity:1">{w.week} · {w.from} → {w.to}</div>
+      <p style="margin:8px 0 10px;font-size:14px;line-height:1.7">{w.summary?.[en ? 'en' : 'zh']}</p>
+      <div class="chips"><span>{en ? 'new' : '新收录'} <b>{w.new_models?.length ?? 0}</b></span><span>{en ? 'weights updated' : '权重更新'} <b>{w.weights_updated?.length ?? 0}</b></span><span>{en ? 'licence changes' : '许可证变化'} <b>{w.license_changed?.length ?? 0}</b></span><span>{en ? 'measurements' : '实测新增'} <b>{w.new_measurements?.length ?? 0}</b></span><span>{en ? 'stale > 180 d' : '停更 > 180 天'} <b>{w.stale?.length ?? 0}</b></span></div>
+      <div style="margin-top:10px;font-size:13px;color:var(--robo-deep);font-weight:600">{T.open}</div>
+    </a>))}</div>
+  <style>.wk{display:grid;gap:14px}.wk a{text-decoration:none;color:inherit;display:block}.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{font-size:12px;border:1px solid var(--hair-2);border-radius:999px;padding:3px 10px;color:var(--ink-3)}.chips b{color:var(--ink);margin-left:4px}</style>
+</Base>
