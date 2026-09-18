@@ -2,7 +2,7 @@
  "month": "2026-09",
  "from": "2026-09-01",
  "to": "2026-09-30",
- "generated": "2026-09-19T01:21:55+08:00",
+ "generated": "2026-09-19T01:40:03+08:00",
  "index": {
   "models": 40,
   "embodiments": 12,
@@ -386,17 +386,68 @@
   ]
  },
  "benchmarks": {
-  "scores": 0,
-  "models_with_score": 0,
-  "by_benchmark": {}
+  "scores": 340,
+  "models_with_score": 39,
+  "by_benchmark": {
+   "libero": 110,
+   "real_robot": 98,
+   "simplerenv_google": 34,
+   "simplerenv_widowx": 29,
+   "robotwin2": 20,
+   "metaworld": 5,
+   "calvin": 12,
+   "vlabench": 2,
+   "other": 29,
+   "robocasa": 1
+  }
  },
  "datasets": {
-  "count": 0,
-  "hours_total": 0,
-  "episodes_total": 0,
-  "forms": {},
-  "license": {},
-  "mirrors": 0,
-  "top_hours": []
+  "count": 16,
+  "hours_total": 11249.3,
+  "episodes_total": 4718954,
+  "forms": {
+   "dual_arm": 9,
+   "single_arm": 9,
+   "multi": 6,
+   "sim": 10,
+   "human_video": 2,
+   "humanoid": 8,
+   "human_hand": 1,
+   "mobile_manipulator": 2,
+   "wheeled": 1,
+   "quadruped": 1
+  },
+  "license": {
+   "no": 4,
+   "yes": 5,
+   "unk": 7
+  },
+  "mirrors": 2,
+  "top_hours": [
+   {
+    "id": "interndata-a1",
+    "name": "InternData-A1",
+    "hours": 7433.0,
+    "episodes": 630000
+   },
+   {
+    "id": "ego4d",
+    "name": "Ego4D",
+    "hours": 3670.0,
+    "episodes": null
+   },
+   {
+    "id": "fourier-actionnet",
+    "name": "Fourier ActionNet",
+    "hours": 140.0,
+    "episodes": 30000
+   },
+   {
+    "id": "kaiwu",
+    "name": "Kaiwu",
+    "hours": 6.3,
+    "episodes": 11664
+   }
+  ]
  }
 }
