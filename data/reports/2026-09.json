@@ -2,7 +2,7 @@
  "month": "2026-09",
  "from": "2026-09-01",
  "to": "2026-09-30",
- "generated": "2026-09-19T01:40:03+08:00",
+ "generated": "2026-09-19T04:54:11+08:00",
  "index": {
   "models": 40,
   "embodiments": 12,
@@ -402,25 +402,25 @@
   }
  },
  "datasets": {
-  "count": 16,
-  "hours_total": 11249.3,
-  "episodes_total": 4718954,
+  "count": 32,
+  "hours_total": 13028.3,
+  "episodes_total": 7572222,
   "forms": {
-   "dual_arm": 9,
-   "single_arm": 9,
-   "multi": 6,
-   "sim": 10,
-   "human_video": 2,
-   "humanoid": 8,
-   "human_hand": 1,
-   "mobile_manipulator": 2,
-   "wheeled": 1,
-   "quadruped": 1
+   "dual_arm": 12,
+   "single_arm": 14,
+   "multi": 10,
+   "sim": 14,
+   "human_video": 5,
+   "human_hand": 3,
+   "mobile_manipulator": 6,
+   "humanoid": 10,
+   "quadruped": 2,
+   "wheeled": 1
   },
   "license": {
-   "no": 4,
-   "yes": 5,
-   "unk": 7
+   "no": 7,
+   "yes": 11,
+   "unk": 14
   },
   "mirrors": 2,
   "top_hours": [
@@ -437,16 +437,22 @@
     "episodes": null
    },
    {
-    "id": "fourier-actionnet",
-    "name": "Fourier ActionNet",
-    "hours": 140.0,
-    "episodes": 30000
+    "id": "egodex",
+    "name": "EgoDex",
+    "hours": 829.0,
+    "episodes": 338000
    },
    {
-    "id": "kaiwu",
-    "name": "Kaiwu",
-    "hours": 6.3,
-    "episodes": 11664
+    "id": "robocasa",
+    "name": "RoboCasa (RoboCasa365)",
+    "hours": 600.0,
+    "episodes": null
+   },
+   {
+    "id": "droid",
+    "name": "DROID (Distributed Robot Interaction Dataset)",
+    "hours": 350.0,
+    "episodes": 76000
    }
   ]
  }

@@ -204,6 +204,360 @@
    "notes": "Human egocentric video, not robot data. Requires signed license agreement (approval ~48 h) before download; commercial_ok true reflects the grant clause allowing commercial product development, but the raw Database cannot be redistributed. Ego-Exo4D has a separate license."
   },
   {
+   "id": "egodex",
+   "name": "EgoDex",
+   "org": "Apple",
+   "url": "https://github.com/apple/ml-egodex",
+   "hf_url": null,
+   "mirror_url": null,
+   "embodiments": [
+    "human hands (egocentric video, Apple Vision Pro)"
+   ],
+   "form_tags": [
+    "human_hand",
+    "human_video"
+   ],
+   "episodes": 338000,
+   "hours": 829.0,
+   "frames": null,
+   "tasks": 194,
+   "scenes": null,
+   "modalities": [
+    "rgb",
+    "language"
+   ],
+   "format": "HDF5 + MP4 (paired per episode)",
+   "license": "CC-by-NC-ND terms",
+   "commercial_ok": false,
+   "release_date": "2025-05",
+   "size_gb": 1500.0,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://arxiv.org/abs/2505.11709",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: 'we use Apple Vision Pro to collect EgoDex: the largest and most diverse dataset of dexterous human manipulation'"
+    },
+    {
+     "field": "org",
+     "url": "https://arxiv.org/abs/2505.11709",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: 'we use Apple Vision Pro to collect EgoDex: the largest and most diverse dataset of dexterous human manipulation'"
+    },
+    {
+     "field": "url",
+     "url": "https://arxiv.org/abs/2505.11709",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: 'we use Apple Vision Pro to collect EgoDex: the largest and most diverse dataset of dexterous human manipulation'"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://arxiv.org/abs/2505.11709",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: 'we use Apple Vision Pro to collect EgoDex: the largest and most diverse dataset of dexterous human manipulation'"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://arxiv.org/abs/2505.11709",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: 'we use Apple Vision Pro to collect EgoDex: the largest and most diverse dataset of dexterous human manipulation'"
+    },
+    {
+     "field": "episodes",
+     "url": "https://arxiv.org/html/2505.11709",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Paper body: '338000 task demonstrations'"
+    },
+    {
+     "field": "hours",
+     "url": "https://arxiv.org/abs/2505.11709",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'829 hours of egocentric video ... 194 different tabletop tasks'"
+    },
+    {
+     "field": "tasks",
+     "url": "https://arxiv.org/abs/2505.11709",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'829 hours of egocentric video ... 194 different tabletop tasks'"
+    },
+    {
+     "field": "modalities",
+     "url": "https://github.com/apple/ml-egodex",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'829 hours of 30 Hz 1080p egocentric video'; 3D pose annotations for head, upper body and hands; natural language annotation; camera intrinsics"
+    },
+    {
+     "field": "format",
+     "url": "https://github.com/apple/ml-egodex",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HDF5 files paired with MP4 files; 'approximately 1.5 TB' total (train ~725h, test ~7h, extra ~97h)"
+    },
+    {
+     "field": "size_gb",
+     "url": "https://github.com/apple/ml-egodex",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HDF5 files paired with MP4 files; 'approximately 1.5 TB' total (train ~725h, test ~7h, extra ~97h)"
+    },
+    {
+     "field": "license",
+     "url": "https://github.com/apple/ml-egodex",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "README: released under 'CC-by-NC-ND terms'"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://github.com/apple/ml-egodex",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "README: released under 'CC-by-NC-ND terms'"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2505.11709",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "arXiv v1 2025-05-16 (v3 2026-03-09)"
+    }
+   ],
+   "notes": "Download from ml-site.cdn-apple.com/datasets/egodex/ (Parts 1-5 at 300 GB each, test 16 GB, extra 200 GB). 3D hand/finger/body pose annotations included (not one of the fixed modality tags)."
+  },
+  {
+   "id": "robocasa",
+   "name": "RoboCasa (RoboCasa365)",
+   "org": "robocasa.ai",
+   "url": "https://robocasa.ai/",
+   "hf_url": null,
+   "mirror_url": null,
+   "embodiments": [
+    "mobile manipulators of diverse form factors, such as single-arm mobile platforms, humanoid robots, and quadruped robots with arms"
+   ],
+   "form_tags": [
+    "sim",
+    "mobile_manipulator",
+    "humanoid",
+    "quadruped",
+    "multi"
+   ],
+   "episodes": null,
+   "hours": 600.0,
+   "frames": null,
+   "tasks": 365,
+   "scenes": 2500,
+   "modalities": [],
+   "format": null,
+   "license": "Code: MIT License; Assets/Datasets: CC BY 4.0",
+   "commercial_ok": true,
+   "release_date": null,
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://robocasa.ai/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Mobile manipulators of diverse form factors, such as single-arm mobile platforms, humanoid robots, and quadruped robots with arms'"
+    },
+    {
+     "field": "org",
+     "url": "https://robocasa.ai/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Mobile manipulators of diverse form factors, such as single-arm mobile platforms, humanoid robots, and quadruped robots with arms'"
+    },
+    {
+     "field": "url",
+     "url": "https://robocasa.ai/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Mobile manipulators of diverse form factors, such as single-arm mobile platforms, humanoid robots, and quadruped robots with arms'"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://robocasa.ai/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Mobile manipulators of diverse form factors, such as single-arm mobile platforms, humanoid robots, and quadruped robots with arms'"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://robocasa.ai/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Mobile manipulators of diverse form factors, such as single-arm mobile platforms, humanoid robots, and quadruped robots with arms'"
+    },
+    {
+     "field": "hours",
+     "url": "https://robocasa.ai/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'600+ hours of human demonstration data and 1,600+ hours of synthetically generated demonstrations' (hours field = human demos only)"
+    },
+    {
+     "field": "tasks",
+     "url": "https://robocasa.ai/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'365 everyday tasks' (65 atomic); '2,500 unique kitchen environments' (50 layouts x 50 styles); '3,200+ objects across more than 150 categories'"
+    },
+    {
+     "field": "scenes",
+     "url": "https://robocasa.ai/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'365 everyday tasks' (65 atomic); '2,500 unique kitchen environments' (50 layouts x 50 styles); '3,200+ objects across more than 150 categories'"
+    },
+    {
+     "field": "license",
+     "url": "https://github.com/robocasa/robocasa",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "README: Code 'MIT License'; Assets/Datasets 'CC BY 4.0'"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://github.com/robocasa/robocasa",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "README: Code 'MIT License'; Assets/Datasets 'CC BY 4.0'"
+    }
+   ],
+   "notes": "Simulator: RoboSuite v1.5 backend (README). Original RoboCasa at RSS 2024, RoboCasa365 at ICLR 2026; README v1.0.1 dated '[5/12/2026]'. Plus 1,600+ hours generated demos. Episode counts, file format and dataset size not stated; assets download ~10GB."
+  },
+  {
+   "id": "droid",
+   "name": "DROID (Distributed Robot Interaction Dataset)",
+   "org": "DROID collaboration (13 institutions)",
+   "url": "https://droid-dataset.github.io/",
+   "hf_url": "https://huggingface.co/datasets/cadene/droid_1.0.1",
+   "mirror_url": null,
+   "embodiments": [
+    "Franka Panda 7DoF robot arm"
+   ],
+   "form_tags": [
+    "single_arm"
+   ],
+   "episodes": 76000,
+   "hours": 350.0,
+   "frames": null,
+   "tasks": 86,
+   "scenes": 564,
+   "modalities": [
+    "rgb",
+    "language"
+   ],
+   "format": "RLDS/TFDS",
+   "license": null,
+   "commercial_ok": null,
+   "release_date": "2024-03",
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page: 'Franka Panda 7DoF robot arm'; 13 institutions across North America, Asia and Europe; 50 data collectors"
+    },
+    {
+     "field": "org",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page: 'Franka Panda 7DoF robot arm'; 13 institutions across North America, Asia and Europe; 50 data collectors"
+    },
+    {
+     "field": "url",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page: 'Franka Panda 7DoF robot arm'; 13 institutions across North America, Asia and Europe; 50 data collectors"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page: 'Franka Panda 7DoF robot arm'; 13 institutions across North America, Asia and Europe; 50 data collectors"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page: 'Franka Panda 7DoF robot arm'; 13 institutions across North America, Asia and Europe; 50 data collectors"
+    },
+    {
+     "field": "episodes",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'76k demonstration trajectories or 350h of interaction data'; 564 scenes; collected over 12 months"
+    },
+    {
+     "field": "hours",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'76k demonstration trajectories or 350h of interaction data'; 564 scenes; collected over 12 months"
+    },
+    {
+     "field": "scenes",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'76k demonstration trajectories or 350h of interaction data'; 564 scenes; collected over 12 months"
+    },
+    {
+     "field": "tasks",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page states 86 tasks; paper abstract (arXiv 2403.12945) states 84 tasks"
+    },
+    {
+     "field": "modalities",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "RGB from two Zed 2 stereo cameras + wrist Zed Mini; language instructions; action data"
+    },
+    {
+     "field": "format",
+     "url": "https://droid-dataset.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Loading example uses 'import tensorflow_datasets as tfds' (RLDS/TFDS)"
+    },
+    {
+     "field": "hf_url",
+     "url": "https://huggingface.co/api/datasets/cadene/droid_1.0.1",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Community LeRobot-format port by user cadene; HF card license tag apache-2.0; usedStorage 399,287,567,377 bytes"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2403.12945",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "arXiv v1 2024-03-19 (v2 2025-04-22)"
+    }
+   ],
+   "notes": "Official license not stated on fetched pages (null); HF LeRobot port cadene/droid_1.0.1 is tagged apache-2.0. Paper abstract says 84 tasks vs 86 on the project page; April 2025 update added improved camera calibrations."
+  },
+  {
    "id": "fourier-actionnet",
    "name": "Fourier ActionNet",
    "org": "Fourier Intelligence (FFTAI)",
@@ -517,6 +871,232 @@
    "notes": "Mixed real + simulation + converted open-source data; hosted at https://openi.pcl.ac.cn/ARIO/ARIO_Dataset (loaded). Total size not stated; commercial_ok null because converted sub-datasets keep their own licenses."
   },
   {
+   "id": "agibot-world",
+   "name": "AgiBot World (Alpha / Beta)",
+   "org": "AgiBot (agibot-world) / OpenDriveLab",
+   "url": "https://agibot-world.com/",
+   "hf_url": "https://huggingface.co/datasets/agibot-world/AgiBotWorld-Beta",
+   "mirror_url": null,
+   "embodiments": [
+    "mobile dual-arm robots",
+    "6-DoF Dexterous hand"
+   ],
+   "form_tags": [
+    "dual_arm",
+    "mobile_manipulator"
+   ],
+   "episodes": 1003672,
+   "hours": null,
+   "frames": null,
+   "tasks": null,
+   "scenes": "100+ 1:1 replicated real-life scenarios across 5 target domains",
+   "modalities": [],
+   "format": "LeRobot (README); HF card format tag: webdataset",
+   "license": "CC BY-NC-SA 4.0",
+   "commercial_ok": false,
+   "release_date": "2024-12",
+   "size_gb": 43800.0,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://github.com/OpenDriveLab/AgiBot-World",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "GitHub README (OpenDriveLab/AgiBot-World)"
+    },
+    {
+     "field": "org",
+     "url": "https://github.com/OpenDriveLab/AgiBot-World",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "GitHub README (OpenDriveLab/AgiBot-World)"
+    },
+    {
+     "field": "url",
+     "url": "https://github.com/OpenDriveLab/AgiBot-World",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "GitHub README (OpenDriveLab/AgiBot-World)"
+    },
+    {
+     "field": "hf_url",
+     "url": "https://huggingface.co/api/datasets/agibot-world/AgiBotWorld-Beta",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF API: gated 'auto', tags real-world / dual-arm; createdAt 2025-02-11; usedStorage 50,223,928,691,609 bytes"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://github.com/OpenDriveLab/AgiBot-World",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Cutting-edge hardware: visual tactile sensors / 6-DoF Dexterous hand / mobile dual-arm robots'; HF tag 'dual-arm'"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://github.com/OpenDriveLab/AgiBot-World",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Cutting-edge hardware: visual tactile sensors / 6-DoF Dexterous hand / mobile dual-arm robots'; HF tag 'dual-arm'"
+    },
+    {
+     "field": "episodes",
+     "url": "https://github.com/OpenDriveLab/AgiBot-World",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Beta: '1,003,672 trajectories (~43.8T)'; Alpha: '92,214 trajectories (~8.5T)'"
+    },
+    {
+     "field": "size_gb",
+     "url": "https://github.com/OpenDriveLab/AgiBot-World",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Beta: '1,003,672 trajectories (~43.8T)'; Alpha: '92,214 trajectories (~8.5T)'"
+    },
+    {
+     "field": "scenes",
+     "url": "https://github.com/OpenDriveLab/AgiBot-World",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'100+ 1:1 replicated real-life scenarios across 5 target domains'; '1 million+ trajectories from 100 robots'"
+    },
+    {
+     "field": "format",
+     "url": "https://github.com/OpenDriveLab/AgiBot-World",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "README: built on LeRobot; HF API tags 'format:webdataset'"
+    },
+    {
+     "field": "license",
+     "url": "https://huggingface.co/api/datasets/agibot-world/AgiBotWorld-Alpha",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "extra_gated_prompt: 'All the data and code within this repo are under CC BY-NC-SA 4.0'; also in README"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://huggingface.co/api/datasets/agibot-world/AgiBotWorld-Alpha",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "extra_gated_prompt: 'All the data and code within this repo are under CC BY-NC-SA 4.0'; also in README"
+    },
+    {
+     "field": "release_date",
+     "url": "https://github.com/OpenDriveLab/AgiBot-World",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Alpha released [2024/12/30]; Beta [2025/03/01]"
+    }
+   ],
+   "notes": "Alpha (HF agibot-world/AgiBotWorld-Alpha): 92,214 trajectories ~8.5T, 2024-12-30; Beta: 1,003,672 trajectories ~43.8T, 2025-03-01. Both HF repos gated. README lists HuggingFace and OpenDataLab hosting; no OpenDataLab page was loaded. Hours, task count and modality list not stated in fetched README."
+  },
+  {
+   "id": "open-x-embodiment",
+   "name": "Open X-Embodiment (OXE)",
+   "org": "Open X-Embodiment Collaboration (Google DeepMind + partner labs)",
+   "url": "https://robotics-transformer-x.github.io/",
+   "hf_url": null,
+   "mirror_url": null,
+   "embodiments": [
+    "22 different robots"
+   ],
+   "form_tags": [
+    "multi"
+   ],
+   "episodes": 1000000,
+   "hours": null,
+   "frames": null,
+   "tasks": 160266,
+   "scenes": null,
+   "modalities": [],
+   "format": "RLDS",
+   "license": "Software: Apache License 2.0; all other materials: Creative Commons Attribution 4.0 International (CC-BY) (repository README); constituent datasets are cited/licensed individually via the dataset spreadsheet",
+   "commercial_ok": null,
+   "release_date": "2023-10",
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://robotics-transformer-x.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page: '22 different robots'; 'pooling 60 existing robot datasets from 34 robotic research labs around the world'"
+    },
+    {
+     "field": "org",
+     "url": "https://robotics-transformer-x.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page: '22 different robots'; 'pooling 60 existing robot datasets from 34 robotic research labs around the world'"
+    },
+    {
+     "field": "url",
+     "url": "https://robotics-transformer-x.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page: '22 different robots'; 'pooling 60 existing robot datasets from 34 robotic research labs around the world'"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://robotics-transformer-x.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page: '22 different robots'; 'pooling 60 existing robot datasets from 34 robotic research labs around the world'"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://robotics-transformer-x.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Page: '22 different robots'; 'pooling 60 existing robot datasets from 34 robotic research labs around the world'"
+    },
+    {
+     "field": "episodes",
+     "url": "https://robotics-transformer-x.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'1M+ real robot trajectories' recorded as floor 1,000,000"
+    },
+    {
+     "field": "tasks",
+     "url": "https://arxiv.org/abs/2310.08864",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: '527 skills (160266 tasks)'; also on project page"
+    },
+    {
+     "field": "format",
+     "url": "https://github.com/google-deepmind/open_x_embodiment",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "README: each episode 'is represented using the RLDS episode format'; data at gs://gdm-robotics-open-x-embodiment/"
+    },
+    {
+     "field": "license",
+     "url": "https://github.com/google-deepmind/open_x_embodiment",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "README: 'All software is licensed under the Apache License, Version 2.0' / 'All other materials are licensed under the Creative Commons Attribution 4.0 International License (CC-BY)'; per-dataset licenses not enumerated, so commercial_ok left null"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://github.com/google-deepmind/open_x_embodiment",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "README: 'All software is licensed under the Apache License, Version 2.0' / 'All other materials are licensed under the Creative Commons Attribution 4.0 International License (CC-BY)'; per-dataset licenses not enumerated, so commercial_ok left null"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2310.08864",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "arXiv v1 submitted 2023-10-13 (latest v9 2025-05-14)"
+    }
+   ],
+   "notes": "Aggregate of 60 datasets from 34 labs (project page); paper abstract states 22 robots, 21 institutions, 527 skills, 160,266 tasks. Hours/frames/modalities not stated on fetched pages; hosted on Google Cloud Storage, not Hugging Face."
+  },
+  {
    "id": "roboverse",
    "name": "RoboVerse (roboverse_data)",
    "org": "RoboVerseOrg",
@@ -681,6 +1261,350 @@
    "notes": "Simulation; post-training data for GR00T N1. Release date not stated on card (HF lastModified 2026-03-05)."
   },
   {
+   "id": "rt-1",
+   "name": "RT-1 dataset (Google robot)",
+   "org": "Google",
+   "url": "https://robotics-transformer1.github.io/",
+   "hf_url": null,
+   "mirror_url": null,
+   "embodiments": [
+    "fleet of 13 robots (platform not named on project page)"
+   ],
+   "form_tags": [
+    "mobile_manipulator",
+    "single_arm"
+   ],
+   "episodes": 130000,
+   "hours": null,
+   "frames": null,
+   "tasks": 700,
+   "scenes": null,
+   "modalities": [],
+   "format": null,
+   "license": null,
+   "commercial_ok": null,
+   "release_date": "2022-12",
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://robotics-transformer1.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'collected with a fleet of 13 robots over 17 months'; robot model not named"
+    },
+    {
+     "field": "org",
+     "url": "https://robotics-transformer1.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'collected with a fleet of 13 robots over 17 months'; robot model not named"
+    },
+    {
+     "field": "url",
+     "url": "https://robotics-transformer1.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'collected with a fleet of 13 robots over 17 months'; robot model not named"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://robotics-transformer1.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'collected with a fleet of 13 robots over 17 months'; robot model not named"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://robotics-transformer1.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Action space: 'seven dimensions for the arm movement ... three dimensions for base movement (x, y, yaw)' -> single arm on mobile base"
+    },
+    {
+     "field": "episodes",
+     "url": "https://robotics-transformer1.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'over 130k episodes, which contain over 700 tasks'"
+    },
+    {
+     "field": "tasks",
+     "url": "https://robotics-transformer1.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'over 130k episodes, which contain over 700 tasks'"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2212.06817",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "arXiv v1 2022-12-13 (v2 2023-08-11)"
+    }
+   ],
+   "notes": "Data released at https://console.cloud.google.com/storage/browser/gresearch/rt-1-data-release (link on project page); also a constituent of OXE. Format, license and modalities not stated on fetched pages."
+  },
+  {
+   "id": "rh20t",
+   "name": "RH20T",
+   "org": "RH20T authors (rh20t.github.io)",
+   "url": "https://rh20t.github.io/",
+   "hf_url": null,
+   "mirror_url": null,
+   "embodiments": [
+    "7 robot configurations (cfg1-cfg7; models detailed in paper appendix)"
+   ],
+   "form_tags": [
+    "multi",
+    "human_video"
+   ],
+   "episodes": 110000,
+   "hours": null,
+   "frames": null,
+   "tasks": 147,
+   "scenes": null,
+   "modalities": [
+    "rgb",
+    "depth",
+    "force",
+    "audio",
+    "tactile",
+    "state",
+    "language"
+   ],
+   "format": "custom (MP4 video + NPY arrays + JSON metadata, per configuration/task folders)",
+   "license": "RH20T-C subset: CC BY-SA 4.0; RH20T-NC subset: CC BY-NC 4.0",
+   "commercial_ok": null,
+   "release_date": "2023-07",
+   "size_gb": 5000.0,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "7 configurations cfg1-cfg7; 'corresponding human demonstration video' for each robot sequence"
+    },
+    {
+     "field": "org",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "7 configurations cfg1-cfg7; 'corresponding human demonstration video' for each robot sequence"
+    },
+    {
+     "field": "url",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "7 configurations cfg1-cfg7; 'corresponding human demonstration video' for each robot sequence"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "7 configurations cfg1-cfg7; 'corresponding human demonstration video' for each robot sequence"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "7 configurations cfg1-cfg7; 'corresponding human demonstration video' for each robot sequence"
+    },
+    {
+     "field": "episodes",
+     "url": "https://arxiv.org/abs/2307.00595",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: 'over 110,000 contact-rich robot manipulation sequences'"
+    },
+    {
+     "field": "tasks",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'We select 48 tasks from RLBench, 29 tasks from MetaWorld, and introduce 70 self-proposed tasks' (147)"
+    },
+    {
+     "field": "modalities",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "RGB, depth, binocular IR, joint angles/torque, gripper pose/width, 6-DoF force/torque, fingertip tactile (cfg7 only), audio, language description"
+    },
+    {
+     "field": "format",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Folder hierarchy of MP4/NPY/JSON; '640x360 version: ~5TB RGB, ~10TB RGBD after extraction'"
+    },
+    {
+     "field": "size_gb",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Folder hierarchy of MP4/NPY/JSON; '640x360 version: ~5TB RGB, ~10TB RGBD after extraction'"
+    },
+    {
+     "field": "license",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Dual license: RH20T-C under CC BY-SA 4.0, RH20T-NC under CC BY-NC 4.0 (mixed -> commercial_ok null)"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://rh20t.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Dual license: RH20T-C under CC BY-SA 4.0, RH20T-NC under CC BY-NC 4.0 (mixed -> commercial_ok null)"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2307.00595",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "arXiv v1 2023-07-02 (v2 2023-09-26); ICRA 2024"
+    }
+   ],
+   "notes": "Robot arm/gripper models per configuration are in the paper appendix, not on the page. Downloads via Google Drive / Baidu Cloud per configuration; 320x180 version ranges 4.4GB-572.2GB per configuration."
+  },
+  {
+   "id": "robomind",
+   "name": "RoboMIND",
+   "org": "X-Humanoid (x-humanoid-robomind)",
+   "url": "https://x-humanoid-robomind.github.io/",
+   "hf_url": "https://huggingface.co/datasets/x-humanoid-robomind/RoboMIND",
+   "mirror_url": null,
+   "embodiments": [
+    "Franka Emika Panda",
+    "UR5e",
+    "AgileX dual-arm robot",
+    "humanoid robot with dual dexterous hands",
+    "digital twin environment in the Isaac Sim simulator"
+   ],
+   "form_tags": [
+    "single_arm",
+    "dual_arm",
+    "humanoid",
+    "sim",
+    "multi"
+   ],
+   "episodes": 107000,
+   "hours": null,
+   "frames": null,
+   "tasks": 479,
+   "scenes": null,
+   "modalities": [
+    "rgb",
+    "state",
+    "language"
+   ],
+   "format": null,
+   "license": "apache-2.0",
+   "commercial_ok": true,
+   "release_date": "2024-12",
+   "size_gb": 12279.0,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://x-humanoid-robomind.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Franka Emika Panda, the UR5e, the AgileX dual-arm robot, and a humanoid robot with dual dexterous hands' plus Isaac Sim digital twin"
+    },
+    {
+     "field": "org",
+     "url": "https://x-humanoid-robomind.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Franka Emika Panda, the UR5e, the AgileX dual-arm robot, and a humanoid robot with dual dexterous hands' plus Isaac Sim digital twin"
+    },
+    {
+     "field": "url",
+     "url": "https://x-humanoid-robomind.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Franka Emika Panda, the UR5e, the AgileX dual-arm robot, and a humanoid robot with dual dexterous hands' plus Isaac Sim digital twin"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://x-humanoid-robomind.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Franka Emika Panda, the UR5e, the AgileX dual-arm robot, and a humanoid robot with dual dexterous hands' plus Isaac Sim digital twin"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://x-humanoid-robomind.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Franka Emika Panda, the UR5e, the AgileX dual-arm robot, and a humanoid robot with dual dexterous hands' plus Isaac Sim digital twin"
+    },
+    {
+     "field": "episodes",
+     "url": "https://arxiv.org/abs/2412.13877",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: '107k demonstration trajectories across 479 diverse tasks involving 96 object classes'"
+    },
+    {
+     "field": "tasks",
+     "url": "https://arxiv.org/abs/2412.13877",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: '107k demonstration trajectories across 479 diverse tasks involving 96 object classes'"
+    },
+    {
+     "field": "modalities",
+     "url": "https://x-humanoid-robomind.github.io/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'multi-view observations, proprioceptive robot state information, and linguistic task descriptions'"
+    },
+    {
+     "field": "hf_url",
+     "url": "https://huggingface.co/api/datasets/x-humanoid-robomind/RoboMIND",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF API cardData.license 'apache-2.0'; gated 'auto'; languages en, zh"
+    },
+    {
+     "field": "license",
+     "url": "https://huggingface.co/api/datasets/x-humanoid-robomind/RoboMIND",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF API cardData.license 'apache-2.0'; gated 'auto'; languages en, zh"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://huggingface.co/api/datasets/x-humanoid-robomind/RoboMIND",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF API cardData.license 'apache-2.0'; gated 'auto'; languages en, zh"
+    },
+    {
+     "field": "size_gb",
+     "url": "https://huggingface.co/api/datasets/x-humanoid-robomind/RoboMIND",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF API usedStorage 12,278,955,507,251 bytes (~12,279 GB)"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2412.13877",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "arXiv v1 2024-12-18 (v3 2025-05-27); RSS 2025"
+    }
+   ],
+   "notes": "Project page lists ModelScope mirror https://modelscope.cn/collections/X-Humanoid/RoboMIND20 (ModelScope page itself not loaded, so mirror_url null). Also 5k failure demonstrations and 10,000 refined language annotations; V2.0 announced. File format not stated on fetched pages."
+  },
+  {
    "id": "robotwin-2.0",
    "name": "RoboTwin 2.0",
    "org": "RoboTwin-Platform (Tianxing Chen et al.)",
@@ -768,6 +1692,129 @@
    "notes": "Simulation (SAPIEN-based). Object library: 731 objects across 147 categories. 5 robot embodiments stated but names not enumerated on fetched pages (default aloha_agilex). Paper: arXiv 2506.18088."
   },
   {
+   "id": "bridgedata-v2",
+   "name": "BridgeData V2",
+   "org": "UC Berkeley RAIL",
+   "url": "https://rail-berkeley.github.io/bridgedata/",
+   "hf_url": null,
+   "mirror_url": null,
+   "embodiments": [
+    "WidowX 250 6DOF robot arm"
+   ],
+   "form_tags": [
+    "single_arm"
+   ],
+   "episodes": 60096,
+   "hours": null,
+   "frames": null,
+   "tasks": "13 skills",
+   "scenes": 24,
+   "modalities": [
+    "rgb",
+    "depth",
+    "language"
+   ],
+   "format": "raw (JPEG images, zip downloads)",
+   "license": "Creative Commons Attribution 4.0 International License",
+   "commercial_ok": true,
+   "release_date": "2023-08",
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'WidowX 250 6DOF robot arm'"
+    },
+    {
+     "field": "org",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'WidowX 250 6DOF robot arm'"
+    },
+    {
+     "field": "url",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'WidowX 250 6DOF robot arm'"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'WidowX 250 6DOF robot arm'"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'WidowX 250 6DOF robot arm'"
+    },
+    {
+     "field": "episodes",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'60,096 trajectories' = '50,365 teleoperated demonstrations' + '9,731 rollouts from a scripted pick-and-place policy'"
+    },
+    {
+     "field": "tasks",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'13 skills' across '24 environments'"
+    },
+    {
+     "field": "scenes",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'13 skills' across '24 environments'"
+    },
+    {
+     "field": "modalities",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Fixed over-the-shoulder RGBD camera, two randomized RGB cameras, wrist RGB camera; 'Each trajectory is labeled with a natural langauge instruction'"
+    },
+    {
+     "field": "format",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'stored as JPEGS'; teleop and scripted data provided as separate zip files"
+    },
+    {
+     "field": "license",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'All data is provided under the Creative Commons Attribution 4.0 International License'"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://rail-berkeley.github.io/bridgedata/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'All data is provided under the Creative Commons Attribution 4.0 International License'"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2308.12952",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "arXiv v1 2023-08-24 (v3 2024-01-17)"
+    }
+   ],
+   "notes": "Paper abstract: 60,096 trajectories across 24 environments on a low-cost robot. Download size and depth-camera model not stated on fetched page."
+  },
+  {
    "id": "mimicgen-datasets",
    "name": "MimicGen Datasets",
    "org": "NVIDIA (NVlabs)",
@@ -847,6 +1894,102 @@
     }
    ],
    "notes": "Simulation (robosuite/MuJoCo; Isaac Gym Factory for some tasks). Paper reports 'over 50K demonstrations across 18 tasks' from ~200 human demos; hub release is 48,000+ across 12 tasks. Modalities not enumerated on fetched pages."
+  },
+  {
+   "id": "roboset",
+   "name": "RoboSet",
+   "org": "RoboAgent / RoboPen (robopen.github.io)",
+   "url": "https://robopen.github.io/roboset/",
+   "hf_url": null,
+   "mirror_url": null,
+   "embodiments": [],
+   "form_tags": [],
+   "episodes": 28500,
+   "hours": null,
+   "frames": null,
+   "tasks": null,
+   "scenes": "kitchen scenes",
+   "modalities": [
+    "rgb"
+   ],
+   "format": "HDF5 (h5py)",
+   "license": "MIT-License",
+   "commercial_ok": true,
+   "release_date": "2023-09",
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://robopen.github.io/roboset/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "RoboSet page"
+    },
+    {
+     "field": "org",
+     "url": "https://robopen.github.io/roboset/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "RoboSet page"
+    },
+    {
+     "field": "url",
+     "url": "https://robopen.github.io/roboset/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "RoboSet page"
+    },
+    {
+     "field": "episodes",
+     "url": "https://robopen.github.io/roboset/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'28,500 trajectories in the dataset, out of which 9,500 are collected through teleoperation, and 19,000 are collected through kinesthetic playback'"
+    },
+    {
+     "field": "scenes",
+     "url": "https://robopen.github.io/roboset/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'kitchen scenes' with scene variations; '4 distinct camera views per frame'"
+    },
+    {
+     "field": "modalities",
+     "url": "https://robopen.github.io/roboset/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'kitchen scenes' with scene variations; '4 distinct camera views per frame'"
+    },
+    {
+     "field": "format",
+     "url": "https://robopen.github.io/roboset/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Loading example uses h5py.File on .h5 files"
+    },
+    {
+     "field": "license",
+     "url": "https://robopen.github.io/roboset/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'MIT-License'"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://robopen.github.io/roboset/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'MIT-License'"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2309.01918",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "RoboAgent arXiv submitted 2023-09-05"
+    }
+   ],
+   "notes": "Robot model, task/skill counts, camera type and size not stated on fetched page. RoboAgent paper abstract trains on 'merely 7500 demonstrations' for 12 skills / 38 tasks, distinct from the 28,500-trajectory RoboSet total."
   },
   {
    "id": "dexmimicgen-datasets",
@@ -938,6 +2081,544 @@
     }
    ],
    "notes": "Simulation (RoboSuite/MuJoCo; also applied to BiGym). License conflict between HF card (CC BY-NC-SA 4.0) and GitHub README (CC-BY 4.0)."
+  },
+  {
+   "id": "libero",
+   "name": "LIBERO datasets",
+   "org": "Lifelong-Robot-Learning (LIBERO project)",
+   "url": "https://libero-project.github.io/",
+   "hf_url": null,
+   "mirror_url": null,
+   "embodiments": [],
+   "form_tags": [
+    "sim"
+   ],
+   "episodes": null,
+   "hours": null,
+   "frames": null,
+   "tasks": 130,
+   "scenes": null,
+   "modalities": [],
+   "format": null,
+   "license": "Codebase: MIT License; Datasets: Creative Commons Attribution 4.0 International (CC BY 4.0)",
+   "commercial_ok": true,
+   "release_date": "2023-06",
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Simulation benchmark; README references OffScreenRenderEnv"
+    },
+    {
+     "field": "org",
+     "url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Simulation benchmark; README references OffScreenRenderEnv"
+    },
+    {
+     "field": "url",
+     "url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Simulation benchmark; README references OffScreenRenderEnv"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Simulation benchmark; README references OffScreenRenderEnv"
+    },
+    {
+     "field": "tasks",
+     "url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'130 tasks grouped into four task suites: LIBERO-Spatial, LIBERO-Object, LIBERO-Goal, and LIBERO-100'; LIBERO-100 split into LIBERO-90 and LIBERO-10"
+    },
+    {
+     "field": "license",
+     "url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "README: 'Codebase MIT License' and 'Datasets Creative Commons Attribution 4.0 International (CC BY 4.0)'"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "README: 'Codebase MIT License' and 'Datasets Creative Commons Attribution 4.0 International (CC BY 4.0)'"
+    },
+    {
+     "field": "release_date",
+     "url": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Citation: arXiv:2306.03310, 2023"
+    },
+    {
+     "field": "tasks",
+     "url": "https://lifelong-robot-learning.github.io/LIBERO/html/algo_data/datasets.html",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Docs: libero_spatial/object/goal/100 have '10, 10, 10, and 100 tasks each'"
+    }
+   ],
+   "notes": "Demonstration counts, robot model, file format and dataset size not stated on the fetched README/docs page; project page libero-project.github.io returned no content."
+  },
+  {
+   "id": "calvin",
+   "name": "CALVIN",
+   "org": "mees/calvin (Oier Mees et al.)",
+   "url": "https://github.com/mees/calvin",
+   "hf_url": null,
+   "mirror_url": null,
+   "embodiments": [],
+   "form_tags": [
+    "sim",
+    "single_arm"
+   ],
+   "episodes": null,
+   "hours": null,
+   "frames": null,
+   "tasks": null,
+   "scenes": "environments A, B, C, D",
+   "modalities": [
+    "rgb",
+    "depth",
+    "tactile",
+    "state",
+    "language"
+   ],
+   "format": null,
+   "license": "MIT",
+   "commercial_ok": true,
+   "release_date": "2021-12",
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://github.com/mees/calvin",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "GitHub README"
+    },
+    {
+     "field": "org",
+     "url": "https://github.com/mees/calvin",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "GitHub README"
+    },
+    {
+     "field": "url",
+     "url": "https://github.com/mees/calvin",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "GitHub README"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://github.com/mees/calvin",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "PyBullet simulation; proprioceptive state lists one EE pose, one gripper width and 'joint positions (7)'"
+    },
+    {
+     "field": "scenes",
+     "url": "https://github.com/mees/calvin",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Download options 'D | ABC | ABCD' (environments A-D)"
+    },
+    {
+     "field": "modalities",
+     "url": "https://github.com/mees/calvin",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Static RGB 200x200x3, static depth 200x200, gripper RGB 84x84x3, gripper depth 84x84, tactile image 120x160x6, proprioceptive state; benchmark is language-conditioned"
+    },
+    {
+     "field": "license",
+     "url": "https://github.com/mees/calvin",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'License: MIT' badge and footer"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://github.com/mees/calvin",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'License: MIT' badge and footer"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2112.03227",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "arXiv v1 2021-12-06 (v4 2022-07-13); RA-L vol 7 no 3, 2022"
+    }
+   ],
+   "notes": "Hours, frames, task count, language-instruction count, split sizes and file format live in dataset/README.md, which was not fetched (budget); robot name not explicit in fetched README."
+  },
+  {
+   "id": "galaxea-open-world",
+   "name": "Galaxea Open-World Dataset (G0 data)",
+   "org": "Galaxea (OpenGalaxea)",
+   "url": "https://opengalaxea.github.io/G0/",
+   "hf_url": "https://huggingface.co/datasets/OpenGalaxea/Galaxea-Open-World-Dataset",
+   "mirror_url": null,
+   "embodiments": [
+    "Galaxea R1 Lite (mobile dual-arm manipulator)"
+   ],
+   "form_tags": [
+    "dual_arm",
+    "mobile_manipulator"
+   ],
+   "episodes": null,
+   "hours": null,
+   "frames": null,
+   "tasks": null,
+   "scenes": "11 physical sites (residential, catering, retail, office)",
+   "modalities": [
+    "rgb",
+    "language"
+   ],
+   "format": "LeRobot (HF tag 'lerobot')",
+   "license": "cc-by-nc-sa-4.0",
+   "commercial_ok": false,
+   "release_date": "2025-08",
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://opengalaxea.github.io/GalaxeaVLA/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "opengalaxea.github.io/G0/ redirects to GalaxeaVLA page"
+    },
+    {
+     "field": "org",
+     "url": "https://opengalaxea.github.io/GalaxeaVLA/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "opengalaxea.github.io/G0/ redirects to GalaxeaVLA page"
+    },
+    {
+     "field": "url",
+     "url": "https://opengalaxea.github.io/GalaxeaVLA/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "opengalaxea.github.io/G0/ redirects to GalaxeaVLA page"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://opengalaxea.github.io/GalaxeaVLA/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Galaxea R1 Lite is a mobile dual-arm manipulator designed for daily tasks'; HF tags dual-arm, whole body control"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://opengalaxea.github.io/GalaxeaVLA/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'Galaxea R1 Lite is a mobile dual-arm manipulator designed for daily tasks'; HF tags dual-arm, whole body control"
+    },
+    {
+     "field": "scenes",
+     "url": "https://opengalaxea.github.io/GalaxeaVLA/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "'collected at 11 physical sites—covering residential, catering, retail, and office spaces'"
+    },
+    {
+     "field": "modalities",
+     "url": "https://opengalaxea.github.io/GalaxeaVLA/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Visual data 'paired with precise subtask-level language annotations'; HF tag modality:video"
+    },
+    {
+     "field": "hf_url",
+     "url": "https://huggingface.co/api/datasets?author=OpenGalaxea&limit=50",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF org listing: OpenGalaxea/Galaxea-Open-World-Dataset tags license:cc-by-nc-sa-4.0, lerobot, size_categories:n>1T, arxiv:2509.00576; repo gated"
+    },
+    {
+     "field": "format",
+     "url": "https://huggingface.co/api/datasets?author=OpenGalaxea&limit=50",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF org listing: OpenGalaxea/Galaxea-Open-World-Dataset tags license:cc-by-nc-sa-4.0, lerobot, size_categories:n>1T, arxiv:2509.00576; repo gated"
+    },
+    {
+     "field": "license",
+     "url": "https://huggingface.co/api/datasets?author=OpenGalaxea&limit=50",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF org listing: OpenGalaxea/Galaxea-Open-World-Dataset tags license:cc-by-nc-sa-4.0, lerobot, size_categories:n>1T, arxiv:2509.00576; repo gated"
+    },
+    {
+     "field": "commercial_ok",
+     "url": "https://huggingface.co/api/datasets?author=OpenGalaxea&limit=50",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF org listing: OpenGalaxea/Galaxea-Open-World-Dataset tags license:cc-by-nc-sa-4.0, lerobot, size_categories:n>1T, arxiv:2509.00576; repo gated"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2509.00576",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "arXiv submitted 2025-08-30"
+    }
+   ],
+   "notes": "Project page links ModelScope mirror https://www.modelscope.cn/datasets/Galaxea/Galaxea-Open-World-Dataset (not loaded, so mirror_url null). Hours, episodes and task counts not stated on fetched pages or abstract; HF size category n>1T."
+  },
+  {
+   "id": "bc-z",
+   "name": "BC-Z dataset",
+   "org": "Google",
+   "url": "https://sites.google.com/view/bc-z/",
+   "hf_url": null,
+   "mirror_url": null,
+   "embodiments": [],
+   "form_tags": [],
+   "episodes": null,
+   "hours": null,
+   "frames": null,
+   "tasks": 100,
+   "scenes": null,
+   "modalities": [],
+   "format": null,
+   "license": null,
+   "commercial_ok": null,
+   "release_date": "2022-02",
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://sites.google.com/view/bc-z/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Project site; dataset link https://www.kaggle.com/google/bc-z-robot"
+    },
+    {
+     "field": "org",
+     "url": "https://sites.google.com/view/bc-z/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Project site; dataset link https://www.kaggle.com/google/bc-z-robot"
+    },
+    {
+     "field": "url",
+     "url": "https://sites.google.com/view/bc-z/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Project site; dataset link https://www.kaggle.com/google/bc-z-robot"
+    },
+    {
+     "field": "tasks",
+     "url": "https://arxiv.org/abs/2202.02005",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: 'scaling data collection on a real robot to more than 100 distinct tasks'; page: '100 manipulation tasks'"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2202.02005",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "arXiv submitted 2022-02-04; CoRL 2021"
+    }
+   ],
+   "notes": "Kaggle dataset page returned only a title (no metadata). Episode count, robot, format and license not stated on fetched pages; also a constituent of OXE."
+  },
+  {
+   "id": "unihand",
+   "name": "UniHand (Being-H0 human hand pretraining data; HF: UniHand_Preview)",
+   "org": "BeingBeyond",
+   "url": "https://github.com/BeingBeyond/Being-H0",
+   "hf_url": "https://huggingface.co/datasets/BeingBeyond/UniHand_Preview",
+   "mirror_url": null,
+   "embodiments": [
+    "human hands (motion capture, VR, and RGB-only videos)"
+   ],
+   "form_tags": [
+    "human_hand",
+    "human_video"
+   ],
+   "episodes": null,
+   "hours": null,
+   "frames": null,
+   "tasks": null,
+   "scenes": null,
+   "modalities": [
+    "rgb",
+    "language"
+   ],
+   "format": "webdataset (HF card format tag)",
+   "license": null,
+   "commercial_ok": null,
+   "release_date": "2025-07",
+   "size_gb": 601.0,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://github.com/BeingBeyond/Being-H0",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Being-H0 GitHub README (mentions post-training set h0_post_train_db_2508; no UniHand stats)"
+    },
+    {
+     "field": "org",
+     "url": "https://github.com/BeingBeyond/Being-H0",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Being-H0 GitHub README (mentions post-training set h0_post_train_db_2508; no UniHand stats)"
+    },
+    {
+     "field": "url",
+     "url": "https://github.com/BeingBeyond/Being-H0",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Being-H0 GitHub README (mentions post-training set h0_post_train_db_2508; no UniHand stats)"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://arxiv.org/abs/2507.15597",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: 'leveraging human hands as a foundation manipulator'; data pipeline integrates 'motion capture, VR, and RGB-only videos'"
+    },
+    {
+     "field": "form_tags",
+     "url": "https://arxiv.org/abs/2507.15597",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Abstract: 'leveraging human hands as a foundation manipulator'; data pipeline integrates 'motion capture, VR, and RGB-only videos'"
+    },
+    {
+     "field": "hf_url",
+     "url": "https://huggingface.co/datasets/BeingBeyond/UniHand_Preview",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Dataset card: 'a subset of the pretraining data for Being-H0.5'; total file size '601 GB'; HF viewer estimates ~2,851,091 rows"
+    },
+    {
+     "field": "size_gb",
+     "url": "https://huggingface.co/datasets/BeingBeyond/UniHand_Preview",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Dataset card: 'a subset of the pretraining data for Being-H0.5'; total file size '601 GB'; HF viewer estimates ~2,851,091 rows"
+    },
+    {
+     "field": "modalities",
+     "url": "https://huggingface.co/api/datasets?author=BeingBeyond&limit=50",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF API tags: format:webdataset, modality:text, lerobot; mp4 files in structure (ego-view EgoDex-derived videos)"
+    },
+    {
+     "field": "format",
+     "url": "https://huggingface.co/api/datasets?author=BeingBeyond&limit=50",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "HF API tags: format:webdataset, modality:text, lerobot; mp4 files in structure (ego-view EgoDex-derived videos)"
+    },
+    {
+     "field": "release_date",
+     "url": "https://arxiv.org/abs/2507.15597",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Being-H0 arXiv submitted 2025-07-21"
+    }
+   ],
+   "notes": "Paper abstract only says 'millions of motion-based instructional instances'; hours/sample counts and license not stated on fetched README, abstract or HF card. HF preview references EgoDex videos; UniHand_Preview lastModified 2026-05-13."
+  },
+  {
+   "id": "lerobot-community-so100-so101",
+   "name": "LeRobot community datasets (SO-100 / SO-101)",
+   "org": "Hugging Face LeRobot community",
+   "url": "https://huggingface.co/datasets?search=so101",
+   "hf_url": "https://huggingface.co/api/datasets?search=so101&limit=1",
+   "mirror_url": null,
+   "embodiments": [
+    "so100",
+    "so101"
+   ],
+   "form_tags": [],
+   "episodes": null,
+   "hours": null,
+   "frames": null,
+   "tasks": null,
+   "scenes": null,
+   "modalities": [],
+   "format": null,
+   "license": null,
+   "commercial_ok": null,
+   "release_date": null,
+   "size_gb": null,
+   "evidence": [
+    {
+     "field": "name",
+     "url": "https://huggingface.co/api/datasets?search=so101&limit=1000",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Search-string match on repo id/name; results not filtered to LeRobot format"
+    },
+    {
+     "field": "org",
+     "url": "https://huggingface.co/api/datasets?search=so101&limit=1000",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Search-string match on repo id/name; results not filtered to LeRobot format"
+    },
+    {
+     "field": "url",
+     "url": "https://huggingface.co/api/datasets?search=so101&limit=1000",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Search-string match on repo id/name; results not filtered to LeRobot format"
+    },
+    {
+     "field": "hf_url",
+     "url": "https://huggingface.co/api/datasets?search=so101&limit=1000",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Search-string match on repo id/name; results not filtered to LeRobot format"
+    },
+    {
+     "field": "embodiments",
+     "url": "https://huggingface.co/api/datasets?search=so101&limit=1000",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "Search-string match on repo id/name; results not filtered to LeRobot format"
+    },
+    {
+     "field": "hub_counts",
+     "url": "https://huggingface.co/api/datasets?search=so100&limit=1000",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "search=so100 -> 4,101 datasets over 5 pages (observed 2026-09-18)"
+    },
+    {
+     "field": "hub_counts",
+     "url": "https://huggingface.co/api/datasets?search=so101&limit=1000",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "search=so101 -> 10,235 datasets over 11 pages (observed 2026-09-18)"
+    }
+   ],
+   "notes": "Observed 2026-09-18: HF API search=so100 returned 4,101 datasets, search=so101 returned 10,235 (single-page limit=1000 caps at 1000; counts obtained by following Link pagination). Per-dataset licenses/formats vary; aggregate fields left null."
   },
   {
    "id": "maniskill-demonstrations",
