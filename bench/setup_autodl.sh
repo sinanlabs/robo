@@ -10,15 +10,15 @@ export HF_ENDPOINT=https://hf-mirror.com HF_HOME=/root/autodl-tmp/hf HF_HUB_DISA
 if python -c "import torch,sys; cap=torch.cuda.get_device_capability()[0] if torch.cuda.is_available() else 0; sys.exit(0 if (cap>=12 and tuple(int(x) for x in torch.__version__.split('+')[0].split('.')[:2])<(2,7)) else 1)"; then
   echo "升级 torch 以支持 sm_120 …"; pip install -q "torch==2.8.0" "torchvision==0.23.0" 2>&1 | grep -v WARNING; python -c "import torch;print('torch', torch.__version__, torch.version.cuda); x=torch.randn(64,64,device='cuda'); print('cuda matmul ok', float((x@x).sum())!=0)"
 fi
-pip install -q -U "huggingface_hub[cli]" pillow numpy 2>&1 | grep -v WARNING
+pip install -q -U "huggingface_hub[cli]" pillow numpy 2>&1 | grep -v WARNING; pip uninstall -y -q hf_xet hf-xet >/dev/null 2>&1 || true
 mk() { # name, packages...
   local n=$1; shift
   [ -d /root/envs/$n ] || python -m venv --system-site-packages /root/envs/$n
   /root/envs/$n/bin/pip install -q "$@" 2>&1 | grep -v WARNING; echo "env $n ready"
 }
 mk openvla "transformers==4.40.1" "timm==0.9.10" "tokenizers==0.19.1" accelerate &
-mk spatialvla "transformers==4.47.0" accelerate &
-mk qwen "transformers==4.57.1" accelerate qwen-vl-utils &
+mk spatialvla "transformers==4.47.0" accelerate scipy &
+mk qwen "transformers==4.57.1" accelerate qwen-vl-utils einops &
 ( [ -d /root/envs/lerobot ] || python -m venv /root/envs/lerobot; /root/envs/lerobot/bin/pip install -q -U pip >/dev/null; /root/envs/lerobot/bin/pip install -q "lerobot[smolvla]" 2>&1 | grep -v WARNING; echo "env lerobot ready" ) &
 # 权重预下载（并行，走 hf-mirror）
 for r in lerobot/smolvla_base HuggingFaceTB/SmolVLM2-500M-Video-Instruct; do python -c "from huggingface_hub import snapshot_download as s; s('$r')" > /dev/null 2>&1 && echo "weights $r ready" & done   # 只预下小的；大模型跑到再下、跑完即删（数据盘 50 GB）
