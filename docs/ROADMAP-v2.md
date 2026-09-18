@@ -125,7 +125,7 @@ bench/ 里五个适配器是我们已经踩平的路：transformers 版本互相
 | B 工作台 | 已上线 | /select：所选显卡的实测 p50/p95、可达频率、每千次成本、每天/每月租金（国内 AutoDL / 海外 Vast 两档） |
 | C 部署配方 | 已上线 | /recipes：通用步骤、环境坑位表、5 篇配方、4 个未复现原因；模型页入口 |
 | D 基准分数表 | 已上线 | 340 条分数 / 39 个模型（论文 270 · 官方 38 · 第三方 32）；/benchmarks 按基准分组；模型页分数卡；scripts/merge_mine.py 合并 data/mine/ 研究结果 |
-| E 数据集索引 | 首批上线（第二批合并中） | /datasets、/datasets/<id>、本体页“覆盖这个本体的公开数据集”卡；data/datasets.json |
+| E 数据集索引 | 已上线 | 32 个数据集（真机 / 人类视频 / 仿真），规模 / 许可证 / 格式 / 镜像逐条带来源；/datasets、/datasets/<id>、本体页“覆盖这个本体的公开数据集”卡；data/datasets.json |
 | I 月报 | 创刊号已上线 | /reports/2026-09：脚本结构块（scripts/monthly_brief.py）+ 署名分析（zh/en） |
 | F Jetson | 不做（不花钱） | — |
 | G 众测上传 | 已上线 | bench.py --upload → Compute /api/robo/measure（匿名、限频、范围校验、待核验）；后台「Robo 众测」核验；scripts/pull_crowd.py 每晚拉核验通过 → measurements 集合（source=crowd） |
