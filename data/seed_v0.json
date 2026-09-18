@@ -2243,6 +2243,25 @@
    "rental_ref_url": "https://compute.sinanlab.com/gpu",
    "note": "数据中心主力卡；人形公司训练与云端推理常用",
    "evidence": []
+  },
+  {
+   "id": "a800-80g",
+   "name": "NVIDIA A800 80GB",
+   "vram_gb": 80,
+   "type": "datacenter_gpu",
+   "rental_cny_per_hour_ref": null,
+   "rental_ref_source": null,
+   "rental_ref_url": null,
+   "note": "A100 80GB 的中国市场版本（NVLink 带宽下调）；国内算力平台按量可租",
+   "evidence": [
+    {
+     "field": "name,vram_gb",
+     "url": "https://www.nvidia.cn/data-center/a800/",
+     "source_type": "official",
+     "fetched": "2026-09-18",
+     "note": "NVIDIA 中国官网 A800 产品页"
+    }
+   ]
   }
  ]
 }

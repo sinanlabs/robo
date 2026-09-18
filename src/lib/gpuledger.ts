@@ -1,7 +1,7 @@
 // 构建时从 Sinan Compute 读取每日算力租赁账本（公开 JSON），给硬件页提供实时租价。
 // 读不到就返回空，页面退回 seed 里的静态参考价；绝不因为对方站点抖动让 Robo 构建失败。
 export type LiveRent = { cny: number; usd: number; platform: string; kind: string; ts: string; n: number };
-const MAP: Record<string, string> = { 'rtx-4090': 'RTX 4090', 'rtx-5090': 'RTX 5090', 'a100-80g': 'A100 SXM4', 'h100-80g': 'H100 SXM' };
+const MAP: Record<string, string> = { 'rtx-4090': 'RTX 4090', 'rtx-5090': 'RTX 5090', 'a100-80g': 'A100 SXM4', 'a800-80g': 'A800 80GB', 'h100-80g': 'H100 SXM', 'h800-80g': 'H800 80GB' };
 let cache: any | null | undefined;
 async function ledger(): Promise<any | null> {
   if (cache !== undefined) return cache;
@@ -16,9 +16,10 @@ export async function liveRent(hardwareId: string): Promise<LiveRent | null> {
   const L = await ledger(); if (!L) return null;
   const name = MAP[hardwareId]; if (!name) return null;
   const g = (L.gpus || []).find((x: any) => x.gpu === name); if (!g) return null;
-  const pick = g.quotes.find((q: any) => q.platform === 'vast' && q.kind === 'median') || g.quotes.find((q: any) => q.platform === 'runpod' && q.kind === 'community');
+  const pick = g.quotes.find((q: any) => q.platform === 'vast' && q.kind === 'median') || g.quotes.find((q: any) => q.platform === 'runpod' && q.kind === 'community') || g.quotes.find((q: any) => q.platform === 'autodl' && q.kind === 'median');
   if (!pick) return null;
-  return { cny: pick.cny, usd: pick.usd, platform: pick.platform === 'vast' ? 'Vast.ai 按需中位' : 'RunPod 社区云', kind: pick.kind, ts: pick.ts, n: pick.n };
+  const label: Record<string, string> = { vast: 'Vast.ai 按需中位', runpod: 'RunPod 社区云', autodl: 'AutoDL 按量中位（国内）' };
+  return { cny: pick.cny, usd: pick.usd, platform: label[pick.platform] || pick.platform, kind: pick.kind, ts: pick.ts, n: pick.n };
 }
 export async function allQuotes(hardwareId: string): Promise<{ platform: string; kind: string; usd: number; cny: number; n: number }[]> {
   const L = await ledger(); const name = MAP[hardwareId]; if (!L || !name) return [];
