@@ -6,7 +6,7 @@
   "description": "Sinan Robo · 司南·机脑 —— 开源具身模型（VLA）的可审计索引、适配矩阵与延迟/成本层",
   "scripts": {
     "dev": "astro dev",
-    "build": "npm run import && npm run validate && astro build",
+    "build": "npm run import && npm run validate && astro build && node scripts/en_apply.mjs",
     "preview": "astro preview",
     "import": "node scripts/import-seed.mjs",
     "validate": "node scripts/validate.mjs",
