@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-27T11:05:56+00:00",
+ "generated": "2026-09-27T21:07:27+00:00",
  "items": {
   "gr00t-n1.7": {
    "model_id": "gr00t-n1.7",
@@ -10,9 +10,9 @@
    "github": {
     "ok": true,
     "repo": "NVIDIA/Isaac-GR00T",
-    "stars": 8132,
+    "stars": 8131,
     "forks": 1475,
-    "open_issues": 337,
+    "open_issues": 335,
     "pushed_at": "2026-08-20",
     "archived": false,
     "license": "Apache-2.0",
@@ -78,7 +78,7 @@
    "github": {
     "ok": true,
     "repo": "robbyant/lingbot-vla-v2",
-    "stars": 966,
+    "stars": 967,
     "forks": 108,
     "open_issues": 21,
     "pushed_at": "2026-09-22",
@@ -102,7 +102,7 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-vla-v2-6b",
-    "downloads": 1434,
+    "downloads": 1445,
     "updated": "2026-07-07",
     "official_org": true
    }
@@ -154,8 +154,8 @@
    "github": {
     "ok": true,
     "repo": "Physical-Intelligence/openpi",
-    "stars": 14004,
-    "forks": 2502,
+    "stars": 14007,
+    "forks": 2504,
     "open_issues": 349,
     "pushed_at": "2026-08-24",
     "archived": false,
@@ -192,8 +192,8 @@
    "github": {
     "ok": true,
     "repo": "Physical-Intelligence/openpi",
-    "stars": 14004,
-    "forks": 2502,
+    "stars": 14007,
+    "forks": 2504,
     "open_issues": 349,
     "pushed_at": "2026-08-24",
     "archived": false,
@@ -216,7 +216,7 @@
    "modelscope": {
     "ok": true,
     "path": "lerobot/pi05_base",
-    "downloads": 2493,
+    "downloads": 2498,
     "updated": "2026-07-29",
     "official_org": true
    }
@@ -230,9 +230,9 @@
    "github": {
     "ok": true,
     "repo": "huggingface/lerobot",
-    "stars": 27803,
-    "forks": 5747,
-    "open_issues": 953,
+    "stars": 27808,
+    "forks": 5752,
+    "open_issues": 957,
     "pushed_at": "2026-09-27",
     "archived": false,
     "license": "Apache-2.0",
@@ -257,9 +257,9 @@
    "modelscope": {
     "ok": true,
     "path": "lerobot/smolvla_base",
-    "downloads": 2570,
+    "downloads": 2575,
     "updated": "2026-09-21",
-    "official_org": false
+    "official_org": true
    }
   },
   "openvla": {
@@ -271,7 +271,7 @@
    "github": {
     "ok": true,
     "repo": "openvla/openvla",
-    "stars": 7086,
+    "stars": 7087,
     "forks": 852,
     "open_issues": 117,
     "pushed_at": "2025-03-23",
@@ -295,7 +295,7 @@
    "modelscope": {
     "ok": true,
     "path": "zixiaoBios/openvla-7b",
-    "downloads": 3130,
+    "downloads": 3134,
     "updated": "2025-03-05",
     "official_org": false
    }
@@ -309,7 +309,7 @@
    "github": {
     "ok": true,
     "repo": "2toinf/X-VLA",
-    "stars": 734,
+    "stars": 735,
     "forks": 74,
     "open_issues": 35,
     "pushed_at": "2026-06-10",
@@ -495,7 +495,7 @@
     "repo": "OpenDriveLab/UniVLA",
     "stars": 1134,
     "forks": 68,
-    "open_issues": 23,
+    "open_issues": 24,
     "pushed_at": "2025-11-19",
     "archived": false,
     "license": "Apache-2.0",
@@ -864,7 +864,7 @@
    "github": {
     "ok": true,
     "repo": "OpenHelix-Team/VLA-Adapter",
-    "stars": 2314,
+    "stars": 2315,
     "forks": 208,
     "open_issues": 39,
     "pushed_at": "2026-03-19",
@@ -890,7 +890,7 @@
     "path": "VLA-Adapter/LIBERO-Spatial",
     "downloads": 103,
     "updated": "2025-09-22",
-    "official_org": false
+    "official_org": true
    }
   },
   "hpt": {
@@ -1083,8 +1083,8 @@
    "github": {
     "ok": true,
     "repo": "facebookresearch/vjepa2",
-    "stars": 4691,
-    "forks": 583,
+    "stars": 4692,
+    "forks": 584,
     "open_issues": 91,
     "pushed_at": "2026-03-23",
     "archived": false,
@@ -1202,7 +1202,7 @@
    "modelscope": {
     "ok": true,
     "path": "Spirit-AI-robotics/Spirit-v1.5",
-    "downloads": 143,
+    "downloads": 144,
     "updated": "2026-01-12",
     "official_org": true
    }
@@ -1427,9 +1427,9 @@
    "github": {
     "ok": true,
     "repo": "NVIDIA/Isaac-GR00T",
-    "stars": 8132,
+    "stars": 8131,
     "forks": 1475,
-    "open_issues": 337,
+    "open_issues": 335,
     "pushed_at": "2026-08-20",
     "archived": false,
     "license": "Apache-2.0",
