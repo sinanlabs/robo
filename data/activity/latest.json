@@ -1,17 +1,17 @@
 {
- "generated": "2026-10-04T20:51:43+00:00",
+ "generated": "2026-10-05T22:00:04+00:00",
  "items": {
   "gr00t-n1.7": {
    "model_id": "gr00t-n1.7",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "NVIDIA Open Model License（权重）；Apache-2.0（Isaac-GR00T 代码）",
    "weights_url": "https://huggingface.co/nvidia/GR00T-N1.7-3B",
    "code_url": "https://github.com/NVIDIA/Isaac-GR00T",
    "github": {
     "ok": true,
     "repo": "NVIDIA/Isaac-GR00T",
-    "stars": 8158,
-    "forks": 1486,
+    "stars": 8161,
+    "forks": 1487,
     "open_issues": 339,
     "pushed_at": "2026-08-20",
     "archived": false,
@@ -23,14 +23,14 @@
      "tag": "n1.7-release",
      "at": "2026-04-18"
     },
-    "days_since_push": 45
+    "days_since_push": 46
    },
    "hf": {
     "ok": true,
     "repo": "nvidia/GR00T-N1.7-3B",
-    "downloads_30d": 151388,
-    "downloads_all": 389697,
-    "likes": 145,
+    "downloads_30d": 150598,
+    "downloads_all": 391382,
+    "likes": 147,
     "last_modified": "2026-04-23",
     "gated": false
    },
@@ -44,7 +44,7 @@
   },
   "gr00t-n1.6-3b": {
    "model_id": "gr00t-n1.6-3b",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "模型卡标 NVIDIA License（链接 LICENSE 文件，条款待逐字核实）",
    "weights_url": "https://huggingface.co/nvidia/GR00T-N1.6-3B",
    "code_url": null,
@@ -55,8 +55,8 @@
    "hf": {
     "ok": true,
     "repo": "nvidia/GR00T-N1.6-3B",
-    "downloads_30d": 23300,
-    "downloads_all": 273679,
+    "downloads_30d": 23206,
+    "downloads_all": 273784,
     "likes": 92,
     "last_modified": "2025-12-15",
     "gated": false
@@ -71,14 +71,14 @@
   },
   "lingbot-vla-2.0": {
    "model_id": "lingbot-vla-2.0",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/robbyant/lingbot-vla-v2-6b",
    "code_url": "https://github.com/robbyant/lingbot-vla-v2",
    "github": {
     "ok": true,
     "repo": "robbyant/lingbot-vla-v2",
-    "stars": 995,
+    "stars": 997,
     "forks": 116,
     "open_issues": 23,
     "pushed_at": "2026-09-22",
@@ -88,13 +88,13 @@
     "commits_90d": 28,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 12
+    "days_since_push": 13
    },
    "hf": {
     "ok": true,
     "repo": "robbyant/lingbot-vla-v2-6b",
-    "downloads_30d": 1316,
-    "downloads_all": 4784,
+    "downloads_30d": 1346,
+    "downloads_all": 4831,
     "likes": 44,
     "last_modified": "2026-07-07",
     "gated": false
@@ -102,14 +102,14 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-vla-v2-6b",
-    "downloads": 1598,
+    "downloads": 1608,
     "updated": "2026-07-07",
     "official_org": true
    }
   },
   "go-1": {
    "model_id": "go-1",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "CC BY-NC-SA 4.0",
    "weights_url": "https://huggingface.co/agibot-world/GO-1",
    "code_url": "https://github.com/OpenDriveLab/AgiBot-World",
@@ -126,33 +126,36 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 128
+    "days_since_push": 129
    },
    "hf": {
     "ok": true,
     "repo": "agibot-world/GO-1",
-    "downloads_30d": 113,
-    "downloads_all": 3879,
+    "downloads_30d": 110,
+    "downloads_all": 3880,
     "likes": 21,
     "last_modified": "2025-09-21",
     "gated": false
    },
    "modelscope": {
-    "ok": false,
-    "why": "none"
+    "ok": true,
+    "path": "agibot_world/GO-1",
+    "downloads": 247,
+    "updated": "2025-09-21",
+    "official_org": false
    }
   },
   "pi0": {
    "model_id": "pi0",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（openpi 代码）；权重无独立许可证声明，仓库附 Gemma 使用条款",
    "weights_url": "https://huggingface.co/lerobot/pi0_base",
    "code_url": "https://github.com/Physical-Intelligence/openpi",
    "github": {
     "ok": true,
     "repo": "Physical-Intelligence/openpi",
-    "stars": 14089,
-    "forks": 2528,
+    "stars": 14097,
+    "forks": 2532,
     "open_issues": 354,
     "pushed_at": "2026-08-24",
     "archived": false,
@@ -161,13 +164,13 @@
     "commits_90d": 1,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 41
+    "days_since_push": 42
    },
    "hf": {
     "ok": true,
     "repo": "lerobot/pi0_base",
-    "downloads_30d": 35791,
-    "downloads_all": 127819,
+    "downloads_30d": 34207,
+    "downloads_all": 128411,
     "likes": 28,
     "last_modified": "2026-06-03",
     "gated": false
@@ -182,15 +185,15 @@
   },
   "pi0.5": {
    "model_id": "pi0.5",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（openpi 代码）；权重无独立许可证声明，仓库附 Gemma 使用条款",
    "weights_url": "https://huggingface.co/lerobot/pi05_base",
    "code_url": "https://github.com/Physical-Intelligence/openpi",
    "github": {
     "ok": true,
     "repo": "Physical-Intelligence/openpi",
-    "stars": 14089,
-    "forks": 2528,
+    "stars": 14097,
+    "forks": 2532,
     "open_issues": 354,
     "pushed_at": "2026-08-24",
     "archived": false,
@@ -199,13 +202,13 @@
     "commits_90d": 1,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 41
+    "days_since_push": 42
    },
    "hf": {
     "ok": true,
     "repo": "lerobot/pi05_base",
-    "downloads_30d": 16200,
-    "downloads_all": 158408,
+    "downloads_30d": 16384,
+    "downloads_all": 159012,
     "likes": 105,
     "last_modified": "2026-07-29",
     "gated": false
@@ -213,24 +216,24 @@
    "modelscope": {
     "ok": true,
     "path": "lerobot/pi05_base",
-    "downloads": 2623,
+    "downloads": 2625,
     "updated": "2026-07-29",
     "official_org": true
    }
   },
   "smolvla": {
    "model_id": "smolvla",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "权重模型卡未标注许可证（LeRobot 代码仓库 Apache-2.0）",
    "weights_url": "https://huggingface.co/lerobot/smolvla_base",
    "code_url": "https://github.com/huggingface/lerobot",
    "github": {
     "ok": true,
     "repo": "huggingface/lerobot",
-    "stars": 27944,
-    "forks": 5806,
-    "open_issues": 985,
-    "pushed_at": "2026-10-04",
+    "stars": 27961,
+    "forks": 5816,
+    "open_issues": 988,
+    "pushed_at": "2026-10-05",
     "archived": false,
     "license": "Apache-2.0",
     "default_branch": "main",
@@ -245,9 +248,9 @@
    "hf": {
     "ok": true,
     "repo": "lerobot/smolvla_base",
-    "downloads_30d": 93290,
-    "downloads_all": 742682,
-    "likes": 457,
+    "downloads_30d": 97916,
+    "downloads_all": 750861,
+    "likes": 458,
     "last_modified": "2026-09-17",
     "gated": false
    },
@@ -261,15 +264,15 @@
   },
   "openvla": {
    "model_id": "openvla",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码与权重仓库标注）；权重衍生自 Llama-2，受 Llama 2 Community License 约束",
    "weights_url": "https://huggingface.co/openvla/openvla-7b",
    "code_url": "https://github.com/openvla/openvla",
    "github": {
     "ok": true,
     "repo": "openvla/openvla",
-    "stars": 7111,
-    "forks": 855,
+    "stars": 7114,
+    "forks": 856,
     "open_issues": 118,
     "pushed_at": "2025-03-23",
     "archived": false,
@@ -278,13 +281,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 560
+    "days_since_push": 561
    },
    "hf": {
     "ok": true,
     "repo": "openvla/openvla-7b",
-    "downloads_30d": 132296,
-    "downloads_all": 18065766,
+    "downloads_30d": 148383,
+    "downloads_all": 18082722,
     "likes": 260,
     "last_modified": "2026-02-17",
     "gated": false
@@ -299,7 +302,7 @@
   },
   "x-vla": {
    "model_id": "x-vla",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（代码与模型卡）",
    "weights_url": "https://huggingface.co/2toINF/X-VLA-Pt",
    "code_url": "https://github.com/2toinf/X-VLA",
@@ -316,13 +319,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 116
+    "days_since_push": 117
    },
    "hf": {
     "ok": true,
     "repo": "2toINF/X-VLA-Pt",
-    "downloads_30d": 10600,
-    "downloads_all": 126595,
+    "downloads_30d": 10572,
+    "downloads_all": 126741,
     "likes": 14,
     "last_modified": "2025-11-16",
     "gated": false
@@ -334,14 +337,14 @@
   },
   "octo": {
    "model_id": "octo",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码与权重仓库标注）",
    "weights_url": "https://huggingface.co/rail-berkeley/octo-base-1.5",
    "code_url": "https://github.com/octo-models/octo",
    "github": {
     "ok": true,
     "repo": "octo-models/octo",
-    "stars": 1794,
+    "stars": 1795,
     "forks": 281,
     "open_issues": 96,
     "pushed_at": "2024-07-31",
@@ -354,13 +357,13 @@
      "tag": "v1.5",
      "at": "2024-05-24"
     },
-    "days_since_push": 795
+    "days_since_push": 796
    },
    "hf": {
     "ok": true,
     "repo": "rail-berkeley/octo-base-1.5",
-    "downloads_30d": 144,
-    "downloads_all": 3023,
+    "downloads_30d": 149,
+    "downloads_all": 3029,
     "likes": 18,
     "last_modified": "2024-05-21",
     "gated": false
@@ -372,7 +375,7 @@
   },
   "rdt-1b": {
    "model_id": "rdt-1b",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码、权重、数据均为 MIT，README 原文）",
    "weights_url": "https://huggingface.co/robotics-diffusion-transformer/rdt-1b",
    "code_url": "https://github.com/thu-ml/RoboticsDiffusionTransformer",
@@ -389,13 +392,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 256
+    "days_since_push": 257
    },
    "hf": {
     "ok": true,
     "repo": "robotics-diffusion-transformer/rdt-1b",
-    "downloads_30d": 405,
-    "downloads_all": 35612,
+    "downloads_30d": 384,
+    "downloads_all": 35620,
     "likes": 106,
     "last_modified": "2024-10-17",
     "gated": false
@@ -410,7 +413,7 @@
   },
   "cogact": {
    "model_id": "cogact",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码、权重、数据均为 MIT，README 原文）",
    "weights_url": "https://huggingface.co/CogACT/CogACT-Base",
    "code_url": "https://github.com/microsoft/CogACT",
@@ -427,13 +430,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 339
+    "days_since_push": 340
    },
    "hf": {
     "ok": true,
     "repo": "CogACT/CogACT-Base",
-    "downloads_30d": 1017,
-    "downloads_all": 78531,
+    "downloads_30d": 1033,
+    "downloads_all": 78552,
     "likes": 19,
     "last_modified": "2024-12-04",
     "gated": false
@@ -445,7 +448,7 @@
   },
   "spatialvla": {
    "model_id": "spatialvla",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码 README 与模型卡均标 MIT）",
    "weights_url": "https://huggingface.co/IPEC-COMMUNITY/spatialvla-4b-224-pt",
    "code_url": "https://github.com/SpatialVLA/SpatialVLA",
@@ -462,13 +465,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 468
+    "days_since_push": 469
    },
    "hf": {
     "ok": true,
     "repo": "IPEC-COMMUNITY/spatialvla-4b-224-pt",
-    "downloads_30d": 1310,
-    "downloads_all": 157220,
+    "downloads_30d": 1315,
+    "downloads_all": 157231,
     "likes": 14,
     "last_modified": "2025-03-16",
     "gated": false
@@ -483,7 +486,7 @@
   },
   "univla": {
    "model_id": "univla",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（代码仓库与模型卡均标注）",
    "weights_url": "https://huggingface.co/qwbu/univla-7b",
    "code_url": "https://github.com/OpenDriveLab/UniVLA",
@@ -500,13 +503,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 319
+    "days_since_push": 320
    },
    "hf": {
     "ok": true,
     "repo": "qwbu/univla-7b",
     "downloads_30d": 141,
-    "downloads_all": 9874,
+    "downloads_all": 9875,
     "likes": 10,
     "last_modified": "2025-08-02",
     "gated": false
@@ -521,7 +524,7 @@
   },
   "molmoact": {
    "model_id": "molmoact",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（代码与权重）",
    "weights_url": "https://huggingface.co/allenai/MolmoAct-7B-D-0812",
    "code_url": "https://github.com/allenai/MolmoAct",
@@ -538,13 +541,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 146
+    "days_since_push": 147
    },
    "hf": {
     "ok": true,
     "repo": "allenai/MolmoAct-7B-D-0812",
-    "downloads_30d": 562,
-    "downloads_all": 14322,
+    "downloads_30d": 550,
+    "downloads_all": 14327,
     "likes": 53,
     "last_modified": "2025-10-24",
     "gated": false
@@ -559,7 +562,7 @@
   },
   "rynnvla-001": {
    "model_id": "rynnvla-001",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（代码与模型卡）；README 同时注明 research preview intended for non-commercial use ONLY",
    "weights_url": "https://huggingface.co/Alibaba-DAMO-Academy/RynnVLA-001-7B-Base",
    "code_url": "https://github.com/alibaba-damo-academy/RynnVLA-001",
@@ -576,13 +579,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 254
+    "days_since_push": 255
    },
    "hf": {
     "ok": true,
     "repo": "Alibaba-DAMO-Academy/RynnVLA-001-7B-Base",
-    "downloads_30d": 16,
-    "downloads_all": 153,
+    "downloads_30d": 17,
+    "downloads_all": 154,
     "likes": 9,
     "last_modified": "2025-09-18",
     "gated": false
@@ -597,7 +600,7 @@
   },
   "wall-oss": {
    "model_id": "wall-oss",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（代码仓库）；权重模型卡未标注许可证",
    "weights_url": "https://huggingface.co/x-square-robot/wall-oss-flow",
    "code_url": "https://github.com/X-Square-Robot/wall-x",
@@ -614,13 +617,13 @@
     "commits_90d": 6,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 16
+    "days_since_push": 17
    },
    "hf": {
     "ok": true,
     "repo": "x-square-robot/wall-oss-flow",
-    "downloads_30d": 1458,
-    "downloads_all": 12771,
+    "downloads_30d": 1454,
+    "downloads_all": 12798,
     "likes": 34,
     "last_modified": "2026-06-02",
     "gated": false
@@ -635,7 +638,7 @@
   },
   "internvla-m1": {
    "model_id": "internvla-m1",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "代码 MIT；权重模型卡标 CC BY-NC-SA 4.0",
    "weights_url": "https://huggingface.co/InternRobotics/InternVLA-M1",
    "code_url": "https://github.com/InternRobotics/InternVLA-M1",
@@ -652,13 +655,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 235
+    "days_since_push": 236
    },
    "hf": {
     "ok": true,
     "repo": "InternRobotics/InternVLA-M1",
-    "downloads_30d": 268,
-    "downloads_all": 6548,
+    "downloads_30d": 276,
+    "downloads_all": 6558,
     "likes": 28,
     "last_modified": "2025-10-15",
     "gated": false
@@ -673,14 +676,14 @@
   },
   "graspvla": {
    "model_id": "graspvla",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "CC BY-NC 4.0（代码徽章与模型卡一致）",
    "weights_url": "https://huggingface.co/vegebirrd/GraspVLA",
    "code_url": "https://github.com/PKU-EPIC/GraspVLA",
    "github": {
     "ok": true,
     "repo": "PKU-EPIC/GraspVLA",
-    "stars": 420,
+    "stars": 421,
     "forks": 19,
     "open_issues": 1,
     "pushed_at": "2026-08-19",
@@ -690,13 +693,13 @@
     "commits_90d": 2,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 46
+    "days_since_push": 47
    },
    "hf": {
     "ok": true,
     "repo": "vegebirrd/GraspVLA",
-    "downloads_30d": 91,
-    "downloads_all": 136,
+    "downloads_30d": 87,
+    "downloads_all": 139,
     "likes": 1,
     "last_modified": "2026-08-18",
     "gated": false
@@ -708,7 +711,7 @@
   },
   "being-h0": {
    "model_id": "being-h0",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码仓库与模型卡）",
    "weights_url": "https://huggingface.co/BeingBeyond/Being-H0-8B-2508",
    "code_url": "https://github.com/BeingBeyond/Being-H0",
@@ -725,12 +728,12 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 153
+    "days_since_push": 154
    },
    "hf": {
     "ok": true,
     "repo": "BeingBeyond/Being-H0-8B-2508",
-    "downloads_30d": 20,
+    "downloads_30d": 17,
     "downloads_all": 207,
     "likes": 3,
     "last_modified": "2025-08-02",
@@ -743,7 +746,7 @@
   },
   "eo-1": {
    "model_id": "eo-1",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（模型卡）",
    "weights_url": "https://huggingface.co/IPEC-COMMUNITY/EO-1-3B",
    "code_url": "https://github.com/IPEC-PUBLIC/EO-1",
@@ -760,13 +763,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 375
+    "days_since_push": 376
    },
    "hf": {
     "ok": true,
     "repo": "IPEC-COMMUNITY/EO-1-3B",
-    "downloads_30d": 982,
-    "downloads_all": 2701,
+    "downloads_30d": 935,
+    "downloads_all": 2702,
     "likes": 15,
     "last_modified": "2026-01-14",
     "gated": false
@@ -778,7 +781,7 @@
   },
   "lingbot-vla-4b": {
    "model_id": "lingbot-vla-4b",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（代码仓库）；权重模型卡未标注许可证",
    "weights_url": "https://huggingface.co/robbyant/lingbot-vla-4b",
    "code_url": "https://github.com/robbyant/lingbot-vla",
@@ -795,13 +798,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 115
+    "days_since_push": 116
    },
    "hf": {
     "ok": true,
     "repo": "robbyant/lingbot-vla-4b",
-    "downloads_30d": 1454,
-    "downloads_all": 6577,
+    "downloads_30d": 1523,
+    "downloads_all": 6653,
     "likes": 32,
     "last_modified": "2026-04-30",
     "gated": false
@@ -809,14 +812,14 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-vla-4b",
-    "downloads": 2799,
+    "downloads": 2800,
     "updated": "2026-05-01",
     "official_org": true
    }
   },
   "nora": {
    "model_id": "nora",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "仓库与模型卡均未标注许可证",
    "weights_url": "https://huggingface.co/declare-lab/nora",
    "code_url": "https://github.com/declare-lab/nora",
@@ -833,13 +836,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 268
+    "days_since_push": 269
    },
    "hf": {
     "ok": true,
     "repo": "declare-lab/nora",
-    "downloads_30d": 569,
-    "downloads_all": 39797,
+    "downloads_30d": 567,
+    "downloads_all": 39803,
     "likes": 13,
     "last_modified": "2025-08-27",
     "gated": false
@@ -854,14 +857,14 @@
   },
   "vla-adapter": {
    "model_id": "vla-adapter",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码仓库）；权重模型卡未标注",
    "weights_url": "https://huggingface.co/VLA-Adapter/LIBERO-Spatial",
    "code_url": "https://github.com/OpenHelix-Team/VLA-Adapter",
    "github": {
     "ok": true,
     "repo": "OpenHelix-Team/VLA-Adapter",
-    "stars": 2320,
+    "stars": 2321,
     "forks": 210,
     "open_issues": 39,
     "pushed_at": "2026-03-19",
@@ -871,13 +874,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 199
+    "days_since_push": 200
    },
    "hf": {
     "ok": true,
     "repo": "VLA-Adapter/LIBERO-Spatial",
-    "downloads_30d": 110,
-    "downloads_all": 1041,
+    "downloads_30d": 112,
+    "downloads_all": 1045,
     "likes": 8,
     "last_modified": "2025-09-21",
     "gated": false
@@ -892,7 +895,7 @@
   },
   "hpt": {
    "model_id": "hpt",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码仓库）；模型卡未标注许可证",
    "weights_url": "https://huggingface.co/liruiw/hpt-xlarge",
    "code_url": "https://github.com/liruiw/HPT",
@@ -909,13 +912,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 667
+    "days_since_push": 668
    },
    "hf": {
     "ok": true,
     "repo": "liruiw/hpt-xlarge",
-    "downloads_30d": 40,
-    "downloads_all": 305,
+    "downloads_30d": 42,
+    "downloads_all": 307,
     "likes": 0,
     "last_modified": "2024-09-27",
     "gated": false
@@ -927,7 +930,7 @@
   },
   "lapa": {
    "model_id": "lapa",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码与模型卡均标注）",
    "weights_url": "https://huggingface.co/latent-action-pretraining/LAPA-7B-openx",
    "code_url": "https://github.com/LatentActionPretraining/LAPA",
@@ -944,7 +947,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 620
+    "days_since_push": 621
    },
    "hf": {
     "ok": true,
@@ -962,7 +965,7 @@
   },
   "llava-vla": {
    "model_id": "llava-vla",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码与模型卡）",
    "weights_url": "https://huggingface.co/chenpyyy/LLaVA-VLA",
    "code_url": "https://github.com/OpenHelix-Team/LLaVA-VLA",
@@ -979,7 +982,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 206
+    "days_since_push": 207
    },
    "hf": {
     "ok": true,
@@ -997,7 +1000,7 @@
   },
   "robovlms": {
    "model_id": "robovlms",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（代码与模型卡）",
    "weights_url": "https://huggingface.co/robovlms/RoboVLMs",
    "code_url": "https://github.com/Robot-VLAs/RoboVLMs",
@@ -1017,7 +1020,7 @@
      "tag": "v0.1.0",
      "at": "2025-11-29"
     },
-    "days_since_push": 173
+    "days_since_push": 174
    },
    "hf": {
     "ok": true,
@@ -1035,14 +1038,14 @@
   },
   "magma": {
    "model_id": "magma",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT（代码与模型卡）",
    "weights_url": "https://huggingface.co/microsoft/Magma-8B",
    "code_url": "https://github.com/microsoft/Magma",
    "github": {
     "ok": true,
     "repo": "microsoft/Magma",
-    "stars": 1948,
+    "stars": 1947,
     "forks": 165,
     "open_issues": 21,
     "pushed_at": "2026-03-03",
@@ -1052,36 +1055,36 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 215
+    "days_since_push": 216
    },
    "hf": {
     "ok": true,
     "repo": "microsoft/Magma-8B",
-    "downloads_30d": 877,
-    "downloads_all": 69893,
-    "likes": 417,
+    "downloads_30d": 881,
+    "downloads_all": 69918,
+    "likes": 418,
     "last_modified": "2025-12-10",
     "gated": false
    },
    "modelscope": {
     "ok": true,
     "path": "microsoft/Magma-8B",
-    "downloads": 450,
+    "downloads": 451,
     "updated": "2026-07-15",
     "official_org": true
    }
   },
   "vjepa2-ac": {
    "model_id": "vjepa2-ac",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "MIT 为主，部分文件 Apache-2.0（README 原文）；HF 权重需申请访问",
    "weights_url": "https://huggingface.co/collections/facebook/v-jepa-2-6841bad8413014e185b497a6",
    "code_url": "https://github.com/facebookresearch/vjepa2",
    "github": {
     "ok": true,
     "repo": "facebookresearch/vjepa2",
-    "stars": 4711,
-    "forks": 586,
+    "stars": 4716,
+    "forks": 587,
     "open_issues": 94,
     "pushed_at": "2026-03-23",
     "archived": false,
@@ -1090,7 +1093,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 195
+    "days_since_push": 196
    },
    "hf": {
     "ok": false,
@@ -1103,7 +1106,7 @@
   },
   "dexvla": {
    "model_id": "dexvla",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "代码 MIT；ScaleDP 预训练权重模型卡标 CC BY-NC 4.0",
    "weights_url": "https://huggingface.co/lesjie/scale_dp_h",
    "code_url": "https://github.com/juruobenruo/DexVLA",
@@ -1120,7 +1123,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 537
+    "days_since_push": 538
    },
    "hf": {
     "ok": true,
@@ -1138,7 +1141,7 @@
   },
   "gr-1": {
    "model_id": "gr-1",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（代码仓库）",
    "weights_url": "https://lf-robot-opensource.bytetos.com/obj/lab-robot-public/gr1_code_release/",
    "code_url": "https://github.com/bytedance/GR-1",
@@ -1155,7 +1158,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 895
+    "days_since_push": 896
    },
    "hf": {
     "ok": false,
@@ -1168,7 +1171,7 @@
   },
   "spirit-v1.5": {
    "model_id": "spirit-v1.5",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "代码 MIT（README）；模型卡标 apache-2.0",
    "weights_url": "https://huggingface.co/Spirit-AI-robotics/Spirit-v1.5",
    "code_url": "https://github.com/Spirit-AI-Team/spirit-v1.5",
@@ -1185,13 +1188,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 128
+    "days_since_push": 129
    },
    "hf": {
     "ok": true,
     "repo": "Spirit-AI-robotics/Spirit-v1.5",
-    "downloads_30d": 169,
-    "downloads_all": 647,
+    "downloads_30d": 172,
+    "downloads_all": 652,
     "likes": 31,
     "last_modified": "2026-01-11",
     "gated": false
@@ -1206,14 +1209,14 @@
   },
   "galaxea-g0.5": {
    "model_id": "galaxea-g0.5",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "G0.5 Community License（非商用 + 有限专利许可；模型卡 license: other）；2026-01-04 前版本为 Apache-2.0",
    "weights_url": "https://huggingface.co/OpenGalaxea/G05",
    "code_url": "https://github.com/OpenGalaxea/GalaxeaVLA",
    "github": {
     "ok": true,
     "repo": "OpenGalaxea/GalaxeaVLA",
-    "stars": 803,
+    "stars": 805,
     "forks": 70,
     "open_issues": 27,
     "pushed_at": "2026-08-13",
@@ -1223,7 +1226,7 @@
     "commits_90d": 5,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 52
+    "days_since_push": 53
    },
    "hf": {
     "ok": true,
@@ -1241,7 +1244,7 @@
   },
   "rdt2-vq": {
    "model_id": "rdt2-vq",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "Apache-2.0（代码与模型卡）",
    "weights_url": "https://huggingface.co/robotics-diffusion-transformer/RDT2-VQ",
    "code_url": "https://github.com/thu-ml/RDT2",
@@ -1258,13 +1261,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 239
+    "days_since_push": 240
    },
    "hf": {
     "ok": true,
     "repo": "robotics-diffusion-transformer/RDT2-VQ",
     "downloads_30d": 169,
-    "downloads_all": 36744,
+    "downloads_all": 36748,
     "likes": 23,
     "last_modified": "2026-02-07",
     "gated": false
@@ -1276,7 +1279,7 @@
   },
   "internvla-a1.5": {
    "model_id": "internvla-a1.5",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "CC BY-NC-SA 4.0（代码仓库与模型卡一致）",
    "weights_url": "https://huggingface.co/InternRobotics/InternVLA-A1.5-base",
    "code_url": "https://github.com/InternRobotics/InternVLA-A1",
@@ -1290,16 +1293,16 @@
     "archived": false,
     "license": "NOASSERTION",
     "default_branch": "master",
-    "commits_90d": 11,
+    "commits_90d": 6,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 20
+    "days_since_push": 21
    },
    "hf": {
     "ok": true,
     "repo": "InternRobotics/InternVLA-A1.5-base",
-    "downloads_30d": 114,
-    "downloads_all": 512,
+    "downloads_30d": 118,
+    "downloads_all": 516,
     "likes": 10,
     "last_modified": "2026-07-16",
     "gated": false
@@ -1314,7 +1317,7 @@
   },
   "vla-0": {
    "model_id": "vla-0",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "CC BY-NC 4.0（代码与权重）；底座受 Qwen Research License 约束",
    "weights_url": "https://huggingface.co/ankgoyal/vla0-libero",
    "code_url": "https://github.com/NVlabs/vla0",
@@ -1331,13 +1334,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 225
+    "days_since_push": 226
    },
    "hf": {
     "ok": true,
     "repo": "ankgoyal/vla0-libero",
-    "downloads_30d": 43,
-    "downloads_all": 733,
+    "downloads_30d": 37,
+    "downloads_all": 734,
     "likes": 5,
     "last_modified": "2025-11-18",
     "gated": false
@@ -1349,7 +1352,7 @@
   },
   "minivla": {
    "model_id": "minivla",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "代码 MIT；README 注明预训练权重可能继承底座（Llama Community License）限制",
    "weights_url": "https://huggingface.co/collections/Stanford-ILIAD/minivla-675a2a9aca369ff3a6c04e33",
    "code_url": "https://github.com/Stanford-ILIAD/openvla-mini",
@@ -1366,7 +1369,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 564
+    "days_since_push": 565
    },
    "hf": {
     "ok": false,
@@ -1379,7 +1382,7 @@
   },
   "genie-envisioner": {
    "model_id": "genie-envisioner",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "代码分两块：LTX/Cosmos/pipeline/openpi_client 部分 Apache-2.0，其余代码与数据 CC BY-NC-SA 4.0；权重模型卡未标注",
    "weights_url": "https://huggingface.co/agibot-world/Genie-Envisioner",
    "code_url": "https://github.com/AgibotTech/Genie-Envisioner",
@@ -1396,13 +1399,13 @@
     "commits_90d": 2,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 24
+    "days_since_push": 25
    },
    "hf": {
     "ok": true,
     "repo": "agibot-world/Genie-Envisioner",
-    "downloads_30d": 19,
-    "downloads_all": 63,
+    "downloads_30d": 21,
+    "downloads_all": 65,
     "likes": 9,
     "last_modified": "2025-08-25",
     "gated": false
@@ -1417,15 +1420,15 @@
   },
   "gr00t-n1.5-3b": {
    "model_id": "gr00t-n1.5-3b",
-   "fetched": "2026-10-04",
+   "fetched": "2026-10-05",
    "license": "模型卡标 Nvidia License（页面注明仅限非商用）",
    "weights_url": "https://huggingface.co/nvidia/GR00T-N1.5-3B",
    "code_url": "https://github.com/NVIDIA/Isaac-GR00T",
    "github": {
     "ok": true,
     "repo": "NVIDIA/Isaac-GR00T",
-    "stars": 8158,
-    "forks": 1486,
+    "stars": 8161,
+    "forks": 1487,
     "open_issues": 339,
     "pushed_at": "2026-08-20",
     "archived": false,
@@ -1437,13 +1440,13 @@
      "tag": "n1.7-release",
      "at": "2026-04-18"
     },
-    "days_since_push": 45
+    "days_since_push": 46
    },
    "hf": {
     "ok": true,
     "repo": "nvidia/GR00T-N1.5-3B",
-    "downloads_30d": 1290,
-    "downloads_all": 77976,
+    "downloads_30d": 1292,
+    "downloads_all": 78012,
     "likes": 197,
     "last_modified": "2025-09-17",
     "gated": false
@@ -1451,7 +1454,7 @@
    "modelscope": {
     "ok": true,
     "path": "nv-community/GR00T-N1.5-3B",
-    "downloads": 717,
+    "downloads": 720,
     "updated": "2025-09-18",
     "official_org": false
    }
