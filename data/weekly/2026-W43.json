@@ -1,0 +1,377 @@
+{
+ "week": "2026-W43",
+ "from": "2026-10-12",
+ "to": "2026-10-19",
+ "generated": "2026-10-19T05:13:51+08:00",
+ "snapshot_days": [
+  "2026-10-12",
+  "2026-10-14",
+  "2026-10-15",
+  "2026-10-16",
+  "2026-10-17",
+  "2026-10-18"
+ ],
+ "counts": {
+  "models": 40,
+  "measurements": 15,
+  "recipes": 5,
+  "snap_days": 6,
+  "tracked": 40
+ },
+ "new_models": [],
+ "weights_updated": [],
+ "license_changed": [],
+ "weights_moved": [],
+ "commits": [
+  {
+   "id": "smolvla",
+   "name": "SmolVLA",
+   "c90": 100,
+   "capped": true,
+   "pushed": "2026-10-18"
+  },
+  {
+   "id": "lingbot-vla-2.0",
+   "name": "LingBot-VLA 2.0",
+   "c90": 18,
+   "capped": false,
+   "pushed": "2026-09-22"
+  },
+  {
+   "id": "gr00t-n1.7",
+   "name": "Isaac GR00T N1.7",
+   "c90": 9,
+   "capped": false,
+   "pushed": "2026-10-15"
+  },
+  {
+   "id": "gr00t-n1.5-3b",
+   "name": "GR00T N1.5 3B",
+   "c90": 9,
+   "capped": false,
+   "pushed": "2026-10-15"
+  },
+  {
+   "id": "wall-oss",
+   "name": "WALL-OSS",
+   "c90": 4,
+   "capped": false,
+   "pushed": "2026-09-18"
+  },
+  {
+   "id": "internvla-m1",
+   "name": "InternVLA-M1",
+   "c90": 2,
+   "capped": false,
+   "pushed": "2026-10-09"
+  },
+  {
+   "id": "graspvla",
+   "name": "GraspVLA",
+   "c90": 2,
+   "capped": false,
+   "pushed": "2026-08-19"
+  },
+  {
+   "id": "genie-envisioner",
+   "name": "Genie Envisioner（GE-Act）",
+   "c90": 2,
+   "capped": false,
+   "pushed": "2026-09-10"
+  },
+  {
+   "id": "pi0",
+   "name": "π0 (pi-zero)",
+   "c90": 1,
+   "capped": false,
+   "pushed": "2026-08-24"
+  },
+  {
+   "id": "pi0.5",
+   "name": "π0.5",
+   "c90": 1,
+   "capped": false,
+   "pushed": "2026-08-24"
+  }
+ ],
+ "stars_gain": [
+  {
+   "id": "smolvla",
+   "name": "SmolVLA",
+   "delta": 160,
+   "stars": 28271
+  },
+  {
+   "id": "pi0",
+   "name": "π0 (pi-zero)",
+   "delta": 94,
+   "stars": 14290
+  },
+  {
+   "id": "pi0.5",
+   "name": "π0.5",
+   "delta": 94,
+   "stars": 14290
+  },
+  {
+   "id": "vjepa2-ac",
+   "name": "V-JEPA 2-AC",
+   "delta": 32,
+   "stars": 4785
+  },
+  {
+   "id": "gr00t-n1.5-3b",
+   "name": "GR00T N1.5 3B",
+   "delta": 28,
+   "stars": 8224
+  },
+  {
+   "id": "gr00t-n1.7",
+   "name": "Isaac GR00T N1.7",
+   "delta": 28,
+   "stars": 8224
+  },
+  {
+   "id": "openvla",
+   "name": "OpenVLA",
+   "delta": 28,
+   "stars": 7169
+  },
+  {
+   "id": "lingbot-vla-2.0",
+   "name": "LingBot-VLA 2.0",
+   "delta": 20,
+   "stars": 1049
+  },
+  {
+   "id": "lingbot-vla-4b",
+   "name": "LingBot-VLA 4B",
+   "delta": 13,
+   "stars": 1863
+  },
+  {
+   "id": "wall-oss",
+   "name": "WALL-OSS",
+   "delta": 6,
+   "stars": 1296
+  }
+ ],
+ "downloads": [
+  {
+   "id": "openvla",
+   "name": "OpenVLA",
+   "dl30": 153562,
+   "repo": "openvla/openvla-7b"
+  },
+  {
+   "id": "smolvla",
+   "name": "SmolVLA",
+   "dl30": 150301,
+   "repo": "lerobot/smolvla_base"
+  },
+  {
+   "id": "gr00t-n1.7",
+   "name": "Isaac GR00T N1.7",
+   "dl30": 112262,
+   "repo": "nvidia/GR00T-N1.7-3B"
+  },
+  {
+   "id": "pi0",
+   "name": "π0 (pi-zero)",
+   "dl30": 17679,
+   "repo": "lerobot/pi0_base"
+  },
+  {
+   "id": "pi0.5",
+   "name": "π0.5",
+   "dl30": 17377,
+   "repo": "lerobot/pi05_base"
+  },
+  {
+   "id": "gr00t-n1.6-3b",
+   "name": "GR00T N1.6 3B",
+   "dl30": 12183,
+   "repo": "nvidia/GR00T-N1.6-3B"
+  },
+  {
+   "id": "x-vla",
+   "name": "X-VLA",
+   "dl30": 7247,
+   "repo": "2toINF/X-VLA-Pt"
+  },
+  {
+   "id": "lingbot-vla-2.0",
+   "name": "LingBot-VLA 2.0",
+   "dl30": 1734,
+   "repo": "robbyant/lingbot-vla-v2-6b"
+  },
+  {
+   "id": "wall-oss",
+   "name": "WALL-OSS",
+   "dl30": 1541,
+   "repo": "x-square-robot/wall-oss-flow"
+  },
+  {
+   "id": "gr00t-n1.5-3b",
+   "name": "GR00T N1.5 3B",
+   "dl30": 1521,
+   "repo": "nvidia/GR00T-N1.5-3B"
+  }
+ ],
+ "stale": [
+  {
+   "id": "gr-1",
+   "name": "GR-1",
+   "days": 909,
+   "pushed": "2024-04-22",
+   "archived": false
+  },
+  {
+   "id": "octo",
+   "name": "Octo",
+   "days": 809,
+   "pushed": "2024-07-31",
+   "archived": false
+  },
+  {
+   "id": "hpt",
+   "name": "HPT（Heterogeneous Pre-trained Transformers）",
+   "days": 681,
+   "pushed": "2024-12-06",
+   "archived": false
+  },
+  {
+   "id": "lapa",
+   "name": "LAPA",
+   "days": 634,
+   "pushed": "2025-01-22",
+   "archived": false
+  },
+  {
+   "id": "minivla",
+   "name": "MiniVLA",
+   "days": 578,
+   "pushed": "2025-03-19",
+   "archived": false
+  },
+  {
+   "id": "openvla",
+   "name": "OpenVLA",
+   "days": 574,
+   "pushed": "2025-03-23",
+   "archived": false
+  },
+  {
+   "id": "dexvla",
+   "name": "DexVLA",
+   "days": 551,
+   "pushed": "2025-04-15",
+   "archived": false
+  },
+  {
+   "id": "spatialvla",
+   "name": "SpatialVLA",
+   "days": 482,
+   "pushed": "2025-06-23",
+   "archived": false
+  },
+  {
+   "id": "eo-1",
+   "name": "EO-1",
+   "days": 389,
+   "pushed": "2025-09-24",
+   "archived": false
+  },
+  {
+   "id": "cogact",
+   "name": "CogACT",
+   "days": 353,
+   "pushed": "2025-10-30",
+   "archived": false
+  },
+  {
+   "id": "univla",
+   "name": "UniVLA",
+   "days": 333,
+   "pushed": "2025-11-19",
+   "archived": false
+  },
+  {
+   "id": "nora",
+   "name": "NORA",
+   "days": 282,
+   "pushed": "2026-01-09",
+   "archived": false
+  },
+  {
+   "id": "rdt-1b",
+   "name": "RDT-1B",
+   "days": 270,
+   "pushed": "2026-01-21",
+   "archived": false
+  },
+  {
+   "id": "rynnvla-001",
+   "name": "RynnVLA-001",
+   "days": 268,
+   "pushed": "2026-01-23",
+   "archived": false
+  },
+  {
+   "id": "rdt2-vq",
+   "name": "RDT2-VQ",
+   "days": 253,
+   "pushed": "2026-02-07",
+   "archived": false
+  },
+  {
+   "id": "vla-0",
+   "name": "VLA-0",
+   "days": 239,
+   "pushed": "2026-02-21",
+   "archived": false
+  },
+  {
+   "id": "magma",
+   "name": "Magma-8B",
+   "days": 229,
+   "pushed": "2026-03-03",
+   "archived": false
+  },
+  {
+   "id": "llava-vla",
+   "name": "LLaVA-VLA",
+   "days": 220,
+   "pushed": "2026-03-12",
+   "archived": false
+  },
+  {
+   "id": "vla-adapter",
+   "name": "VLA-Adapter",
+   "days": 213,
+   "pushed": "2026-03-19",
+   "archived": false
+  },
+  {
+   "id": "vjepa2-ac",
+   "name": "V-JEPA 2-AC",
+   "days": 209,
+   "pushed": "2026-03-23",
+   "archived": false
+  },
+  {
+   "id": "robovlms",
+   "name": "RoboVLMs（KosMos P.H.）",
+   "days": 187,
+   "pushed": "2026-04-14",
+   "archived": false
+  }
+ ],
+ "new_measurements": [],
+ "summary": {
+  "zh": "2026-10-12 至 2026-10-19：索引 40 个模型；本周新收录 0 个，权重在本周内更新的 0 个，许可证文本变化 0 个；实测新增 0 条（累计 15 条）；超过 180 天无推送的仓库 21 个。数据取自 6 天的每日快照。",
+  "en": "2026-10-12 to 2026-10-19: 40 models indexed; 0 newly indexed this week, 0 with weights modified this week, 0 licence-text changes; 0 new measurements (15 total); 21 repositories with no push for over 180 days. Based on 6 daily snapshots."
+ },
+ "x_en": "Open VLA weekly 2026-W43: 40 models tracked, 0 weights updated, 0 new latency measurements. Most commits in 90 d: SmolVLA (100+). Numbers only, sources on every row.",
+ "url": "https://robo.sinanlab.com/weekly/2026-W43"
+}
