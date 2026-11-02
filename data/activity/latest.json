@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-02T15:17:26+00:00",
+ "generated": "2026-11-02T20:59:00+00:00",
  "items": {
   "gr00t-n1.7": {
    "model_id": "gr00t-n1.7",
@@ -10,8 +10,8 @@
    "github": {
     "ok": true,
     "repo": "NVIDIA/Isaac-GR00T",
-    "stars": 8303,
-    "forks": 1515,
+    "stars": 8304,
+    "forks": 1516,
     "open_issues": 346,
     "pushed_at": "2026-10-29",
     "archived": false,
@@ -37,7 +37,7 @@
    "modelscope": {
     "ok": true,
     "path": "nv-community/GR00T-N1.7-3B",
-    "downloads": 472,
+    "downloads": 473,
     "updated": "2026-04-24",
     "official_org": false
    }
@@ -102,7 +102,7 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-vla-v2-6b",
-    "downloads": 2919,
+    "downloads": 2921,
     "updated": "2026-07-07",
     "official_org": true
    }
@@ -116,7 +116,7 @@
    "github": {
     "ok": true,
     "repo": "OpenDriveLab/AgiBot-World",
-    "stars": 3221,
+    "stars": 3222,
     "forks": 221,
     "open_issues": 39,
     "pushed_at": "2026-05-29",
@@ -154,7 +154,7 @@
    "github": {
     "ok": true,
     "repo": "Physical-Intelligence/openpi",
-    "stars": 14502,
+    "stars": 14503,
     "forks": 2616,
     "open_issues": 370,
     "pushed_at": "2026-08-24",
@@ -192,7 +192,7 @@
    "github": {
     "ok": true,
     "repo": "Physical-Intelligence/openpi",
-    "stars": 14502,
+    "stars": 14503,
     "forks": 2616,
     "open_issues": 370,
     "pushed_at": "2026-08-24",
@@ -216,7 +216,7 @@
    "modelscope": {
     "ok": true,
     "path": "lerobot/pi05_base",
-    "downloads": 3221,
+    "downloads": 3222,
     "updated": "2026-10-12",
     "official_org": true
    }
@@ -230,9 +230,9 @@
    "github": {
     "ok": true,
     "repo": "huggingface/lerobot",
-    "stars": 28645,
-    "forks": 5996,
-    "open_issues": 887,
+    "stars": 28648,
+    "forks": 6000,
+    "open_issues": 892,
     "pushed_at": "2026-11-02",
     "archived": false,
     "license": "Apache-2.0",
@@ -257,7 +257,7 @@
    "modelscope": {
     "ok": true,
     "path": "lerobot/smolvla_base",
-    "downloads": 3025,
+    "downloads": 3028,
     "updated": "2026-10-12",
     "official_org": true
    }
@@ -288,7 +288,7 @@
     "repo": "openvla/openvla-7b",
     "downloads_30d": 74607,
     "downloads_all": 18140191,
-    "likes": 264,
+    "likes": 265,
     "last_modified": "2026-02-17",
     "gated": false
    },
@@ -812,7 +812,7 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-vla-4b",
-    "downloads": 2948,
+    "downloads": 2954,
     "updated": "2026-05-01",
     "official_org": true
    }
@@ -1083,8 +1083,8 @@
    "github": {
     "ok": true,
     "repo": "facebookresearch/vjepa2",
-    "stars": 4845,
-    "forks": 594,
+    "stars": 4846,
+    "forks": 593,
     "open_issues": 98,
     "pushed_at": "2026-10-29",
     "archived": false,
@@ -1427,8 +1427,8 @@
    "github": {
     "ok": true,
     "repo": "NVIDIA/Isaac-GR00T",
-    "stars": 8303,
-    "forks": 1515,
+    "stars": 8304,
+    "forks": 1516,
     "open_issues": 346,
     "pushed_at": "2026-10-29",
     "archived": false,
