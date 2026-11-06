@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-06T19:30:38+00:00",
+ "generated": "2026-11-06T21:07:12+00:00",
  "items": {
   "gr00t-n1.7": {
    "model_id": "gr00t-n1.7",
@@ -80,7 +80,7 @@
     "repo": "robbyant/lingbot-vla-v2",
     "stars": 1100,
     "forks": 131,
-    "open_issues": 27,
+    "open_issues": 28,
     "pushed_at": "2026-09-22",
     "archived": false,
     "license": "Apache-2.0",
@@ -154,7 +154,7 @@
    "github": {
     "ok": true,
     "repo": "Physical-Intelligence/openpi",
-    "stars": 14563,
+    "stars": 14564,
     "forks": 2627,
     "open_issues": 375,
     "pushed_at": "2026-08-24",
@@ -192,7 +192,7 @@
    "github": {
     "ok": true,
     "repo": "Physical-Intelligence/openpi",
-    "stars": 14563,
+    "stars": 14564,
     "forks": 2627,
     "open_issues": 375,
     "pushed_at": "2026-08-24",
@@ -230,7 +230,7 @@
    "github": {
     "ok": true,
     "repo": "huggingface/lerobot",
-    "stars": 28721,
+    "stars": 28722,
     "forks": 6028,
     "open_issues": 912,
     "pushed_at": "2026-11-06",
@@ -915,9 +915,13 @@
     "days_since_push": 700
    },
    "hf": {
-    "ok": false,
-    "why": "http_0",
-    "repo": "liruiw/hpt-xlarge"
+    "ok": true,
+    "repo": "liruiw/hpt-xlarge",
+    "downloads_30d": 12,
+    "downloads_all": 320,
+    "likes": 0,
+    "last_modified": "2024-09-27",
+    "gated": false
    },
    "modelscope": {
     "ok": false,
@@ -1079,8 +1083,8 @@
    "github": {
     "ok": true,
     "repo": "facebookresearch/vjepa2",
-    "stars": 4859,
-    "forks": 594,
+    "stars": 4860,
+    "forks": 595,
     "open_issues": 99,
     "pushed_at": "2026-10-29",
     "archived": false,
@@ -1383,8 +1387,19 @@
    "weights_url": "https://huggingface.co/agibot-world/Genie-Envisioner",
    "code_url": "https://github.com/AgibotTech/Genie-Envisioner",
    "github": {
-    "ok": false,
-    "why": "Get \"https://api.github.com/repos/AgibotTech/Genie-Envisioner\": Service Unavailable"
+    "ok": true,
+    "repo": "AgibotTech/Genie-Envisioner",
+    "stars": 591,
+    "forks": 32,
+    "open_issues": 19,
+    "pushed_at": "2026-09-10",
+    "archived": false,
+    "license": null,
+    "default_branch": "master",
+    "commits_90d": 2,
+    "commits_90d_capped": false,
+    "latest_release": null,
+    "days_since_push": 57
    },
    "hf": {
     "ok": true,
