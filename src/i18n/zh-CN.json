@@ -9,6 +9,7 @@
   "nav": {
     "home": "总览",
     "models": "模型索引",
+    "world": "世界模型",
     "matrix": "适配矩阵",
     "embodiments": "本体",
     "hardware": "硬件与成本",

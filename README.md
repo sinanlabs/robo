@@ -23,6 +23,7 @@ Picking a robot foundation model today means reading ten READMEs, three model ca
 | Models | 25 (GR00T N1.6/N1.7, π0/π0.5, OpenVLA, Octo, RDT-1B, CogACT, SpatialVLA, UniVLA, MolmoAct, EO-1, X-VLA, LingBot-VLA, WALL-OSS, InternVLA-M1, GraspVLA, GO-1, Being-H0, SmolVLA, RynnVLA-001, NORA, VLA-Adapter …) |
 | Robot bodies | 12 (Unitree G1/H1, AgiBot G1, Galaxea R1 Pro, AgileX Piper, ALOHA 2 / Cobot Magic, Franka FR3 / Panda, WidowX 250 S, SO-101, Google Robot, Fourier GR) |
 | Hardware | 4 reference GPUs / edge devices with rental price references |
+| World models | 65 (2026-11-06): NVIDIA Cosmos 3 / Cosmos-Predict2.5, Meta V-JEPA 2, AgiBot Genie Envisioner, Robbyant LingBot-World / LingBot-VA, Skywork Matrix-Game, Tencent HY-World, Xiaomi-Robotics-U0, Unitree UnifoLM-WMA, plus API / demo-only systems (Genie 3, Marble, Runway GWM …). Data in [`data/world_models.json`](data/world_models.json); plan in [`docs/WORLD-MODEL-PLAN.md`](docs/WORLD-MODEL-PLAN.md) |
 | Measurements | latency / cost-per-1k-inferences layer is in place, awaiting reproducible runs |
 
 Target for 2026-Q4: 40+ models, 25+ bodies, first reproducible latency measurements.

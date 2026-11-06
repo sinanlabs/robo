@@ -15,6 +15,7 @@ const nMeas = (await getCollection('measurements')).filter((m) => m.data.review_
 const nRecipes = (await getCollection('recipes').catch(() => [])).length;
 const nScores = (await getCollection('scores').catch(() => [])).length;
 const nDatasets = (await getCollection('datasets').catch(() => [])).length;
+const nWorld = (await getCollection('world_models').catch(() => [])).length;
 const nWeekly = (await getCollection('weekly').catch(() => [])).length;
 const cells = compat.length, cellsKnown = compat.filter((c) => c.status !== 'unknown').length;
 let pend = 0, tot = 0;
@@ -46,6 +47,7 @@ const latest = [...models].sort((a, b) => String(b.release_date).localeCompare(S
 
   <div class="grid3 rise" style="margin-top:18px;--i:4">
     <a class="card tile amber" href={href(lang, '/models')}><span class="orb"></span><div class="v">{models.length}</div><div class="k">{t(lang, 'nav.models')}</div><div class="n">{en ? 'License, weights, architecture, target forms, sources for every field' : '许可证、权重、架构、目标形态，每个字段带来源'}</div></a>
+    <a class="card tile teal" href={href(lang, '/world-models')}><span class="orb"></span><div class="v">{nWorld}</div><div class="k">{t(lang, 'nav.world')}</div><div class="n">{en ? 'Models that predict what happens next: weights, licences, stated VRAM, API prices; our own tests to follow' : '预测“接下来会发生什么”的模型：权重、许可证、显存、接口价，司南实测陆续补上'}</div></a>
     <a class="card tile violet" href={href(lang, '/matrix')}><span class="orb"></span><div class="v">{models.length}×{embs.length}</div><div class="k">{t(lang, 'nav.matrix')}</div><div class="n">{en ? 'Model × embodiment; only evidenced states are colored' : '模型 × 本体；只给有证据的格子上色'}</div></a>
     <a class="card tile teal" href={href(lang, '/hardware')}><span class="orb"></span><div class="v">{hw.length}</div><div class="k">{t(lang, 'nav.hardware')}</div><div class="n">{en ? 'Latency p50/p95 and cost per 1k inferences by GPU' : '按显卡看延迟 p50/p95 与每千次推理成本'}</div></a>
     <a class="card tile amber" href={href(lang, '/select')}><span class="orb"></span><div class="v">{nMeas}</div><div class="k">{t(lang, 'nav.select')}</div><div class="n">{en ? 'Measured p50/p95, achievable Hz and cost per 1k on the GPU you pick' : '选一张卡：实测 p50/p95、能跑几赫兹、每千次多少钱'}</div></a>

@@ -140,6 +140,27 @@ if (fs.existsSync(rpDir)) {
   console.log(`月报：${reports.length} 期`);
 }
 
+// 世界模型：data/world_models.json（逐条带来源）+ data/activity/world_latest.json / world_history.jsonl（活性，单独存放）
+let worldModels = [], worldActivity = [];
+const wmP = path.join(root, 'data/world_models.json');
+if (fs.existsSync(wmP)) {
+  worldModels = (JSON.parse(fs.readFileSync(wmP, 'utf8')).items || []).map((m) => ({ ...m, evidence: m.evidence ?? [] }));
+  const wA = path.join(root, 'data/activity/world_latest.json'), wH = path.join(root, 'data/activity/world_history.jsonl');
+  if (fs.existsSync(wA)) {
+    const A = JSON.parse(fs.readFileSync(wA, 'utf8'));
+    const hist = fs.existsSync(wH) ? fs.readFileSync(wH, 'utf8').split('\n').filter(Boolean).map((l) => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean) : [];
+    const cutoff = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+    for (const m of worldModels) {
+      const r = A.items[m.id]; if (!r) continue;
+      const series = hist.filter((h) => h.id === m.id && h.d >= cutoff).sort((a, b) => a.d.localeCompare(b.d)).map((h) => ({ d: h.d, stars: h.stars ?? null, hf30: h.hf30 ?? null, c90: h.c90 ?? null }));
+      const first = series[0], last = series[series.length - 1];
+      const delta = first && last && first.d !== last.d ? { days: Math.round((new Date(last.d) - new Date(first.d)) / 864e5), stars: last.stars != null && first.stars != null ? last.stars - first.stars : null, hf30: last.hf30 != null && first.hf30 != null ? last.hf30 - first.hf30 : null } : null;
+      worldActivity.push({ id: m.id, fetched: r.fetched, github: r.github ?? { ok: false }, hf: r.hf ?? { ok: false }, modelscope: r.modelscope ?? { ok: false }, series, delta });
+    }
+  }
+  console.log(`世界模型：${worldModels.length} 个 · 活性 ${worldActivity.length}`);
+}
+
 const write = (name, data) => fs.writeFileSync(path.join(out, `${name}.json`), JSON.stringify(data, null, 2));
 write('models', models);
 write('embodiments', embodiments);
@@ -154,6 +175,8 @@ write('benchmarks', benchDefs);
 write('scores', scores);
 write('datasets', datasets);
 write('reports', reports);
+write('world_models', worldModels);
+write('world_activity', worldActivity);
 write('repro', repro.map((r) => ({ id: String(r.id), ...r })));
 write('meta', { ...seed._meta, imported_at: new Date().toISOString() });
 

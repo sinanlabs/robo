@@ -1,0 +1,74 @@
+---
+// 世界模型索引：给一段画面和一个动作（或镜头移动、文字），预测接下来画面的模型。开源权重、许可证、显存、国内镜像逐条带来源；
+// 只有接口 / 演示的也列出来，写清怎么用、官方价格。只记录，不打分、不推荐。2026-11-06 起。
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { href, type Lang } from '../lib/i18n';
+import { fmtParams } from '../lib/data';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const wm = (await getCollection('world_models')).map((d) => d.data as any).sort((a, b) => String(b.release_date || '').localeCompare(String(a.release_date || '')) || a.name.localeCompare(b.name));
+const act = new Map((await getCollection('world_activity')).map((d) => [d.data.id, d.data as any]));
+const mirror = (m: any) => m.modelscope_url || (act.get(m.id)?.modelscope?.ok ? 'https://modelscope.cn/models/' + act.get(m.id).modelscope.path : null);
+const CAT: Record<string, string> = en ? { robot: 'robotics', interactive: 'interactive world', driving: 'driving', general: 'general' } : { robot: '机器人', interactive: '可交互世界', driving: '自动驾驶', general: '通用' };
+const ACC: Record<string, string> = en ? { open_weights: 'weights', api: 'API', demo_only: 'demo / product', announced: 'announced' } : { open_weights: '可下载权重', api: '接口', demo_only: '仅体验 / 产品', announced: '仅宣布' };
+const ACCP: Record<string, string> = { open_weights: 'official', api: 'theoretical', demo_only: 'none', announced: 'unknown' };
+const IN: Record<string, string> = en ? { text: 'text', image: 'image', video: 'video', action: 'robot action', camera: 'camera path', keyboard_mouse: 'keyboard / mouse', audio: 'audio', '3d': '3D' }
+  : { text: '文字', image: '图片', video: '视频', action: '机器人动作', camera: '镜头轨迹', keyboard_mouse: '键鼠', audio: '声音', '3d': '3D' };
+const T = en ? {
+  h1: 'World models', lead: 'Models that predict what happens next: give one a picture or clip plus an action (or a camera move, or text) and it generates the frames that follow. Robotics uses them to train and test robot policies in “imagination”; games and content use them to generate worlds you can walk into. We record weights, licences, stated VRAM needs and China mirrors with a source for every field. API-only and demo-only systems are listed too, with how to access them and the official price. Our own measurements will be added as they are run.',
+  k1: 'world models', k2: 'with downloadable weights', k3: 'controllable step by step', k4: 'with a China mirror',
+  cat: 'Type', acc: 'Access', any: 'any', lic: 'Licence', licYes: 'commercial OK (stated)', ctl: 'Step control', ctlYes: 'action / camera / keys', mir: 'China mirror', mirYes: 'on ModelScope', n: 'match',
+  colName: 'Model', colCat: 'Type', colAcc: 'Access', colP: 'Params', colIn: 'Input', colLic: 'Licence', colMir: 'Mirror', gated: 'request access', empty: 'Nothing matches all conditions.',
+  foot: 'Sorted by release date (when weights or the API became available, not the paper date). “Step control” means the model can be driven frame by frame with robot actions, a camera path or keyboard / mouse input. Licence: ✓ only when both code and weights licences allow commercial use; conflicts between README, model card and mirror are marked “?”.', how: 'How we record these', meth: '/methodology#world' }
+  : {
+  h1: '世界模型', lead: '能「预测接下来会发生什么」的模型：给它一张图或一段画面，再给一个动作（或镜头移动、一句话），它生成之后的画面。机器人行业用它在“想象”里训练和考核机器人大脑，游戏和内容行业用它生成能走进去的世界。这里记录权重、许可证、官方写明的显存要求和国内镜像，每个字段带来源；只有接口或体验入口的也列出来，写清怎么用、官方价格。我们自己的实测会陆续补上。',
+  k1: '个世界模型', k2: '个可下载权重', k3: '个能逐步控制', k4: '个有国内镜像',
+  cat: '类别', acc: '获取方式', any: '不限', lic: '许可证', licYes: '明确允许商用', ctl: '逐步控制', ctlYes: '动作 / 镜头 / 键鼠', mir: '国内镜像', mirYes: '魔搭有', n: '个符合条件',
+  colName: '模型', colCat: '类别', colAcc: '获取方式', colP: '参数', colIn: '输入', colLic: '许可证', colMir: '镜像', gated: '需申请', empty: '没有同时满足所有条件的模型。',
+  foot: '按发布日期排序（权重或接口真正能用的那天，不是论文日期）。“逐步控制”指能用机器人动作、镜头轨迹或键鼠一帧帧地驱动生成。许可证：代码和权重许可证都明确允许商用才标 ✓；README、模型卡、镜像说法冲突的标“?”。', how: '我们怎么记录', meth: '/methodology#world' };
+const nOpen = wm.filter((m) => m.access === 'open_weights').length, nCtl = wm.filter((m) => m.action_conditioned === true).length, nMir = wm.filter((m) => mirror(m)).length;
+const cats = Array.from(new Set(wm.map((m) => m.category)));
+const accs = ['open_weights', 'api', 'demo_only', 'announced'].filter((a) => wm.some((m) => m.access === a));
+---
+<Base lang={lang} title={T.h1 + ' · Sinan Robo'} desc={T.lead} active="world" path="/world-models" crumbs={[{ label: T.h1 }]}>
+  <div class="rise" style="--i:0;margin-bottom:14px"><h1 style="font-size:24px">{T.h1}</h1><p class="lead">{T.lead}</p>
+    <div class="kp"><span><b>{wm.length}</b> {T.k1}</span><span><b>{nOpen}</b> {T.k2}</span><span><b>{nCtl}</b> {T.k3}</span><span><b>{nMir}</b> {T.k4}</span></div></div>
+  <section class="card rise" style="--i:1"><div class="pad">
+    <div class="filters" id="wf">
+      <label>{T.cat}</label><select data-f="cat"><option value="">{T.any}</option>{cats.map((c) => <option value={c}>{CAT[c] || c}</option>)}</select>
+      <label>{T.acc}</label><select data-f="acc"><option value="">{T.any}</option>{accs.map((a) => <option value={a}>{ACC[a]}</option>)}</select>
+      <label>{T.ctl}</label><select data-f="ctl"><option value="">{T.any}</option><option value="yes">{T.ctlYes}</option></select>
+      <label>{T.lic}</label><select data-f="lic"><option value="">{T.any}</option><option value="yes">{T.licYes}</option></select>
+      <label>{T.mir}</label><select data-f="mir"><option value="">{T.any}</option><option value="yes">{T.mirYes}</option></select>
+    </div>
+    <p class="sub" style="margin-top:8px"><b id="cnt">{wm.length}</b> {T.n}</p></div>
+    <div class="tablewrap"><table id="tbl"><thead><tr><th>{T.colName}</th><th>{T.colCat}</th><th>{T.colAcc}</th><th class="num">{T.colP}</th><th>{T.colIn}</th><th>{T.colLic}</th><th>{T.colMir}</th></tr></thead><tbody>
+      {wm.map((m) => { const mu = mirror(m); return (
+        <tr data-cat={m.category} data-acc={m.access} data-ctl={m.action_conditioned === true ? 'yes' : 'no'} data-lic={m.commercial_ok === true ? 'yes' : 'no'} data-mir={mu ? 'yes' : 'no'}>
+          <td><a href={href(lang, '/world-models/' + m.id)}><b>{m.name}</b></a><div class="sub">{en ? (m.org_en ?? m.org) : m.org}{m.release_date ? ' · ' + m.release_date : ''}</div></td>
+          <td class="sub">{CAT[m.category] || m.category}</td>
+          <td><span class={'pill ' + ACCP[m.access]}>{ACC[m.access] || m.access}</span>{m.gated ? <div class="dim" style="font-size:11.5px;margin-top:3px">{T.gated}</div> : null}</td>
+          <td class="num mono">{m.params_b != null ? fmtParams(m.params_b) : <span class="pending">?</span>}</td>
+          <td class="sub" style="max-width:200px">{(m.inputs || []).map((x: string) => IN[x] || x).join(' · ') || '—'}</td>
+          <td class="sub" style="max-width:200px">{m.access === 'open_weights' ? <>{m.commercial_ok === true ? '✓ ' : m.commercial_ok === false ? '✗ ' : '? '}{String((en ? (m.license_weights_en ?? m.license_weights) : m.license_weights) || (en ? (m.license_code_en ?? m.license_code) : m.license_code) || '').slice(0, 40)}</> : '—'}</td>
+          <td class="sub">{mu ? <a href={mu} rel="noopener">ModelScope</a> : '—'}</td>
+        </tr>); })}
+    </tbody></table></div>
+    <p class="sub pad" id="empty" style="display:none">{T.empty}</p>
+  </section>
+  <p class="sub" style="margin-top:14px">{T.foot} <a href={href(lang, T.meth)}>{T.how} →</a></p>
+  <style>.kp{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--ink-3)}.kp b{color:var(--ink);font-size:16px;margin-right:4px}</style>
+  <script>
+    const rows = Array.from(document.querySelectorAll<HTMLTableRowElement>('#tbl tbody tr'));
+    const sel = Array.from(document.querySelectorAll<HTMLSelectElement>('#wf select'));
+    const cnt = document.getElementById('cnt')!, empty = document.getElementById('empty')!;
+    function apply() {
+      const f: Record<string, string> = {}; sel.forEach((s) => (f[s.dataset.f!] = s.value)); let k = 0;
+      rows.forEach((r) => { const ok = (!f.cat || r.dataset.cat === f.cat) && (!f.acc || r.dataset.acc === f.acc) && (!f.ctl || r.dataset.ctl === 'yes') && (!f.lic || r.dataset.lic === 'yes') && (!f.mir || r.dataset.mir === 'yes'); r.style.display = ok ? '' : 'none'; if (ok) k++; });
+      cnt.textContent = String(k); empty.style.display = k ? 'none' : '';
+    }
+    sel.forEach((s) => s.addEventListener('change', apply)); apply();
+  </script>
+</Base>

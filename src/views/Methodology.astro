@@ -27,6 +27,10 @@ sinan-bench run --model gr00t-n1.7 --steps 200 --precision fp16
 sinan-bench report --last              # local JSON / Markdown report
 sinan-bench upload --last              # metrics + fingerprint only; no images, data or keys</pre>
     <p>Uploads carry only metrics and the hardware fingerprint. Same fingerprint and configuration are de-duplicated within 24 hours.</p>
+    <h2 id="world">8. World models: what we record and how</h2>
+    <p><b>Scope.</b> Models the publisher calls a world model that predict later frames or states from the current view plus a condition (robot action, camera path, keyboard / mouse, or text). Downloadable weights, API-only, demo-only and announced-only systems are all listed, with the access type shown.</p>
+    <ul><li><b>Available since</b> is the day weights or the API actually became available, not the paper date.</li><li><b>Parameters</b> come from the model card or weight metadata; when they differ from the marketing number we use the metadata and say so.</li><li><b>Licences</b> are copied verbatim, code and weights separately. “Commercial OK” is set only when both allow it; conflicts between README, model card and mirror leave it unverified.</li><li><b>Speed, resolution, length and VRAM</b> are the publisher’s own statements and are labelled “claimed”. They are not our measurements.</li></ul>
+    <p><b>Our measurements (in preparation).</b> (1) Speed and VRAM: the official inference script on RTX 4090 / RTX 5090 / A800 at a fixed resolution and frame count; frames generated per second and peak VRAM, with the hardware fingerprint. (2) A physics test set: a fixed set of short prompts run every month on every accessible model (an object falls, something hidden reappears, a cup is pushed off a table, water is poured, the camera circles a product, a walk through a shop). Clips are published side by side and each item is marked pass / fail / can’t tell by written rules. No overall score and no ranking.</p>
   </> : <>
     <h2>1. 测什么</h2>
     <p>一个测量单元是 <code>模型版本 × 硬件 × 精度（fp16 / int8 …）× 批大小 = 1 × 输入分辨率 × 动作块长度</code>。指标：单步推理延迟 p50 / p95（毫秒）、首动作延迟、吞吐（每秒动作块数）、显存峰值（GB）、功耗（可选）。</p>
@@ -46,6 +50,10 @@ sinan-bench run --model gr00t-n1.7 --steps 200 --precision fp16
 sinan-bench report --last              # 本地 JSON / Markdown 报告
 sinan-bench upload --last              # 只传指标和硬件指纹，不传图像、数据、密钥</pre>
     <p>上传只含指标与硬件指纹。同一指纹、同一配置 24 小时内去重。</p>
+    <h2 id="world">8. 世界模型：收什么、怎么记</h2>
+    <p><b>收录范围。</b>发布方称为世界模型、能根据当前画面加一个条件（机器人动作、镜头轨迹、键鼠或文字）预测之后画面或状态的模型。可下载权重、只有接口、只有体验入口、只宣布的都收，并标明获取方式。</p>
+    <ul><li><b>可用日期</b>取权重或接口真正能用的那天，不是论文日期。</li><li><b>参数量</b>取模型卡或权重元数据；和宣传数字不一致时用元数据，并写明。</li><li><b>许可证</b>照抄原文，代码和权重分开记。两个都明确允许才记“可商用”；README、模型卡、镜像说法冲突的记“待核实”。</li><li><b>速度、分辨率、时长、显存</b>都是发布方自己的说法，标“官方声称”，不是我们测的。</li></ul>
+    <p><b>我们的实测（准备中）。</b>① 速度与显存：用官方推理脚本，在 RTX 4090 / RTX 5090 / A800 上固定分辨率和帧数，测每秒生成帧数和显存峰值，附硬件指纹。② 物理考题：一套固定的短题，每月对所有能用的模型同题生成（东西掉下来、挡住后再出现、杯子被推下桌、倒水、镜头绕产品一圈、在店里走一遍等）。视频并排公开，按写好的规则逐题记“过 / 不过 / 看不出”，不算综合分，不排名。</p>
   </>}
   </section>
 </Base>

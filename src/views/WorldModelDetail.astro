@@ -1,0 +1,64 @@
+---
+// 单个世界模型：官方写明的事实 + 逐条来源 + 活性信号 + 司南实测（有了才显示数字）。只记录来源怎么说，不评价。
+import Base from '../layouts/Base.astro';
+import EvidenceList from '../components/EvidenceList.astro';
+import ActivityCard from '../components/ActivityCard.astro';
+import { getCollection } from 'astro:content';
+import { href, type Lang } from '../lib/i18n';
+import { fmtParams } from '../lib/data';
+interface Props { lang: Lang; id: string }
+const { lang, id } = Astro.props;
+const en = lang === 'en';
+const all = (await getCollection('world_models')).map((x) => x.data as any);
+const m = all.find((x) => x.id === id)!;
+const act = (await getCollection('world_activity')).map((x) => x.data as any).find((x) => x.id === id);
+const vla = (await getCollection('models')).map((x) => x.data);
+const related = vla.filter((v) => (m.robo_model_ids || []).includes(v.id));
+const siblings = all.filter((x) => x.id !== m.id && m.family && x.family === m.family);
+const meas = (m.measurements || []) as any[];
+// 英文页取 *_en 字段（scripts/apply_world_en.py 写入），没有就用原文
+const L = (k: string) => (en ? (m[k + '_en'] ?? m[k]) : m[k]);
+const apiP = m.api ? (en ? (m.api.provider_en ?? m.api.provider) : m.api.provider) : null, apiN = m.api ? (en ? (m.api.price_note_en ?? m.api.price_note) : m.api.price_note) : null;
+const CAT: Record<string, string> = en ? { robot: 'robotics', interactive: 'interactive world', driving: 'driving', general: 'general' } : { robot: '机器人', interactive: '可交互世界', driving: '自动驾驶', general: '通用' };
+const ACC: Record<string, string> = en ? { open_weights: 'downloadable weights', api: 'API only', demo_only: 'demo / product only', announced: 'announced, no access yet' } : { open_weights: '可下载权重', api: '只有接口', demo_only: '只有体验入口 / 产品', announced: '只宣布，还没有入口' };
+const IN: Record<string, string> = en ? { text: 'text', image: 'image', video: 'video', action: 'robot action', camera: 'camera path', keyboard_mouse: 'keyboard / mouse', audio: 'audio', '3d': '3D' }
+  : { text: '文字', image: '图片', video: '视频', action: '机器人动作', camera: '镜头轨迹', keyboard_mouse: '键鼠', audio: '声音', '3d': '3D' };
+const OUT: Record<string, string> = en ? { video: 'video', image: 'image', '3d_scene': '3D scene', latent: 'latent representation', action: 'robot action', audio: 'audio', state: 'world state' }
+  : { video: '视频', image: '图片', '3d_scene': '3D 场景', latent: '隐空间表示', action: '机器人动作', audio: '声音', state: '世界状态' };
+const T = en ? { h1: 'World model', back: 'All world models', facts: 'Facts (as stated by the publisher)', org: 'Organisation', fam: 'Family', cat: 'Type', acc: 'Access', gated: 'request access first', date: 'Available since', pdate: 'Paper', params: 'Parameters', base: 'Base model', inp: 'Input', outp: 'Output', ctl: 'Step-by-step control', yes: 'yes', no: 'no', rt: 'Speed (claimed)', res: 'Resolution (claimed)', len: 'Length (claimed)', vram: 'Min. VRAM (stated)', vramN: 'VRAM note', lc: 'Code licence', lw: 'Weights licence', comm: 'Commercial use', commY: 'allowed by both licences', commN: 'not allowed', unk: 'unverified', api: 'API / price', weights: 'Weights', code: 'Code', paper: 'Paper', proj: 'Project page', ms: 'ModelScope',
+  ours: 'Sinan measurements', oursNone: 'Not measured by us yet. Planned: generation speed and peak VRAM on RTX 4090 / RTX 5090 / A800, and a monthly fixed set of physics test clips run on every accessible model. Claimed speeds above are the publisher’s numbers, not ours.', fam2: 'Same family', rel: 'Related robot models in the index', relS: 'Robot policies built on or evaluated with this world model.' }
+  : { h1: '世界模型', back: '全部世界模型', facts: '基本事实（按发布方原文）', org: '机构', fam: '系列', cat: '类别', acc: '获取方式', gated: '需先申请', date: '可用日期', pdate: '论文', params: '参数量', base: '底座模型', inp: '输入', outp: '输出', ctl: '能否逐步控制', yes: '能', no: '不能', rt: '速度（官方声称）', res: '分辨率（官方声称）', len: '连续时长（官方声称）', vram: '最低显存（官方写明）', vramN: '显存说明', lc: '代码许可证', lw: '权重许可证', comm: '商用', commY: '两个许可证都允许', commN: '不允许', unk: '待核实', api: '接口 / 价格', weights: '权重', code: '代码', paper: '论文', proj: '项目页', ms: '魔搭镜像',
+  ours: '司南实测', oursNone: '我们还没有实测这个模型。计划：在 RTX 4090 / RTX 5090 / A800 上测生成速度和显存峰值，并每月用同一套物理考题对所有能用的模型同题测试。上面的速度是发布方自己的数字，不是我们测的。', fam2: '同系列', rel: '索引里的相关机器人模型', relS: '基于这个世界模型训练、或用它做评测的机器人策略。' };
+const row = (k: string, v: any) => ({ k, v });
+const yn = (b: any) => (b === true ? T.yes : b === false ? T.no : null);
+const facts = [row(T.org, L('org')), row(T.fam, L('family')), row(T.cat, CAT[m.category] || m.category), row(T.acc, (ACC[m.access] || m.access) + (m.gated ? ' · ' + T.gated : '')), row(T.date, m.release_date), row(T.pdate, m.paper_date),
+  row(T.params, m.params_b != null ? fmtParams(m.params_b) : null), row(T.base, L('base_model')), row(T.inp, (m.inputs || []).map((x: string) => IN[x] || x).join(' · ') || null), row(T.outp, (m.outputs || []).map((x: string) => OUT[x] || x).join(' · ') || null),
+  row(T.ctl, yn(m.action_conditioned)), row(T.rt, L('realtime_claim')), row(T.res, L('resolution_claim')), row(T.len, L('length_claim')), row(T.vram, m.min_vram_gb_stated != null ? m.min_vram_gb_stated + ' GB' : null), row(T.vramN, L('vram_note')),
+  ...(m.access === 'open_weights' ? [row(T.lc, L('license_code')), row(T.lw, L('license_weights')), row(T.comm, m.commercial_ok === true ? T.commY : m.commercial_ok === false ? T.commN : null)] : []),
+  ...(m.api ? [row(T.api, `${apiP}${apiN ? ' · ' + apiN : ''}`)] : [])];
+const links = [[T.weights, m.weights_url], [T.code, m.code_url], [T.paper, m.paper_url], [T.proj, m.project_url], [T.ms, m.modelscope_url], [T.api, m.api?.url]].filter(([, u]) => u) as [string, string][];
+---
+<Base lang={lang} title={`${m.name} · ${T.h1} · Sinan Robo`} desc={`${m.name} · ${L('org')} · ${en ? m.notes_en : m.notes}`} active="world" path={'/world-models/' + m.id} crumbs={[{ label: T.back, href: href(lang, '/world-models') }, { label: m.name }]}>
+  <div class="rise" style="--i:0;display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:14px">
+    <div><div class="eyebrow" style="color:var(--robo-deep);opacity:1">{T.h1} · {L('org')}</div><h1 style="font-size:28px;margin-top:6px">{m.name}</h1></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-left:auto">{links.map(([k, u]) => <a class="btn" href={u} rel="noopener">{k} →</a>)}</div>
+  </div>
+  <p class="lead rise" style="--i:0.5">{en ? m.notes_en : m.notes}</p>
+  <div class="grid2" style="margin-top:12px">
+    <section class="card pad rise" style="--i:1"><h2 class="sec">{T.facts}</h2>
+      <dl class="kv" style="margin-top:12px">{facts.map((f) => <div class="row"><dt>{f.k}</dt><dd>{f.v == null || f.v === '' ? <span class="pill pending">{T.unk}</span> : f.v}</dd></div>)}</dl>
+      <EvidenceList lang={lang} evidence={m.evidence} open={true} />
+    </section>
+    <div style="display:grid;gap:16px;align-content:start">
+      <section class="card pad rise" style="--i:2"><h2 class="sec">{T.ours}</h2>
+        {meas.length ? <ul class="rel">{meas.map((x) => <li>{x.hardware} · {x.summary} <span class="dim">{x.date}</span></li>)}</ul> : <p class="sub" style="margin-top:6px">{T.oursNone}</p>}
+      </section>
+      {related.length > 0 && <section class="card pad rise" style="--i:2.5"><h2 class="sec">{T.rel}</h2><p class="sub" style="margin-top:4px">{T.relS}</p>
+        <ul class="rel">{related.map((v) => <li><a href={href(lang, '/models/' + v.id)}>{v.name}</a> <span class="dim">{v.org}</span></li>)}</ul></section>}
+      {siblings.length > 0 && <section class="card pad rise" style="--i:3"><h2 class="sec">{T.fam2} · {L('family')}</h2>
+        <ul class="rel">{siblings.map((x) => <li><a href={href(lang, '/world-models/' + x.id)}>{x.name}</a> <span class="dim">{x.release_date || ''}{x.params_b != null ? ' · ' + fmtParams(x.params_b) : ''}</span></li>)}</ul></section>}
+    </div>
+  </div>
+  {(m.weights_url || m.code_url) && <div class="rise" style="margin-top:16px;--i:3.5"><ActivityCard lang={lang} a={act} codeUrl={m.code_url} weightsUrl={m.weights_url} /></div>}
+  <style>.kv .row{display:grid;grid-template-columns:150px 1fr;gap:8px;padding:6px 0;border-bottom:1px solid var(--hair-2);font-size:13.5px}.kv dt{color:var(--ink-3)}.kv dd{margin:0;word-break:break-word}.rel{margin:10px 0 0;padding-left:18px;font-size:13.5px;line-height:1.9}</style>
+</Base>

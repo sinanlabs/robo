@@ -10,10 +10,12 @@ const canonical = site + href(lang, path);
 const altZh = site + href('zh-cn', path), altEn = site + href('en', path);
 const models = await getCollection('models');
 const embs = await getCollection('embodiments');
+const worldN = (await getCollection('world_models')).length || '';
 const description = desc ?? t(lang, 'site.desc');
 const nav = [
   ['home', '/', '<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/>', ''],
   ['models', '/models', '<path d="M4 7h16M4 12h16M4 17h10"/>', String(models.length)],
+  ['world', '/world-models', '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>', String(worldN)],
   ['matrix', '/matrix', '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>', ''],
   ['embodiments', '/embodiments', '<circle cx="12" cy="5" r="2"/><path d="M12 7v5M7 22l5-10 5 10M5 12h14"/>', String(embs.length)],
   ['hardware', '/hardware', '<rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h8M8 14h5"/>', ''],

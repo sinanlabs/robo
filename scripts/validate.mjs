@@ -108,6 +108,43 @@ const mids = new Set(read('models').map((m) => m.id)), eids = new Set(read('embo
 for (const c of read('compat')) if (!mids.has(c.model_id) || !eids.has(c.embodiment_id)) { problems++; report.push(`❌ compat/${c.id} 引用了不存在的模型或本体`); }
 for (const m of read('measurements')) if (!mids.has(m.model_id) || !hids.has(m.hardware_id)) { problems++; report.push(`❌ measurements/${m.id} 引用了不存在的模型或硬件`); }
 
+// 世界模型（data/world_models.json）：枚举字段合法；每个确定的事实字段都要有 evidence 覆盖；有权重的必须给权重地址；
+// 说明文字过禁用词（与 compass/core/wording.py 同一份）
+const WM_FACTS = ['release_date', 'paper_date', 'params_b', 'base_model', 'gated', 'action_conditioned', 'realtime_claim', 'resolution_claim', 'length_claim', 'min_vram_gb_stated', 'vram_note',
+  'license_code', 'license_weights', 'commercial_ok', 'weights_url', 'modelscope_url', 'code_url', 'paper_url', 'project_url', 'api', 'inputs', 'outputs', 'access'];
+const WorldModel = z.object({
+  id: z.string().regex(/^[a-z0-9.\-]+$/), name: z.string().min(1), org: z.string().min(1), family: z.string().nullable().optional(),
+  category: z.enum(['robot', 'interactive', 'driving', 'general']), access: z.enum(['open_weights', 'api', 'demo_only', 'announced']),
+  gated: z.boolean().nullable().optional(), release_date: z.string().nullable(), paper_date: z.string().nullable().optional(), params_b: z.number().nullable(),
+  base_model: z.string().nullable().optional(), inputs: z.array(z.string()), outputs: z.array(z.string()), action_conditioned: z.boolean().nullable(),
+  realtime_claim: z.string().nullable().optional(), resolution_claim: z.string().nullable().optional(), length_claim: z.string().nullable().optional(),
+  min_vram_gb_stated: z.number().nullable().optional(), vram_note: z.string().nullable().optional(),
+  license_code: z.string().nullable(), license_weights: z.string().nullable(), commercial_ok: z.boolean().nullable(),
+  weights_url: z.string().nullable(), modelscope_url: z.string().nullable().optional(), code_url: z.string().nullable(), paper_url: z.string().nullable(), project_url: z.string().nullable().optional(),
+  api: z.object({ provider: z.string(), url: z.string(), price_note: z.string().nullable().optional() }).nullable().optional(),
+  notes: z.string().min(4), notes_en: z.string().min(4), evidence: z.array(Evidence),
+});
+const BANNED = ['实锤', '假模型', '套壳', '掺假', '造假', '诈骗', '骗子', '黑榜', '曝光', '打假', '涉嫌', '降智', '掉包', '跑路', '推荐', '最佳', '首选', '性价比', '靠谱', 'scam', 'fraud', 'fake'];
+{
+  const rows = read('world_models'); const ids = new Set(); let pend = 0, tot = 0;
+  for (const r of rows) {
+    const res = WorldModel.safeParse(r);
+    if (!res.success) { problems++; report.push(`❌ world_models/${r.id ?? '?'}: ${res.error.issues.map((i) => i.path.join('.') + ' ' + i.message).join('; ')}`); continue; }
+    if (ids.has(r.id)) { problems++; report.push(`❌ world_models/${r.id} id 重复`); } ids.add(r.id);
+    if (r.access === 'open_weights' && !r.weights_url) { problems++; report.push(`❌ world_models/${r.id} 标了 open_weights 却没有权重地址`); }
+    const covered = new Set((r.evidence ?? []).flatMap((e) => e.field.split(',').map((x) => x.trim().split('.')[0])));
+    for (const f of WM_FACTS) {
+      tot++; const v = r[f];
+      if (isPending(v)) { pend++; continue; }
+      if (!covered.has(f)) { unsourced++; report.push(`⚠️ world_models/${r.id}.${f} = ${JSON.stringify(v).slice(0, 60)} —— 确定值但没有 evidence 覆盖`); }
+    }
+    const txt = [r.notes, r.notes_en].join(' ').toLowerCase();   // 只查我们自己写的说明；evidence.note 可能是原文摘句（如“推荐显存”）
+    const hit = BANNED.filter((w) => txt.includes(w.toLowerCase()));
+    if (hit.length) { problems++; report.push(`❌ world_models/${r.id} 文字含禁用词：${hit.join('、')}`); }
+  }
+  report.push(`· world_models: ${rows.length} 条 · 事实字段完整率 ${tot ? Math.round((1 - pend / tot) * 100) : 100}%（空 ${pend}/${tot}）`);
+}
+
 console.log(report.join('\n'));
 console.log(`\n结论：schema 错误 ${problems} · 无来源的确定值 ${unsourced}`);
 if (problems > 0 || (strict && unsourced > 0)) process.exit(1);

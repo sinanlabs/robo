@@ -7,13 +7,16 @@
 产出：
   data/activity/latest.json          今日快照（按 model_id）
   data/activity/history.jsonl        逐日一行一模型（画 30 天走势、算周变化；同日重跑会覆盖当日）
-用法：python3 scripts/activity.py            全部模型
-      python3 scripts/activity.py openvla    只跑一个（调试）
+  data/activity/world_latest.json    世界模型（data/world_models.json 里有权重或代码的条目）同样的快照，单独存放，不混进 VLA 的周报 / 月报统计
+  data/activity/world_history.jsonl
+用法：python3 scripts/activity.py            全部模型 + 世界模型
+      python3 scripts/activity.py openvla    只跑一个（调试；id 在两边查）
 """
 import io, os, sys, json, re, subprocess, urllib.request, urllib.parse, datetime as dt, time
 
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 SEED = os.path.join(ROOT, "data", "seed_v0.json")
+WORLD = os.path.join(ROOT, "data", "world_models.json")
 OUT = os.path.join(ROOT, "data", "activity"); os.makedirs(OUT, exist_ok=True)
 TODAY = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
 SINCE_90 = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=90)).strftime("%Y-%m-%dT00:00:00Z")
@@ -92,16 +95,14 @@ def fetch_modelscope(hf_path):
     return {"ok": False, "why": "none"}
 
 
-def main():
-    only = sys.argv[1] if len(sys.argv) > 1 else None
-    seed = json.load(io.open(SEED, encoding="utf-8"))
-    latest_p = os.path.join(OUT, "latest.json")
+def run(entries, latest_p, hist_p, only=None, label="activity"):
     prev = json.load(io.open(latest_p, encoding="utf-8")) if os.path.exists(latest_p) else {"items": {}}
     items = dict(prev.get("items", {}))
     n_ok = 0
-    for m in seed["models"]:
+    for m in entries:
         if only and m["id"] != only: continue
-        rec = {"model_id": m["id"], "fetched": TODAY, "license": m.get("license"), "weights_url": m.get("weights_url"), "code_url": m.get("code_url")}
+        lic = m.get("license") if "license" in m else m.get("license_weights")
+        rec = {"model_id": m["id"], "fetched": TODAY, "license": lic, "weights_url": m.get("weights_url"), "code_url": m.get("code_url")}
         g = gh_repo(m.get("code_url"))
         try: rec["github"] = fetch_github(*g) if g else {"ok": False, "why": "no_github_url"}
         except Exception as e: rec["github"] = {"ok": False, "why": str(e)[:120]}
@@ -112,9 +113,9 @@ def main():
         print("%-18s gh=%s hf=%s ms=%s" % (m["id"], (rec["github"].get("stars") if rec["github"].get("ok") else rec["github"].get("why")),
               (rec["hf"].get("downloads_30d") if rec["hf"].get("ok") else rec["hf"].get("why")), (rec["modelscope"].get("path") if rec["modelscope"].get("ok") else "-")))
         time.sleep(0.3)
+    if not n_ok: return 0
     json.dump({"generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "items": items}, io.open(latest_p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     # 逐日历史：同日重跑覆盖
-    hist_p = os.path.join(OUT, "history.jsonl")
     rows = []
     if os.path.exists(hist_p):
         for ln in io.open(hist_p, encoding="utf-8"):
@@ -133,7 +134,18 @@ def main():
     rows.sort(key=lambda r: (r["d"], r["id"]))
     with io.open(hist_p, "w", encoding="utf-8") as f:
         for r in rows: f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    print("activity: %d 个模型 → data/activity/latest.json · history %d 行" % (n_ok, len(rows)))
+    print("%s: %d 个 → %s · history %d 行" % (label, n_ok, os.path.relpath(latest_p, ROOT), len(rows)))
+    return n_ok
+
+
+def main():
+    only = sys.argv[1] if len(sys.argv) > 1 else None
+    seed = json.load(io.open(SEED, encoding="utf-8"))
+    run(seed["models"], os.path.join(OUT, "latest.json"), os.path.join(OUT, "history.jsonl"), only, "activity")
+    # 世界模型：只抓有权重或代码地址的（纯接口 / 演示产品没有可抓的公开计数）
+    if os.path.exists(WORLD):
+        wm = [m for m in json.load(io.open(WORLD, encoding="utf-8")).get("items", []) if m.get("weights_url") or m.get("code_url")]
+        run(wm, os.path.join(OUT, "world_latest.json"), os.path.join(OUT, "world_history.jsonl"), only, "world activity")
 
 
 if __name__ == "__main__":

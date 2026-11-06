@@ -88,6 +88,10 @@ const datasets = defineCollection({ loader: file('src/content/generated/datasets
 
 const reports = defineCollection({ loader: file('src/content/generated/reports.json'), schema: z.object({ id: z.string(), month: z.string(), from: z.string(), to: z.string() }).passthrough() });
 
+// 世界模型：字段见 data/world_models.json 的 _meta.fields；活性与 activity 同结构
+const world_models = defineCollection({ loader: file('src/content/generated/world_models.json'), schema: z.object({ id: z.string(), name: z.string(), org: z.string(), category: z.string(), access: z.string(), evidence: z.array(Evidence.passthrough()) }).passthrough() });
+const world_activity = defineCollection({ loader: file('src/content/generated/world_activity.json'), schema: z.object({ id: z.string() }).passthrough() });
+
 const repro = defineCollection({ loader: file('src/content/generated/repro.json'), schema: z.object({ id: z.string(), model_id: z.string(), embodiment_id: z.string(), outcome: z.string() }).passthrough() });
 
-export const collections = { models, embodiments, hardware, compat, measurements, activity, recipes, recipes_meta, weekly, benchmarks, scores, datasets, reports, repro };
+export const collections = { models, embodiments, hardware, compat, measurements, activity, recipes, recipes_meta, weekly, benchmarks, scores, datasets, reports, repro, world_models, world_activity };

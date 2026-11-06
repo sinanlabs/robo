@@ -1,0 +1,7 @@
+---
+import V from '../../../views/WorldModelDetail.astro';
+import { getCollection } from 'astro:content';
+export async function getStaticPaths() { return (await getCollection('world_models')).map((x) => ({ params: { id: x.data.id } })); }
+const { id } = Astro.params;
+---
+<V lang="en" id={id!} />

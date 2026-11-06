@@ -9,6 +9,7 @@
   "nav": {
     "home": "Overview",
     "models": "Models",
+    "world": "World models",
     "matrix": "Compatibility",
     "embodiments": "Embodiments",
     "hardware": "Hardware & cost",
