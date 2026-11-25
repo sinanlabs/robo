@@ -1,9 +1,9 @@
 {
- "generated": "2026-11-24T22:28:38+00:00",
+ "generated": "2026-11-25T22:53:28+00:00",
  "items": {
   "primebot-primesim": {
    "model_id": "primebot-primesim",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/qiyuan-robot/PrimeSim",
    "code_url": "https://github.com/PrimebotTech/PrimeSim",
@@ -13,20 +13,20 @@
     "stars": 11,
     "forks": 0,
     "open_issues": 1,
-    "pushed_at": "2026-11-06",
+    "pushed_at": "2026-11-25",
     "archived": false,
     "license": "Apache-2.0",
     "default_branch": "main",
-    "commits_90d": 4,
+    "commits_90d": 5,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 18
+    "days_since_push": 0
    },
    "hf": {
     "ok": true,
     "repo": "qiyuan-robot/PrimeSim",
-    "downloads_30d": 1609,
-    "downloads_all": 1609,
+    "downloads_30d": 1829,
+    "downloads_all": 1829,
     "likes": 2,
     "last_modified": "2026-11-06",
     "gated": false
@@ -38,16 +38,16 @@
   },
   "matrix-game-4-0": {
    "model_id": "matrix-game-4-0",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/Skywork/Matrix-Game-4.0",
    "code_url": "https://github.com/SkyworkAI/Matrix-Game/tree/main/Matrix-Game-4",
    "github": {
     "ok": true,
     "repo": "SkyworkAI/Matrix-Game",
-    "stars": 2990,
+    "stars": 2991,
     "forks": 311,
-    "open_issues": 46,
+    "open_issues": 47,
     "pushed_at": "2026-10-29",
     "archived": false,
     "license": "MIT",
@@ -55,35 +55,35 @@
     "commits_90d": 25,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 26
+    "days_since_push": 27
    },
    "hf": {
     "ok": true,
     "repo": "Skywork/Matrix-Game-4.0",
-    "downloads_30d": 760,
-    "downloads_all": 1466,
-    "likes": 67,
+    "downloads_30d": 757,
+    "downloads_all": 1505,
+    "likes": 68,
     "last_modified": "2026-10-16",
     "gated": false
    },
    "modelscope": {
     "ok": true,
     "path": "Skywork/Matrix-Game-4.0",
-    "downloads": 421,
+    "downloads": 432,
     "updated": "2026-10-16",
     "official_org": true
    }
   },
   "lingbot-world-v2-14b-causal-pretrain": {
    "model_id": "lingbot-world-v2-14b-causal-pretrain",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "CC BY-NC-SA 4.0",
    "weights_url": "https://huggingface.co/robbyant/lingbot-world-v2-14b-causal-pretrain",
    "code_url": "https://github.com/Robbyant/lingbot-world-v2",
    "github": {
     "ok": true,
     "repo": "Robbyant/lingbot-world-v2",
-    "stars": 1927,
+    "stars": 1928,
     "forks": 152,
     "open_issues": 10,
     "pushed_at": "2026-09-10",
@@ -93,7 +93,7 @@
     "commits_90d": 7,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 75
+    "days_since_push": 76
    },
    "hf": {
     "ok": true,
@@ -107,21 +107,21 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-world-v2-14b-causal-pretrain",
-    "downloads": 125,
+    "downloads": 127,
     "updated": "2026-09-10",
     "official_org": true
    }
   },
   "lingbot-world-v2-14b-bid": {
    "model_id": "lingbot-world-v2-14b-bid",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "CC BY-NC-SA 4.0",
    "weights_url": "https://huggingface.co/robbyant/lingbot-world-v2-14b-bid",
    "code_url": "https://github.com/Robbyant/lingbot-world-v2",
    "github": {
     "ok": true,
     "repo": "Robbyant/lingbot-world-v2",
-    "stars": 1927,
+    "stars": 1928,
     "forks": 152,
     "open_issues": 10,
     "pushed_at": "2026-09-10",
@@ -131,7 +131,7 @@
     "commits_90d": 7,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 75
+    "days_since_push": 76
    },
    "hf": {
     "ok": true,
@@ -145,21 +145,21 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-world-v2-14b-bid",
-    "downloads": 73,
+    "downloads": 74,
     "updated": "2026-09-10",
     "official_org": true
    }
   },
   "lingbot-world-v2-1-3b-causal-fast": {
    "model_id": "lingbot-world-v2-1-3b-causal-fast",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "CC BY-NC-SA 4.0",
    "weights_url": "https://huggingface.co/robbyant/lingbot-world-v2-1.3b-causal-fast",
    "code_url": "https://github.com/Robbyant/lingbot-world-v2",
    "github": {
     "ok": true,
     "repo": "Robbyant/lingbot-world-v2",
-    "stars": 1927,
+    "stars": 1928,
     "forks": 152,
     "open_issues": 10,
     "pushed_at": "2026-09-10",
@@ -169,7 +169,7 @@
     "commits_90d": 7,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 75
+    "days_since_push": 76
    },
    "hf": {
     "ok": true,
@@ -183,14 +183,14 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-world-v2-1.3b-causal-fast",
-    "downloads": 898,
+    "downloads": 906,
     "updated": "2026-09-10",
     "official_org": true
    }
   },
   "xiaomi-robotics-u0-sequence": {
    "model_id": "xiaomi-robotics-u0-sequence",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/XiaomiRobotics/Xiaomi-Robotics-U0-Sequence",
    "code_url": "https://github.com/XiaomiRobotics/Xiaomi-Robotics-U0",
@@ -207,13 +207,13 @@
     "commits_90d": 5,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 75
+    "days_since_push": 76
    },
    "hf": {
     "ok": true,
     "repo": "XiaomiRobotics/Xiaomi-Robotics-U0-Sequence",
-    "downloads_30d": 50,
-    "downloads_all": 186,
+    "downloads_30d": 52,
+    "downloads_all": 188,
     "likes": 5,
     "last_modified": "2026-09-09",
     "gated": false
@@ -221,14 +221,14 @@
    "modelscope": {
     "ok": true,
     "path": "XiaomiRobotics/Xiaomi-Robotics-U0-Sequence",
-    "downloads": 53,
+    "downloads": 55,
     "updated": "2026-09-09",
     "official_org": true
    }
   },
   "xiaomi-robotics-u0-4b-sequence": {
    "model_id": "xiaomi-robotics-u0-4b-sequence",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/XiaomiRobotics/Xiaomi-Robotics-U0-4B-Sequence",
    "code_url": "https://github.com/XiaomiRobotics/Xiaomi-Robotics-U0",
@@ -245,13 +245,13 @@
     "commits_90d": 5,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 75
+    "days_since_push": 76
    },
    "hf": {
     "ok": true,
     "repo": "XiaomiRobotics/Xiaomi-Robotics-U0-4B-Sequence",
     "downloads_30d": 66,
-    "downloads_all": 212,
+    "downloads_all": 214,
     "likes": 6,
     "last_modified": "2026-09-09",
     "gated": false
@@ -259,14 +259,14 @@
    "modelscope": {
     "ok": true,
     "path": "XiaomiRobotics/Xiaomi-Robotics-U0-4B-Sequence",
-    "downloads": 73,
+    "downloads": 75,
     "updated": "2026-09-09",
     "official_org": true
    }
   },
   "xiaomi-robotics-u0-4b": {
    "model_id": "xiaomi-robotics-u0-4b",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/XiaomiRobotics/Xiaomi-Robotics-U0-4B",
    "code_url": "https://github.com/XiaomiRobotics/Xiaomi-Robotics-U0",
@@ -283,13 +283,13 @@
     "commits_90d": 5,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 75
+    "days_since_push": 76
    },
    "hf": {
     "ok": true,
     "repo": "XiaomiRobotics/Xiaomi-Robotics-U0-4B",
-    "downloads_30d": 55,
-    "downloads_all": 201,
+    "downloads_30d": 57,
+    "downloads_all": 203,
     "likes": 13,
     "last_modified": "2026-09-09",
     "gated": false
@@ -297,37 +297,37 @@
    "modelscope": {
     "ok": true,
     "path": "XiaomiRobotics/Xiaomi-Robotics-U0-4B",
-    "downloads": 95,
+    "downloads": 98,
     "updated": "2026-09-09",
     "official_org": true
    }
   },
   "echo-wm-flash": {
    "model_id": "echo-wm-flash",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "LTX-2 Community License",
    "weights_url": "https://huggingface.co/Echo-Team/Echo-WM",
    "code_url": "https://github.com/jd-opensource/JoyAI-Echo/tree/main/echo_wm",
    "github": {
     "ok": true,
     "repo": "jd-opensource/JoyAI-Echo",
-    "stars": 2076,
+    "stars": 2075,
     "forks": 176,
     "open_issues": 8,
     "pushed_at": "2026-11-04",
     "archived": false,
     "license": "NOASSERTION",
     "default_branch": "main",
-    "commits_90d": 34,
+    "commits_90d": 8,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 20
+    "days_since_push": 21
    },
    "hf": {
     "ok": true,
     "repo": "Echo-Team/Echo-WM",
-    "downloads_30d": 51,
-    "downloads_all": 497,
+    "downloads_30d": 52,
+    "downloads_all": 501,
     "likes": 11,
     "last_modified": "2026-08-28",
     "gated": false
@@ -339,30 +339,30 @@
   },
   "echo-wm-base": {
    "model_id": "echo-wm-base",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "LTX-2 Community License",
    "weights_url": "https://huggingface.co/Echo-Team/Echo-WM",
    "code_url": "https://github.com/jd-opensource/JoyAI-Echo/tree/main/echo_wm",
    "github": {
     "ok": true,
     "repo": "jd-opensource/JoyAI-Echo",
-    "stars": 2076,
+    "stars": 2075,
     "forks": 176,
     "open_issues": 8,
     "pushed_at": "2026-11-04",
     "archived": false,
     "license": "NOASSERTION",
     "default_branch": "main",
-    "commits_90d": 34,
+    "commits_90d": 8,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 20
+    "days_since_push": 21
    },
    "hf": {
     "ok": true,
     "repo": "Echo-Team/Echo-WM",
-    "downloads_30d": 51,
-    "downloads_all": 497,
+    "downloads_30d": 52,
+    "downloads_all": 501,
     "likes": 11,
     "last_modified": "2026-08-28",
     "gated": false
@@ -374,14 +374,14 @@
   },
   "ace-ntu-puffin-world-pro": {
    "model_id": "ace-ntu-puffin-world-pro",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "NTU S-Lab License 1.0",
    "weights_url": "https://huggingface.co/ACERobotics/Puffin-World",
    "code_url": "https://github.com/KangLiao929/Puffin",
    "github": {
     "ok": true,
     "repo": "KangLiao929/Puffin",
-    "stars": 520,
+    "stars": 521,
     "forks": 22,
     "open_issues": 1,
     "pushed_at": "2026-09-04",
@@ -391,7 +391,7 @@
     "commits_90d": 5,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 81
+    "days_since_push": 82
    },
    "hf": {
     "ok": true,
@@ -405,21 +405,21 @@
    "modelscope": {
     "ok": true,
     "path": "ACERobotics/Puffin-World",
-    "downloads": 18,
+    "downloads": 19,
     "updated": "2026-09-06",
     "official_org": true
    }
   },
   "ace-ntu-puffin-world-base": {
    "model_id": "ace-ntu-puffin-world-base",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "NTU S-Lab License 1.0",
    "weights_url": "https://huggingface.co/ACERobotics/Puffin-World",
    "code_url": "https://github.com/KangLiao929/Puffin",
    "github": {
     "ok": true,
     "repo": "KangLiao929/Puffin",
-    "stars": 520,
+    "stars": 521,
     "forks": 22,
     "open_issues": 1,
     "pushed_at": "2026-09-04",
@@ -429,7 +429,7 @@
     "commits_90d": 5,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 81
+    "days_since_push": 82
    },
    "hf": {
     "ok": true,
@@ -443,23 +443,23 @@
    "modelscope": {
     "ok": true,
     "path": "ACERobotics/Puffin-World",
-    "downloads": 18,
+    "downloads": 19,
     "updated": "2026-09-06",
     "official_org": true
    }
   },
   "cosmos3-edge": {
    "model_id": "cosmos3-edge",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "OpenMDW-1.1",
    "weights_url": "https://huggingface.co/nvidia/Cosmos3-Edge",
    "code_url": "https://github.com/NVIDIA/cosmos",
    "github": {
     "ok": true,
     "repo": "NVIDIA/cosmos",
-    "stars": 12449,
-    "forks": 976,
-    "open_issues": 14,
+    "stars": 12462,
+    "forks": 977,
+    "open_issues": 15,
     "pushed_at": "2026-11-19",
     "archived": false,
     "license": "NOASSERTION",
@@ -470,28 +470,28 @@
      "tag": "Cosmos3",
      "at": "2026-06-01"
     },
-    "days_since_push": 5
+    "days_since_push": 6
    },
    "hf": {
     "ok": true,
     "repo": "nvidia/Cosmos3-Edge",
-    "downloads_30d": 44882,
-    "downloads_all": 2603154,
-    "likes": 252,
+    "downloads_30d": 43574,
+    "downloads_all": 2604158,
+    "likes": 253,
     "last_modified": "2026-11-12",
     "gated": false
    },
    "modelscope": {
     "ok": true,
     "path": "nv-community/Cosmos3-Edge",
-    "downloads": 6282,
+    "downloads": 6351,
     "updated": "2026-11-13",
     "official_org": false
    }
   },
   "xiaomi-robotics-u0": {
    "model_id": "xiaomi-robotics-u0",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/XiaomiRobotics/Xiaomi-Robotics-U0",
    "code_url": "https://github.com/XiaomiRobotics/Xiaomi-Robotics-U0",
@@ -508,13 +508,13 @@
     "commits_90d": 5,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 75
+    "days_since_push": 76
    },
    "hf": {
     "ok": true,
     "repo": "XiaomiRobotics/Xiaomi-Robotics-U0",
-    "downloads_30d": 61,
-    "downloads_all": 395,
+    "downloads_30d": 63,
+    "downloads_all": 397,
     "likes": 32,
     "last_modified": "2026-07-15",
     "gated": false
@@ -522,21 +522,21 @@
    "modelscope": {
     "ok": true,
     "path": "XiaomiRobotics/Xiaomi-Robotics-U0",
-    "downloads": 165,
+    "downloads": 167,
     "updated": "2026-07-15",
     "official_org": true
    }
   },
   "lingbot-world-v2-14b-causal-fast": {
    "model_id": "lingbot-world-v2-14b-causal-fast",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "CC BY-NC-SA 4.0",
    "weights_url": "https://huggingface.co/robbyant/lingbot-world-v2-14b-causal-fast",
    "code_url": "https://github.com/Robbyant/lingbot-world-v2",
    "github": {
     "ok": true,
     "repo": "Robbyant/lingbot-world-v2",
-    "stars": 1927,
+    "stars": 1928,
     "forks": 152,
     "open_issues": 10,
     "pushed_at": "2026-09-10",
@@ -546,7 +546,7 @@
     "commits_90d": 7,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 75
+    "days_since_push": 76
    },
    "hf": {
     "ok": true,
@@ -560,21 +560,21 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-world-v2-14b-causal-fast",
-    "downloads": 834,
+    "downloads": 838,
     "updated": "2026-07-09",
     "official_org": true
    }
   },
   "ace-robotics-kairos-3-1-4b-robot-480p": {
    "model_id": "ace-robotics-kairos-3-1-4b-robot-480p",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/ACERobotics/Kairos3.1-4B-robot-480P",
    "code_url": "https://github.com/DAXIAORobotics/kairos",
    "github": {
     "ok": true,
     "repo": "DAXIAORobotics/kairos",
-    "stars": 3262,
+    "stars": 3268,
     "forks": 551,
     "open_issues": 3,
     "pushed_at": "2026-09-15",
@@ -584,13 +584,13 @@
     "commits_90d": 1,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 70
+    "days_since_push": 71
    },
    "hf": {
     "ok": true,
     "repo": "ACERobotics/Kairos3.1-4B-robot-480P",
-    "downloads_30d": 67,
-    "downloads_all": 296,
+    "downloads_30d": 68,
+    "downloads_all": 298,
     "likes": 1,
     "last_modified": "2026-07-08",
     "gated": false
@@ -598,14 +598,14 @@
    "modelscope": {
     "ok": true,
     "path": "ACERobotics/Kairos3.1-4B-robot-480P",
-    "downloads": 20,
+    "downloads": 21,
     "updated": "2026-08-18",
     "official_org": true
    }
   },
   "agibot-ge-sim-2-0-2b": {
    "model_id": "agibot-ge-sim-2-0-2b",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "CC BY-NC-SA 4.0",
    "weights_url": "https://huggingface.co/agibot-world/Genie-Envisioner-Sim-v2.0",
    "code_url": "https://github.com/AgibotTech/GE-Sim-V2",
@@ -622,7 +622,7 @@
     "commits_90d": 2,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 35
+    "days_since_push": 36
    },
    "hf": {
     "ok": true,
@@ -640,16 +640,16 @@
   },
   "cosmos3-super": {
    "model_id": "cosmos3-super",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "OpenMDW-1.1",
    "weights_url": "https://huggingface.co/nvidia/Cosmos3-Super",
    "code_url": "https://github.com/NVIDIA/cosmos",
    "github": {
     "ok": true,
     "repo": "NVIDIA/cosmos",
-    "stars": 12449,
-    "forks": 976,
-    "open_issues": 14,
+    "stars": 12462,
+    "forks": 977,
+    "open_issues": 15,
     "pushed_at": "2026-11-19",
     "archived": false,
     "license": "NOASSERTION",
@@ -660,37 +660,37 @@
      "tag": "Cosmos3",
      "at": "2026-06-01"
     },
-    "days_since_push": 5
+    "days_since_push": 6
    },
    "hf": {
     "ok": true,
     "repo": "nvidia/Cosmos3-Super",
-    "downloads_30d": 47081,
-    "downloads_all": 547343,
-    "likes": 296,
+    "downloads_30d": 47207,
+    "downloads_all": 548782,
+    "likes": 298,
     "last_modified": "2026-11-12",
     "gated": false
    },
    "modelscope": {
     "ok": true,
     "path": "nv-community/Cosmos3-Super",
-    "downloads": 7853,
+    "downloads": 7926,
     "updated": "2026-11-13",
     "official_org": false
    }
   },
   "cosmos3-nano": {
    "model_id": "cosmos3-nano",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "OpenMDW-1.1",
    "weights_url": "https://huggingface.co/nvidia/Cosmos3-Nano",
    "code_url": "https://github.com/NVIDIA/cosmos",
    "github": {
     "ok": true,
     "repo": "NVIDIA/cosmos",
-    "stars": 12449,
-    "forks": 976,
-    "open_issues": 14,
+    "stars": 12462,
+    "forks": 977,
+    "open_issues": 15,
     "pushed_at": "2026-11-19",
     "archived": false,
     "license": "NOASSERTION",
@@ -701,28 +701,28 @@
      "tag": "Cosmos3",
      "at": "2026-06-01"
     },
-    "days_since_push": 5
+    "days_since_push": 6
    },
    "hf": {
     "ok": true,
     "repo": "nvidia/Cosmos3-Nano",
-    "downloads_30d": 2330216,
-    "downloads_all": 3365493,
-    "likes": 433,
+    "downloads_30d": 2331114,
+    "downloads_all": 3368711,
+    "likes": 436,
     "last_modified": "2026-11-12",
     "gated": false
    },
    "modelscope": {
     "ok": true,
     "path": "nv-community/Cosmos3-Nano",
-    "downloads": 207089,
+    "downloads": 207187,
     "updated": "2026-11-13",
     "official_org": false
    }
   },
   "blm-lab-boundless-world-model": {
    "model_id": "blm-lab-boundless-world-model",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": null,
    "weights_url": "https://huggingface.co/BLM-Lab/Boundless-World-Model",
    "code_url": "https://github.com/boundless-large-model/boundless-world-model",
@@ -739,13 +739,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 76
+    "days_since_push": 77
    },
    "hf": {
     "ok": true,
     "repo": "BLM-Lab/Boundless-World-Model",
     "downloads_30d": 83,
-    "downloads_all": 347,
+    "downloads_all": 348,
     "likes": 15,
     "last_modified": "2026-05-29",
     "gated": false
@@ -757,14 +757,14 @@
   },
   "hy-world-2-0": {
    "model_id": "hy-world-2-0",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Tencent HY-World 2.0 Community License",
    "weights_url": "https://huggingface.co/tencent/HY-World-2.0",
    "code_url": "https://github.com/Tencent-Hunyuan/HY-World-2.0",
    "github": {
     "ok": true,
     "repo": "Tencent-Hunyuan/HY-World-2.0",
-    "stars": 2908,
+    "stars": 2909,
     "forks": 253,
     "open_issues": 17,
     "pushed_at": "2026-08-12",
@@ -774,13 +774,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 104
+    "days_since_push": 105
    },
    "hf": {
     "ok": true,
     "repo": "tencent/HY-World-2.0",
-    "downloads_30d": 3378,
-    "downloads_all": 24825,
+    "downloads_30d": 3341,
+    "downloads_all": 24930,
     "likes": 730,
     "last_modified": "2026-05-21",
     "gated": false
@@ -788,28 +788,28 @@
    "modelscope": {
     "ok": true,
     "path": "Tencent-Hunyuan/HY-World-2.0",
-    "downloads": 34113,
+    "downloads": 34138,
     "updated": "2026-07-18",
     "official_org": false
    }
   },
   "sana-wm": {
    "model_id": "sana-wm",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0（内含的 LTX-2 refiner/VAE 沿用 LTX-2 上游许可 ltx-2-community-license-agreement）",
    "weights_url": "https://huggingface.co/Efficient-Large-Model/SANA-WM_bidirectional",
    "code_url": "https://github.com/NVlabs/Sana",
    "github": {
     "ok": true,
     "repo": "NVlabs/Sana",
-    "stars": 9885,
+    "stars": 9897,
     "forks": 815,
-    "open_issues": 142,
-    "pushed_at": "2026-11-24",
+    "open_issues": 138,
+    "pushed_at": "2026-11-25",
     "archived": false,
     "license": "Apache-2.0",
     "default_branch": "main",
-    "commits_90d": 26,
+    "commits_90d": 29,
     "commits_90d_capped": false,
     "latest_release": {
      "tag": "v2.0.0",
@@ -829,21 +829,21 @@
    "modelscope": {
     "ok": true,
     "path": "Efficient-Large-Model/SANA-WM_bidirectional",
-    "downloads": 657,
+    "downloads": 667,
     "updated": "2026-08-01",
     "official_org": true
    }
   },
   "lingbot-world-fast": {
    "model_id": "lingbot-world-fast",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/robbyant/lingbot-world-fast",
    "code_url": "https://github.com/Robbyant/lingbot-world",
    "github": {
     "ok": true,
     "repo": "Robbyant/lingbot-world",
-    "stars": 4596,
+    "stars": 4597,
     "forks": 412,
     "open_issues": 42,
     "pushed_at": "2026-07-09",
@@ -853,13 +853,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 138
+    "days_since_push": 139
    },
    "hf": {
     "ok": true,
     "repo": "robbyant/lingbot-world-fast",
-    "downloads_30d": 12770,
-    "downloads_all": 162653,
+    "downloads_30d": 8522,
+    "downloads_all": 162777,
     "likes": 24,
     "last_modified": "2026-04-02",
     "gated": false
@@ -867,23 +867,23 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-world-fast",
-    "downloads": 287,
+    "downloads": 289,
     "updated": "2026-04-28",
     "official_org": true
    }
   },
   "matrix-game-3-0": {
    "model_id": "matrix-game-3-0",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/Skywork/Matrix-Game-3.0",
    "code_url": "https://github.com/SkyworkAI/Matrix-Game/tree/main/Matrix-Game-3",
    "github": {
     "ok": true,
     "repo": "SkyworkAI/Matrix-Game",
-    "stars": 2990,
+    "stars": 2991,
     "forks": 311,
-    "open_issues": 46,
+    "open_issues": 47,
     "pushed_at": "2026-10-29",
     "archived": false,
     "license": "MIT",
@@ -891,13 +891,13 @@
     "commits_90d": 25,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 26
+    "days_since_push": 27
    },
    "hf": {
     "ok": true,
     "repo": "Skywork/Matrix-Game-3.0",
-    "downloads_30d": 245,
-    "downloads_all": 2150,
+    "downloads_30d": 224,
+    "downloads_all": 2158,
     "likes": 135,
     "last_modified": "2026-10-26",
     "gated": false
@@ -905,22 +905,22 @@
    "modelscope": {
     "ok": true,
     "path": "Skywork/Matrix-Game-3.0",
-    "downloads": 666,
+    "downloads": 671,
     "updated": "2026-10-28",
     "official_org": true
    }
   },
   "v-jepa-2-1-vit-gigantic-384": {
    "model_id": "v-jepa-2-1-vit-gigantic-384",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": null,
    "weights_url": "https://dl.fbaipublicfiles.com/vjepa2/vjepa2_1_vitG_384.pt",
    "code_url": "https://github.com/facebookresearch/vjepa2",
    "github": {
     "ok": true,
     "repo": "facebookresearch/vjepa2",
-    "stars": 4913,
-    "forks": 600,
+    "stars": 4920,
+    "forks": 601,
     "open_issues": 98,
     "pushed_at": "2026-10-29",
     "archived": false,
@@ -929,7 +929,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 26
+    "days_since_push": 27
    },
    "hf": {
     "ok": false,
@@ -942,14 +942,14 @@
   },
   "lingbot-world-base-act": {
    "model_id": "lingbot-world-base-act",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/robbyant/lingbot-world-base-act-preview",
    "code_url": "https://github.com/Robbyant/lingbot-world",
    "github": {
     "ok": true,
     "repo": "Robbyant/lingbot-world",
-    "stars": 4596,
+    "stars": 4597,
     "forks": 412,
     "open_issues": 42,
     "pushed_at": "2026-07-09",
@@ -959,7 +959,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 138
+    "days_since_push": 139
    },
    "hf": {
     "ok": true,
@@ -977,14 +977,14 @@
   },
   "ace-robotics-kairos-3-0-4b-robot-480p": {
    "model_id": "ace-robotics-kairos-3-0-4b-robot-480p",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/ACERobotics/kairos-sensenova-robot-4B-480P",
    "code_url": "https://github.com/DAXIAORobotics/kairos",
    "github": {
     "ok": true,
     "repo": "DAXIAORobotics/kairos",
-    "stars": 3262,
+    "stars": 3268,
     "forks": 551,
     "open_issues": 3,
     "pushed_at": "2026-09-15",
@@ -994,13 +994,13 @@
     "commits_90d": 1,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 70
+    "days_since_push": 71
    },
    "hf": {
     "ok": true,
     "repo": "ACERobotics/kairos-sensenova-robot-4B-480P",
-    "downloads_30d": 27,
-    "downloads_all": 252,
+    "downloads_30d": 28,
+    "downloads_all": 253,
     "likes": 7,
     "last_modified": "2026-03-26",
     "gated": false
@@ -1008,21 +1008,21 @@
    "modelscope": {
     "ok": true,
     "path": "ACERobotics/kairos-sensenova-robot-4B-480P",
-    "downloads": 20,
+    "downloads": 21,
     "updated": "2026-08-18",
     "official_org": true
    }
   },
   "lingbot-world-base-cam": {
    "model_id": "lingbot-world-base-cam",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/robbyant/lingbot-world-base-cam",
    "code_url": "https://github.com/Robbyant/lingbot-world",
    "github": {
     "ok": true,
     "repo": "Robbyant/lingbot-world",
-    "stars": 4596,
+    "stars": 4597,
     "forks": 412,
     "open_issues": 42,
     "pushed_at": "2026-07-09",
@@ -1032,7 +1032,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 138
+    "days_since_push": 139
    },
    "hf": {
     "ok": true,
@@ -1046,21 +1046,21 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-world-base-cam",
-    "downloads": 6721,
+    "downloads": 6723,
     "updated": "2026-02-02",
     "official_org": true
    }
   },
   "robbyant-lingbot-va": {
    "model_id": "robbyant-lingbot-va",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/robbyant/lingbot-va-base",
    "code_url": "https://github.com/Robbyant/lingbot-va",
    "github": {
     "ok": true,
     "repo": "Robbyant/lingbot-va",
-    "stars": 1990,
+    "stars": 1992,
     "forks": 195,
     "open_issues": 78,
     "pushed_at": "2026-07-09",
@@ -1070,7 +1070,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 138
+    "days_since_push": 139
    },
    "hf": {
     "ok": true,
@@ -1084,14 +1084,14 @@
    "modelscope": {
     "ok": true,
     "path": "Robbyant/lingbot-va-base",
-    "downloads": 2217,
+    "downloads": 2232,
     "updated": "2026-04-24",
     "official_org": true
    }
   },
   "hy-world-1-5-worldplay-5b": {
    "model_id": "hy-world-1-5-worldplay-5b",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Tencent HY-WorldPlay Community License",
    "weights_url": "https://huggingface.co/tencent/HY-WorldPlay",
    "code_url": "https://github.com/Tencent-Hunyuan/HY-WorldPlay",
@@ -1099,22 +1099,22 @@
     "ok": true,
     "repo": "Tencent-Hunyuan/HY-WorldPlay",
     "stars": 1637,
-    "forks": 147,
+    "forks": 148,
     "open_issues": 29,
-    "pushed_at": "2026-06-10",
+    "pushed_at": "2026-11-25",
     "archived": false,
     "license": "NOASSERTION",
     "default_branch": "main",
-    "commits_90d": 0,
+    "commits_90d": 4,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 167
+    "days_since_push": 0
    },
    "hf": {
     "ok": true,
     "repo": "tencent/HY-WorldPlay",
-    "downloads_30d": 495,
-    "downloads_all": 11983,
+    "downloads_30d": 485,
+    "downloads_all": 11995,
     "likes": 526,
     "last_modified": "2026-03-06",
     "gated": false
@@ -1122,14 +1122,14 @@
    "modelscope": {
     "ok": true,
     "path": "Tencent-Hunyuan/HY-WorldPlay",
-    "downloads": 4669,
+    "downloads": 4674,
     "updated": "2026-07-16",
     "official_org": false
    }
   },
   "hy-world-1-5-worldplay-8b": {
    "model_id": "hy-world-1-5-worldplay-8b",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Tencent HY-WorldPlay Community License",
    "weights_url": "https://huggingface.co/tencent/HY-WorldPlay",
    "code_url": "https://github.com/Tencent-Hunyuan/HY-WorldPlay",
@@ -1137,22 +1137,22 @@
     "ok": true,
     "repo": "Tencent-Hunyuan/HY-WorldPlay",
     "stars": 1637,
-    "forks": 147,
+    "forks": 148,
     "open_issues": 29,
-    "pushed_at": "2026-06-10",
+    "pushed_at": "2026-11-25",
     "archived": false,
     "license": "NOASSERTION",
     "default_branch": "main",
-    "commits_90d": 0,
+    "commits_90d": 4,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 167
+    "days_since_push": 0
    },
    "hf": {
     "ok": true,
     "repo": "tencent/HY-WorldPlay",
-    "downloads_30d": 495,
-    "downloads_all": 11983,
+    "downloads_30d": 485,
+    "downloads_all": 11995,
     "likes": 526,
     "last_modified": "2026-03-06",
     "gated": false
@@ -1160,21 +1160,21 @@
    "modelscope": {
     "ok": true,
     "path": "Tencent-Hunyuan/HY-WorldPlay",
-    "downloads": 4669,
+    "downloads": 4674,
     "updated": "2026-07-16",
     "official_org": false
    }
   },
   "cosmos-predict2-5-14b": {
    "model_id": "cosmos-predict2-5-14b",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "NVIDIA Open Model License",
    "weights_url": "https://huggingface.co/nvidia/Cosmos-Predict2.5-14B",
    "code_url": "https://github.com/nvidia-cosmos/cosmos-predict2.5",
    "github": {
     "ok": true,
     "repo": "nvidia-cosmos/cosmos-predict2.5",
-    "stars": 1406,
+    "stars": 1405,
     "forks": 200,
     "open_issues": 34,
     "pushed_at": "2026-06-08",
@@ -1187,13 +1187,13 @@
      "tag": "v1.5.1",
      "at": "2026-04-03"
     },
-    "days_since_push": 169
+    "days_since_push": 170
    },
    "hf": {
     "ok": true,
     "repo": "nvidia/Cosmos-Predict2.5-14B",
-    "downloads_30d": 6539,
-    "downloads_all": 88314,
+    "downloads_30d": 6548,
+    "downloads_all": 88328,
     "likes": 36,
     "last_modified": "2026-06-29",
     "gated": false
@@ -1201,14 +1201,14 @@
    "modelscope": {
     "ok": true,
     "path": "nv-community/Cosmos-Predict2.5-14B",
-    "downloads": 108,
+    "downloads": 109,
     "updated": "2026-06-30",
     "official_org": false
    }
   },
   "gigaai-gigaworld-0-video-pretrain-2b": {
    "model_id": "gigaai-gigaworld-0-video-pretrain-2b",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/open-gigaai/GigaWorld-0-Video-Pretrain-2b",
    "code_url": "https://github.com/open-gigaai/giga-world-0",
@@ -1225,7 +1225,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 356
+    "days_since_push": 357
    },
    "hf": {
     "ok": true,
@@ -1239,14 +1239,14 @@
    "modelscope": {
     "ok": true,
     "path": "GigaAI/GigaWorld-0-Video-Pretrain-2b",
-    "downloads": 29,
+    "downloads": 30,
     "updated": "2026-03-31",
     "official_org": false
    }
   },
   "gigaai-gigaworld-0-video-gr1-2b": {
    "model_id": "gigaai-gigaworld-0-video-gr1-2b",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/open-gigaai/GigaWorld-0-Video-GR1-2b",
    "code_url": "https://github.com/open-gigaai/giga-world-0",
@@ -1263,7 +1263,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 356
+    "days_since_push": 357
    },
    "hf": {
     "ok": true,
@@ -1275,13 +1275,16 @@
     "gated": false
    },
    "modelscope": {
-    "ok": false,
-    "why": "none"
+    "ok": true,
+    "path": "GigaAI/GigaWorld-0-Video-GR1-2b",
+    "downloads": 28,
+    "updated": "2026-03-31",
+    "official_org": false
    }
   },
   "agibot-ge-sim-cosmos-v0-1": {
    "model_id": "agibot-ge-sim-cosmos-v0-1",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "CC BY-NC-SA 4.0",
    "weights_url": "https://modelscope.cn/models/agibot_world/Genie-Envisioner/file/view/master/ge_sim_cosmos_v0.1.safetensors",
    "code_url": "https://github.com/AgibotTech/Genie-Envisioner-V1",
@@ -1298,7 +1301,7 @@
     "commits_90d": 2,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 75
+    "days_since_push": 76
    },
    "hf": {
     "ok": false,
@@ -1311,7 +1314,7 @@
   },
   "cosmos-transfer2-5-2b": {
    "model_id": "cosmos-transfer2-5-2b",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "NVIDIA Open Model License",
    "weights_url": "https://huggingface.co/nvidia/Cosmos-Transfer2.5-2B",
    "code_url": "https://github.com/nvidia-cosmos/cosmos-transfer2.5",
@@ -1331,13 +1334,13 @@
      "tag": "v1.5.4",
      "at": "2026-05-13"
     },
-    "days_since_push": 147
+    "days_since_push": 148
    },
    "hf": {
     "ok": true,
     "repo": "nvidia/Cosmos-Transfer2.5-2B",
-    "downloads_30d": 19879,
-    "downloads_all": 529479,
+    "downloads_30d": 18115,
+    "downloads_all": 529646,
     "likes": 108,
     "last_modified": "2026-06-29",
     "gated": "auto"
@@ -1352,14 +1355,14 @@
   },
   "cosmos-predict2-5-2b": {
    "model_id": "cosmos-predict2-5-2b",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "NVIDIA Open Model License",
    "weights_url": "https://huggingface.co/nvidia/Cosmos-Predict2.5-2B",
    "code_url": "https://github.com/nvidia-cosmos/cosmos-predict2.5",
    "github": {
     "ok": true,
     "repo": "nvidia-cosmos/cosmos-predict2.5",
-    "stars": 1406,
+    "stars": 1405,
     "forks": 200,
     "open_issues": 34,
     "pushed_at": "2026-06-08",
@@ -1372,28 +1375,28 @@
      "tag": "v1.5.1",
      "at": "2026-04-03"
     },
-    "days_since_push": 169
+    "days_since_push": 170
    },
    "hf": {
     "ok": true,
     "repo": "nvidia/Cosmos-Predict2.5-2B",
-    "downloads_30d": 15342,
-    "downloads_all": 832199,
-    "likes": 221,
+    "downloads_30d": 14853,
+    "downloads_all": 833316,
+    "likes": 222,
     "last_modified": "2026-06-29",
     "gated": "auto"
    },
    "modelscope": {
     "ok": true,
     "path": "nv-community/Cosmos-Predict2.5-2B",
-    "downloads": 722,
+    "downloads": 723,
     "updated": "2026-06-29",
     "official_org": false
    }
   },
   "unitree-unifolm-wma-0-dual": {
    "model_id": "unitree-unifolm-wma-0-dual",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "CC BY-NC-SA 4.0 / apache-2.0（来源冲突）",
    "weights_url": "https://huggingface.co/unitreerobotics/UnifoLM-WMA-0-Dual",
    "code_url": "https://github.com/unitreerobotics/unifolm-world-model-action",
@@ -1401,7 +1404,7 @@
     "ok": true,
     "repo": "unitreerobotics/unifolm-world-model-action",
     "stars": 1172,
-    "forks": 151,
+    "forks": 152,
     "open_issues": 19,
     "pushed_at": "2026-03-18",
     "archived": false,
@@ -1410,7 +1413,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 251
+    "days_since_push": 252
    },
    "hf": {
     "ok": true,
@@ -1431,7 +1434,7 @@
   },
   "unitree-unifolm-wma-0-base": {
    "model_id": "unitree-unifolm-wma-0-base",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "CC BY-NC-SA 4.0 / apache-2.0（来源冲突）",
    "weights_url": "https://huggingface.co/unitreerobotics/UnifoLM-WMA-0-Base",
    "code_url": "https://github.com/unitreerobotics/unifolm-world-model-action",
@@ -1439,7 +1442,7 @@
     "ok": true,
     "repo": "unitreerobotics/unifolm-world-model-action",
     "stars": 1172,
-    "forks": 151,
+    "forks": 152,
     "open_issues": 19,
     "pushed_at": "2026-03-18",
     "archived": false,
@@ -1448,14 +1451,14 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 251
+    "days_since_push": 252
    },
    "hf": {
     "ok": true,
     "repo": "unitreerobotics/UnifoLM-WMA-0-Base",
     "downloads_30d": 0,
     "downloads_all": 0,
-    "likes": 67,
+    "likes": 68,
     "last_modified": "2026-09-13",
     "gated": "auto"
    },
@@ -1469,7 +1472,7 @@
   },
   "hunyuanworld-voyager": {
    "model_id": "hunyuanworld-voyager",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Tencent HunyuanWorld-Voyager Community License",
    "weights_url": "https://huggingface.co/tencent/HunyuanWorld-Voyager",
    "code_url": "https://github.com/Tencent-Hunyuan/HunyuanWorld-Voyager",
@@ -1479,21 +1482,21 @@
     "stars": 1611,
     "forks": 169,
     "open_issues": 30,
-    "pushed_at": "2026-04-15",
+    "pushed_at": "2026-11-25",
     "archived": false,
     "license": "NOASSERTION",
     "default_branch": "main",
-    "commits_90d": 0,
+    "commits_90d": 3,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 223
+    "days_since_push": 0
    },
    "hf": {
     "ok": true,
     "repo": "tencent/HunyuanWorld-Voyager",
-    "downloads_30d": 2427,
-    "downloads_all": 9024,
-    "likes": 612,
+    "downloads_30d": 2424,
+    "downloads_all": 9034,
+    "likes": 613,
     "last_modified": "2025-10-17",
     "gated": false
    },
@@ -1507,7 +1510,7 @@
   },
   "hunyuan-gamecraft-1-0": {
    "model_id": "hunyuan-gamecraft-1-0",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Tencent Hunyuan Community License",
    "weights_url": "https://huggingface.co/tencent/Hunyuan-GameCraft-1.0",
    "code_url": "https://github.com/Tencent-Hunyuan/Hunyuan-GameCraft-1.0",
@@ -1524,13 +1527,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 361
+    "days_since_push": 362
    },
    "hf": {
     "ok": true,
     "repo": "tencent/Hunyuan-GameCraft-1.0",
-    "downloads_30d": 2354,
-    "downloads_all": 3787,
+    "downloads_30d": 2361,
+    "downloads_all": 3799,
     "likes": 493,
     "last_modified": "2025-08-19",
     "gated": false
@@ -1545,7 +1548,7 @@
   },
   "agibot-ge-base-v0-1": {
    "model_id": "agibot-ge-base-v0-1",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "LTX Video 0.9 RAIL-M License（与 ltx-video-2b-v0.9 相同）",
    "weights_url": "https://huggingface.co/agibot-world/Genie-Envisioner-v1.0",
    "code_url": "https://github.com/AgibotTech/Genie-Envisioner-V1",
@@ -1562,7 +1565,7 @@
     "commits_90d": 2,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 75
+    "days_since_push": 76
    },
    "hf": {
     "ok": true,
@@ -1580,16 +1583,16 @@
   },
   "matrix-game-2-0": {
    "model_id": "matrix-game-2-0",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "MIT",
    "weights_url": "https://huggingface.co/Skywork/Matrix-Game-2.0",
    "code_url": "https://github.com/SkyworkAI/Matrix-Game/tree/main/Matrix-Game-2",
    "github": {
     "ok": true,
     "repo": "SkyworkAI/Matrix-Game",
-    "stars": 2990,
+    "stars": 2991,
     "forks": 311,
-    "open_issues": 46,
+    "open_issues": 47,
     "pushed_at": "2026-10-29",
     "archived": false,
     "license": "MIT",
@@ -1597,13 +1600,13 @@
     "commits_90d": 25,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 26
+    "days_since_push": 27
    },
    "hf": {
     "ok": true,
     "repo": "Skywork/Matrix-Game-2.0",
-    "downloads_30d": 412,
-    "downloads_all": 1751,
+    "downloads_30d": 329,
+    "downloads_all": 1760,
     "likes": 304,
     "last_modified": "2026-09-29",
     "gated": false
@@ -1618,14 +1621,14 @@
   },
   "hunyuanworld-1-0": {
    "model_id": "hunyuanworld-1-0",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Tencent HunyuanWorld-1.0 Community License",
    "weights_url": "https://huggingface.co/tencent/HunyuanWorld-1",
    "code_url": "https://github.com/Tencent-Hunyuan/HunyuanWorld-1.0",
    "github": {
     "ok": true,
     "repo": "Tencent-Hunyuan/HunyuanWorld-1.0",
-    "stars": 2993,
+    "stars": 2994,
     "forks": 276,
     "open_issues": 36,
     "pushed_at": "2026-04-15",
@@ -1635,13 +1638,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 223
+    "days_since_push": 224
    },
    "hf": {
     "ok": true,
     "repo": "tencent/HunyuanWorld-1",
-    "downloads_30d": 4871,
-    "downloads_all": 121696,
+    "downloads_30d": 4693,
+    "downloads_all": 121837,
     "likes": 606,
     "last_modified": "2025-10-20",
     "gated": false
@@ -1649,22 +1652,22 @@
    "modelscope": {
     "ok": true,
     "path": "Tencent-Hunyuan/HunyuanWorld-1",
-    "downloads": 2624,
+    "downloads": 2629,
     "updated": "2025-07-27",
     "official_org": false
    }
   },
   "v-jepa-2-ac": {
    "model_id": "v-jepa-2-ac",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": null,
    "weights_url": "https://dl.fbaipublicfiles.com/vjepa2/vjepa2-ac-vitg.pt",
    "code_url": "https://github.com/facebookresearch/vjepa2",
    "github": {
     "ok": true,
     "repo": "facebookresearch/vjepa2",
-    "stars": 4913,
-    "forks": 600,
+    "stars": 4920,
+    "forks": 601,
     "open_issues": 98,
     "pushed_at": "2026-10-29",
     "archived": false,
@@ -1673,7 +1676,7 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 26
+    "days_since_push": 27
    },
    "hf": {
     "ok": false,
@@ -1686,15 +1689,15 @@
   },
   "v-jepa-2-vitg-384": {
    "model_id": "v-jepa-2-vitg-384",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Apache-2.0",
    "weights_url": "https://huggingface.co/facebook/vjepa2-vitg-fpc64-384",
    "code_url": "https://github.com/facebookresearch/vjepa2",
    "github": {
     "ok": true,
     "repo": "facebookresearch/vjepa2",
-    "stars": 4913,
-    "forks": 600,
+    "stars": 4920,
+    "forks": 601,
     "open_issues": 98,
     "pushed_at": "2026-10-29",
     "archived": false,
@@ -1703,13 +1706,13 @@
     "commits_90d": 0,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 26
+    "days_since_push": 27
    },
    "hf": {
     "ok": true,
     "repo": "facebook/vjepa2-vitg-fpc64-384",
-    "downloads_30d": 2292,
-    "downloads_all": 182343,
+    "downloads_30d": 2338,
+    "downloads_all": 182414,
     "likes": 50,
     "last_modified": "2025-08-11",
     "gated": false
@@ -1724,16 +1727,16 @@
   },
   "matrix-game-1-0": {
    "model_id": "matrix-game-1-0",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "MIT",
    "weights_url": "https://huggingface.co/Skywork/Matrix-Game",
    "code_url": "https://github.com/SkyworkAI/Matrix-Game/tree/main/Matrix-Game-1",
    "github": {
     "ok": true,
     "repo": "SkyworkAI/Matrix-Game",
-    "stars": 2990,
+    "stars": 2991,
     "forks": 311,
-    "open_issues": 46,
+    "open_issues": 47,
     "pushed_at": "2026-10-29",
     "archived": false,
     "license": "MIT",
@@ -1741,7 +1744,7 @@
     "commits_90d": 25,
     "commits_90d_capped": false,
     "latest_release": null,
-    "days_since_push": 26
+    "days_since_push": 27
    },
    "hf": {
     "ok": true,
@@ -1762,7 +1765,7 @@
   },
   "wham-200m": {
    "model_id": "wham-200m",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Microsoft Research License Terms",
    "weights_url": "https://huggingface.co/microsoft/wham",
    "code_url": "https://huggingface.co/microsoft/wham",
@@ -1773,8 +1776,8 @@
    "hf": {
     "ok": true,
     "repo": "microsoft/wham",
-    "downloads_30d": 1049,
-    "downloads_all": 12523,
+    "downloads_30d": 1411,
+    "downloads_all": 12898,
     "likes": 278,
     "last_modified": "2025-12-17",
     "gated": false
@@ -1789,7 +1792,7 @@
   },
   "wham-1-6b": {
    "model_id": "wham-1-6b",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "Microsoft Research License Terms",
    "weights_url": "https://huggingface.co/microsoft/wham",
    "code_url": "https://huggingface.co/microsoft/wham",
@@ -1800,8 +1803,8 @@
    "hf": {
     "ok": true,
     "repo": "microsoft/wham",
-    "downloads_30d": 1049,
-    "downloads_all": 12523,
+    "downloads_30d": 1411,
+    "downloads_all": 12898,
     "likes": 278,
     "last_modified": "2025-12-17",
     "gated": false
@@ -1816,7 +1819,7 @@
   },
   "oasis-500m": {
    "model_id": "oasis-500m",
-   "fetched": "2026-11-24",
+   "fetched": "2026-11-25",
    "license": "MIT",
    "weights_url": "https://huggingface.co/Etched/oasis-500m",
    "code_url": null,
@@ -1827,8 +1830,8 @@
    "hf": {
     "ok": true,
     "repo": "Etched/oasis-500m",
-    "downloads_30d": 768,
-    "downloads_all": 10062,
+    "downloads_30d": 758,
+    "downloads_all": 10063,
     "likes": 522,
     "last_modified": "2024-11-04",
     "gated": "auto"
